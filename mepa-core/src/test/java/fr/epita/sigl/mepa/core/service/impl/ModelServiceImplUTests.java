@@ -28,7 +28,7 @@ public class ModelServiceImplUTests {
         // Given
         Model modelToCreate = new Model();
         Date now = new Date();
-        long deltaInMilliseconds = 50000000;
+        long deltaInMilliseconds = 500;
 
         // When
         modelService.createModel(modelToCreate);
