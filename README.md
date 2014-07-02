@@ -12,3 +12,4 @@ SIGL MEPA 2015
 * JACCOUD Nicolas
 * BALESSE Mehdi
 * LEMBI Jason
+* COUTAUD Etienne
