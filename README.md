@@ -13,3 +13,4 @@ SIGL MEPA 2015
 * BALESSE Mehdi
 * LEMBI Jason
 * COUTAUD Etienne
+* CARDOVILLE Laurent
