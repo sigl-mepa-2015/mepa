@@ -17,3 +17,4 @@ SIGL MEPA 2015
 * CARDOVILLE Laurent
 * AMOURDON Ma�t�
 * KUOY Jeremy
+* GALVIN Hugo
