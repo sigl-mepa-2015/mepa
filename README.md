@@ -15,4 +15,5 @@ SIGL MEPA 2015
 * LEMBI Jason
 * COUTAUD Etienne
 * CARDOVILLE Laurent
-* AMOURDON Maïté
+* AMOURDON Maï¿½tï¿½
+* GALVIN Hugo
