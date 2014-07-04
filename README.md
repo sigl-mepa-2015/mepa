@@ -25,3 +25,4 @@ SIGL MEPA 2015
 * GUEUGNON Nicolas
 * GALLAND Dylan
 * LARROQUE Vincent
+* SOTTY Nicolas
