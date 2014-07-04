@@ -1,6 +1,7 @@
 SIGL MEPA 2015
 ====
 
+* GODRON Quentin
 * COPPEE Pierre
 * BELINGARD Alexandre
 * RENAUDIN David
