@@ -3,6 +3,7 @@ SIGL MEPA 2015
 
 * GODRON Quentin
 * COPPEE Pierre
+* DA SILVA Marlène
 * BELINGARD Alexandre
 * RENAUDIN David
 * TEISSEDRE Florian
