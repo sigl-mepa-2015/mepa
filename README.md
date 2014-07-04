@@ -24,3 +24,4 @@ SIGL MEPA 2015
 * ESSAKI Saïd
 * GUEUGNON Nicolas
 * GALLAND Dylan
+* LARROQUE Vincent
