@@ -3,7 +3,7 @@ SIGL MEPA 2015
 
 * GODRON Quentin
 * COPPEE Pierre
-* DA SILVA Marlène
+* DA SILVA MarlÃ¨ne
 * BELINGARD Alexandre
 * RENAUDIN David
 * TEISSEDRE Florian
@@ -16,9 +16,10 @@ SIGL MEPA 2015
 * LEMBI Jason
 * COUTAUD Etienne
 * CARDOVILLE Laurent
-* AMOURDON Ma�t�
+* AMOURDON Maï¿½tï¿½
 * KUOY Jeremy
 * GALVIN Hugo
 * AIT HAMOUDA Faradj
 * ACHOUR Mustapha
-* ESSAKI Saïd
+* ESSAKI SaÃ¯d
+* HEFTMAN Raphael
