@@ -36,7 +36,7 @@ public class ReportingController {
     public ModelAndView showComingGame()
     {
     	LOG.info("inside showComingGame fonction");
-    	ModelAndView mv = new ModelAndView("/reporting/showComingGale");
+    	ModelAndView mv = new ModelAndView("/reporting/showComingGame");
     	return mv;
     }
     

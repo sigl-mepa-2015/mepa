@@ -23,6 +23,12 @@
     <definition name="/reporting/showEndedGame" extends="base.definition">
     	<put-attribute name="body" value="/WEB-INF/views/reporting/showEndedGame.jsp"/>
     </definition>
+     <definition name="/reporting/showComingGame" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/showComingGame.jsp"/>
+    </definition>
+     <definition name="/reporting/showRange" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/showRange.jsp"/>
+    </definition>
 
     <!-- Core example -->
     <definition name="/example/core/form" extends="base.definition">
