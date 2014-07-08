@@ -27,6 +27,9 @@ public class Tournament {
     @Column(name = "created", nullable = false)
     private Date created;
 
+    @OneToMany(cascade=ALL, mappedBy="pools")
+    public Set<Pool> getPools() { return pools; }
+
     @NotNull
     private String name;
 
