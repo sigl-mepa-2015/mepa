@@ -18,6 +18,11 @@
     <definition name="/home/home" extends="home.definition">
         <put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
     </definition>
+    
+    <!-- Reporting -->
+    <definition name="/reporting/showEndedGame" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/showEndedGame.jsp"/>
+    </definition>
 
     <!-- Core example -->
     <definition name="/example/core/form" extends="base.definition">
