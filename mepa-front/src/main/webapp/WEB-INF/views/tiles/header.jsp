@@ -14,11 +14,13 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="homeUrl" value="/home"/>
-                        <li><a href="${homeUrl}">Home page</a></li>
-                        <c:url var="coreExampleUrl" value="/example/core/"/>
-                        <li><a href="${coreExampleUrl}">Core module example</a></li>
-                    </ul>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title"/> <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu">
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
+	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
+	         	           </ul>
+         	           </li>
                 </div>
             </div>
         </div>
