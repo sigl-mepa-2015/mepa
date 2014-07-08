@@ -25,6 +25,8 @@ public class ReportingController {
     {
     	LOG.info("inside showEndedGame fonction");
     	ModelAndView mv = new ModelAndView("/reporting/showEndedGame");
+    	mv.addObject("tournamentName","Tournoi n1");
+
     	return mv;
     }
     
@@ -37,6 +39,7 @@ public class ReportingController {
     {
     	LOG.info("inside showComingGame fonction");
     	ModelAndView mv = new ModelAndView("/reporting/showComingGame");
+    	mv.addObject("tournamentName","Tournoi n1");
     	return mv;
     }
     
@@ -49,6 +52,8 @@ public class ReportingController {
     {
     	LOG.info("inside showRange fonction");
     	ModelAndView mv = new ModelAndView("/reporting/showRange");
+    	mv.addObject("tournamentName","Tournoi n1");
+
     	return mv;
     }
 
