@@ -29,7 +29,7 @@ import java.util.List;
 public class CreateTournamentController {
     private static final Logger LOG = LoggerFactory.getLogger(CreateTournamentController.class);
 
-    protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
+    protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournament";
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "addTournamentFormBean";
 
     @Autowired
@@ -45,7 +45,7 @@ public class CreateTournamentController {
         }
 
         // Update model attribute "tournaments", to use it in JSP
-        modelMap.addAttribute(TOURNAMENT_MODEL_ATTRIBUTE, tournaments);
+        modelMap.addAttribute("tournaments", tournaments);
 
         return "/tournament/create/form";
     }
@@ -67,7 +67,6 @@ public class CreateTournamentController {
         Tournament newTournament = new Tournament();
         newTournament.setName(addTournamentFormBean.getName());
         this.tournamentService.createTournament(newTournament);
-
         modelMap.addAttribute(TOURNAMENT_MODEL_ATTRIBUTE, newTournament);
 
         return "/tournament/create/result";
@@ -84,12 +83,12 @@ public class CreateTournamentController {
     }
 
     /**
-     * Initialize "addCustomModelFormBean" model attribute
+     * Initialize "AddTournamentFormBean" model attribute
      *
      * @return a new AddTournamentFormBean.
      */
     @ModelAttribute(ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
-    public AddTournamentFormBean initAddCustomModelFormBean() {
+    public AddTournamentFormBean initAddTournamentFormBean() {
         return new AddTournamentFormBean();
     }
 }
