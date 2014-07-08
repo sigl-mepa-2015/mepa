@@ -67,7 +67,6 @@ public class CreateTournamentController {
         Tournament newTournament = new Tournament();
         newTournament.setName(addTournamentFormBean.getName());
         this.tournamentService.createTournament(newTournament);
-
         modelMap.addAttribute(TOURNAMENT_MODEL_ATTRIBUTE, newTournament);
 
         return "/tournament/create/result";
