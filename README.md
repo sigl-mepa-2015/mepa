@@ -35,5 +35,5 @@ Avec
 * GUEUGNON Nicolas
 * GALLAND Dylan
 * LARROQUE Vincent
-* SOTTY Nicolas
+* SOTTY Nicolas 
 * HEFTMAN Raphael
