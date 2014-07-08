@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
+// Cette ligne commentee perme de ne pas generer le schema. L'equipe concerne doit generer le model correspondant avec les relations qui vont bien
 //@Entity
 @NamedQueries({
         @NamedQuery(name = "Tournament.findById", query = "FROM Tournament t WHERE t.id=:id"),

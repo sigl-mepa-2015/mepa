@@ -31,7 +31,7 @@ public class ReportingController {
      * @return ModelAndView
      */
     @RequestMapping(value="/endedGame", method=RequestMethod.GET)
-    public ModelAndView showEndedGame(@RequestParam("tournamentID") Long tournamentID)
+    public ModelAndView showEndedGame(/*@RequestParam("tournamentID") Long tournamentID*/)
     {
     	/*Tournament t;
     	System.out.println(tournamentID);
