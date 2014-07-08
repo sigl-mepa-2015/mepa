@@ -29,7 +29,7 @@ import java.util.List;
 public class CreateTournamentController {
     private static final Logger LOG = LoggerFactory.getLogger(CreateTournamentController.class);
 
-    protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournament";
+    protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "addTournamentFormBean";
 
     @Autowired
@@ -67,7 +67,7 @@ public class CreateTournamentController {
         Tournament newTournament = new Tournament();
         newTournament.setName(addTournamentFormBean.getName());
         this.tournamentService.createTournament(newTournament);
-        modelMap.addAttribute(TOURNAMENT_MODEL_ATTRIBUTE, newTournament);
+        modelMap.addAttribute("tournament", newTournament);
 
         return "/tournament/create/result";
     }
