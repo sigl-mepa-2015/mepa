@@ -19,12 +19,12 @@
         <put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
     </definition>
 
-    <!-- Core example -->
-    <definition name="/example/core/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/example/core/form.jsp" />
+    <!-- Create tournament -->
+    <definition name="/tournament/create/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
     </definition>
-    <definition name="/example/core/result" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/example/core/result.jsp" />
+    <definition name="/tournament/create/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
     </definition>
 
 </tiles-definitions>

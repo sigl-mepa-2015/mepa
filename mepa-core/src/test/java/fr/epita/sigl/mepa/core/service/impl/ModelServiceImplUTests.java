@@ -1,8 +1,8 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
 
-import fr.epita.sigl.mepa.core.dao.ModelDao;
-import fr.epita.sigl.mepa.core.domain.Model;
+import fr.epita.sigl.mepa.core.dao.TournamentDao;
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,35 +18,35 @@ import static org.mockito.Mockito.verify;
 public class ModelServiceImplUTests {
 
     @Mock
-    ModelDao mockedModelDao;
+    TournamentDao mockedTournamentDao;
 
     @InjectMocks
-    ModelServiceImpl modelService;
+    TournamentServiceImpl modelService;
 
     @Test
     public void createModel_ShouldCreateANewModel_WithDateVeryCloseToNow() {
         // Given
-        Model modelToCreate = new Model();
+        Tournament tournamentToCreate = new Tournament();
         Date now = new Date();
         long deltaInMilliseconds = 500;
 
         // When
-        modelService.createModel(modelToCreate);
+        modelService.createTournament(tournamentToCreate);
 
         // Then
-        assertThat(modelToCreate.getCreated()).isCloseTo(now, deltaInMilliseconds);
+        assertThat(tournamentToCreate.getCreated()).isCloseTo(now, deltaInMilliseconds);
     }
 
     @Test
     public void createModel_ShouldCreateANewModel_UsingModelDao() {
         // Given
-        Model modelToCreate = new Model();
+        Tournament tournamentToCreate = new Tournament();
 
         // When
-        modelService.createModel(modelToCreate);
+        modelService.createTournament(tournamentToCreate);
 
         // Then
-        verify(mockedModelDao).create(modelToCreate);
+        verify(mockedTournamentDao).create(tournamentToCreate);
     }
 
 
