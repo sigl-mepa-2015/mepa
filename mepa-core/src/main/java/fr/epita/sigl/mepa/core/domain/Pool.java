@@ -5,6 +5,7 @@ import java.lang.Float;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-@Entity
+//@Entity
 @NamedQueries({
         @NamedQuery(name = "Pool.findById", query = "FROM Pool o WHERE o.id=:id"),
         @NamedQuery(name = "Pool.findAll", query = "FROM Pool o") })
@@ -22,7 +23,10 @@ public class Pool {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    private Set<Match> matchs;
+    
+    private Tournament tournament;
+ 
     private String name;
     public Long getId() {
         return this.id;
@@ -32,12 +36,12 @@ public class Pool {
         this.id = id;
     }
 
-    @OneToMany(cascade=ALL, mappedBy="pool")
-    public Set<Match> getMatchs() { return matchs; }
+    //@OneToMany(mappedBy="pool")
+    //public Set<Match> getMatchs() { return matchs; }
 
-    @ManyToOne
-    @JoinColumn(name="TOUR_ID", nullable=false)
-    public Pool getTournament() { return tournament; }
+   // @ManyToOne()
+    @JoinColumn(name="TOURNAMENT_ID", nullable=false)
+    public Tournament getTournament() { return tournament; }
 
 
     public String getName() {
@@ -52,5 +56,13 @@ public class Pool {
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
+	public Set<Match> getMatchs() {
+		return matchs;
+	}
+
+	public void setMatchs(Set<Match> matchs) {
+		this.matchs = matchs;
+	}
 
 }

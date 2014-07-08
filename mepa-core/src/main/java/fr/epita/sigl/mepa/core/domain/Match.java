@@ -21,18 +21,22 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    
+    private Pool pool;
 
     @ManyToOne
     @JoinColumn(name="POOL_ID", nullable=false)
     public Pool getPool() { return pool; }
 
     @NotNull
-    private Integer scoreTeamOne;
+    private Integer scoreTeam1;
 
     @NotNull
-    private Integer scoreTeamTwo;
+    private Integer scoreTeam2;
 
     private Float duration;
+    private Team team1;
+    private Team team2;
 
     public enum enumStatus {
             EC ("en cours"),
@@ -56,22 +60,22 @@ public class Match {
         this.id = id;
     }
 
-    public Integer getScoreTeamOne() {
-        return scoreTeamOne;
+    public Integer getScoreTeam1() {
+        return scoreTeam1;
     }
 
     // Add team
 
     public void setScoreTeamOne(Integer scoreTeamOne) {
-        this.scoreTeamOne = scoreTeamOne;
+        this.scoreTeam1 = scoreTeamOne;
     }
 
-    public Integer getScoreTeamTwo() {
-        return scoreTeamTwo;
+    public Integer getScoreTeam2() {
+        return scoreTeam2;
     }
 
     public void setScoreTeamTwo(Integer scoreTeamTwo) {
-        this.scoreTeamTwo = scoreTeamTwo;
+        this.scoreTeam2 = scoreTeamTwo;
     }
 
     public fr.epita.sigl.mepa.core.domain.Match.enumStatus getStatus() {
@@ -94,5 +98,21 @@ public class Match {
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
+	public Team getTeam1() {
+		return team1;
+	}
+
+	public void setTeam1(Team team1) {
+		this.team1 = team1;
+	}
+
+	public Team getTeam2() {
+		return team2;
+	}
+
+	public void setTeam2(Team team2) {
+		this.team2 = team2;
+	}
 
 }

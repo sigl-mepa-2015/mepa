@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-@Entity
+//@Entity
 @NamedQueries({
         @NamedQuery(name = "Tournament.findById", query = "FROM Tournament t WHERE t.id=:id"),
         @NamedQuery(name = "Tournament.findAll", query = "FROM Tournament t") })
@@ -18,20 +19,14 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Version
-    @Column(name = "version", nullable = false)
-    private Integer version;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created", nullable = false)
-    private Date created;
-
-    @OneToMany(cascade=ALL, mappedBy="pools")
-    public Set<Pool> getPools() { return pools; }
+    
+    //@OneToMany(mappedBy="tournament")
+    private Set<Pool> pools;
 
     @NotNull
     private String name;
+    
+  
 
     public Long getId() {
         return this.id;
@@ -40,23 +35,12 @@ public class Tournament {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Integer getVersion() {
-        return this.version;
+    
+    public Set<Pool> getPools() { return pools; }
+    
+    public void setPools(Set<Pool> pools) {
+    	this.pools = pools;
     }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Date getCreated() {
-        return this.created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
     /**
      * @return the name
      */

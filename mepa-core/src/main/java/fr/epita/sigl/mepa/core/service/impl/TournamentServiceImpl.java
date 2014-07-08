@@ -20,7 +20,6 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public void createTournament(Tournament tournament) {
-        tournament.setCreated(new Date());
         this.tournamentDao.create(tournament);
     }
 

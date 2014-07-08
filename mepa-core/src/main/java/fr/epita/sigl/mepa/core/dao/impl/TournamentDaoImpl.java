@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TournamentDaoImpl implements TournamentDao {
 
-    @Autowired
+   // @Autowired
     private SessionFactory sessionFactory;
 
     private Session getSession() {
