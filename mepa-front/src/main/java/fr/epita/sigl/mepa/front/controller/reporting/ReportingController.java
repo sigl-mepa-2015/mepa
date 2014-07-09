@@ -14,17 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.epita.sigl.mepa.core.domain.Match;
 import fr.epita.sigl.mepa.core.domain.Pool;
-import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
-import fr.epita.sigl.mepa.front.controller.home.HomeController;
 
 @Controller
 @RequestMapping("/reporting")
 public class ReportingController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
     /**
      * 
@@ -33,12 +31,12 @@ public class ReportingController {
     @RequestMapping(value="/endedGame", method=RequestMethod.GET)
     public ModelAndView showEndedGame(/*@RequestParam("tournamentID") Long tournamentID*/)
     {
-    	/*Tournament t;
-    	System.out.println(tournamentID);
+    	Tournament t = null;
+    	/*System.out.println(tournamentID);
     	
     	TournamentService tournamentService = new TournamentServiceImpl();
     	
-    	t = tournamentService.getTournamentById(tournamentID);*/
+    	t = tournamentService.getTournamentById(tournamentID);
     	
     	Tournament t = new Tournament();
     	t.setName("monTournoi");
@@ -79,7 +77,7 @@ public class ReportingController {
     	sp.add(p1);
     	sp.add(p2);
     	
-    	t.setPools(sp);
+    	t.setPools(sp);*/
     	
     	LOG.info("inside showEndedGame fonction");
     	ModelAndView mv = new ModelAndView("/reporting/showEndedGame");
