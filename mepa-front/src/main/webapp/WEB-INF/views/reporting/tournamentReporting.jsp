@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="page-header">
 		<h1>Statistiques sur le tournoi</h1>
-		<h3><spring:message code="tournament"/> : ${t.name}</h3>
+		<h4><spring:message code="tournament"/> : ${t.name}</h4>
 	</div>
 </div>
 
@@ -18,27 +18,51 @@
 <div class="container">
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">
-	<%-- <c:forEach items="${t.pools}" var="pool">
+	  	<h3>Liste des matchs termines</h3>
+		 <c:forEach items="${t.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
-					<c:forEach items="${pool.matchs}" var="match">	
-						<tr>
-							<td>${match.team1.name}</td>
-							<td>${match.scoreTeam1}</td>
-							<td>${match.scoreTeam2}</td>
-							<td>${match.team2.name}</td>
-						</tr>		
+					<c:forEach items="${pool.games}" var="game">	
+						<c:choose>
+							<c:when test="${game.status == 'ENDED'}">
+								<tr>
+									<td>${game.team1.name}</td>
+									<td>${game.resultTeam1}</td>
+									<td>${game.resultTeam2}</td>
+									<td>${game.team2.name}</td>
+								</tr>	
+							</c:when>	
+						</c:choose>
 					</c:forEach>
 				</tbody>
 			</table>
-		</c:forEach> --%>
+		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="coming">
-	  		Coming pane
+	  		<h3>Liste des matchs a venir</h3>
+	  		 <c:forEach items="${t.pools}" var="pool">
+			<h3>Poule : ${pool.name}</h3>
+			<table class="table table-bordered">
+				<tbody>
+					<c:forEach items="${pool.games}" var="game">	
+						<c:choose>
+							<c:when test="${game.status == 'TODO'}">
+								<tr>
+									<td>${game.team1.name}</td>
+									<td>${game.resultTeam1}</td>
+									<td>${game.resultTeam2}</td>
+									<td>${game.team2.name}</td>
+								</tr>	
+							</c:when>	
+						</c:choose>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="range">
-	  		Range
+	  		<h3>Classement general pour le tournoi</h3>
 	  </div>
 	</div>
 </div>
