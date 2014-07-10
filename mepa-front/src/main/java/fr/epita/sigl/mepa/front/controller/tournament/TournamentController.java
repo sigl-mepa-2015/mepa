@@ -39,8 +39,13 @@ public class TournamentController {
     @Autowired
     private TournamentService tournamentService;
 
-    @RequestMapping(value = { "/", "/form" })
+    @RequestMapping(value = {"/form" })
     public String showForm(HttpServletRequest request, ModelMap modelMap) {
+        return "/tournament/create/form";
+    }
+
+    @RequestMapping(value = { "/"})
+    public String showList(HttpServletRequest request, ModelMap modelMap) {
 
         // Get tournaments data from database
         List<Tournament> tournaments = this.tournamentService.getAllTournaments();

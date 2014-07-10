@@ -28,6 +28,9 @@
     <definition name="/tournament/read/list" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
     </definition>
+    <definition name="/tournament/create/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
+    </definition>
     <definition name="/tournament/create/result" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
     </definition>
