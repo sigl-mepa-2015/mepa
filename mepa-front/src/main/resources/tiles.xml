@@ -41,4 +41,12 @@
         <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
+    <!-- Team -->
+    <definition name="/team/create" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/createTeam.jsp" />
+    </definition>
+    <definition name="/team/edit" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/editTeam.jsp" />
+    </definition>
+
 </tiles-definitions>
