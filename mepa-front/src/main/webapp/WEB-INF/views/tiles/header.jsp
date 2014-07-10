@@ -22,8 +22,18 @@
 	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
 	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
 						  </ul>
+
 				   </li>
 			   </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title2"/> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><spring:message code="home.bar.title2.nav1"/></a></li>
+                                <li><a href="#"><spring:message code="home.bar.title2.nav2"/></a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
