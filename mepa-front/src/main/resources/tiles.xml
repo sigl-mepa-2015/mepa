@@ -41,4 +41,8 @@
         <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
+
+    <definition name="/createPool" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/pool/create/create.jsp" />
+    </definition>
 </tiles-definitions>

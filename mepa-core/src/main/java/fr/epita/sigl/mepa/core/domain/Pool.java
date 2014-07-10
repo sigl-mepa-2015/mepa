@@ -113,50 +113,6 @@ public class Pool implements Serializable{
 		this.tournament = tournament;
 	}
 
-    private String name;
 
-    private Set<Team> teams;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the teams
-     */
-    public Set<Team> getTeams() {
-        return teams;
-    }
-
-    /**
-     * @param teams the teams to set
-     */
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
-    }
 
 }
