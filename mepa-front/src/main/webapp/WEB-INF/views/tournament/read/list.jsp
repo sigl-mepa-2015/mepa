@@ -1,5 +1,15 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
-<%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
+
+
+
+
+<div class="container">
+	sdhjkhfksjhfkj
+</div>
+
+
+
+<%-- <%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 <%@ include file="/WEB-INF/views/tournament/create/form.jsp"%>
 
 <div class="container">
@@ -31,4 +41,4 @@
             <h2><spring:message code="tournament.emptyTitle"/></h2>
     </c:otherwise>
     </c:choose>
-</div>
+</div> --%>

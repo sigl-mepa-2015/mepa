@@ -4,6 +4,7 @@ import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
 import fr.epita.sigl.mepa.front.model.tournament.AddTournamentFormBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +74,16 @@ public class TournamentController {
         modelMap.addAttribute("tournament", newTournament);
 
         return "/tournament/create/result";
+    }
+    
+    @RequestMapping(value="/getAllTournament", method=RequestMethod.GET)
+    public ModelAndView getAllTournament()
+    {
+    	List<Tournament> allTournament = tournamentService.getAllTournaments();
+    	ModelAndView mv = new ModelAndView("/tournament/read/list");
+    	mv.addObject("tournaments", allTournament);
+    	
+    	return mv;
     }
 
     /**

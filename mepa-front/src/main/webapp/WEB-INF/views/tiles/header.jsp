@@ -14,16 +14,19 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="tournamentUrl" value="/tournament/"/>
-                        <li><a href="${tournamentUrl}"><spring:message code="tournament.listTitle" /></a></li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title"/> <span class="caret"></span></a>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
 	                    	<ul class="dropdown-menu" role="menu">
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
-	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame">Creer un tournoi</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/getAllTournament">Tout les tournois</a></li>
 						  </ul>
-				   </li>
-			   </ul>
+				   		</li>
+				   		  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipe <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu">
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame">Creer une equipe</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame">Tout les equipes</a></li>
+						  </ul>
+				   		</li>
+			  		 </ul>
                 </div>
             </div>
         </div>
