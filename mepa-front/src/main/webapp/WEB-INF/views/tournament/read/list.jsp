@@ -18,7 +18,8 @@
 	</c:choose>
 	
 
-	<table class="table table-bordered">
+<div class="col-md-9 col-md-offset-1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Nom du tournoi</th>
@@ -28,19 +29,28 @@
 		<tbody>
 			<c:forEach items="${tournaments}" var="t">
 				<tr>
-					<td>${t.name}</td>
-					<td>
-						<div class="btn-group btn-group-sm">
-							<button type="button" class="btn btn-default">Left</button>
-  							<button type="button" class="btn btn-default">Middle</button>
- 							<button type="button" class="btn btn-default">Right</button>
-						</div>
+					<td width="70%">${t.name}</td>
+					<td width="30%">
+						<button type="button" class="btn btn-primary" >
+							<span class="glyphicon glyphicon-arrow-right"></span>
+						</button>
+						<button type="button" class="btn btn-info" onClick="location.href='${pageContext.request.contextPath}/reporting/tournament?tournamentID=${t.id}'">
+							<span class="glyphicon glyphicon-stats"></span>
+						</button>
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-cog"></span>
+						</button>
+						<button type="button" class="btn btn-danger">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>			
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
+</div>
+
 <script>
 	$("#message_box").delay(1500).slideUp();
 </script>
