@@ -9,7 +9,7 @@
 
 <div class="container">
 
-	<c:forEach items="${t.pools}" var="pool">
+	<%-- <c:forEach items="${t.pools}" var="pool">
 		<h3>Poule : ${pool.name}</h3>
 		<table class="table table-bordered">
 			<tbody>
@@ -23,6 +23,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</c:forEach>
+	</c:forEach> --%>
 
 </div>

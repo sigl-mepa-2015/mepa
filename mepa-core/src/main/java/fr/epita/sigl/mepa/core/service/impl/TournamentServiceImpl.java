@@ -1,6 +1,5 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
