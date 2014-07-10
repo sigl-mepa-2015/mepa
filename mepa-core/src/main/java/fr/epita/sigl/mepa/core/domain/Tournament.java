@@ -1,5 +1,7 @@
 package fr.epita.sigl.mepa.core.domain;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,7 +13,9 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Tournament.findById", query = "FROM Tournament t WHERE t.id=:id"),
         @NamedQuery(name = "Tournament.findAll", query = "FROM Tournament t") })
-public class Tournament {
+public class Tournament implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +28,10 @@ public class Tournament {
 	@OneToMany
 	private Set<Pool> pools;
 
+	@Column(name="startedDate")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date startedDate;
+	
 	/**
 	 * @return the id
 	 */

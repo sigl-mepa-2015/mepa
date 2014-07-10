@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.epita.sigl.mepa.core.domain.Match;
-import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
-import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
 
 @Controller
 @RequestMapping("/reporting")
