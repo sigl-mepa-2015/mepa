@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -27,6 +28,10 @@ public class Tournament implements Serializable{
 	@OneToMany
 	private Set<Pool> pools;
 
+	@Column(name="startedDate")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date startedDate;
+	
 	/**
 	 * @return the id
 	 */

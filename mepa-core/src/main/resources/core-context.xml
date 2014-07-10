@@ -22,6 +22,8 @@
         <property name="annotatedClasses">
             <list>
                 <value>fr.epita.sigl.mepa.core.domain.Tournament</value>
+                <value>fr.epita.sigl.mepa.core.domain.Team</value>
+                <value>fr.epita.sigl.mepa.core.domain.Game</value>
                 <value>fr.epita.sigl.mepa.core.domain.Pool</value>
             </list>
         </property>
