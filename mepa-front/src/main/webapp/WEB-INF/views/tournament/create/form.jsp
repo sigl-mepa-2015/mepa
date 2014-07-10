@@ -1,43 +1,24 @@
-<%@ include file="/WEB-INF/views/includes/common.jsp"%>
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Quentin
+  Date: 10/07/2014
+  Time: 11:02
+  To change this template use File | Settings | File Templates.
+--%>
 <div class="container">
     <div class="page-header">
-        <h1>Tournament creation</h1>
+        <h1><spring:message code="tournament.createTitle" /></h1>
     </div>
-    <c:url var="addTournamentFormActionUrl" value="/tournament/create/add"/>
     <form:form role="form" action="${addTournamentFormActionUrl}" modelAttribute="addTournamentFormBean" method="post">
         <div class="form-group">
             <form:errors path="name" cssStyle="color: #FF0000;" htmlEscape="false"/>
-            <p class="help-block">This is the name of the tournament</p>
-            <label for="name">Enter a name below:</label>
+            <p class="help-block"><spring:message code="tournament.form.nameHelp" /></p>
+            <label for="name"><spring:message code="tournament.form.nameLabel" /></label>
             <br/>
-            <form:input id="name" path="name" type="text" maxlength="20" placeholder="Tournament name"/>
+            <spring:message code='tournament.form.namePlaceholder' var="namePlaceholder"/>
+            <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}"/>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary"><spring:message code="add" /></button>
     </form:form>
 </div>
 
-<div class="container">
-    <h2>Tournament in database</h2>
-    <div class="alert alert-warning">
-        A new random tournament will be added each time this page is called
-    </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${tournaments}" var="tournament" varStatus="loop">
-                    <tr>
-                        <td>${tournament.name}</td>
-                        <td>${tournament.id}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-</div>

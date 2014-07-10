@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 <div class="container">
     <div class="alert alert-success">
-        <spring:message code="tournament.create.resultMessage" arguments="${tournament.name}" />
+        <spring:message code="tournament.remove.resultMessage" arguments="${tournament.name}" />
     </div>
     <p>
         <a href="${tournamentUrl}">
