@@ -20,16 +20,10 @@
     </definition>
     
     <!-- Reporting -->
-    <definition name="/reporting/showEndedGame" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/showEndedGame.jsp"/>
+    <definition name="/reporting/tournamentReporting" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentReporting.jsp"/>
     </definition>
-     <definition name="/reporting/showComingGame" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/showComingGame.jsp"/>
-    </definition>
-     <definition name="/reporting/showRange" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/showRange.jsp"/>
-    </definition>
-
+     
     <!-- Tournament -->
     <definition name="/tournament/read/list" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />

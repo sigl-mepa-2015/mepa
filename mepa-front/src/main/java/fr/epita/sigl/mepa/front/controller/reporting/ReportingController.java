@@ -28,7 +28,7 @@ public class ReportingController {
      * 
      * @return ModelAndView
      */
-    @RequestMapping(value="/endedGame", method=RequestMethod.GET)
+    @RequestMapping(value="/tournament", method=RequestMethod.GET)
     public ModelAndView showEndedGame(@RequestParam("tournamentID") Long tournamentID)
     {
     	Tournament t = null;
@@ -36,47 +36,10 @@ public class ReportingController {
     	t = tournamentService.getTournamentById(tournamentID);
     	
     	LOG.info("inside showEndedGame fonction");
-    	ModelAndView mv = new ModelAndView("/reporting/showEndedGame");
+    	ModelAndView mv = new ModelAndView("/reporting/tournamentReporting");
     	mv.addObject("t",t);
 
     	return mv;
     }
-    
-    /**
-     * 
-     * @return ModelAndView
-     */
-    @RequestMapping(value="/comingGame", method=RequestMethod.GET)
-    public ModelAndView showComingGame(@RequestParam("tournamentID") Long tournamentID)
-    {
-    	
-    	Tournament t = null;
-    	System.out.println(tournamentID);    	
-    	t = tournamentService.getTournamentById(tournamentID);
-    	
-    	LOG.info("inside showComingGame fonction");
-    	ModelAndView mv = new ModelAndView("/reporting/showComingGame");
-    	mv.addObject("t",t);
-
-    	return mv;
-    }
-    
-    /**
-     * 
-     * @return ModelAndView
-     */
-    @RequestMapping(value="/showRange", method=RequestMethod.GET)
-    public ModelAndView showRange(@RequestParam("tournamentID") Long tournamentID)
-    {
-    	Tournament t = null;
-    	System.out.println(tournamentID);    	
-    	t = tournamentService.getTournamentById(tournamentID);
-    	
-    	LOG.info("inside showRange fonction");
-    	ModelAndView mv = new ModelAndView("/reporting/showRange");
-    	mv.addObject("t",t);
-
-    	return mv;
-    }
-
+  
 }
