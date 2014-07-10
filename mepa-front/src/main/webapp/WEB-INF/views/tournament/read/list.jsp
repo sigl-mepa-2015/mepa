@@ -1,10 +1,35 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
 
-
+<div class="container">
+	<div class="page-header">
+		<h1>Tout les tournois</h1>
+	</div>
+</div>
 
 <div class="container">
-	sdhjkhfksjhfkj
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Nom du tournoi</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${tournaments}" var="t">
+				<tr>
+					<td>${t.name}</td>
+					<td>
+						<div class="btn-group btn-group-sm">
+							<button type="button" class="btn btn-default">Left</button>
+  							<button type="button" class="btn btn-default">Middle</button>
+ 							<button type="button" class="btn btn-default">Right</button>
+						</div>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 
 

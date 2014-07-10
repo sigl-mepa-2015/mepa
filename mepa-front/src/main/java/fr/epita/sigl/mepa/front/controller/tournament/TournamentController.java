@@ -81,7 +81,7 @@ public class TournamentController {
         return "/tournament/create/result";
     }
     
-    @RequestMapping(value="/getAllTournament", method=RequestMethod.GET)
+    @RequestMapping(value="/all", method=RequestMethod.GET)
     public ModelAndView getAllTournament()
     {
     	List<Tournament> allTournament = tournamentService.getAllTournaments();
