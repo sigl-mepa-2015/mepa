@@ -27,14 +27,14 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Created</th>
+                    <th>ID</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${tournaments}" var="tournament" varStatus="loop">
                     <tr>
                         <td>${tournament.name}</td>
-                        <td><fmt:formatDate value="${tournament.created}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
+                        <td>${tournament.id}</td>
                     </tr>
                 </c:forEach>
             </tbody>

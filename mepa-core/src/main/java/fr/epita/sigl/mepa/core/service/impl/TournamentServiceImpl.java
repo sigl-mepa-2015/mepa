@@ -1,6 +1,5 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
@@ -20,7 +19,6 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public void createTournament(Tournament tournament) {
-        tournament.setCreated(new Date());
         this.tournamentDao.create(tournament);
     }
 

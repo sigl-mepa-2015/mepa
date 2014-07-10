@@ -1,77 +1,71 @@
 package fr.epita.sigl.mepa.core.domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
 
 @Entity
+@Table(name="Tournament")
 @NamedQueries({
         @NamedQuery(name = "Tournament.findById", query = "FROM Tournament t WHERE t.id=:id"),
         @NamedQuery(name = "Tournament.findAll", query = "FROM Tournament t") })
-public class Tournament {
+public class Tournament implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    @Version
-    @Column(name = "version", nullable = false)
-    private Integer version;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", nullable=false)
+	private Long id;
+	
+	@Column(name="name", nullable=false)
+	private String name;
+	
+	@OneToMany
+	private Set<Pool> pools;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created", nullable = false)
-    private Date created;
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
 
-    @NotNull
-    private String name;
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getId() {
-        return this.id;
-    }
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Integer getVersion() {
-        return this.version;
-    }
+	/**
+	 * @return the pools
+	 */
+	public Set<Pool> getPools() {
+		return pools;
+	}
 
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Date getCreated() {
-        return this.created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
+	/**
+	 * @param pools the pools to set
+	 */
+	public void setPools(Set<Pool> pools) {
+		this.pools = pools;
+	}
 }

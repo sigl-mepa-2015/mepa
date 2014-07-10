@@ -14,8 +14,6 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="homeUrl" value="/home"/>
-                        <li><a href="${homeUrl}">Home page</a></li>
                         <c:url var="createTournamentUrl" value="/tournament/create/"/>
                         <li><a href="${createTournamentUrl}">Create Tournament</a></li>
                         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title"/> <span class="caret"></span></a>
