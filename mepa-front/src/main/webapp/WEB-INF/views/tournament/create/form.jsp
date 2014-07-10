@@ -14,7 +14,6 @@
     <form:form role="form" action="${addTournamentFormActionUrl}" modelAttribute="addTournamentFormBean" method="post">
         <div class="form-group col-md-3">
             <form:errors path="name" cssStyle="color: #FF0000;" htmlEscape="false"/>
-            <p class="help-block"><spring:message code="tournament.form.nameHelp" /></p>
             <label for="name"><spring:message code="tournament.form.nameLabel" /></label>
             <br/>
             <spring:message code='tournament.form.namePlaceholder' var="namePlaceholder"/>

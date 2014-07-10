@@ -8,6 +8,16 @@
 </div>
 
 <div class="container">
+
+	<c:choose>
+		<c:when test="${tournament != null}">
+			<div id="message_box" class="alert alert-success">
+      		  <spring:message code="tournament.create.resultMessage" arguments="${tournament.name}" />
+    		</div>
+		</c:when>
+	</c:choose>
+	
+
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -31,9 +41,9 @@
 		</tbody>
 	</table>
 </div>
-
-
-
+<script>
+	$("#message_box").delay(1500).slideUp();
+</script>
 <%-- <%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 <%@ include file="/WEB-INF/views/tournament/create/form.jsp"%>
 

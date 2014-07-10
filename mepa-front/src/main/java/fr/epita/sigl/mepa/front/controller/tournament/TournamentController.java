@@ -62,8 +62,11 @@ public class TournamentController {
         newTournament.setName(addTournamentFormBean.getName());
         this.tournamentService.createTournament(newTournament);
         modelMap.addAttribute("tournament", newTournament);
+        
+    	List<Tournament> allTournament = tournamentService.getAllTournaments();
+    	modelMap.addAttribute("tournaments", allTournament);
 
-        return "/tournament/create/result";
+        return "/tournament/read/list";
     }
     
     @RequestMapping(value="/all", method=RequestMethod.GET)
@@ -72,6 +75,7 @@ public class TournamentController {
     	List<Tournament> allTournament = tournamentService.getAllTournaments();
     	ModelAndView mv = new ModelAndView("/tournament/read/list");
     	mv.addObject("tournaments", allTournament);
+    	mv.addObject("tournament", null);
     	
     	return mv;
     }
