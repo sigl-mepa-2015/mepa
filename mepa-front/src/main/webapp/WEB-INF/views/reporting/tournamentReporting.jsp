@@ -63,6 +63,30 @@
 	  </div>
 	  <div class="tab-pane" id="range">
 	  		<h3>Classement general pour le tournoi</h3>
+	  		<table class="table table-bordered">
+	  			<thead>
+	  				<tr>
+	  					<th>Classement</th>
+	  					<th>Equipe</th>
+	  					<th>Poule</th>
+	  					<th>J</th>
+	  					<th>V</th>
+	  					<th>D</th>
+	  					<th>N</th>
+	  				</tr>
+	  			</thead>
+	  			<tbody>
+	  				<tr>
+	  					<td>1</td>
+	  					<td>Equipe1</td>
+	  					<td>Poule A</td>
+	  					<td class="info">5</td>
+	  					<td class="success">3</td>
+	  					<td class="danger">1</td>
+	  					<td class="warning">4</td>
+	  				</tr>
+	  			</tbody>
+	  		</table>
 	  </div>
 	</div>
 </div>
