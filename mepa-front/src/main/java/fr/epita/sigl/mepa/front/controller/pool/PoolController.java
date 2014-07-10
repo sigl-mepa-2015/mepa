@@ -15,8 +15,8 @@ public class PoolController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PoolController.class);
 
-    @RequestMapping(value = {"/pool", "/createPool"})
+    @RequestMapping(value = {"/creerPoule", "/creerPoule"})
     public String create() {
-        return "/createPool";
+        return "/creerPoule";
     }
 }
