@@ -44,21 +44,6 @@ public class TournamentController {
         return "/tournament/create/form";
     }
 
-    @RequestMapping(value = { "/"})
-    public String showList(HttpServletRequest request, ModelMap modelMap) {
-
-        // Get tournaments data from database
-        List<Tournament> tournaments = this.tournamentService.getAllTournaments();
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("There are {} tournaments in database", tournaments.size());
-        }
-
-        // Update model attribute "tournaments", to use it in JSP
-        modelMap.addAttribute("tournaments", tournaments);
-
-        return "/tournament/read/list";
-    }
-
     /**
      * @param request
      * @param modelMap
