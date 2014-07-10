@@ -30,12 +30,15 @@
     	<put-attribute name="body" value="/WEB-INF/views/reporting/showRange.jsp"/>
     </definition>
 
-    <!-- Create tournament -->
-    <definition name="/tournament/create/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
+    <!-- Tournament -->
+    <definition name="/tournament/read/list" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
     </definition>
     <definition name="/tournament/create/result" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
+    </definition>
+    <definition name="/tournament/remove/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
 </tiles-definitions>
