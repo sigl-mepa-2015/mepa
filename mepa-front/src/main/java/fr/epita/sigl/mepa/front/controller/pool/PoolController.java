@@ -34,7 +34,7 @@ public class PoolController {
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
 
     @ModelAttribute(CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE)
-    public CreatePoolFormBean initAddTournamentFormBean() {
+    public CreatePoolFormBean initAddPoolFormBean() {
         return new CreatePoolFormBean();
     }
 
@@ -59,7 +59,7 @@ public class PoolController {
             // Error(s) in form bean validation
             return "/creerPoule";
         }
-        Pool newPool = new Pool();
+        Pool newPool = new Pool(null, null);
         newPool.setName(createPoolFormBean.getName());
         this.s.createPool(newPool);
         modelMap.addAttribute("pool", newPool);
