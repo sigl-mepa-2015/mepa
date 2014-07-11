@@ -35,12 +35,16 @@
 				<tbody>
 					<c:forEach items="${pool.games}" var="game">
 						<c:choose>
-							<c:when test="${game.status == 'ENDED'}">
+							<c:when test="${game.status == 'DONE'}">
 								<tr>
-									<td>${game.team1.name}</td>
-									<td>${game.resultTeam1}</td>
-									<td>${game.resultTeam2}</td>
-									<td>${game.team2.name}</td>
+									<td>TODO TEAM NAME</td>
+                                    <td>TODO TEAM1 RESULT</td>
+                                    <td>TODO TEAM NAME</td>
+                                    <td>TODO TEAM2 RESULT</td>
+									<%--<td>${game.team1.name}</td>--%>
+									<%--<td>${game.resultTeam1}</td>--%>
+									<%--<td>${game.resultTeam2}</td>--%>
+									<%--<td>${game.team2.name}</td>--%>
 								</tr>
 							</c:when>
 						</c:choose>
@@ -51,7 +55,7 @@
 	  </div>
 	  <div class="tab-pane" id="coming">
 	  		<h3>Liste des matchs a venir</h3>
-	  		 <c:forEach items="${t.pools}" var="pool">
+	  		<c:forEach items="${t.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
@@ -59,10 +63,10 @@
 						<c:choose>
 							<c:when test="${game.status == 'TODO'}">
 								<tr>
-									<td>${game.team1.name}</td>
-									<td>${game.resultTeam1}</td>
-									<td>${game.resultTeam2}</td>
-									<td>${game.team2.name}</td>
+									<td>TODO TEAM</td>
+                                    <td>TODO TEAM2</td>
+									<%--<td>${game.team1.name}</td>--%>
+									<%--<td>${game.team2.name}</td>--%>
 								</tr>	
 							</c:when>	
 						</c:choose>

@@ -24,7 +24,16 @@ public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-    public enum GameStatus {TODO, PROGESS, DONE};
+    public enum GameStatus {
+        TODO("TODO"), PROGESS("PROGRESS"), DONE("DONE");
+
+        private final String val;
+        GameStatus(String val) { this.val = val;}
+
+        public String getGameStatus() {
+            return val;
+        }
+    }
 	
 	private Long id;
 	//private Team team1;

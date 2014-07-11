@@ -2,7 +2,7 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Tout les tournois</h1>
+		<h1>Tous les tournois</h1>
 	</div>
 </div>
 
