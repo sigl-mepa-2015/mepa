@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * Created by maite on 10/07/14.
  */
 public class CreatePoolFormBean {
-    @NotBlank
+   // @NotBlank
     private String name;
 
     public String getName() {
