@@ -9,7 +9,7 @@
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
     <context:component-scan base-package="fr.epita.sigl.mepa.core" />
 
-    <!-- Remove this data source below when you will use a JNDI data source -->
+    <!-- Remove this name source below when you will use a JNDI name source -->
     <bean id="coreDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${dataSource.driverClassName}" />
         <property name="url" value="${dataSource.url}" />
@@ -21,7 +21,12 @@
         <property name="dataSource" ref="coreDataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>fr.epita.sigl.mepa.core.domain.Model</value>
+                <value>fr.epita.sigl.mepa.front.utils.CreateObject</value>
+                <value>fr.epita.sigl.mepa.core.domain.Tournament</value>
+                <value>fr.epita.sigl.mepa.core.domain.Team</value>
+                <value>fr.epita.sigl.mepa.core.domain.Game</value>
+                <value>fr.epita.sigl.mepa.core.domain.Pool</value>
+                <value>fr.epita.sigl.mepa.core.domain.TeamResult</value>
             </list>
         </property>
         <property name="hibernateProperties">

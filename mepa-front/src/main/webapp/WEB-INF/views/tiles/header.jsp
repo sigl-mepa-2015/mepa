@@ -4,21 +4,29 @@
         <div class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle" name-toggle="collapse" name-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">MEPA</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}">MEPA</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="homeUrl" value="/home"/>
-                        <li><a href="${homeUrl}">Home page</a></li>
-                        <c:url var="coreExampleUrl" value="/example/core/"/>
-                        <li><a href="${coreExampleUrl}">Core module example</a></li>
-                    </ul>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu">
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/all">Tout les tournois</a></li>
+						  </ul>
+				   		</li>
+				   		  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipe <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu">
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame">Créer une équipe</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame">Toutes les équipes</a></li>
+						  </ul>
+				   		</li>
+			  		 </ul>
                 </div>
             </div>
         </div>

@@ -18,13 +18,24 @@
     <definition name="/home/home" extends="home.definition">
         <put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
     </definition>
-
-    <!-- Core example -->
-    <definition name="/example/core/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/example/core/form.jsp" />
+    
+    <!-- Reporting -->
+    <definition name="/reporting/tournamentReporting" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentReporting.jsp"/>
     </definition>
-    <definition name="/example/core/result" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/example/core/result.jsp" />
+     
+    <!-- Tournament -->
+    <definition name="/tournament/read/list" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
+    </definition>
+    <definition name="/tournament/create/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
+    </definition>
+    <definition name="/tournament/create/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
+    </definition>
+    <definition name="/tournament/remove/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
 </tiles-definitions>
