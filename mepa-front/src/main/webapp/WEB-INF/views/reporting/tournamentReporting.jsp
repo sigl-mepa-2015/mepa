@@ -83,19 +83,28 @@
 	  					<th>Poule</th>
 	  					<th>J</th>
 	  					<th>V</th>
-	  					<th>D</th>
 	  					<th>N</th>
+	  					<th>D</th>
 	  				</tr>
 	  			</thead>
 	  			<tbody>
 	  				<tr>
-	  					<td>1</td>
-	  					<td>Equipe1</td>
-	  					<td>Poule A</td>
-	  					<td class="info">5</td>
-	  					<td class="success">3</td>
-	  					<td class="danger">1</td>
-	  					<td class="warning">4</td>
+	  					<c:forEach items="${orderTeams}" var="t" varStatus="index">
+	  						<td>
+	  							<c:choose>
+		  							<c:when test="${index != 0 && t.winGame == orderTeams[index - 1].winGame && t.drawGame == orderTeams[index - 1].drawGame && t.loseGame == orderTeams[index - 1].loseGame}">
+		  								-
+		  							</c:when>
+		  							<c:otherwise>${index + 1}</c:otherwise>
+	  							</c:choose>
+	  						</td>
+	  						<td>${t.name}</td>
+	  						<td>${t.pool.name}</td>
+	  						<td class="info">${t.winGame + t.drawGame + t.loseGame}</td>
+	  						<td class="success">${t.winGame}</td>
+	  						<td class="warning">${t.drawGame}</td>
+	  						<td class="danger">${t.loseGame}</td>
+	  					</c:forEach>
 	  				</tr>
 	  			</tbody>
 	  		</table>
