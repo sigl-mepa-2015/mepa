@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -42,9 +39,14 @@ public class TeamController {
     }
 
     @RequestMapping(value="/edit", method=RequestMethod.GET)
-    public String editTeam(){
+    public ModelAndView editTeam(@RequestParam("teamID") Long teamID){
 
-        return "/team/edit/form";
+        Team team = teamService.getTeamById(teamID);
+        System.out.println(teamID);
+        ModelAndView mv = new ModelAndView("/team/edit/form");
+        mv.addObject("t", team);
+        return mv;
+
     }
     
     
@@ -61,6 +63,24 @@ public class TeamController {
         
     	List<Team> allTeam = teamService.getAllTeams();
     	modelMap.addAttribute("teams", allTeam);
+
+        return "/team/read/list";
+    }
+
+    @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
+    public String processEditForm(HttpServletRequest request, ModelMap modelMap,
+                              @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
+        if (result.hasErrors()) {
+            // Error(s) in form bean validation
+            return "/team/read/list";
+        }
+        Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
+        newTeam.setName(addTeamFormBean.getName());
+        this.teamService.updateTeam(newTeam);
+        modelMap.addAttribute("team", newTeam);
+
+        List<Team> allTeam = teamService.getAllTeams();
+        modelMap.addAttribute("teams", allTeam);
 
         return "/team/read/list";
     }

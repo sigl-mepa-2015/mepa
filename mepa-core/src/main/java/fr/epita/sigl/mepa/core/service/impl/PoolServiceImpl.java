@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+
 /**
  * Created by maite on 11/07/14.
  */
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,22 +25,14 @@ public class PoolServiceImpl implements PoolService {
     @Autowired
     private PoolDao poolDao;
 
-    @Override
-    public void createPool(Pool p) {
-        System.out.println("********** Fonction Service = " + p.getName());this.poolDao.create(p);
+    public PoolDao getPoolDao() {
+        return poolDao;
     }
 
-
-    @Override
-    public void updatePool(Pool p) {
-        this.poolDao.update(p);
+    public void setPoolDao(PoolDao poolDao) {
+        this.poolDao = poolDao;
     }
 
-    @Override
-    public void deletePool(Pool p) {
-        this.poolDao.delete(p);
-    }
-    
     @Override
     @Transactional(readOnly = true)
     public Pool getPoolById(Long id) {
@@ -46,8 +40,26 @@ public class PoolServiceImpl implements PoolService {
     }
 
     @Override
+    public void createPool(Pool pool) {
+        this.poolDao.create(pool);
+    }
+
+    @Override
+    public void updatePool(Pool pool) {
+        this.poolDao.update(pool);
+    }
+
+    @Override
+    public void deletePool(Pool pool) {
+        this.poolDao.delete(pool);
+    }
+
+
+    @Override
     @Transactional(readOnly = true)
     public List<Pool> getAllPools() {
+
         return this.poolDao.getAll();
+
     }
 }

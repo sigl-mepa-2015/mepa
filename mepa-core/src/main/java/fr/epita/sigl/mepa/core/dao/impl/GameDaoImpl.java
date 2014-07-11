@@ -1,6 +1,8 @@
 package fr.epita.sigl.mepa.core.dao.impl;
 
+import fr.epita.sigl.mepa.core.dao.GameDao;
 import fr.epita.sigl.mepa.core.dao.PoolDao;
+import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Pool;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PoolDaoImpl implements PoolDao {
+public class GameDaoImpl implements GameDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -21,30 +23,30 @@ public class PoolDaoImpl implements PoolDao {
     }
 
     @Override
-    public void create(Pool pool) {
-        this.getSession().save(pool);
+    public void create(Game game) {
+        this.getSession().save(game);
     }
 
     @Override
-    public void update(Pool pool) {
-        this.getSession().saveOrUpdate(pool);
+    public void update(Game game) {
+        this.getSession().saveOrUpdate(game);
     }
 
     @Override
-    public void delete(Pool pool) {
-        this.getSession().delete(pool);
+    public void delete(Game game) {
+        this.getSession().delete(game);
     }
 
     @Override
-    public Pool getById(Long id) {
-        Query query = this.getSession().getNamedQuery("Pool.findById");
+    public Game getById(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.findById");
         query.setParameter("id", id);
-        return (Pool) query.uniqueResult();
+        return (Game) query.uniqueResult();
     }
 
     @Override
-    public List<Pool> getAll() {
-        Query query = this.getSession().getNamedQuery("Pool.findAll");
+    public List<Game> getAll() {
+        Query query = this.getSession().getNamedQuery("Game.findAll");
         return query.list();
     }
 }

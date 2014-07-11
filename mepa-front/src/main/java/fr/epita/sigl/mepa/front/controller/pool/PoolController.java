@@ -68,18 +68,10 @@ public class PoolController {
             // Error(s) in form bean validation
             return "/creerPoule";
         }
-      List e = createPoolFormBean.getTeams();
-      System.out.println(e.size());
-      Set<Team> teams = new HashSet<Team>();
-      for(int i = 0; i < e.size(); ++i) {
-            Team c = new Team(e.get(i).toString());
-            teams.add(c);
-        }
 
-        System.out.println(teams.toString());
         Pool newPool = new Pool();
         newPool.setName(createPoolFormBean.getName());
-        //newPool.setTeams(teams);
+
         this.s.createPool(newPool);
         modelMap.addAttribute("pool", newPool);
 
