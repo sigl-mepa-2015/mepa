@@ -43,6 +43,13 @@ public class TournamentDaoImpl implements TournamentDao {
     }
 
     @Override
+    public Tournament getByType(String type) {
+        Query query = this.getSession().getNamedQuery("Tournament.findByType");
+        query.setParameter("type", type);
+        return (Tournament) query.uniqueResult();
+    }
+
+    @Override
     public List<Tournament> getAll() {
         Query query = this.getSession().getNamedQuery("Tournament.findAll");
         return query.list();

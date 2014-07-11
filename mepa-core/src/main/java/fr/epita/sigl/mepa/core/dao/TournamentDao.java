@@ -14,6 +14,8 @@ public interface TournamentDao {
 
     Tournament getById(Long id);
 
+    Tournament getByType(String type);
+
     List<Tournament> getAll();
 
 }

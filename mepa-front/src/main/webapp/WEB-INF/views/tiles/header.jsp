@@ -27,7 +27,7 @@
                     </ul>
 
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/tournament/all">Tout les tournois</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
 						  </ul>
 
 				   </li>

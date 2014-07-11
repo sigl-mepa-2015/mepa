@@ -1,11 +1,14 @@
 package fr.epita.sigl.mepa.core.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 
 @Entity
@@ -23,7 +26,16 @@ public class Tournament implements Serializable{
 	private Long id;
 	
 	@Column(name="name", nullable=false)
+    @NotBlank
 	private String name;
+
+    @Column(name="maxTeamNumber")
+    @Digits(integer = 10, fraction = 0)
+    @Min(0)
+    private Integer maxTeamNumber;
+
+    @Column(name="type", nullable=true)
+    private String type;
 	
 	@OneToMany
 	private Set<Pool> pools;
@@ -33,11 +45,15 @@ public class Tournament implements Serializable{
 	private Date startedDate;
 
     public Tournament() {
-
+        name = null;
+        maxTeamNumber = 0;
+        type = null;
     }
 
-    public Tournament(String name) {
+    public Tournament(String name, Integer maxTeamNumber, String type) {
         this.name = name;
+        this.maxTeamNumber = maxTeamNumber;
+        this.type = type;
     }
 
     /**
@@ -67,6 +83,18 @@ public class Tournament implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+    public Integer getMaxTeamNumber() { return maxTeamNumber; }
+
+    public void setMaxTeamNumber(Integer maxTeamNumber) { this.maxTeamNumber = maxTeamNumber; }
+
+    public void setMaxPoolNumber(String maxPoolNumber) {
+        this.maxTeamNumber = Integer.parseInt(maxPoolNumber);
+    }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 
 	/**
 	 * @return the pools
