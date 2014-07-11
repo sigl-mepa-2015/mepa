@@ -21,9 +21,12 @@
 	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
 	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
 	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
-						  </ul>
+                            </ul>
 				   </li>
-			   </ul>
+                        <li><a href="${pageContext.request.contextPath}/creerPoule"><spring:message code="home.bar.title.nav1"/></a></li>
+
+                    </ul>
+
                 </div>
             </div>
         </div>
