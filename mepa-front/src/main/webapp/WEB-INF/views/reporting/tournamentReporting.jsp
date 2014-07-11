@@ -8,6 +8,16 @@
 </div>
 
 <div class="container">
+	<h5>Niveau de progression du tournoi</h5>
+	<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+    80%
+  </div>
+</div>
+</div>
+
+
+<div class="container">
 	<ul class="nav nav-tabs nav-justified" role="tablist">
 		<li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs termines</a></li>
 		<li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs a venir</a></li>
@@ -41,7 +51,7 @@
 	  </div>
 	  <div class="tab-pane" id="coming">
 	  		<h3>Liste des matchs a venir</h3>
-	  		<%--  <c:forEach items="${t.pools}" var="pool">
+	  		 <c:forEach items="${t.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
@@ -59,7 +69,7 @@
 					</c:forEach> 
 				</tbody>
 			</table>
-		</c:forEach>--%>
+		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="range">
 	  		<h3>Classement general pour le tournoi</h3>
