@@ -19,7 +19,16 @@ public class Tournament implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+    public Tournament(String name, Integer maxTeamNumber, String type) {
+        this.name = name;
+        this.type = type;
+        this.maxTeamNumber = maxTeamNumber;
+    }
+
+    public Tournament() {
+    }
+
+    private Long id;
 	private String name;
 	private Set<Pool> pools;
 
