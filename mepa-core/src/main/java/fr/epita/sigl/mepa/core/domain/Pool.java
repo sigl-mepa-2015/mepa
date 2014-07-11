@@ -34,7 +34,7 @@ public class Pool implements Serializable{
 	private String name;
 	
 	@OneToMany
-	private Set<Game> games;
+    private Set<Game> games;
 	
 	@OneToMany
 	private Set<Team> teams;
@@ -42,8 +42,13 @@ public class Pool implements Serializable{
 	@ManyToOne(targetEntity=Tournament.class)
 	@JoinColumn(name="TOURNAMENT_ID")
 	private Tournament tournament;
-	
-	/**
+
+    public Pool(String name, Tournament tournament) {
+        this.name = name;
+        this.tournament = tournament;
+    }
+
+    /**
 	 * @return the id
 	 */
 	public Long getId() {

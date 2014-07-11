@@ -42,7 +42,6 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Team> getAllTeams() {
         return this.teamDao.getAll();
     }

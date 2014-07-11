@@ -21,10 +21,12 @@
         <property name="dataSource" ref="coreDataSource" />
         <property name="annotatedClasses">
             <list>
+                <value>fr.epita.sigl.mepa.front.utils.CreateObject</value>
                 <value>fr.epita.sigl.mepa.core.domain.Tournament</value>
                 <value>fr.epita.sigl.mepa.core.domain.Team</value>
                 <value>fr.epita.sigl.mepa.core.domain.Game</value>
                 <value>fr.epita.sigl.mepa.core.domain.Pool</value>
+                <value>fr.epita.sigl.mepa.core.domain.TeamResult</value>
             </list>
         </property>
         <property name="hibernateProperties">

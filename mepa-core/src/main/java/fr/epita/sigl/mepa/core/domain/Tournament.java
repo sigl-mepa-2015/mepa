@@ -31,8 +31,16 @@ public class Tournament implements Serializable{
 	@Column(name="startedDate")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startedDate;
-	
-	/**
+
+    public Tournament() {
+
+    }
+
+    public Tournament(String name) {
+        this.name = name;
+    }
+
+    /**
 	 * @return the id
 	 */
 	public Long getId() {

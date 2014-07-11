@@ -4,3 +4,15 @@
 .well-done img {
     border-radius: 10px;
 }
+
+footer {
+	position: fixed;
+	bottom: 0px;
+	width : 100%;
+	height : 60px;
+	background-color : rgb(230,230,230);
+}
+
+body {
+	height : 100%;
+}

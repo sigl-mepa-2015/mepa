@@ -14,14 +14,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="tournamentUrl" value="/tournament/"/>
-                        <li><a href="${tournamentUrl}"><spring:message code="tournament.listTitle" /></a></li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title"/> <span class="caret"></span></a>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
 	                    	<ul class="dropdown-menu" role="menu">
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
-	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/all">Tout les tournois</a></li>
 						  </ul>
+
 
 				   </li>
 			   </ul>
@@ -29,11 +27,12 @@
                         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title2"/> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="${pageContext.request.contextPath}/team/form"><spring:message code="home.bar.title2.nav1"/></a></li>
-                                <li><a href="${pageContext.request.contextPath}/team/edit"><spring:message code="home.bar.title2.nav2"/></a></li>
+                                <li><a href="${pageContext.request.contextPath}/team/all"><spring:message code="home.bar.title2.nav2"/></a></li>
                             </ul>
 
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>
