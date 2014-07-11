@@ -1,19 +1,20 @@
 package fr.epita.sigl.mepa.core.dao;
 
-import fr.epita.sigl.mepa.core.domain.Pool;
-
 import java.util.List;
 
+import fr.epita.sigl.mepa.core.domain.Pool;
+
+/**
+ * Created by maite on 11/07/14.
+ */
 public interface PoolDao {
+    void create(Pool p);
 
-    void create(Pool pool);
+    void update(Pool p);
 
-    void update(Pool pool);
-
-    void delete(Pool pool);
+    void delete(Pool p);
 
     Pool getById(Long id);
 
     List<Pool> getAll();
-
 }

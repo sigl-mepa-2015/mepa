@@ -19,18 +19,19 @@ public class Tournament implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-    public Tournament(String name, Integer maxTeamNumber, String type) {
-        this.name = name;
-        this.type = type;
-        this.maxTeamNumber = maxTeamNumber;
-    }
-
-    public Tournament() {
-    }
-
-    private Long id;
+	private Long id;
 	private String name;
 	private Set<Pool> pools;
+    private Set<Team> teams;
+
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Team.class, mappedBy = "tournament", fetch = FetchType.EAGER)
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
 
     public String getType() {
         return type;

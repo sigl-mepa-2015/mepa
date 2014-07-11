@@ -30,7 +30,7 @@ public class Pool implements Serializable{
 	private Long id;	
 	private String name;
     private Set<Game> games;
-//	private Set<Team> teams;
+	private Set<Team> teams;
 
     @ManyToOne()
     @JoinColumn(name="TOURNAMENT_ID")
@@ -38,12 +38,27 @@ public class Pool implements Serializable{
         return tournament;
     }
 
+    public Pool(String name, Tournament tournament) {
+        this.name = name;
+        this.tournament = tournament;
+    }
     public void setTournament(Tournament tournament) {
+
         this.tournament = tournament;
     }
 
-    private Tournament tournament;
+    public Pool() {
+        this.name= "";
+        this.tournament = null;
 
+    }
+
+
+
+    private Tournament tournament;
+    /**
+     * @return the id
+     */
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="POOL_ID", nullable=false)
@@ -75,14 +90,15 @@ public class Pool implements Serializable{
 		this.games = games;
 	}
 
-//	@OneToMany(cascade=CascadeType.ALL)
-//	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
-//    public Set<Team> getTeams() {
-//		return teams;
-//	}
-//
-//	public void setTeams(Set<Team> teams) {
-//		this.teams = teams;
-//	}
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Team.class, mappedBy = "pool", fetch = FetchType.EAGER)
+    public Set<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
+
+
 
 }

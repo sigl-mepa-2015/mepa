@@ -32,7 +32,7 @@
 					<td width="70%">${t.name}</td>
 					<td width="30%">
 						<button type="button" class="btn btn-info" onClick="location.href='${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
-							<span class="glyphicon glyphicon-stats"></span>
+							<span class="glyphicon glyphicon-cog"></span>
 						</button>
 		
 					</td>

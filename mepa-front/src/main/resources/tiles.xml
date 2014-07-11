@@ -55,5 +55,12 @@
     <definition name="/team/remove/result" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/team/remove/result.jsp" />
     </definition>
+    <definition name="/team/edit/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/edit/form.jsp" />
+    </definition>
 
+    <!-- Pool -->
+    <definition name="/creerPoule" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
+    </definition>
 </tiles-definitions>
