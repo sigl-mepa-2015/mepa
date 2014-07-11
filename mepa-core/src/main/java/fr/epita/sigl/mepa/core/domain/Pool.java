@@ -3,119 +3,86 @@ package fr.epita.sigl.mepa.core.domain;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Pool")
+@Table(name="POOL")
 @NamedQueries({
         @NamedQuery(name = "Pool.findById", query = "FROM Pool o WHERE o.id=:id"),
-        @NamedQuery(name = "Pool.findAll", query = "FROM Pool o"),
-        @NamedQuery(name = "Pool.findAllByTournamentId", query ="SELECT p FROM Pool p LEFT JOIN p.tournament t ON t.id = :tournamentId")})
+        @NamedQuery(name = "Pool.findAll", query = "FROM Pool o")})
 public class Pool implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", nullable=false)
-	private Long id;
 	
-	@Column(name="name", nullable=false)
+	private Long id;	
 	private String name;
-	
-	@OneToMany
     private Set<Game> games;
-	
-	@OneToMany
-	private Set<Team> teams;
+//	private Set<Team> teams;
 
-	@ManyToOne(targetEntity=Tournament.class)
-	@JoinColumn(name="TOURNAMENT_ID")
-	private Tournament tournament;
+    @ManyToOne()
+    @JoinColumn(name="TOURNAMENT_ID")
+    public Tournament getTournament() {
+        return tournament;
+    }
 
-    public Pool(String name, Tournament tournament) {
-        this.name = name;
+    public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
 
-    /**
-	 * @return the id
-	 */
+    private Tournament tournament;
+
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="POOL_ID", nullable=false)
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the name
-	 */
+	@Column(name="name", nullable=false)
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the games
-	 */
-	public Set<Game> getGames() {
+	//@OneToMany(cascade=CascadeType.ALL)
+	//@JoinTable(name="POOL_GAME", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="GAME_ID")}
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Game.class, mappedBy = "pool", fetch = FetchType.EAGER)
+    public Set<Game> getGames() {
 		return games;
 	}
 
-	/**
-	 * @param games the games to set
-	 */
 	public void setGames(Set<Game> games) {
 		this.games = games;
 	}
 
-	/**
-	 * @return the teams
-	 */
-	public Set<Team> getTeams() {
-		return teams;
-	}
-
-	/**
-	 * @param teams the teams to set
-	 */
-	public void setTeams(Set<Team> teams) {
-		this.teams = teams;
-	}
-
-	/**
-	 * @return the tournament
-	 */
-	public Tournament getTournament() {
-		return tournament;
-	}
-
-	/**
-	 * @param tournament the tournament to set
-	 */
-	public void setTournament(Tournament tournament) {
-		this.tournament = tournament;
-	}
+//	@OneToMany(cascade=CascadeType.ALL)
+//	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
+//    public Set<Team> getTeams() {
+//		return teams;
+//	}
+//
+//	public void setTeams(Set<Team> teams) {
+//		this.teams = teams;
+//	}
 
 }

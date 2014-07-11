@@ -31,10 +31,10 @@ public class ReportingController {
     public ModelAndView showEndedGame(@RequestParam("tournamentID") Long tournamentID)
     {
     	Tournament t = null;
-    	System.out.println(tournamentID);    	
+//    	System.out.println(tournamentID);
     	t = tournamentService.getTournamentById(tournamentID);
     	
-    	LOG.info("inside showEndedGame fonction");
+//    	LOG.info("inside showEndedGame fonction");
     	ModelAndView mv = new ModelAndView("/reporting/tournamentReporting");
     	mv.addObject("t",t);
 

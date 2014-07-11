@@ -34,6 +34,12 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     @Transactional(readOnly = true)
+    public Tournament getTournamentByType(String type) {
+        return this.tournamentDao.getByType(type);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Tournament getTournamentById(Long id) {
         return this.tournamentDao.getById(id);
     }

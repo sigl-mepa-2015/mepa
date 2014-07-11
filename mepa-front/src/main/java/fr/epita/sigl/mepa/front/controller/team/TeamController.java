@@ -67,7 +67,7 @@ public class TeamController {
         return "/team/read/list";
     }
 
-    @RequestMapping(value = { "/edit/form" }, method = { RequestMethod.POST })
+    @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
     public String processEditForm(HttpServletRequest request, ModelMap modelMap,
                               @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
         if (result.hasErrors()) {
