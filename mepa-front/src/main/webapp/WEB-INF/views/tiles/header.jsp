@@ -19,14 +19,19 @@
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
 						  </ul>
-				   		</li>
-				   		  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipe <span class="caret"></span></a>
-	                    	<ul class="dropdown-menu" role="menu">
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame">Créer une équipe</a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame">Toutes les équipes</a></li>
-						  </ul>
-				   		</li>
-			  		 </ul>
+
+				   </li>
+			   </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title2"/> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="${pageContext.request.contextPath}/team/form"><spring:message code="home.bar.title2.nav1"/></a></li>
+                                <li><a href="${pageContext.request.contextPath}/team/all"><spring:message code="home.bar.title2.nav2"/></a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>
