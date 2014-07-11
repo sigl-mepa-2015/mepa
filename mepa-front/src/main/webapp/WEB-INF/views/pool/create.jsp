@@ -15,6 +15,10 @@
                 </tr>
             </thead>
             <tbody>
+            <tr>
+                <td><label >Enter a team below:</label></td>
+                <td><input  type="text" id="name"/></td>
+            </tr>
                 <tr>
                      <td><label for="team1">Equipe 1</label></td>
                     <td><input type="checkbox" id="team1"/></td>
