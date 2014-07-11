@@ -1,6 +1,8 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
+import java.lang.Integer;
+import java.lang.String;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,6 +22,26 @@ public class Tournament implements Serializable{
 	private Long id;
 	private String name;
 	private Set<Pool> pools;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getMaxTeamNumber() {
+        return maxTeamNumber;
+    }
+
+    public void setMaxTeamNumber(Integer maxTeamNumber) {
+        this.maxTeamNumber = maxTeamNumber;
+    }
+
+    private Integer maxTeamNumber;
+
+    private String type;
 	private Date startedDate;
 
     @Id
