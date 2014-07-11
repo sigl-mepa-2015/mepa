@@ -90,15 +90,14 @@ public class Pool implements Serializable{
 		this.games = games;
 	}
 
-//	@OneToMany(cascade=CascadeType.ALL)
-//	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
-//    public Set<Team> getTeams() {
-//		return teams;
-//	}
-//
-//	public void setTeams(Set<Team> teams) {
-//		this.teams = teams;
-//	}
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Team.class, mappedBy = "pool", fetch = FetchType.EAGER)
+    public Set<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
 
 
 

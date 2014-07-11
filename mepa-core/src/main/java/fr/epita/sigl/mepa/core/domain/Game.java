@@ -1,19 +1,9 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="GAME")
@@ -36,14 +26,12 @@ public class Game implements Serializable{
     }
 	
 	private Long id;
-	//private Team team1;
-	//private Team team2;
+    private Set<Team> teams;
 	private int resultTeam1;	
 	private int resultTeam2;
 	private int duration;
 	private GameStatus status;
     private Pool pool;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,6 +43,17 @@ public class Game implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+//    @ManyToMany
+//    @JoinTable(name="GAME_TEAM", joinColumns = @JoinColumn(name="GAME_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TEAM_ID", referencedColumnName = "ID"))
+    @ManyToMany(targetEntity = Team.class)
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
 
 //	@Column(name="GAME_TEAM1", nullable=false)
 //	public Team getTeam1() {
