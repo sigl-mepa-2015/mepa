@@ -38,7 +38,21 @@
         <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
+    <!-- Team -->
+        <definition name="/team/read/list" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/read/list.jsp" />
+    </definition>
+    <definition name="/team/create/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/create/form.jsp" />
+    </definition>
+    <definition name="/team/create/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/create/result.jsp" />
+    </definition>
+    <definition name="/team/remove/result" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/remove/result.jsp" />
+    </definition>
 
+    <!-- Pool -->
     <definition name="/creerPoule" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
     </definition>
