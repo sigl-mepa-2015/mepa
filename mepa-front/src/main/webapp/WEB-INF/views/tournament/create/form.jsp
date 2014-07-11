@@ -9,7 +9,7 @@
 <%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 <div class="container">
     <div class="page-header">
-        <h1><spring:message code="tournament.createTitle" /></h1>
+        <h1><c:choose> <c:when test="${not empty tournament.id}"><spring:message code="tournament.updateTitle" /></c:when><c:otherwise><spring:message code="tournament.createTitle" /></c:otherwise></c:choose></h1>
     </div>
     <form:form role="form" action="${addTournamentFormActionUrl}" cssClass="row" cssStyle="margin:auto;" modelAttribute="tournament" method="post">
         <div class="form-group">
@@ -34,7 +34,8 @@
             </div>
             <div class="input-group col-md-4">
                 <br>
-                <button type="submit" class="btn btn-success pull-right"><spring:message code="add" /></button>
+                <a class="pull-left btn btn-default" href="${tournamentUrl}"><i class="glyphicon glyphicon-arrow-left"></i> <spring:message code="back" /></a>
+                <button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-ok"></i> <c:choose> <c:when test="${not empty tournament.id}"><spring:message code="update" /></c:when><c:otherwise><spring:message code="add" /></c:otherwise></c:choose></button>
             </div>
         </div>
     </form:form>

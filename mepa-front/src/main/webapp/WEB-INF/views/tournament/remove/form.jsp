@@ -7,5 +7,6 @@
 <%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 <form:form role="form" action="${removeTournamentActionUrl}" modelAttribute="removeTournamentFormBean"  method="post" cssStyle="display : inline-block">
     <form:input path="id" name="id" type="hidden" value="${t.id}"/>
-    <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+    <spring:message code="delete" var="removeLabel" />
+    <button class="btn btn-danger" title="${removeLabel}"><i class="glyphicon glyphicon-trash"></i></button>
 </form:form>

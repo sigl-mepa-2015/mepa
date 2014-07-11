@@ -35,6 +35,31 @@ public class TournamentController {
     @Autowired
     private TournamentService tournamentService;
 
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    public ModelAndView showAllTournaments(HttpServletRequest request) {
+        List<Tournament> allTournament = tournamentService.getAllTournaments();
+        ModelAndView mv = new ModelAndView("/tournament/read/list");
+        mv.addObject("tournaments", allTournament);
+
+        String removed = request.getParameter("removed");
+        String updated = request.getParameter("updated");
+        String created = request.getParameter("created");
+
+
+        if (created != null) {
+            mv.addObject("created", created);
+        }
+        else if (updated != null)
+        {
+            mv.addObject("updated", updated);
+        }
+        else if (removed != null)
+        {
+            mv.addObject("removed", removed);
+        }
+
+        return mv;
+    }
     @RequestMapping(value = {"/form"})
     public String showForm(HttpServletRequest request, ModelMap modelMap) {return "/tournament/create/form";}
 
@@ -62,34 +87,22 @@ public class TournamentController {
         }
         if (newTournament.getId() == null) {
             this.tournamentService.createTournament(newTournament);
+            return "redirect:?created=" + newTournament.getName();
         }
         else
         {
             this.tournamentService.updateTournament(newTournament);
+            return "redirect:?updated=" + newTournament.getName();
         }
-        modelMap.addAttribute("tournament", newTournament);
-
-        List<Tournament> allTournament = tournamentService.getAllTournaments();
-        modelMap.addAttribute("tournaments", allTournament);
-
-        return "/tournament/read/list";
     }
 
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public ModelAndView getAllTournament() {
-        List<Tournament> allTournament = tournamentService.getAllTournaments();
-        ModelAndView mv = new ModelAndView("/tournament/read/list");
-        mv.addObject("tournaments", allTournament);
-        mv.addObject("tournament", null);
-
-        return mv;
-    }
 
     /**
-     * @param request
-     * @param modelMap
-     * @param result
-     * @return
+     * @param request The request
+     * @param modelMap The variables used in the view
+     * @param removeTournamentFormBean The form binding object
+     * @param result The binding result
+     * @return viewName
      */
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
     public String removeTournament(HttpServletRequest request, ModelMap modelMap,
@@ -101,7 +114,7 @@ public class TournamentController {
         Tournament removedTournament = this.tournamentService.getTournamentById(removeTournamentFormBean.getId());
         this.tournamentService.deleteTournament(removedTournament);
         modelMap.addAttribute("tournament", removedTournament);
-        return "/tournament/remove/result";
+        return "redirect:?removed=" + removedTournament.getName();
     }
 
     /**
