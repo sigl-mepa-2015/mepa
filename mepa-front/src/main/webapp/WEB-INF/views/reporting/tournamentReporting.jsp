@@ -37,14 +37,12 @@
 						<c:choose>
 							<c:when test="${game.status == 'DONE'}">
 								<tr>
-									<td>TODO TEAM NAME</td>
-                                    <td>TODO TEAM1 RESULT</td>
-                                    <td>TODO TEAM NAME</td>
-                                    <td>TODO TEAM2 RESULT</td>
+                                    <td>TODO TEAM</td>
 									<%--<td>${game.team1.name}</td>--%>
-									<%--<td>${game.resultTeam1}</td>--%>
-									<%--<td>${game.resultTeam2}</td>--%>
+									<td>${game.resultTeam1}</td>
+									<td>${game.resultTeam2}</td>
 									<%--<td>${game.team2.name}</td>--%>
+                                    <td>TODO TEAM</td>
 								</tr>
 							</c:when>
 						</c:choose>

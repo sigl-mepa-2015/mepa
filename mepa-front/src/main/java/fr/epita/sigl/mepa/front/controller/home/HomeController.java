@@ -55,6 +55,12 @@ public class HomeController {
         g1.setStatus(Game.GameStatus.TODO);
         gs.createGame(g1);
 
+        Game g2 = new Game();
+        g2.setPool(p2);
+        g2.setStatus(Game.GameStatus.DONE);
+        g2.setResultTeam1(2);
+        g2.setResultTeam2(3);
+        gs.createGame(g2);
 
         return "/home/home";
     }
