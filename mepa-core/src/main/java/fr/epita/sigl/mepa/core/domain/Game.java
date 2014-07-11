@@ -24,8 +24,15 @@ import javax.persistence.Table;
 public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	public enum GameStatus {TODO, PROGESS, DONE};
+
+    public Game(Team team1, Team team2, Pool pool) {
+        this.team1 = team1;
+        this.team2 = team2;
+        this.pool = pool;
+        this.status = GameStatus.TODO;
+    }
+
+    public enum GameStatus {TODO, PROGESS, DONE};
 	
 	
 	@Id

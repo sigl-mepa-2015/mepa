@@ -14,19 +14,20 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <c:url var="tournamentUrl" value="/tournament/"/>
-                        <li><a href="${tournamentUrl}"><spring:message code="tournament.listTitle" /></a></li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title"/> <span class="caret"></span></a>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
 	                    	<ul class="dropdown-menu" role="menu">
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
-	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
-                            </ul>
-				   </li>
-                        <li><a href="${pageContext.request.contextPath}/creerPoule"><spring:message code="home.bar.title.nav1"/></a></li>
 
-                    </ul>
-
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/tournament/all">Tout les tournois</a></li>
+						  </ul>
+				   		</li>
+				   		  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipe <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu">
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame">Créer une équipe</a></li>
+	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame">Toutes les équipes</a></li>
+						  </ul>
+				   		</li>
+			  		 </ul>
                 </div>
             </div>
         </div>
