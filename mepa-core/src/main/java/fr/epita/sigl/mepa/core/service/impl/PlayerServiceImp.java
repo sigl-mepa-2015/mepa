@@ -21,23 +21,23 @@ public class PlayerServiceImp implements PlayerService {
     private PlayerDao playerDao;
 
     @Override
+    @Transactional(readOnly = true)
     public void createPlayer(Player player){this.playerDao.create(player);};
 
     @Override
+    @Transactional(readOnly = true)
     public void updatePlayer(Player player){this.playerDao.update(player);};
 
     @Override
+    @Transactional(readOnly = true)
     public void deletePlayer(Player player){this.playerDao.delete(player);};
 
     @Override
-    @Transactional(readOnly = true)
     public Player getPlayerById(Long id){return this.playerDao.getById(id);};
 
     @Override
-    @Transactional(readOnly = true)
     public List<Player> getAllPlayers(){return this.playerDao.getAll();};
 
     @Override
-    @Transactional(readOnly = true)
     public List<Player> getAllPlayersByIdTeam(Long id){return this.playerDao.getAllByIdTeam(id);}
 }

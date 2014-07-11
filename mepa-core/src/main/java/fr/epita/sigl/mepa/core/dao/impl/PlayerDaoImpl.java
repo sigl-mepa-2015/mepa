@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
@@ -22,16 +24,19 @@ public class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void create(Player player) {
         this.getSession().save(player);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void update(Player player) {
         this.getSession().saveOrUpdate(player);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void delete(Player player) {
         this.getSession().delete(player);
     }
