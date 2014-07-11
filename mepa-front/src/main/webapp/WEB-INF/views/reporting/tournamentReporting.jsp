@@ -23,7 +23,7 @@
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
-					<c:forEach items="${pool.games}" var="game">	
+					<c:forEach items="${pool.games}" var="game">
 						<c:choose>
 							<c:when test="${game.status == 'ENDED'}">
 								<tr>
@@ -31,8 +31,8 @@
 									<td>${game.resultTeam1}</td>
 									<td>${game.resultTeam2}</td>
 									<td>${game.team2.name}</td>
-								</tr>	
-							</c:when>	
+								</tr>
+							</c:when>
 						</c:choose>
 					</c:forEach>
 				</tbody>

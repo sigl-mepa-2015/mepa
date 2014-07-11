@@ -42,9 +42,10 @@ public class Tournament implements Serializable{
 		this.name = name;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="TOURNAMENT_POOL", joinColumns = {@JoinColumn(name="TOURNAMENT_ID")}, inverseJoinColumns = {@JoinColumn(name="POOL_ID")})
-	public Set<Pool> getPools() {
+	@OneToMany(cascade=CascadeType.ALL, targetEntity = Pool.class, mappedBy = "tournament", fetch = FetchType.EAGER)
+	//@JoinTable(name="TOURNAMENT_POOL", joinColumns = {@JoinColumn(name="TOURNAMENT_ID")}, inverseJoinColumns = {@JoinColumn(name="POOL_ID")})
+	//@Column
+    public Set<Pool> getPools() {
 		return pools;
 	}
 

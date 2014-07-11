@@ -29,8 +29,20 @@ public class Pool implements Serializable{
 	
 	private Long id;	
 	private String name;
-    private Set<Game> games;
-	private Set<Team> teams;
+//    private Set<Game> games;
+//	private Set<Team> teams;
+
+    @ManyToOne()
+    @JoinColumn(name="TOURNAMENT_ID")
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+    private Tournament tournament;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,24 +64,24 @@ public class Pool implements Serializable{
 		this.name = name;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="POOL_GAME", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="GAME_ID")})
-	public Set<Game> getGames() {
-		return games;
-	}
-	
-	public void setGames(Set<Game> games) {
-		this.games = games;
-	}
+	//@OneToMany(cascade=CascadeType.ALL)
+	//@JoinTable(name="POOL_GAME", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="GAME_ID")}
+//    public Set<Game> getGames() {
+//		return games;
+//	}
+//
+//	public void setGames(Set<Game> games) {
+//		this.games = games;
+//	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
-	public Set<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(Set<Team> teams) {
-		this.teams = teams;
-	}
+//	@OneToMany(cascade=CascadeType.ALL)
+//	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
+//    public Set<Team> getTeams() {
+//		return teams;
+//	}
+//
+//	public void setTeams(Set<Team> teams) {
+//		this.teams = teams;
+//	}
 
 }
