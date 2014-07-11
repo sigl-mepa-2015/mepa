@@ -48,6 +48,13 @@ public class Pool implements Serializable{
         this.tournament = tournament;
     }
 
+    public Pool() {
+        this.name= "";
+        this.tournament = null;
+        this.teams = null;
+    }
+
+
     /**
 	 * @return the id
 	 */

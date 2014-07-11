@@ -9,7 +9,7 @@
 <div class="container">
         <form:form role="form"  modelAttribute="createPoolFormBean" method="post">
             <label class="col-lg-6">Nom de la poule</label>
-            <input type="text" class="col-lg-6"/>
+            <input type="text" class="col-lg-6" name="name">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -31,8 +31,24 @@
         </form:form>
 </div>
 
-<c:forEach items="${pools}" var="p" varStatus="loop">
+<div class="container">
 
-                            <td>${p.name}</td>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>
+            Nom
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>        <td>Poule test</td><tr>
+    <c:forEach items="${pools}" var="p" varStatus="loop">
 
-                    </c:forEach>
+        <tr>        <td>${p.name}</td><tr>
+        </c:forEach>
+    </tbody>
+</table>
+</div>
+
+

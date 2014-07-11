@@ -25,7 +25,7 @@ public class PoolServiceImpl implements PoolService {
 
     @Override
     public void createPool(Pool p) {
-        this.poolDao.create(p);
+        System.out.println("********** Fonction Service = " + p.getName());this.poolDao.create(p);
     }
 
 

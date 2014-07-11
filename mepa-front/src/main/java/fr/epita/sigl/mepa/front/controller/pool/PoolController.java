@@ -55,15 +55,21 @@ public class PoolController {
     public String creer(HttpServletRequest request, ModelMap modelMap,
                         @Valid CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
+
+
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/creerPoule";
         }
-        Pool newPool = new Pool(null, null);
-        newPool.setName(createPoolFormBean.getName());
-        this.s.createPool(newPool);
-        modelMap.addAttribute("pool", newPool);
 
+        System.out.println("Resultat ********** " + createPoolFormBean.getName());
+        Pool newPool = new Pool(createPoolFormBean.getName(), null);
+
+        this.s.createPool(newPool);
+        System.out.println(s.getAllPools().get(0).getName());
+        modelMap.addAttribute("pool", newPool);
+        List<Pool> l = this.s.getAllPools();
+        modelMap.addAttribute("pools", l);
         return "/creerPoule";
     }
 }
