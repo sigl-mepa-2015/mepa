@@ -6,6 +6,7 @@ import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.service.GameService;
 import fr.epita.sigl.mepa.core.service.PoolService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +45,17 @@ public class GameServiceImpl implements GameService {
     @Transactional(readOnly = true)
     public List<Game> getAllGames() {
         return this.gameDao.getAll();
+    }
+    
+    @Override
+    public int getComingGameByTournamentId(Long tournamentId)
+    {
+    	return this.gameDao.getComingGameById(tournamentId);
+    }
+    
+    @Override
+    public int getEndedGameByTournamentId(Long tournamentId)
+    {
+    	return this.gameDao.getEndedGameById(tournamentId);
     }
 }

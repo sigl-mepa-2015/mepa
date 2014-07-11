@@ -17,4 +17,8 @@ public interface GameService {
 
     List<Game> getAllGames();
 
+	int getComingGameByTournamentId(Long tournamentId);
+
+	int getEndedGameByTournamentId(Long tournamentId);
+
 }

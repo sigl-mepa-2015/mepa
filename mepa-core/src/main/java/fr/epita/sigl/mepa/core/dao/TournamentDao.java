@@ -18,8 +18,4 @@ public interface TournamentDao {
 
     List<Tournament> getAll();
 
-	int getComingGameById(Long id);
-
-	int getEndedGameById(Long id);
-
 }

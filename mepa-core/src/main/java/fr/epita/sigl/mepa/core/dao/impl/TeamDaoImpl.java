@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by david on 10/07/14.
- */
 
 @Repository
 public class TeamDaoImpl implements TeamDao {
@@ -55,6 +52,8 @@ public class TeamDaoImpl implements TeamDao {
     @Override 
     public List<Team> getOrderByTournamentId(Long id)
     {
-    	return null;
+    	Query query = this.getSession().getNamedQuery("Team.findAllOrderByTournamentId");
+    	query.setParameter("tournamentId", id);
+    	return query.list();
     }
 }

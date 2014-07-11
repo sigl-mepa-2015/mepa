@@ -11,7 +11,11 @@ import javax.persistence.*;
 @Table(name = "Team")
 @NamedQueries({
     @NamedQuery(name = "Team.findById", query = "FROM Team o WHERE o.id=:id"),
-    @NamedQuery(name = "Team.findAll", query = "FROM Team o")})
+    @NamedQuery(name = "Team.findAll", query = "FROM Team o"),
+    @NamedQuery(name = "Team.findAllOrderByTournamentId", 
+    query = "FROM Team t where t.tournament.id = :tournamentId "
+    		+ "ORDER BY t.winGame DESC, t.drawGame DESC, t.loseGame ASC")})
+
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;

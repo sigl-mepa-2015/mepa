@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name="TOURNAMENT")
 @NamedQueries({
         @NamedQuery(name = "Tournament.findById", query = "FROM Tournament t WHERE t.id=:id"),
-        @NamedQuery(name = "Tournament.findAll", query = "FROM Tournament t") })
+        @NamedQuery(name = "Tournament.findAll", query = "FROM Tournament t")})
 public class Tournament implements Serializable{
 
 	private static final long serialVersionUID = 1L;

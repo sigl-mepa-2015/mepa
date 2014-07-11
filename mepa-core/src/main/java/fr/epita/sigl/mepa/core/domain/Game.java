@@ -9,7 +9,11 @@ import javax.persistence.*;
 @Table(name="GAME")
 @NamedQueries({
         @NamedQuery(name = "Game.findById", query = "FROM Game o WHERE o.id=:id"),
-        @NamedQuery(name = "Game.findAll", query = "FROM Game o")})
+        @NamedQuery(name = "Game.findAll", query = "FROM Game o"),
+        @NamedQuery(name = "Game.findAllComingByTournamentId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'TODO'"),
+        @NamedQuery(name = "Game.findAllEndedByTournamentId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'ENDED'")})
 public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -44,8 +48,6 @@ public class Game implements Serializable{
 		this.id = id;
 	}
 
-//    @ManyToMany
-//    @JoinTable(name="GAME_TEAM", joinColumns = @JoinColumn(name="GAME_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TEAM_ID", referencedColumnName = "ID"))
     @ManyToMany(targetEntity = Team.class)
     public Set<Team> getTeams() {
         return teams;
@@ -54,24 +56,6 @@ public class Game implements Serializable{
     public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
-
-//	@Column(name="GAME_TEAM1", nullable=false)
-//	public Team getTeam1() {
-//		return team1;
-//	}
-//
-//	public void setTeam1(Team team1) {
-//		this.team1 = team1;
-//	}
-//
-//	@Column(name="GAME_TEAM2", nullable=false)
-//	public Team getTeam2() {
-//		return team2;
-//	}
-//
-//	public void setTeam2(Team team2) {
-//		this.team2 = team2;
-//	}
 
 	@Column(name="GAME_RTEAM1")
 	public int getResultTeam1() {

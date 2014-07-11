@@ -25,7 +25,9 @@
                 <value>fr.epita.sigl.mepa.core.domain.Team</value>
                 <value>fr.epita.sigl.mepa.core.domain.Game</value>
                 <value>fr.epita.sigl.mepa.core.domain.Pool</value>
-                <value>fr.epita.sigl.mepa.core.domain.TeamResult</value>
+                <value>fr.epita.sigl.mepa.core.domain.Role</value>
+                <value>fr.epita.sigl.mepa.core.domain.Player</value>
+                <value>fr.epita.sigl.mepa.core.domain.User</value>
             </list>
         </property>
         <property name="hibernateProperties">

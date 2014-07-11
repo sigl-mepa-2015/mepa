@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.epita.sigl.mepa.core.service.TeamService;
-import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.core.service.*;
 
 @Controller
 @RequestMapping("/reporting")
@@ -21,6 +20,8 @@ public class ReportingController {
     private TournamentService tournamentService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private GameService gameService;
 	
     private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
@@ -35,8 +36,8 @@ public class ReportingController {
     	
     	mv.addObject("tournament",tournamentService.getTournamentById(tournamentID));
         mv.addObject("listOrderTeam", teamService.getAllOrderTeamsByTournament(tournamentID));
-    	mv.addObject("comingGame", tournamentService.getComingGameByTournamentId(tournamentID));
-    	mv.addObject("endedGame", tournamentService.getEndedGameByTournamentId(tournamentID));
+    	mv.addObject("comingGame", gameService.getComingGameByTournamentId(tournamentID));
+    	mv.addObject("endedGame", gameService.getEndedGameByTournamentId(tournamentID));
             
     	return mv;
     }

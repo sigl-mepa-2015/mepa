@@ -49,16 +49,4 @@ public class TournamentServiceImpl implements TournamentService {
     public List<Tournament> getAllTournaments() {
         return this.tournamentDao.getAll();
     }
-    
-    @Override
-    public int getComingGameByTournamentId(Long tournamentId)
-    {
-    	return this.tournamentDao.getComingGameById(tournamentId);
-    }
-    
-    @Override
-    public int getEndedGameByTournamentId(Long tournamentId)
-    {
-    	return this.tournamentDao.getEndedGameById(tournamentId);
-    }
 }

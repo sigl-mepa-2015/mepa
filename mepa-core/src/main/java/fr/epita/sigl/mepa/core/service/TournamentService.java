@@ -18,8 +18,4 @@ public interface TournamentService {
 
     List<Tournament> getAllTournaments();
 
-	int getComingGameByTournamentId(Long tournamentId);
-
-	int getEndedGameByTournamentId(Long tournamentId);
-
 }

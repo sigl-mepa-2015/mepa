@@ -4,6 +4,7 @@ import fr.epita.sigl.mepa.core.dao.GameDao;
 import fr.epita.sigl.mepa.core.dao.PoolDao;
 import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Pool;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,5 +49,21 @@ public class GameDaoImpl implements GameDao {
     public List<Game> getAll() {
         Query query = this.getSession().getNamedQuery("Game.findAll");
         return query.list();
+    }
+    
+    @Override
+    public int getComingGameById(Long id)
+    {
+    	 Query query = this.getSession().getNamedQuery("Game.findAllComingByTournamentId");
+         query.setParameter("id", id);
+         return (int) query.uniqueResult();
+    }
+    
+    @Override
+    public int getEndedGameById(Long id)
+    {
+    	 Query query = this.getSession().getNamedQuery("Game.findAllEndedByTournamentId");
+         query.setParameter("id", id);
+         return (int) query.uniqueResult();
     }
 }
