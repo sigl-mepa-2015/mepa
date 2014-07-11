@@ -4,16 +4,18 @@ import fr.epita.sigl.mepa.core.domain.Pool;
 
 import java.util.List;
 
+/**
+ * Created by maite on 11/07/14.
+ */
 public interface PoolService {
+    void createPool(Pool p);
 
-    void createTournament(Pool pool);
+    void updatePool(Pool p);
 
-    void updateTournament(Pool pool);
-
-    void deleteTournament(Pool pool);
+    void deletePool(Pool p);
 
     Pool getPoolById(Long id);
 
     List<Pool> getAllPools();
-
 }
+

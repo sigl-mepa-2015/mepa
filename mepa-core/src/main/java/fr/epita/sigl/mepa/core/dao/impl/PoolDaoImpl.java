@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public class PoolDaoImpl implements PoolDao {
-
     @Autowired
     private SessionFactory sessionFactory;
 
