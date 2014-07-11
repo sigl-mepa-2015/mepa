@@ -11,7 +11,7 @@ public class CreateObject {
 
     public Tournament createTournamentOnLaunch()
     {
-        Tournament g = new Tournament("Tournois 1");
+        //Tournament g = new Tournament("Tournois 1");
 //        Pool p1 = new Pool("Pool 1", g);
 //        Pool p2 = new Pool("Pool 2", g);
 //        Team t1 = new Team("team 1");
@@ -24,6 +24,6 @@ public class CreateObject {
 //        pools.add(p2);
 //        g.setPools(pools);
 
-        return g;
+        return null;
     }
 }

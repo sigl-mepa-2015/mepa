@@ -19,7 +19,7 @@
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">
 	  	<h3>Liste des matchs termines</h3>
-		<%--  <c:forEach items="${t.pools}" var="pool">
+		  <c:forEach items="${t.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
@@ -37,7 +37,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</c:forEach> --%>
+		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="coming">
 	  		<h3>Liste des matchs a venir</h3>
