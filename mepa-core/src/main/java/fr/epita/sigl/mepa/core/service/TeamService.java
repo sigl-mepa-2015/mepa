@@ -19,4 +19,6 @@ public interface TeamService {
     Team getTeamById(Long id);
 
     List<Team> getAllTeams();
+
+	List<Team> getAllOrderTeamsByTournament(Long tournamentID);
 }

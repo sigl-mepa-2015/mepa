@@ -51,4 +51,10 @@ public class TeamDaoImpl implements TeamDao {
         Query query = this.getSession().getNamedQuery("Team.findAll");
         return query.list();
     }
+    
+    @Override 
+    public List<Team> getOrderByTournamentId(Long id)
+    {
+    	return null;
+    }
 }

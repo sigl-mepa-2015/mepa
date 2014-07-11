@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.core.dao;
 
 import fr.epita.sigl.mepa.core.domain.Team;
+
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface TeamDao {
     Team getById(Long id);
 
     List<Team> getAll();
+
+	List<Team> getOrderByTournamentId(Long id);
 }

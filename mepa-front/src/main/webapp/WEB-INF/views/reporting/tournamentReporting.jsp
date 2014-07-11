@@ -3,15 +3,15 @@
 <div class="container">
 	<div class="page-header">
 		<h1>Statistiques sur le tournoi</h1>
-		<h4><spring:message code="tournament"/> : ${t.name}</h4>
+		<h4><spring:message code="tournament"/> : ${tournament.name}</h4>
 	</div>
 </div>
 
 <div class="container">
 	<h5>Niveau de progression du tournoi</h5>
 	<div class="progress">
-  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-    80%
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: 80%;">
+    ${(endedGame * 100) / (comingGame + endedGame)} %
   </div>
 </div>
 </div>
@@ -29,7 +29,7 @@
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">
 	  	<h3>Liste des matchs termines</h3>
-		  <c:forEach items="${t.pools}" var="pool">
+		  <c:forEach items="${tournament.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>
@@ -53,7 +53,7 @@
 	  </div>
 	  <div class="tab-pane" id="coming">
 	  		<h3>Liste des matchs a venir</h3>
-	  		<c:forEach items="${t.pools}" var="pool">
+	  		<c:forEach items="${tournament.pools}" var="pool">
 			<h3>Poule : ${pool.name}</h3>
 			<table class="table table-bordered">
 				<tbody>

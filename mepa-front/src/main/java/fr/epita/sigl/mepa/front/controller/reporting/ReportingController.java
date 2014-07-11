@@ -1,8 +1,6 @@
 package fr.epita.sigl.mepa.front.controller.reporting;
 
 
-import fr.epita.sigl.mepa.core.domain.Tournament;
-import fr.epita.sigl.mepa.core.service.TournamentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import fr.epita.sigl.mepa.core.service.TeamService;
+import fr.epita.sigl.mepa.core.service.TournamentService;
 
 @Controller
 @RequestMapping("/reporting")
@@ -20,6 +19,8 @@ public class ReportingController {
 
 	@Autowired
     private TournamentService tournamentService;
+	@Autowired
+	private TeamService teamService;
 	
     private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
@@ -28,18 +29,15 @@ public class ReportingController {
      * @return ModelAndView
      */
     @RequestMapping(value="/tournament", method=RequestMethod.GET)
-    public ModelAndView showEndedGame(@RequestParam("tournamentID") Long tournamentID)
-    {
-    	Tournament t = null;
-//    	System.out.println(tournamentID);
-    	t = tournamentService.getTournamentById(tournamentID);
-    	
-//    	LOG.info("inside showEndedGame fonction");
+    public ModelAndView globalReporting(@RequestParam("tournamentID") Long tournamentID)
+    {    	
     	ModelAndView mv = new ModelAndView("/reporting/tournamentReporting");
-    	mv.addObject("t",t);
-
-        List<Tournament> li = tournamentService.getAllTournaments();
-        mv.addObject("li", li);
+    	
+    	mv.addObject("tournament",tournamentService.getTournamentById(tournamentID));
+        mv.addObject("listOrderTeam", teamService.getAllOrderTeamsByTournament(tournamentID));
+    	mv.addObject("comingGame", tournamentService.getComingGameByTournamentId(tournamentID));
+    	mv.addObject("endedGame", tournamentService.getEndedGameByTournamentId(tournamentID));
+            
     	return mv;
     }
   

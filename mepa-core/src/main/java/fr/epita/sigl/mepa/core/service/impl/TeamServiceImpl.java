@@ -45,4 +45,10 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> getAllTeams() {
         return this.teamDao.getAll();
     }
+    
+    @Override
+    public List<Team> getAllOrderTeamsByTournament(Long tournamentID)
+    {
+    	return null;
+    }
 }

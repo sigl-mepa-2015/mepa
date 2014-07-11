@@ -54,4 +54,16 @@ public class TournamentDaoImpl implements TournamentDao {
         Query query = this.getSession().getNamedQuery("Tournament.findAll");
         return query.list();
     }
+    
+    @Override
+    public int getComingGameById(Long id)
+    {
+    	return 0;
+    }
+    
+    @Override
+    public int getEndedGameById(Long id)
+    {
+    	return 0;
+    }
 }
