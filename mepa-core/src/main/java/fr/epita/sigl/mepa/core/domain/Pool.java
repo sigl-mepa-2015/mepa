@@ -43,9 +43,11 @@ public class Pool implements Serializable{
 	@JoinColumn(name="TOURNAMENT_ID")
 	private Tournament tournament;
 
-    public Pool(String name, Tournament tournament) {
+    public Pool(String name, Tournament tournament, Set<Team> team) {
         this.name = name;
         this.tournament = tournament;
+
+        this.teams = team;
     }
 
     public Pool() {

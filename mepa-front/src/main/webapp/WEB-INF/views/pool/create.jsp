@@ -19,12 +19,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                         <td><label for="team1">Equipe 1</label></td>
-                        <td><input type="checkbox" id="team1"/></td>
+                    <td>Equipe 1</td>
+                   <td><input type="checkbox" name="teams" value="Equipe 1"/></td>
+
                     </tr>
                     <tr>
-                        <td><label for="team2">Equipe 2</label></td>
-                        <td><input type="checkbox" id="team2"/></td>
+                       <td>Equipe 2</td>
+                       <td><input type="checkbox" name="teams" value="Equipe 2"/></td>
+
                     </tr>
                 </tbody>
             </table><button type="submit"  class="btn btn-primary">Créer</button>
@@ -46,6 +48,10 @@
     <c:forEach items="${pools}" var="p" varStatus="loop">
 
         <tr>        <td>${p.name}</td><tr>
+
+
+
+
         </c:forEach>
     </tbody>
 </table>
