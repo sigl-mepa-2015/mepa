@@ -1,7 +1,9 @@
 package fr.epita.sigl.mepa.front.controller.home;
 
+import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Tournament;
+import fr.epita.sigl.mepa.core.service.GameService;
 import fr.epita.sigl.mepa.core.service.PoolService;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
@@ -23,6 +25,8 @@ public class HomeController {
     private TournamentService t;
     @Autowired
     private PoolService p;
+    @Autowired
+    private GameService gs;
 
     @RequestMapping(value = {"/", "/home"})
     public String home()
@@ -30,21 +34,27 @@ public class HomeController {
         //CreateObject init = new CreateObject();
         //Tournament g = init.createTournamentOnLaunch();
 
-        Tournament g = new Tournament();
-        g.setName("Tournois 1");
+        Tournament tournament = new Tournament();
+        tournament.setName("Tournois 1");
 
-        t.createTournament(g);
+        t.createTournament(tournament);
 
         Pool p1 = new Pool();
         p1.setName("Poule A");
-        p1.setTournament(g);
+        p1.setTournament(tournament);
 
         Pool p2 = new Pool();
         p2.setName("Poule Z");
-        p2.setTournament(g);
+        p2.setTournament(tournament);
 
         p.createPool(p1);
         p.createPool(p2);
+
+        Game g1 = new Game();
+        g1.setPool(p1);
+        g1.setStatus(Game.GameStatus.TODO);
+        gs.createGame(g1);
+
 
         return "/home/home";
     }

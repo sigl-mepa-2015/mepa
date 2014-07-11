@@ -29,7 +29,7 @@ public class Pool implements Serializable{
 	
 	private Long id;	
 	private String name;
-//    private Set<Game> games;
+    private Set<Game> games;
 //	private Set<Team> teams;
 
     @ManyToOne()
@@ -66,13 +66,14 @@ public class Pool implements Serializable{
 
 	//@OneToMany(cascade=CascadeType.ALL)
 	//@JoinTable(name="POOL_GAME", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="GAME_ID")}
-//    public Set<Game> getGames() {
-//		return games;
-//	}
-//
-//	public void setGames(Set<Game> games) {
-//		this.games = games;
-//	}
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Game.class, mappedBy = "pool", fetch = FetchType.EAGER)
+    public Set<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(Set<Game> games) {
+		this.games = games;
+	}
 
 //	@OneToMany(cascade=CascadeType.ALL)
 //	@JoinTable(name="POOL_TEAM", joinColumns = {@JoinColumn(name="POOL_ID")}, inverseJoinColumns = {@JoinColumn(name="TEAM_ID")})
