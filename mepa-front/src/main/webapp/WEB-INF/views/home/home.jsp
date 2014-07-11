@@ -9,5 +9,11 @@
         	Cette application &agrave; pour but de permettre la gestion simplifi&eacute;e des tournois
         </p>
 
+
+		<p class="text-center" style="margin-top : 50px">
+			<h4>Quand un sprint se deroule sans accroc</h4>
+			<img src="/mepa-front/img/success.gif"/>
+		</p>
+
     </div>
 </div>
