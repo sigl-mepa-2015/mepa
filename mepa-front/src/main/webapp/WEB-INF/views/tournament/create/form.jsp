@@ -13,6 +13,7 @@
     </div>
     <form:form role="form" action="${addTournamentFormActionUrl}" cssClass="row" cssStyle="margin:auto;" modelAttribute="tournament" method="post">
         <div class="form-group">
+            <form:input id="id" path="id" type="hidden" />
             <div class="input-group col-md-4">
                 <form:errors path="name" cssStyle="color: #FF0000;" htmlEscape="false"/>
                 <label for="name"><spring:message code="tournament.form.nameLabel" /></label>
@@ -37,5 +38,6 @@
             </div>
         </div>
     </form:form>
+
 </div>
 

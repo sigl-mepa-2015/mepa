@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
-
+<%@ include file="/WEB-INF/views/tournament/namespace.jsp"%>
 
 <div class="container">
 	<div class="page-header">
@@ -19,6 +19,8 @@
 	
 
 <div class="col-md-9 col-md-offset-1">
+    <c:choose>
+        <c:when test="${not empty tournaments}">
 	<table class="table table-striped" style="text-align: center">
 		<thead>
 			<tr>
@@ -41,15 +43,22 @@
 						<button type="button" class="btn btn-info" onClick="location.href='${pageContext.request.contextPath}/reporting/tournament?tournamentID=${t.id}'">
 							<span class="glyphicon glyphicon-stats"></span>
 						</button>
-						<button type="button" class="btn btn-default">
+						<a href="${pageContext.request.contextPath}/tournament/form/${t.id}" class="btn btn-default" >
 							<span class="glyphicon glyphicon-cog"></span>
-						</button>
+						</a>
                         <%@ include file="/WEB-INF/views/tournament/remove/form.jsp"%>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+
+        </c:when>
+        <c:otherwise>
+            <h2><spring:message code="tournament.emptyTitle" /></h2>
+            <a class="btn btn-primary" href="${addTournamentFormUrl}"><spring:message code="add" /></a>
+        </c:otherwise>
+    </c:choose>
 </div>
 </div>
 
