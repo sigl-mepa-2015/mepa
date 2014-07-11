@@ -41,6 +41,7 @@ public class PoolController {
 
     @ModelAttribute(CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE)
     public CreatePoolFormBean initAddPoolFormBean() {
+
         return new CreatePoolFormBean();
     }
 
@@ -54,13 +55,13 @@ public class PoolController {
     public String afficher(HttpServletRequest request, ModelMap pModel) {
         List<Pool> l = this.s.getAllPools();
         pModel.addAttribute("pools", l);
+        System.out.println("YYYYYYYYYYYYYY");
         return "/creerPoule";
     }
 
     @RequestMapping(value="/creerPoule", method = RequestMethod.POST)
     public String creer(HttpServletRequest request, ModelMap modelMap,
-                        @Valid CreatePoolFormBean createPoolFormBean, BindingResult result) {
-
+                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
 
         if (result.hasErrors()) {
@@ -84,6 +85,8 @@ public class PoolController {
 
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);
+        modelMap.addAttribute("message", true);
         return "/creerPoule";
     }
+
 }

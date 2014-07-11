@@ -3,7 +3,6 @@ package fr.epita.sigl.mepa.front.controller.tournament;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
-import fr.epita.sigl.mepa.front.model.tournament.AddTournamentFormBean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +26,13 @@ import java.util.List;
  * Created by Quentin on 08/07/2014.
  */
 @Controller
-@RequestMapping("/tournament/")
+@RequestMapping("/tournament")
 @SessionAttributes({ TournamentController.TOURNAMENT_MODEL_ATTRIBUTE})
 public class TournamentController {
     private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
 
     protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
-    private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "addTournamentFormBean";
+    private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
 
     @Autowired
@@ -53,13 +52,11 @@ public class TournamentController {
      */
     @RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
     public String processForm(HttpServletRequest request, ModelMap modelMap,
-                              @Valid AddTournamentFormBean addTournamentFormBean, BindingResult result) {
+                              @Valid Tournament newTournament, BindingResult result) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/tournament/read/list";
+            return "/tournament/create/form";
         }
-        Tournament newTournament = new Tournament();
-        newTournament.setName(addTournamentFormBean.getName());
         this.tournamentService.createTournament(newTournament);
         modelMap.addAttribute("tournament", newTournament);
         
@@ -69,7 +66,7 @@ public class TournamentController {
         return "/tournament/read/list";
     }
     
-    @RequestMapping(value="/all", method=RequestMethod.GET)
+    @RequestMapping(value={"", "/"}, method=RequestMethod.GET)
     public ModelAndView getAllTournament()
     {
     	List<Tournament> allTournament = tournamentService.getAllTournaments();
@@ -111,13 +108,13 @@ public class TournamentController {
     }
 
     /**
-     * Initialize "AddTournamentFormBean" model attribute
+     * Initialize "Tournament" model attribute
      *
-     * @return a new AddTournamentFormBean.
+     * @return a new Tournament.
      */
     @ModelAttribute(ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
-    public AddTournamentFormBean initAddTournamentFormBean() {
-        return new AddTournamentFormBean();
+    public Tournament initTournament() {
+        return new Tournament();
     }
     /**
      * Initialize "RemoveTournamentFormBean" model attribute
