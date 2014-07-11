@@ -28,6 +28,7 @@ public class Team implements Serializable {
     @OneToMany
     private Set<TeamResult> teamResults;
 
+<<<<<<< HEAD
     public Team() {
     }
     public Team(String name) {

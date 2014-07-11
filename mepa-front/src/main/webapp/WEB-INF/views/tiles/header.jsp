@@ -20,7 +20,6 @@
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/all">Tout les tournois</a></li>
 						  </ul>
 
-
 				   </li>
 			   </ul>
                     <ul class="nav navbar-nav">
