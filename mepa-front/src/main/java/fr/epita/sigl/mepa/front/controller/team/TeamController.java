@@ -44,7 +44,7 @@ public class TeamController {
         Team team = teamService.getTeamById(teamID);
         System.out.println(teamID);
         ModelAndView mv = new ModelAndView("/team/edit/form");
-        mv.addObject("t", team);
+        mv.addObject("team", team);
         return mv;
 
     }
