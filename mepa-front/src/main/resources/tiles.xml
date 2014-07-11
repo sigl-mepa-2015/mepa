@@ -26,34 +26,33 @@
      
     <!-- Tournament -->
     <definition name="/tournament/read/list" extends="base.definition">
-        <put-attribute name="title" value="default.title" />
+        <put-attribute name="title" value="tournament.listTitle" />
         <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
     </definition>
     <definition name="/tournament/create/form" extends="base.definition">
+        <put-attribute name="title" value="tournament.createTitle" />
         <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
     </definition>
     <definition name="/tournament/create/result" extends="base.definition">
+        <put-attribute name="title" value="tournament.createTitle" />
         <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
     </definition>
     <definition name="/tournament/remove/result" extends="base.definition">
+        <put-attribute name="title" value="tournament.removeTitle" />
         <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
     </definition>
 
     <!-- Team -->
     <definition name="/team/read/list" extends="base.definition">
-        <put-attribute name="title" value="tournament.listTitle" />
         <put-attribute name="body" value="/WEB-INF/views/team/read/list.jsp" />
     </definition>
     <definition name="/team/create/form" extends="base.definition">
-        <put-attribute name="title" value="tournament.createTitle" />
         <put-attribute name="body" value="/WEB-INF/views/team/create/form.jsp" />
     </definition>
     <definition name="/team/create/result" extends="base.definition">
-        <put-attribute name="title" value="tournament.createTitle" />
         <put-attribute name="body" value="/WEB-INF/views/team/create/result.jsp" />
     </definition>
     <definition name="/team/remove/result" extends="base.definition">
-        <put-attribute name="title" value="tournament.removeTitle" />
         <put-attribute name="body" value="/WEB-INF/views/team/remove/result.jsp" />
     </definition>
 
