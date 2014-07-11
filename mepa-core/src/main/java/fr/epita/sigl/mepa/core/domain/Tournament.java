@@ -25,7 +25,7 @@ public class Tournament implements Serializable{
 	@Column(name="name", nullable=false)
 	private String name;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Pool> pools;
 
 	@Column(name="startedDate")
