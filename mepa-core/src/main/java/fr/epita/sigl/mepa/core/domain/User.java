@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Alexandre on 7/12/2014.
@@ -31,6 +32,20 @@ public class User implements Serializable {
 
     @OneToOne (optional = true, mappedBy = "user")
     private Player player;
+
+    private Set<Role> roles;
+
+    @JoinTable(
+            name="USER_ROLE",
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public User() {
 
