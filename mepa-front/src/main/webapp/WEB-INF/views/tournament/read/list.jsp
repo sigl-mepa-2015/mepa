@@ -44,9 +44,7 @@
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-cog"></span>
 						</button>
-						<button type="button" class="btn btn-danger">
-							<span class="glyphicon glyphicon-trash"></span>
-						</button>			
+                        <%@ include file="/WEB-INF/views/tournament/remove/form.jsp"%>
 					</td>
 				</tr>
 			</c:forEach>
