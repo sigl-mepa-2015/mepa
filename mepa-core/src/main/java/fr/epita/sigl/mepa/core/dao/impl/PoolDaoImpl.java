@@ -10,11 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by maite on 11/07/14.
- */
 @Repository
-public class PoolDaoImpl implements PoolDao{
+public class PoolDaoImpl implements PoolDao {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -23,18 +20,18 @@ public class PoolDaoImpl implements PoolDao{
     }
 
     @Override
-    public void create(Pool p) {
-        this.getSession().save(p);
+    public void create(Pool pool) {
+        this.getSession().save(pool);
     }
 
     @Override
-    public void update(Pool p) {
-        this.getSession().saveOrUpdate(p);
+    public void update(Pool pool) {
+        this.getSession().saveOrUpdate(pool);
     }
 
     @Override
-    public void delete(Pool p) {
-        this.getSession().delete(p);
+    public void delete(Pool pool) {
+        this.getSession().delete(pool);
     }
 
     @Override
@@ -46,8 +43,7 @@ public class PoolDaoImpl implements PoolDao{
 
     @Override
     public List<Pool> getAll() {
-        Query query;
-        query = this.getSession().getNamedQuery("Pool.findAll");
+        Query query = this.getSession().getNamedQuery("Pool.findAll");
         return query.list();
     }
 }
