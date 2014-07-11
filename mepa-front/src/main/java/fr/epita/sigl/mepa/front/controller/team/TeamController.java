@@ -56,7 +56,6 @@ public class TeamController {
             return "/team/read/list";
         }
         Team newTeam = new Team(addTeamFormBean.getName());
-         newTeam.setName(addTeamFormBean.getName());
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
         
