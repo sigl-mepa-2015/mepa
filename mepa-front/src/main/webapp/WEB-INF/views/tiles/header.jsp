@@ -23,7 +23,7 @@
 	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
                             </ul>
 				   </li>
-                        <li><a href="${pageContext.request.contextPath}/creerPoule"><spring:message code="home.bar.title.nav1"/></a></li>
+
 
                     </ul>
 
