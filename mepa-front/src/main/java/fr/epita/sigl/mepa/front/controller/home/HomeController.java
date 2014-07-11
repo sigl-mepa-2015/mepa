@@ -7,7 +7,6 @@ import fr.epita.sigl.mepa.core.service.GameService;
 import fr.epita.sigl.mepa.core.service.PoolService;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
-import fr.epita.sigl.mepa.front.utils.CreateObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

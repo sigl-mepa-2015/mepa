@@ -14,6 +14,8 @@ public interface TournamentService {
 
     Tournament getTournamentById(Long id);
 
+    Tournament getTournamentByType(String type);
+
     List<Tournament> getAllTournaments();
 
 }
