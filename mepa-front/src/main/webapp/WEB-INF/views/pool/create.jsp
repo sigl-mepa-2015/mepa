@@ -42,11 +42,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr>        <td>Poule test</td><tr>
-    <c:forEach items="${pools}" var="p" varStatus="loop">
+    <tr>
+        
+    <c:if test="${message == true}">
+        <div id="message_box" class="alert alert-success">
+            <spring:message code="pool.create.resultMessageSucces" arguments="${pool.name}" />
+        </div>
+    </c:if>
+    <c:if test="${message == false}">
+        <div id="message_box" class="alert alert-fail">
+            <spring:message code="pool.create.resultMessageFail" arguments="${pool.name}" />
+        </div>
+    </c:if>
 
+    <c:forEach items="${pools}" var="p" varStatus="loop">
         <tr>        <td>${p.name}</td><tr>
-        </c:forEach>
+    </c:forEach>
     </tbody>
 </table>
 </div>
