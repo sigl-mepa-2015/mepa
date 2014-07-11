@@ -66,6 +66,24 @@ public class TeamController {
 
         return "/team/read/list";
     }
+
+    @RequestMapping(value = { "/edit/form" }, method = { RequestMethod.POST })
+    public String processEditForm(HttpServletRequest request, ModelMap modelMap,
+                              @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
+        if (result.hasErrors()) {
+            // Error(s) in form bean validation
+            return "/team/read/list";
+        }
+        Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
+        newTeam.setName(addTeamFormBean.getName());
+        this.teamService.updateTeam(newTeam);
+        modelMap.addAttribute("team", newTeam);
+
+        List<Team> allTeam = teamService.getAllTeams();
+        modelMap.addAttribute("teams", allTeam);
+
+        return "/team/read/list";
+    }
     
     @RequestMapping(value="/all", method=RequestMethod.GET)
     public ModelAndView getAllTeam()
