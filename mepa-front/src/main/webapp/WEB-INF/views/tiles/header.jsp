@@ -17,18 +17,10 @@
                         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
 	                    	<ul class="dropdown-menu" role="menu">
 
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/endedGame"><spring:message code="home.bar.title.nav1"/></a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/reporting/comingGame"><spring:message code="home.bar.title.nav2"/></a></li>
-	         				  <li><a href="${pageContext.request.contextPath}/reporting/showRange"><spring:message code="home.bar.title.nav3"/></a></li>
-                            </ul>
-				   </li>
-
-
-                    </ul>
-
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
-						  </ul>
+                              	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
+                              						</ul>
+				   </li>
 
 				   </li>
 			   </ul>
