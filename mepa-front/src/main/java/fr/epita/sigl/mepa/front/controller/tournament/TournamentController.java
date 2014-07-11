@@ -105,6 +105,7 @@ public class TournamentController {
     }
 
     /**
+    /**
      * Initialize "tournaments" model attribute
      *
      * @return an empty List of Tournaments.

@@ -16,9 +16,11 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span class="caret"></span></a>
 	                    	<ul class="dropdown-menu" role="menu">
+
 	          				  <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
-	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
-						  </ul>
+                              	          				  <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
+                              						</ul>
+				   </li>
 
 				   </li>
 			   </ul>
