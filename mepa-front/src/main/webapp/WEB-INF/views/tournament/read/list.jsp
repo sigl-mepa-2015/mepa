@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Tout les tournois</h1>
+		<h1>Tous les tournois</h1>
 	</div>
 </div>
 
@@ -19,18 +19,22 @@
 	
 
 <div class="col-md-9 col-md-offset-1">
-	<table class="table table-striped">
+	<table class="table table-striped" style="text-align: center">
 		<thead>
 			<tr>
-				<th>Nom du tournoi</th>
+                <th>Nom du tournoi</th>
+                <th>Type de tournoi</th>
+                <th>Nombre maximum d'équipes</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${tournaments}" var="t">
 				<tr>
-					<td width="70%">${t.name}</td>
-					<td width="30%">
+					<td >${t.name}</td>
+                    <td >${t.type}</td>
+                    <td >${t.maxTeamNumber}</td>
+					<td class="col-md-4">
 						<button type="button" class="btn btn-primary" >
 							<span class="glyphicon glyphicon-arrow-right"></span>
 						</button>
