@@ -27,12 +27,13 @@ public class Game implements Serializable{
     public enum GameStatus {TODO, PROGESS, DONE};
 	
 	private Long id;
-	private Team team1;	
-	private Team team2;
+	//private Team team1;
+	//private Team team2;
 	private int resultTeam1;	
 	private int resultTeam2;
 	private int duration;
 	private GameStatus status;
+    private Pool pool;
 	
 
 	@Id
@@ -46,23 +47,23 @@ public class Game implements Serializable{
 		this.id = id;
 	}
 
-	@Column(name="GAME_TEAM1", nullable=false)
-	public Team getTeam1() {
-		return team1;
-	}
-
-	public void setTeam1(Team team1) {
-		this.team1 = team1;
-	}
-
-	@Column(name="GAME_TEAM2", nullable=false)
-	public Team getTeam2() {
-		return team2;
-	}
-
-	public void setTeam2(Team team2) {
-		this.team2 = team2;
-	}
+//	@Column(name="GAME_TEAM1", nullable=false)
+//	public Team getTeam1() {
+//		return team1;
+//	}
+//
+//	public void setTeam1(Team team1) {
+//		this.team1 = team1;
+//	}
+//
+//	@Column(name="GAME_TEAM2", nullable=false)
+//	public Team getTeam2() {
+//		return team2;
+//	}
+//
+//	public void setTeam2(Team team2) {
+//		this.team2 = team2;
+//	}
 
 	@Column(name="GAME_RTEAM1")
 	public int getResultTeam1() {
@@ -100,4 +101,14 @@ public class Game implements Serializable{
 	public void setStatus(GameStatus status) {
 		this.status = status;
 	}
+
+    @ManyToOne()
+    @JoinColumn(name="POOL_ID")
+    public Pool getPool() {
+        return pool;
+    }
+
+    public void setPool(Pool pool) {
+        this.pool = pool;
+    }
 }
