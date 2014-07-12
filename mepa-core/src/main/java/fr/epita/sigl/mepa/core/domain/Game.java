@@ -111,4 +111,15 @@ public class Game implements Serializable{
     public void setPool(Pool pool) {
         this.pool = pool;
     }
+
+    private Set<JoinedGameTeam> joinedGameTeams;
+
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = JoinedGameTeam.class, mappedBy = "game", fetch = FetchType.EAGER)
+    public Set<JoinedGameTeam> getJoinedGameTeams() {
+        return joinedGameTeams;
+    }
+
+    public void setJoinedGameTeams(Set<JoinedGameTeam> joinedGameTeams) {
+        this.joinedGameTeams = joinedGameTeams;
+    }
 }
