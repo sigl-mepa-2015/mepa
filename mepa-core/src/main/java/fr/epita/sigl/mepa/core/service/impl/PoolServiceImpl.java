@@ -82,26 +82,27 @@ public class PoolServiceImpl implements PoolService {
     	HashMap<Pool, JSONArray> returnMap = new HashMap<Pool, JSONArray>();
     	    	
     	Tournament t = tournamentDao.getById(id);
+    	
     	for (Pool p : t.getPools())
     	{
     		JSONArray jArray = new JSONArray();
     		
     		JSONObject comingObject = new JSONObject();
-    		comingObject.put("value", gameDao.countTodoGameByPoolId(id));
+    		comingObject.put("value", gameDao.countTodoGameByPoolId(p.getId()));
     		comingObject.put("color", "#F7464A");
     		comingObject.put("highlight", "#FF5A5E");
     		comingObject.put("label", "A venir");
     		
     		JSONObject progressObject = new JSONObject();
-    		progressObject.put("value", gameDao.countProgressGameByPoolId(id));
-    		progressObject.put("color", "#46BFBD");
-    		progressObject.put("highlight", "#5AD3D1");
+    		progressObject.put("value", gameDao.countProgressGameByPoolId(p.getId()));
+    		progressObject.put("color", "#FDB45C");
+    		progressObject.put("highlight", "#FFC870");
     		progressObject.put("label", "En cours");
     		
     		JSONObject endedObject = new JSONObject();
-    		endedObject.put("value", gameDao.countEndedGameByPoolId(id));
-    		endedObject.put("color", "#FDB45C");
-    		endedObject.put("highlight", "#FFC870");
+    		endedObject.put("value", gameDao.countEndedGameByPoolId(p.getId()));
+    		endedObject.put("color", "#46BFBD");
+    		endedObject.put("highlight", "#5AD3D1");
     		endedObject.put("label", "Fini");
     		
     		jArray.put(0, comingObject);

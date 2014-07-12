@@ -14,7 +14,7 @@
   	</div>
   	
   	<h5>Niveau de progression des poules</h5>
-   	<div class="row">	
+   	<!-- <div class="row">	
 	  	<div class="col-md-2 text-center">
 	  		<div><h5>Poule 1</h5></div>
 	  		<canvas id="myChart" width="120" height="120" ></canvas>
@@ -23,14 +23,15 @@
 	  		<div><h5>Poule 1</h5></div>
 	  		<canvas id="myChart2" width="120" height="120"></canvas>
 	  	</div>
-  	</div>
-  <%-- 	<div class="row">
+  	</div> -->
+   	<div id="pieContainer" class="row">
   		<c:forEach items="${mapPools}" var="pool">
-  			<div class="col-md-2" style="text-align:">
-  			
+  			<div class="col-md-2 text-center">
+  				<div ><h5>${pool.key.name}</h5></div>
+  				<canvas id="pie${pool.key.id}" width="120" height="120" data-json="${fn:escapeXml(pool.value)}"></canvas>
   			</div>
   		</c:forEach>
-  	</div> --%>
+  	</div>
 </div>
 
 
@@ -41,6 +42,20 @@
 		<li><a href="#range" role="tab" data-toggle="tab">Voir le classement general</a></li>
 	</ul>
 </div>
+
+<ul>
+    <c:forEach items="${tournament.teams}" var="team">
+        <li>${team.name}</li>
+        <ul>
+            <c:forEach items="${team.players}" var="player">
+                <li>${player.name}</li>
+                <li>${player.mepaUser.login}</li>
+                <li>${player.mepaUser.name}</li>
+                <li>${player.mepaUser.pwd}</li>
+            </c:forEach>
+        </ul>
+    </c:forEach>
+</ul>
 
 <div class="container">
 	<div class="tab-content">
@@ -169,5 +184,4 @@
 	  </div>
 	</div>
 </div>        
-
 <script src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>

@@ -91,6 +91,25 @@ public class InjectDataController {
         return game;
     }
 
+    private MepaUser createUser(String name, String login, String pwd) {
+        MepaUser user = new MepaUser();
+        user.setName(name);
+        user.setLogin(login);
+        user.setPwd(pwd);
+        mepauserservice.createMepaUser(user);
+        return user;
+    }
+
+    private Player createPlayer(String name, Team team, MepaUser user) {
+        Player player = new Player();
+        player.setName(name);
+        player.setTeam(team);
+//        player.setMepaUser(user);
+        playerservice.createPlayer(player);
+        return player;
+    }
+
+
     @RequestMapping(value="/", method=RequestMethod.GET)
     @ResponseBody
     public void injectData()
@@ -136,6 +155,8 @@ public class InjectDataController {
         Game game16 = createGame(p3, team8, team7);
         Game game17 = createGame(p3, team9, team7);
         Game game18 = createGame(p3, team9, team8);
+
+//        MepaUser mepaUser = createUser("alex", "aloubelou", "test");
     }
 
     private int whowin (int score1, int score2)
