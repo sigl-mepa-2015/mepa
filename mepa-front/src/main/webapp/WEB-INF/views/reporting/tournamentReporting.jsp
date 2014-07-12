@@ -36,10 +36,10 @@
 						<c:choose>
 							<c:when test="${game.status == 'DONE'}">
 								<tr>
-									<td>${game.team1.name}</td>
-									<td>${game.resultTeam1}</td>
-									<td>${game.resultTeam2}</td>
-									<td>${game.team2.name}</td>
+									<c:forEach items="${game.joinedGameTeams}" var="join">
+										<td>${join.team.name}</td>
+										<td>${join.score}</td>
+									</c:forEach>
 								</tr>
 							</c:when>
 						</c:choose>
@@ -58,8 +58,9 @@
 						<c:choose>
 							<c:when test="${game.status == 'TODO'}">
 								<tr>
-									<td>${game.getTeams().}</td>
-									<td>${game.getTeams()}</td>
+									<c:forEach items="${game.joinedGameTeams}" var="join">
+										<td>${join.team.name}</td>
+									</c:forEach>
 								</tr>	
 							</c:when>	
 						</c:choose>

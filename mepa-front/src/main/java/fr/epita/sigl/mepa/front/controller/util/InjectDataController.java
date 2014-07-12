@@ -3,6 +3,8 @@ package fr.epita.sigl.mepa.front.controller.util;
 import java.util.HashSet;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,13 @@ public class InjectDataController {
 		{
 			tournamentservice.deleteTournament(t);
 		}	
+	}
+	
+	@RequestMapping(value="/min", method=RequestMethod.GET)
+	@ResponseBody
+	public void injectDataMin()
+	{
+		
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
@@ -118,11 +127,25 @@ public class InjectDataController {
 		game1.setPool(p1);
 		gameservice.createGame(game1);
 		
+		JoinedGameTeam jg1 = new JoinedGameTeam();
+		jg1.setGame(game1);
+		jg1.setTeam(team1);
+		JoinedGameTeam jg2 = new JoinedGameTeam();
+		jg2.setGame(game1);
+		jg2.setTeam(team2);
+		
 		Game game2 = new Game();
 		game2.setTeams(instanceHashSet(team1, team3));
 		game2.setStatus(Game.GameStatus.TODO);
 		game2.setPool(p1);
 		gameservice.createGame(game2);
+		
+		JoinedGameTeam jg3 = new JoinedGameTeam();
+		jg3.setGame(game2);
+		jg3.setTeam(team1);
+		JoinedGameTeam jg4 = new JoinedGameTeam();
+		jg4.setGame(game2);
+		jg4.setTeam(team3);
 		
 		Game game3 = new Game();
 		game3.setTeams(instanceHashSet(team2, team3));
@@ -130,11 +153,25 @@ public class InjectDataController {
 		game3.setPool(p1);
 		gameservice.createGame(game3);
 		
+		JoinedGameTeam jg5 = new JoinedGameTeam();
+		jg5.setGame(game3);
+		jg5.setTeam(team2);
+		JoinedGameTeam jg6 = new JoinedGameTeam();
+		jg6.setGame(game3);
+		jg6.setTeam(team3);
+		
 		Game game4 = new Game();
 		game4.setTeams(instanceHashSet(team2, team1));
 		game4.setStatus(Game.GameStatus.TODO);
 		game4.setPool(p1);
 		gameservice.createGame(game4);
+		
+		JoinedGameTeam jg7 = new JoinedGameTeam();
+		jg7.setGame(game4);
+		jg7.setTeam(team2);
+		JoinedGameTeam jg8 = new JoinedGameTeam();
+		jg8.setGame(game4);
+		jg8.setTeam(team1);
 		
 		Game game5 = new Game();
 		game5.setTeams(instanceHashSet(team3, team1));
@@ -142,12 +179,25 @@ public class InjectDataController {
 		game5.setPool(p1);
 		gameservice.createGame(game5);
 		
+		JoinedGameTeam jg9 = new JoinedGameTeam();
+		jg9.setGame(game5);
+		jg9.setTeam(team3);
+		JoinedGameTeam jg10 = new JoinedGameTeam();
+		jg10.setGame(game5);
+		jg10.setTeam(team1);
+		
 		Game game6 = new Game();
 		game6.setTeams(instanceHashSet(team2, team3));
 		game6.setStatus(Game.GameStatus.TODO);
 		game6.setPool(p1);
 		gameservice.createGame(game6);
 		
+		JoinedGameTeam jg11 = new JoinedGameTeam();
+		jg11.setGame(game6);
+		jg11.setTeam(team2);
+		JoinedGameTeam jg12 = new JoinedGameTeam();
+		jg12.setGame(game6);
+		jg12.setTeam(team3);
 		
 		Game game7 = new Game();
 		game7.setTeams(instanceHashSet(team4, team5));
@@ -155,11 +205,25 @@ public class InjectDataController {
 		game7.setPool(p2);
 		gameservice.createGame(game7);
 		
+		JoinedGameTeam jg13 = new JoinedGameTeam();
+		jg13.setGame(game7);
+		jg13.setTeam(team4);
+		JoinedGameTeam jg14 = new JoinedGameTeam();
+		jg14.setGame(game7);
+		jg14.setTeam(team5);
+		
 		Game game8 = new Game();
 		game8.setTeams(instanceHashSet(team4, team6));
 		game8.setStatus(Game.GameStatus.TODO);
 		game8.setPool(p2);
 		gameservice.createGame(game8);
+		
+		JoinedGameTeam jg15 = new JoinedGameTeam();
+		jg15.setGame(game8);
+		jg15.setTeam(team4);
+		JoinedGameTeam jg16 = new JoinedGameTeam();
+		jg16.setGame(game8);
+		jg16.setTeam(team6);
 		
 		Game game9 = new Game();
 		game9.setTeams(instanceHashSet(team5, team6));
@@ -167,11 +231,25 @@ public class InjectDataController {
 		game9.setPool(p2);
 		gameservice.createGame(game9);
 		
+		JoinedGameTeam jg17 = new JoinedGameTeam();
+		jg17.setGame(game9);
+		jg17.setTeam(team5);
+		JoinedGameTeam jg18 = new JoinedGameTeam();
+		jg18.setGame(game9);
+		jg18.setTeam(team6);
+		
 		Game game10 = new Game();
 		game10.setTeams(instanceHashSet(team5, team4));
 		game10.setStatus(Game.GameStatus.TODO);
 		game10.setPool(p2);
 		gameservice.createGame(game10);
+		
+		JoinedGameTeam jg19 = new JoinedGameTeam();
+		jg19.setGame(game10);
+		jg19.setTeam(team5);
+		JoinedGameTeam jg20 = new JoinedGameTeam();
+		jg20.setGame(game10);
+		jg20.setTeam(team4);
 		
 		Game game11 = new Game();
 		game11.setTeams(instanceHashSet(team6, team4));
@@ -179,12 +257,25 @@ public class InjectDataController {
 		game11.setPool(p2);
 		gameservice.createGame(game11);
 		
+		JoinedGameTeam jg21 = new JoinedGameTeam();
+		jg21.setGame(game11);
+		jg21.setTeam(team6);
+		JoinedGameTeam jg22 = new JoinedGameTeam();
+		jg22.setGame(game11);
+		jg22.setTeam(team4);
+		
 		Game game12 = new Game();
 		game12.setTeams(instanceHashSet(team5, team6));
 		game12.setStatus(Game.GameStatus.TODO);
 		game12.setPool(p2);
 		gameservice.createGame(game12);
 		
+		JoinedGameTeam jg23 = new JoinedGameTeam();
+		jg23.setGame(game12);
+		jg23.setTeam(team5);
+		JoinedGameTeam jg24 = new JoinedGameTeam();
+		jg24.setGame(game12);
+		jg24.setTeam(team6);
 		
 		Game game13 = new Game();
 		game13.setTeams(instanceHashSet(team7, team8));
@@ -192,11 +283,25 @@ public class InjectDataController {
 		game13.setPool(p3);
 		gameservice.createGame(game13);
 		
+		JoinedGameTeam jg25 = new JoinedGameTeam();
+		jg25.setGame(game13);
+		jg25.setTeam(team7);
+		JoinedGameTeam jg26 = new JoinedGameTeam();
+		jg26.setGame(game13);
+		jg26.setTeam(team8);
+		
 		Game game14 = new Game();
 		game14.setTeams(instanceHashSet(team7, team9));
 		game14.setStatus(Game.GameStatus.TODO);
 		game14.setPool(p3);
 		gameservice.createGame(game14);
+		
+		JoinedGameTeam jg27 = new JoinedGameTeam();
+		jg27.setGame(game14);
+		jg27.setTeam(team7);
+		JoinedGameTeam jg28 = new JoinedGameTeam();
+		jg28.setGame(game14);
+		jg28.setTeam(team9);
 		
 		Game game15 = new Game();
 		game15.setTeams(instanceHashSet(team8, team9));
@@ -204,11 +309,25 @@ public class InjectDataController {
 		game15.setPool(p3);
 		gameservice.createGame(game15);
 		
+		JoinedGameTeam jg29 = new JoinedGameTeam();
+		jg29.setGame(game15);
+		jg29.setTeam(team8);
+		JoinedGameTeam jg30 = new JoinedGameTeam();
+		jg30.setGame(game15);
+		jg30.setTeam(team9);
+		
 		Game game16 = new Game();
 		game16.setTeams(instanceHashSet(team8, team7));
 		game16.setStatus(Game.GameStatus.TODO);
 		game16.setPool(p3);
 		gameservice.createGame(game16);
+		
+		JoinedGameTeam jg31 = new JoinedGameTeam();
+		jg31.setGame(game16);
+		jg31.setTeam(team8);
+		JoinedGameTeam jg32 = new JoinedGameTeam();
+		jg32.setGame(game16);
+		jg32.setTeam(team7);
 		
 		Game game17 = new Game();
 		game17.setTeams(instanceHashSet(team9, team7));
@@ -216,11 +335,25 @@ public class InjectDataController {
 		game17.setPool(p3);
 		gameservice.createGame(game17);
 		
+		JoinedGameTeam jg33 = new JoinedGameTeam();
+		jg33.setGame(game17);
+		jg33.setTeam(team9);
+		JoinedGameTeam jg34 = new JoinedGameTeam();
+		jg34.setGame(game17);
+		jg34.setTeam(team7);
+		
 		Game game18 = new Game();
 		game18.setTeams(instanceHashSet(team8, team9));
 		game18.setStatus(Game.GameStatus.TODO);
 		game18.setPool(p3);
 		gameservice.createGame(game18);
+		
+		JoinedGameTeam jg35 = new JoinedGameTeam();
+		jg35.setGame(game18);
+		jg35.setTeam(team8);
+		JoinedGameTeam jg36 = new JoinedGameTeam();
+		jg36.setGame(game18);
+		jg36.setTeam(team9);
 		
 		System.out.println(t.getId());
 	}
