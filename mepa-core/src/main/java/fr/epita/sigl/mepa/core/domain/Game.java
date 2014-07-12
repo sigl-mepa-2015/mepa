@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.*;

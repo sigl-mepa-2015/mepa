@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.front.controller.util;
 
 import java.util.HashSet;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.epita.sigl.mepa.core.domain.*;
+import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 
 @Controller
@@ -195,8 +197,30 @@ public class InjectDataController {
 	@ResponseBody
 	public void updateData()
 	{
+		/*Random randomGenerator = new Random();
 		
+		Tournament t = tournamentservice.getTournamentById(Long.parseLong("1"));
+		for (Pool p : t.getPools())
+		{
+			for (Game g : p.getGames())
+			{
+				if (randomGenerator.nextInt(1) == 1)
+				{
+					g.setResultTeam1(randomGenerator.nextInt(5));
+					g.setResultTeam2(randomGenerator.nextInt(5));
+					g.setDuration(randomGenerator.nextInt(100) + 20);
+					g.setStatus(GameStatus.DONE);
+					
+					if (g.getResultTeam1() == g.getResultTeam2())
+					{
+						g.getTeams().
+					}
+				}
+			}
+		}*/
 	}
+	
+	
 	
 	
 	
