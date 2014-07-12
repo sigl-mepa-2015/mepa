@@ -20,15 +20,12 @@ public class MepaUserServiceImpl implements MepaUserService {
     private MepaUserDao mepaUserDao;
 
     @Override
-    @Transactional(readOnly = true)
     public void createMepaUser(MepaUser mepaUser){this.mepaUserDao.create(mepaUser);};
 
     @Override
-    @Transactional(readOnly = true)
     public void updateMepaUser(MepaUser mepaUser){this.mepaUserDao.update(mepaUser);};
 
     @Override
-    @Transactional(readOnly = true)
     public void deleteMepaUser(MepaUser mepaUser){this.mepaUserDao.delete(mepaUser);};
 
     @Override

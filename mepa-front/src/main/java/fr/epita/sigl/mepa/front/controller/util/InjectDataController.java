@@ -44,6 +44,9 @@ public class InjectDataController {
     @Autowired
     private JoinedGameTeamService jgservice;
 
+    @Autowired
+    private RoleService roleservice;
+
     @RequestMapping(value="/cleanDatabase", method=RequestMethod.GET)
     @ResponseBody
     public void cleanData()
@@ -105,15 +108,26 @@ public class InjectDataController {
         Player player = new Player();
         player.setName(name);
         player.setTeam(team);
-//        player.setMepaUser(user);
+        player.setMepaUser(user);
         playerservice.createPlayer(player);
         return player;
     }
 
+    private Role createRole(String authority) {
+        Role role = new Role();
+        role.setAuthority(authority);
+        roleservice.createRole(role);
+        return role;
+    }
+
+    private void linkRoleToUser(Role role, MepaUser user) {
+        user.addRole(role);
+        mepauserservice.updateMepaUser(user);
+    }
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     @ResponseBody
-    public void injectData(HttpServletRequest request)
+    public void injectData()
     {
         Tournament t = new Tournament();
         t.setName("TournamentInjectViaController" + (this.lastLoadTournamentId + 1));
@@ -157,7 +171,10 @@ public class InjectDataController {
         Game game17 = createGame(p3, team9, team7);
         Game game18 = createGame(p3, team9, team8);
 
-        //MepaUser mepaUser = createUser("alex", "aloubelou", "test");
+        Role role = createRole("ADMIN");
+        MepaUser user = createUser("taguele", "totot", "ttobgnk");
+        Player player = createPlayer("Bob", team1, user);
+        linkRoleToUser(role, user);
     }
 
     private int whowin (int score1, int score2)
@@ -234,7 +251,7 @@ public class InjectDataController {
             tournamentservice.getTournamentEndDate(t);
         }
     }
-    
+
     @RequestMapping(value="/generateTournament", method=RequestMethod.GET)
     @ResponseBody
     public void generateTournament(@RequestParam("poolNumber") int poolNumber, @RequestParam("teamNumber") int teamNumber)
@@ -267,9 +284,4 @@ public class InjectDataController {
     	}
     	
     }
-
-
-
-
-
 }
