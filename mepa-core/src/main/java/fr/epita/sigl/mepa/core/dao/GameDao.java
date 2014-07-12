@@ -1,6 +1,8 @@
 package fr.epita.sigl.mepa.core.dao;
 
 import fr.epita.sigl.mepa.core.domain.Game;
+import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
+import fr.epita.sigl.mepa.core.domain.Team;
 
 import java.util.List;
 

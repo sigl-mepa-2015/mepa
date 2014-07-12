@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.service;
 
 import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Pool;
+import fr.epita.sigl.mepa.core.domain.Team;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface GameService {
     Game getGameById(Long id);
 
     List<Game> getAllGames();
+
+    List<Team> getTeams(Long id);
 
 }

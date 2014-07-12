@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "JoinedGameTeam")
+@NamedQueries({@NamedQuery(name = "JoinedGameTeam.findAllByGameId", query = "FROM JoinedGameTeam j WHERE j.game.id=:gameId")})
 public class JoinedGameTeam implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -12,5 +12,5 @@ public interface JoinedGameTeamDao {
 
     void delete(JoinedGameTeam joinedGameTeam);
 
-
+    List<JoinedGameTeam> getByGameId(Long id);
 }

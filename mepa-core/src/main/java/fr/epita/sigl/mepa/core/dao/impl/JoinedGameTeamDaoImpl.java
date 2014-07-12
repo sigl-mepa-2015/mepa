@@ -35,5 +35,10 @@ public class JoinedGameTeamDaoImpl implements JoinedGameTeamDao {
         this.getSession().delete(joinedGameTeam);
     }
 
-
+    @Override
+    public List<JoinedGameTeam> getByGameId(Long id) {
+        Query query = this.getSession().getNamedQuery("JoinedGameTeam.findAllByGameId");
+        query.setParameter("gameId", id);
+        return query.list();
+    }
 }
