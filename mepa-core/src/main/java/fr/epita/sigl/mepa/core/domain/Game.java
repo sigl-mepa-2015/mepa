@@ -46,14 +46,14 @@ public class Game implements Serializable{
 
 //    @ManyToMany
 //    @JoinTable(name="GAME_TEAM", joinColumns = @JoinColumn(name="GAME_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TEAM_ID", referencedColumnName = "ID"))
-//@ManyToMany
-//@JoinTable(
-//        name="GAME_TEAM",
-//        joinColumns={@JoinColumn(name="GAME_ID")},
-//        inverseJoinColumns={@JoinColumn(name="TEAM_ID")})
-//    public Set<Team> getTeams() {
-//        return teams;
-//    }
+@ManyToMany
+@JoinTable(
+        name="GAME_TEAM",
+        joinColumns={@JoinColumn(name="GAME_ID")},
+        inverseJoinColumns={@JoinColumn(name="TEAM_ID")})
+    public Set<Team> getTeams() {
+        return teams;
+    }
 
     public void setTeams(Set<Team> teams) {
         this.teams = teams;

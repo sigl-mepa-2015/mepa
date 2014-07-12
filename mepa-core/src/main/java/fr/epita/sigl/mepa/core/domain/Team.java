@@ -32,16 +32,16 @@ public class Team implements Serializable {
     @JoinColumn(name="POOL_ID")
     private Pool pool;
 
-//    public Set<Game> getGames() {
-//        return games;
-//    }
-//
-//    public void setGames(Set<Game> games){
-//        this.games = games;
-//    }
+    public Set<Game> getGames() {
+        return games;
+    }
 
-//    @ManyToMany(mappedBy = "teams")
-//    private Set<Game> games;
+    public void setGames(Set<Game> games) {
+        this.games = games;
+    }
+
+    @ManyToMany(mappedBy = "teams")
+    private Set<Game> games;
 
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
     private Set<Player> players;

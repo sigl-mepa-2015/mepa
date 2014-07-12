@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 /**
  * Created by SushiBalboha on 12/07/2014.
  */
+
+@Repository
 public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
@@ -51,4 +54,6 @@ public class UserDaoImpl implements UserDao {
         Query query = this.getSession().getNamedQuery("User.findAll");
         return query.list();
     }
+
+
 }

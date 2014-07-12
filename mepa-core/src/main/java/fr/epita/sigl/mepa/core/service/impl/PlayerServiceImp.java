@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 public class PlayerServiceImp implements PlayerService {
 
-    //@Autowired
+    @Autowired
     private PlayerDao playerDao;
 
     @Override
@@ -34,4 +34,5 @@ public class PlayerServiceImp implements PlayerService {
 
     @Override
     public List<Player> getAllPlayers(){return this.playerDao.getAll();};
+
 }

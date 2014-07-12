@@ -24,8 +24,8 @@ public class Role implements Serializable {
     @Column(name="POOL_ID", nullable=false)
     private Long id;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     /**
      * @return the id
@@ -39,13 +39,13 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public String getAuthority() {
         return authority;

@@ -14,6 +14,8 @@ import java.util.List;
 /**
  * Created by SushiBalboha on 12/07/2014.
  */
+
+@Repository
 public class PlayerDaoImpl implements PlayerDao {
 
     @Autowired
@@ -50,4 +52,5 @@ public class PlayerDaoImpl implements PlayerDao {
         Query query = this.getSession().getNamedQuery("Player.findAll");
         return query.list();
     }
+
 }
