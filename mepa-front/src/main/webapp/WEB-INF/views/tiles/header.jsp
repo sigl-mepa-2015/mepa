@@ -3,6 +3,9 @@
     <div class="container">
         <div class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
+                <!-- Mettre la variable dev à false lors du Recettage car le client
+                     ne souhaite pas voir apparaître Tournoi et Gestion des équipes -->
+                <c:set var="dev" value="true"/>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" name-toggle="collapse" name-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -13,9 +16,9 @@
                     <c:set var="req" value="${pageContext.request}" />
                     <c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
                     <a class="navbar-brand" href="${baseURL}">MEPA</a>
-                    <a class="navbar-brand tip" data-original-title="Se connecter" data-toggle="modal" role="button" href="#login_modal"><i class="icon-remove3"></i>Se connecter</a>
                 </div>
                 <div class="navbar-collapse collapse">
+                <c:if test="${dev}">
                     <ul class="nav navbar-nav">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span
                                 class="caret"></span></a>
@@ -26,16 +29,16 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message
-                                code="home.bar.title2"/> <span class="caret"></span></a>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="home.bar.title2"/> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${pageContext.request.contextPath}/team/form"><spring:message
-                                        code="home.bar.title2.nav1"/></a></li>
-                                <li><a href="${pageContext.request.contextPath}/team/all"><spring:message
-                                        code="home.bar.title2.nav2"/></a></li>
+                                <li><a href="${pageContext.request.contextPath}/team/form"><spring:message code="home.bar.title2.nav1"/></a></li>
+                                <li><a href="${pageContext.request.contextPath}/team/all"><spring:message code="home.bar.title2.nav2"/></a></li>
                             </ul>
-
                         </li>
+                    </ul>
+                </c:if>
+                    <ul class=nav navbar-nav>
+                        <button type="button" class="btn btn-primary navbar-btn navbar-right tip" data-original-title="Se connecter" data-toggle="modal" role="button" href="#login_modal"><i class="icon-remove3"></i>Se connecter</button>
                     </ul>
                 </div>
             </div>
