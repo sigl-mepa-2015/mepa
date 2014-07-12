@@ -55,7 +55,6 @@ public class PoolController {
     public String afficher(HttpServletRequest request, ModelMap pModel) {
         List<Pool> l = this.s.getAllPools();
         pModel.addAttribute("pools", l);
-        System.out.println("YYYYYYYYYYYYYY");
         return "/creerPoule";
     }
 

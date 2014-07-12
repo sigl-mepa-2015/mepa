@@ -3,11 +3,11 @@ SIGL MEPA 2015
 
 Jenkins CI
 ---------------
-https://sigl-mepa-2015.ci.cloudbees.com/
+https://mepa-2015.ci.cloudbees.com/
 
 Staging environment
 ---------------
-http://mepa.sigl-mepa-2015.eu.cloudbees.net/
+http://mepa.mepa-2015.eu.cloudbees.net/
 
 Avec
 ---------------
