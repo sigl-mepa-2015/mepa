@@ -43,6 +43,20 @@
 	</ul>
 </div>
 
+<ul>
+    <c:forEach items="${tournament.teams}" var="team">
+        <li>${team.name}</li>
+        <ul>
+            <c:forEach items="${team.players}" var="player">
+                <li>${player.name}</li>
+                <li>${player.mepaUser.login}</li>
+                <li>${player.mepaUser.name}</li>
+                <li>${player.mepaUser.pwd}</li>
+            </c:forEach>
+        </ul>
+    </c:forEach>
+</ul>
+
 <div class="container">
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">

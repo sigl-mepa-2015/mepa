@@ -41,14 +41,14 @@ public class MepaUser implements Serializable {
 //    public void setRoles(Set<Role> roles) {
 //        this.roles = roles;
 //    }
-
-    public MepaUser() {
-
-    }
-
-    public MepaUser(String name, String login) {
-        this.name = name;
-    }
+//
+//    public MepaUser() {
+//
+//    }
+//
+//    public MepaUser(String name, String login) {
+//        this.name = name;
+//    }
 
     /**
      * @return the id
