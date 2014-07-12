@@ -29,9 +29,7 @@
         <put-attribute name="title" value="tournament.listTitle" />
         <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
     </definition>
-    <definition name="/tournament/create/form" extends="base.definition">
-        <put-attribute name="title" value="tournament.createTitle" />
-        <put-attribute name="body" value="/WEB-INF/views/tournament/create/form.jsp" />
+    <definition name="/tournament/create/form" template="/WEB-INF/views/tournament/create/form.jsp">
     </definition>
     <definition name="/tournament/create/result" extends="base.definition">
         <put-attribute name="title" value="tournament.createTitle" />
