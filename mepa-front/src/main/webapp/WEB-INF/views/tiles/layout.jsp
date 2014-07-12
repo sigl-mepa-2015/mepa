@@ -19,10 +19,13 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <%-- Header --%>
-        <tiles:insertAttribute name="header" />
-        <%-- Body content --%>
-        <tiles:insertAttribute name="body" />
+        <div class="wrapper">
+            <%-- Header --%>
+            <tiles:insertAttribute name="header" />
+            <%-- Body content --%>
+            <tiles:insertAttribute name="body" />
+            <div class="push"></div>
+        </div>
         <%-- Footer --%>
         <tiles:insertAttribute name="footer" />
     </body>
