@@ -156,18 +156,16 @@ public class InjectDataController {
         if (this.lastLoadTournamentId != 0)
         {
             Random randomGenerator = new Random();
-
             Tournament t = tournamentservice.getTournamentById(this.lastLoadTournamentId);
             for (Pool p : t.getPools())
             {
                 for (Game g : p.getGames())
                 {
-                    if (randomGenerator.nextInt(1) == 1)
+                    if (randomGenerator.nextInt(2) == 1)
                     {
-                        int score1 = randomGenerator.nextInt(5);
-                        int score2 = randomGenerator.nextInt(5);
+                        int score1 = randomGenerator.nextInt(6);
+                        int score2 = randomGenerator.nextInt(6);
                         int i = 0;
-                        System.out.println("Game : " + score1 + " - " + score2);
                         for (JoinedGameTeam jgt : g.getJoinedGameTeams())
                         {
                             if (i == 0) {
@@ -204,7 +202,7 @@ public class InjectDataController {
                             teamservice.updateTeam(jgt.getTeam());
                             jgservice.updateJoinedGameTeam(jgt);
                         }
-                        g.setDuration(randomGenerator.nextInt(100) + 20);
+                        g.setDuration(randomGenerator.nextInt(101) + 20);
                         g.setStatus(GameStatus.DONE);
                         gameservice.updateGame(g);
                     }
