@@ -3,8 +3,8 @@
 
 <div class="container">
 	<div class="page-header">
-        <spring:message code="add" var="addLabel" />
-        <a class="pull-right btn btn-success" href="${addTournamentFormUrl}" title="${addLabel}"><i class="glyphicon glyphicon-plus"></i></a>
+       <spring:message code="create" var="addLabel" />
+        <a class="pull-right btn btn-success" href="${addTournamentFormUrl}" title="${addLabel}"><i class="glyphicon glyphicon-plus"></i>  <spring:message code="create" /></a>
 		<h1>Tous les tournois</h1>
 	</div>
 </div>
@@ -31,12 +31,12 @@
     <c:choose>
         <c:when test="${not empty tournaments}">
             <table class="table table-striped" style="text-align: center">
-                <thead>
+                <thead style="text-align: center">
                     <tr>
-                        <th>Nom du tournoi</th>
-                        <th>Type de tournoi</th>
-                        <th>Nombre maximum d'équipes</th>
-                        <th></th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Nombre d'équipes maximum</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@
             <div class="jumbotron">
                 <div class="container">
                     <h2><spring:message code="tournament.emptyTitle" /></h2>
-                    <a class="btn-lg btn btn-primary" href="${addTournamentFormUrl}" title="${addLabel}"><i class="glyphicon glyphicon-plus"></i> <spring:message code="add" /></a>
+                    <a class="btn-lg btn btn-primary" href="${addTournamentFormUrl}" title="${addLabel}"><i class="glyphicon glyphicon-plus"></i> <spring:message code="create" /></a>
                 </div>
             </div>
         </c:otherwise>
