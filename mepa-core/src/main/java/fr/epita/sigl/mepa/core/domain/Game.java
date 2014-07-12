@@ -33,7 +33,7 @@ public class Game implements Serializable{
     }
 	
 	private Long id;
-    private Set<Team> teams;
+   // private Set<Team> teams;
 	private int resultTeam1;	
 	private int resultTeam2;
 	private int duration;
@@ -52,7 +52,7 @@ public class Game implements Serializable{
 	}
 
 
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(
         name="GAME_TEAM",
         joinColumns={@JoinColumn(name="GAME_ID")},
@@ -63,7 +63,7 @@ public class Game implements Serializable{
 
     public void setTeams(Set<Team> teams) {
         this.teams = teams;
-    }
+    }*/
 
 	@Column(name="GAME_RTEAM1")
 	public int getResultTeam1() {

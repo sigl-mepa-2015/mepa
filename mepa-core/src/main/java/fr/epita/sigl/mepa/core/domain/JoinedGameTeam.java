@@ -22,7 +22,7 @@ public class JoinedGameTeam implements Serializable {
     @Column(name="JOINEDGAMETEAM_ID", nullable=false)
     private Long id;
 
- @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "GAME_ID")
     public Game getGame() {
         return game;
@@ -34,7 +34,6 @@ public class JoinedGameTeam implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
-
     public Team getTeam() {
         return team;
     }
@@ -43,7 +42,7 @@ public class JoinedGameTeam implements Serializable {
         this.team = team;
     }
 
-    @Column(name = "score")
+    @Column(name = "score", nullable=true)
     public Integer getScore() {
         return score;
     }
