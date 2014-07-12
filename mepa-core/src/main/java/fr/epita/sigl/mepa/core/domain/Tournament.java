@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -19,6 +20,7 @@ public class Tournament implements Serializable {
     private Set<Pool> pools;
     private Set<Team> teams;
     private Integer maxTeamNumber;
+    private Date startedDate;
     private String type;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Team.class, mappedBy = "tournament", fetch = FetchType.EAGER)
@@ -75,4 +77,13 @@ public class Tournament implements Serializable {
         this.pools = pools;
     }
 
+    @Column(name = "TOURNAMENT_STARTEDDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getStartedDate() {
+        return startedDate;
+    }
+
+    public void setStartedDate(Date startedDate) {
+        this.startedDate = startedDate;
+    }
 }
