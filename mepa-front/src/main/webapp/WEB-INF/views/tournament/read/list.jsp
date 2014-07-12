@@ -79,7 +79,7 @@
                             <td>${t.type}</td>
                             <td>${t.maxTeamNumber}</td>
                             <td class="col-md-4">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/tournament/view/${t.id}'">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                 </button>
                                 <button type="button" class="btn btn-info"

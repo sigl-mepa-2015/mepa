@@ -29,6 +29,7 @@ public class TournamentController {
     protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
     private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
+    private static final String VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournamentView";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
     @Autowired
     private TournamentService tournamentService;
@@ -72,6 +73,16 @@ public class TournamentController {
     }
 
     /**
+     * Show the view of a tournament
+     *
+     * @return The view name
+     */
+    @RequestMapping(value = {"/view"}, method = RequestMethod.GET)
+    public String showView() {
+        return "/tournament/read/view";
+    }
+
+    /**
      * Show the update form
      *
      * @param id The tournament id
@@ -84,6 +95,14 @@ public class TournamentController {
         if (tournament == null)
             tournament = new Tournament();
         return new ModelAndView("/tournament/create/form", ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
+    }
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public ModelAndView setupView(@PathVariable("id") long id) throws ServletRequestBindingException {
+        Tournament tournament = tournamentService.getTournamentById(id);
+        if (tournament == null)
+            tournament = new Tournament();
+        return new ModelAndView("/tournament/read/view", VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
     }
 
     /**
@@ -153,6 +172,17 @@ public class TournamentController {
      */
     @ModelAttribute(ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
     public Tournament initTournament() {
+        return new Tournament();
+    }
+
+
+    /**
+     * Initialize "TournamentView" model attribute
+     *
+     * @return a new TournamentView.
+     */
+    @ModelAttribute(VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
+    public Tournament initTournamentView() {
         return new Tournament();
     }
 
