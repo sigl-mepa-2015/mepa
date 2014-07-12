@@ -39,9 +39,6 @@ public class Game implements Serializable{
     }
 	
 	private Long id;
-   // private Set<Team> teams;
-	private int resultTeam1;	
-	private int resultTeam2;
 	private int duration;
 	private GameStatus status;
     private Pool pool;
@@ -57,56 +54,24 @@ public class Game implements Serializable{
 		this.id = id;
 	}
 
-
-	/*@ManyToMany
-	@JoinTable(
-        name="GAME_TEAM",
-        joinColumns={@JoinColumn(name="GAME_ID")},
-        inverseJoinColumns={@JoinColumn(name="TEAM_ID")})
-    public ArrayList<Team> getTeams() {
-        return new ArrayList<Team>(teams);
+    @Column(name="GAME_DURATION")
+    public int getDuration() {
+        return duration;
     }
 
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
-    }*/
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
-	@Column(name="GAME_RTEAM1")
-	public int getResultTeam1() {
-		return resultTeam1;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(name="GAME_STATUS", nullable=false)
+    public GameStatus getStatus() {
+        return status;
+    }
 
-	public void setResultTeam1(int resultTeam1) {
-		this.resultTeam1 = resultTeam1;
-	}
-
-	@Column(name="GAME_RTEAM2")
-	public int getResultTeam2() {
-		return resultTeam2;
-	}
-
-	public void setResultTeam2(int resultTeam2) {
-		this.resultTeam2 = resultTeam2;
-	}
-
-	@Column(name="GAME_DURATION")
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	@Enumerated(EnumType.STRING)
-	@Column(name="GAME_STATUS", nullable=false)
-	public GameStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(GameStatus status) {
-		this.status = status;
-	}
+    public void setStatus(GameStatus status) {
+        this.status = status;
+    }
 
     @ManyToOne()
     @JoinColumn(name="POOL_ID")
