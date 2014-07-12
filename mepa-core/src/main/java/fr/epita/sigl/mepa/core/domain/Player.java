@@ -27,17 +27,17 @@ public class Player implements Serializable {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-//    public MepaUser getMepaUser() {
-//        return mepaUser;
-//    }
-//
-//    public void setMepaUser(MepaUser mepaUser) {
-//        this.mepaUser = mepaUser;
-//    }
+    public MepaUser getMepaUser() {
+        return mepaUser;
+    }
 
-//    @OneToOne(optional = false)
-//    @JoinColumn(name = "MEPAUSER_ID", unique = true, nullable = false)
-//    private MepaUser mepaUser;
+    public void setMepaUser(MepaUser mepaUser) {
+        this.mepaUser = mepaUser;
+    }
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "MEPAUSER_ID", unique = true, nullable = false)
+    private MepaUser mepaUser;
 
     public Player() {
 

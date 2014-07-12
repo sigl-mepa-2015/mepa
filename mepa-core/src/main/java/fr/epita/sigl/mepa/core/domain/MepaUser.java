@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,46 +17,53 @@ public class MepaUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "login", nullable = false)
     private String login;
 
+    @Column(name = "pwd", nullable = false)
     private String pwd;
 
-//    @OneToOne (optional = true, mappedBy = "mepaUser")
-//    private Player player;
+    @OneToOne (optional = true, mappedBy = "mepaUser")
+    private Player player;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name="USER_ROLE",
-//            joinColumns={@JoinColumn(name="USER_ID")},
-//            inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
-//    private Set<Role> roles;
-//
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
-//    }
-//
-//    public MepaUser() {
-//
-//    }
-//
-//    public MepaUser(String name, String login) {
-//        this.name = name;
-//    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="USER_ROLES")
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        if (this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+        roles.add(role);
+    }
+
+    public MepaUser() {
+
+    }
+
+    public MepaUser(String name, String login) {
+        this.name = name;
+    }
 
     /**
      * @return the id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
     }
@@ -70,7 +78,6 @@ public class MepaUser implements Serializable {
     /**
      * @return the name
      */
-    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -82,7 +89,6 @@ public class MepaUser implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "login", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -91,7 +97,6 @@ public class MepaUser implements Serializable {
         this.login = login;
     }
 
-    @Column(name = "pwd", nullable = false)
     public String getPwd() {
         return pwd;
     }
@@ -100,11 +105,11 @@ public class MepaUser implements Serializable {
         this.pwd = pwd;
     }
 
-//    public Player getPlayer() {
-//        return player;
-//    }
-//
-//    public void setPlayer(Player player) {
-//        this.player = player;
-//    }
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

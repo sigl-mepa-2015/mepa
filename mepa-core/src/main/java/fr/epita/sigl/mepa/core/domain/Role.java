@@ -22,6 +22,7 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Column(name="authority", nullable=false)
     private String authority;
 
     @Id
@@ -29,8 +30,8 @@ public class Role implements Serializable {
     @Column(name="POOL_ID", nullable=false)
     private Long id;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<MepaUser> mepaUsers;
+    @ManyToMany(mappedBy = "roles")
+    private Set<MepaUser> mepaUsers;
 
     /**
      * @return the id
@@ -44,13 +45,13 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-//    public Set<MepaUser> getMepaUsers() {
-//        return mepaUsers;
-//    }
-//
-//    public void setMepaUsers(Set<MepaUser> mepaUsers) {
-//        this.mepaUsers = mepaUsers;
-//    }
+    public Set<MepaUser> getMepaUsers() {
+        return mepaUsers;
+    }
+
+    public void setMepaUsers(Set<MepaUser> mepaUsers) {
+        this.mepaUsers = mepaUsers;
+    }
 
     public String getAuthority() {
         return authority;

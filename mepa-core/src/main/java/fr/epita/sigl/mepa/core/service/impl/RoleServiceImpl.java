@@ -32,13 +32,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Role getRoleById(Long id) {
         return this.roleDao.getById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Role> getAllRoles() {
         return this.roleDao.getAll();
     }
