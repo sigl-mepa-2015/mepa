@@ -2,6 +2,10 @@ package fr.epita.sigl.mepa.core.service;
 
 import fr.epita.sigl.mepa.core.domain.Pool;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,5 +23,7 @@ public interface PoolService {
     Pool getPoolById(Long id);
 
     List<Pool> getAllPools();
+
+	HashMap<Pool, JSONArray> aggregatePoolGameByTournament(Long id) throws JSONException;
 
 }

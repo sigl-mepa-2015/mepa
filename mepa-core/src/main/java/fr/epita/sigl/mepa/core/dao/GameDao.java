@@ -22,4 +22,10 @@ public interface GameDao {
 
 	Long getEndedGameById(Long id);
 
+	Long countTodoGameByPoolId(Long id);
+
+	Long countProgressGameByPoolId(Long id);
+
+	Long countEndedGameByPoolId(Long id);
+
 }
