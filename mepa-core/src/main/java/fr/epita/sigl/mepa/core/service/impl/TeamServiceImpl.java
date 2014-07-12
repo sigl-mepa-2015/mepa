@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 public class TeamServiceImpl implements TeamService {
 
-    @Autowired
+    //@Autowired
     private TeamDao teamDao;
 
     @Override

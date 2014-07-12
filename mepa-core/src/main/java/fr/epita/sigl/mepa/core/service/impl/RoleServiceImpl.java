@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
+    //@Autowired
     private RoleDao roleDao;
 
     @Override

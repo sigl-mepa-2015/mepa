@@ -24,19 +24,16 @@ public class PlayerDaoImpl implements PlayerDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public void create(Player player) {
         this.getSession().save(player);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public void update(Player player) {
         this.getSession().saveOrUpdate(player);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public void delete(Player player) {
         this.getSession().delete(player);
     }
@@ -51,13 +48,6 @@ public class PlayerDaoImpl implements PlayerDao {
     @Override
     public List<Player> getAll() {
         Query query = this.getSession().getNamedQuery("Player.findAll");
-        return query.list();
-    }
-
-    @Override
-    public List<Player> getAllByIdTeam(Long id)
-    {
-        Query query = this.getSession().getNamedQuery("Player.findByIdTeam");
         return query.list();
     }
 }
