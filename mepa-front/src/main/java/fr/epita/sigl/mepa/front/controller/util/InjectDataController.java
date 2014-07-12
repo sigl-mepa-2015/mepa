@@ -112,10 +112,10 @@ public class InjectDataController {
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     @ResponseBody
-    public void injectData()
+    public void injectData(HttpServletRequest request)
     {
         Tournament t = new Tournament();
-        t.setName("TournamentInjectViaController");
+        t.setName("TournamentInjectViaController" + (this.lastLoadTournamentId + 1));
         tournamentservice.createTournament(t);
         this.lastLoadTournamentId = t.getId();
 
@@ -220,6 +220,7 @@ public class InjectDataController {
                                         break;
                                 }
                             }
+                            i += 1;
                             teamservice.updateTeam(jgt.getTeam());
                             jgservice.updateJoinedGameTeam(jgt);
                         }
