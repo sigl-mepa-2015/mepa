@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.TournamentService;
@@ -17,7 +19,18 @@ public class InjectDataController {
 	@Autowired
 	private TournamentService tournamentservice;
 	
+	@RequestMapping(value="/cleanDatabase", method=RequestMethod.GET)
+	@ResponseBody
+	public void cleanData()
+	{
+		for(Tournament t : tournamentservice.getAllTournaments())
+		{
+			tournamentservice.deleteTournament(t);
+		}	
+	}
+	
 	@RequestMapping(value="/", method=RequestMethod.GET)
+	@ResponseBody
 	public void injectData()
 	{
 		Tournament t = new Tournament();
@@ -42,7 +55,7 @@ public class InjectDataController {
 		team2.setPool(p1);
 		team2.setTournament(t);
 		Team team3 = new Team();
-		team3.setName("TeamInject1");
+		team3.setName("TeamInject3");
 		team3.setPool(p1);
 		team3.setTournament(t);
 		
@@ -55,7 +68,7 @@ public class InjectDataController {
 		team5.setPool(p2);
 		team5.setTournament(t);
 		Team team6 = new Team();
-		team6.setName("TeamInject1");
+		team6.setName("TeamInject6");
 		team6.setPool(p2);
 		team6.setTournament(t);
 		
@@ -68,32 +81,23 @@ public class InjectDataController {
 		team8.setPool(p3);
 		team8.setTournament(t);
 		Team team9 = new Team();
-		team9.setName("TeamInject1");
+		team9.setName("TeamInject9");
 		team9.setPool(p3);
 		team9.setTournament(t);
 		
 		Game game1 = new Game();
 		game1.setTeams(instanceHashSet(team1, team2));
-		game1.setStatus(Game.GameStatus.DONE);
-		game1.setResultTeam1(1);
-		game1.setResultTeam2(3);
-		game1.setDuration(30);
+		game1.setStatus(Game.GameStatus.TODO);
 		game1.setPool(p1);
 		
 		Game game2 = new Game();
 		game2.setTeams(instanceHashSet(team1, team3));
-		game2.setStatus(Game.GameStatus.DONE);
-		game2.setResultTeam1(2);
-		game2.setResultTeam2(0);
-		game2.setDuration(35);
+		game2.setStatus(Game.GameStatus.TODO);
 		game2.setPool(p1);
 		
 		Game game3 = new Game();
 		game3.setTeams(instanceHashSet(team2, team3));
-		game3.setStatus(Game.GameStatus.DONE);
-		game3.setResultTeam1(2);
-		game3.setResultTeam2(2);
-		game3.setDuration(40);
+		game3.setStatus(Game.GameStatus.TODO);
 		game3.setPool(p1);
 		
 		Game game4 = new Game();
@@ -114,26 +118,17 @@ public class InjectDataController {
 		
 		Game game7 = new Game();
 		game7.setTeams(instanceHashSet(team4, team5));
-		game7.setStatus(Game.GameStatus.DONE);
-		game7.setResultTeam1(4);
-		game7.setResultTeam2(0);
-		game7.setDuration(90);
+		game7.setStatus(Game.GameStatus.TODO);
 		game7.setPool(p2);
 		
 		Game game8 = new Game();
 		game8.setTeams(instanceHashSet(team4, team6));
-		game8.setStatus(Game.GameStatus.DONE);
-		game8.setResultTeam1(0);
-		game8.setResultTeam2(0);
-		game8.setDuration(95);
+		game8.setStatus(Game.GameStatus.TODO);
 		game8.setPool(p2);
 		
 		Game game9 = new Game();
 		game9.setTeams(instanceHashSet(team5, team6));
-		game9.setStatus(Game.GameStatus.DONE);
-		game9.setResultTeam1(2);
-		game9.setResultTeam2(1);
-		game9.setDuration(100);
+		game9.setStatus(Game.GameStatus.TODO);
 		game9.setPool(p2);
 		
 		Game game10 = new Game();
@@ -154,26 +149,17 @@ public class InjectDataController {
 		
 		Game game13 = new Game();
 		game13.setTeams(instanceHashSet(team7, team8));
-		game13.setStatus(Game.GameStatus.DONE);
-		game13.setResultTeam1(2);
-		game13.setResultTeam2(2);
-		game13.setDuration(50);
+		game13.setStatus(Game.GameStatus.TODO);
 		game13.setPool(p3);
 		
 		Game game14 = new Game();
 		game14.setTeams(instanceHashSet(team7, team9));
-		game14.setStatus(Game.GameStatus.DONE);
-		game14.setResultTeam1(2);
-		game14.setResultTeam2(3);
-		game14.setDuration(80);
+		game14.setStatus(Game.GameStatus.TODO);
 		game14.setPool(p3);
 		
 		Game game15 = new Game();
 		game15.setTeams(instanceHashSet(team8, team9));
-		game15.setStatus(Game.GameStatus.DONE);
-		game15.setResultTeam1(1);
-		game15.setResultTeam2(2);
-		game15.setDuration(40);
+		game15.setStatus(Game.GameStatus.TODO);
 		game15.setPool(p3);
 		
 		Game game16 = new Game();
@@ -192,6 +178,8 @@ public class InjectDataController {
 		game18.setPool(p3);
 		
 		tournamentservice.createTournament(t);
+		
+		System.out.println(t.getId());
 	}
 	
 	private HashSet<Team> instanceHashSet(Team t1, Team t2)
@@ -202,5 +190,14 @@ public class InjectDataController {
 		
 		return h;
 	}
+	
+	@RequestMapping(value="/updateTournament", method=RequestMethod.GET)
+	@ResponseBody
+	public void updateData()
+	{
+		
+	}
+	
+	
 	
 }
