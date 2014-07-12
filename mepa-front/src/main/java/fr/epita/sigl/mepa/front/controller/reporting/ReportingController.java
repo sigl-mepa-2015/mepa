@@ -2,6 +2,8 @@ package fr.epita.sigl.mepa.front.controller.reporting;
 
 
 import fr.epita.sigl.mepa.core.domain.Team;
+
+import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class ReportingController {
 	private TeamService teamService;
 	@Autowired
 	private GameService gameService;
+	@Autowired
+	private PoolService poolService;
 	
     private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
@@ -39,8 +43,6 @@ public class ReportingController {
     	ModelAndView mv = new ModelAndView("/reporting/tournamentReporting");
     	
     	Tournament t = tournamentService.getTournamentById(tournamentID);
-//    	System.out.println("pools :" + t.getPools().size());
-//    	System.out.println("teamps : " + t.getTeams().size());
 
         List<Team> teamList = teamService.getAllOrderTeamsByTournament(tournamentID);
         System.out.print(teamList.size());
@@ -48,6 +50,12 @@ public class ReportingController {
         mv.addObject("listOrderTeam", teamList);
     	mv.addObject("comingGame", gameService.getComingGameByTournamentId(tournamentID));
     	mv.addObject("endedGame", gameService.getEndedGameByTournamentId(tournamentID));
+    	
+    	try {
+			mv.addObject("mapPools", poolService.aggregatePoolGameByTournament(tournamentID));
+		} catch (JSONException e) {
+			LOG.error(e.toString());
+		}
     	
     	return mv;
     }

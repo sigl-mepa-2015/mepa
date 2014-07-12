@@ -13,8 +13,8 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author david
  */
 public class AddTeamFormBean {
-    @NotBlank
     
+	@NotBlank  
     private String name;
     private long id;
 

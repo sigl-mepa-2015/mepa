@@ -16,7 +16,13 @@ import com.mysql.fabric.xmlrpc.base.Array;
         @NamedQuery(name = "Game.findAllComingByTournamentId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'TODO'"),
         @NamedQuery(name = "Game.findAllEndedByTournamentId", 
-        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'DONE'")})
+        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'DONE'"),
+        @NamedQuery(name = "Game.CountTodoGameByPoolId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.id = :poolId AND g.status = 'TODO'"),
+        @NamedQuery(name = "Game.CountProgressGameByPoolId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.id = :poolId AND g.status = 'PROGRESS'"),
+        @NamedQuery(name = "Game.CountEndedGameByPoolId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.id = :poolId AND g.status = 'DONE'")})
 public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
