@@ -57,7 +57,45 @@ public class InjectDataController {
 	{
 		
 	}
-	
+
+    private Pool createPool(int nb, Tournament t)
+    {
+        Pool p = new Pool();
+        p.setName("PoolInjectViaController" + nb);
+        p.setTournament(t);
+        poolservice.createPool(p);
+        return p;
+    }
+
+    private Team createTeam(int nb, Pool p, Tournament t)
+    {
+        Team team = new Team();
+        team.setName("TeamInject" + nb);
+        team.setPool(p);
+        team.setTournament(t);
+        teamservice.createTeam(team);
+        return team;
+    }
+
+    private Game createGame(Pool p, Team t1, Team t2)
+    {
+        Game game = new Game();
+        game.setStatus(Game.GameStatus.TODO);
+        game.setPool(p);
+        gameservice.createGame(game);
+
+        JoinedGameTeam jg1 = new JoinedGameTeam();
+        jg1.setGame(game);
+        jg1.setTeam(t1);
+        jgservice.createJoinedGameTeam(jg1);
+        JoinedGameTeam jg2 = new JoinedGameTeam();
+        jg2.setGame(game);
+        jg2.setTeam(t2);
+        jgservice.createJoinedGameTeam(jg2);
+
+        return game;
+    }
+
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	@ResponseBody
 	public void injectData()
@@ -65,345 +103,43 @@ public class InjectDataController {
 		Tournament t = new Tournament();
 		t.setName("TournamentInjectViaController");
 		tournamentservice.createTournament(t);
-		
-		Pool p1 = new Pool();
-		p1.setName("PoolInjectViaController1");
-		p1.setTournament(t);
-		poolservice.createPool(p1);
-		Pool p2 = new Pool();
-		p2.setName("PoolInjectViaController2");
-		p2.setTournament(t);
-		poolservice.createPool(p2);
-		Pool p3 = new Pool();
-		p3.setName("PoolInjectViaController3");
-		p3.setTournament(t);
-		poolservice.createPool(p3);
-		
-		Team team1 = new Team();
-		team1.setName("TeamInject1");
-		team1.setPool(p1);
-		team1.setTournament(t);
-		teamservice.createTeam(team1);
 
-//        MepaUser mepaUser = new MepaUser();
-//        mepaUser.setName("GuyUser");
-//        mepaUser.setLogin("guyguy");
-//        mepaUser.setPwd("lolol");
-//        user.setPlayer();
-//        mepauserservice.createMepaUser(mepaUser);
+		Pool p1 = createPool(1, t);
+		Pool p2 = createPool(2, t);
+		Pool p3 = createPool(3, t);
+		
+		Team team1 = createTeam(1, p1, t);
+		Team team2 = createTeam(2, p1, t);
+		Team team3 = createTeam(3, p1, t);
+		
+		Team team4 = createTeam(4, p2, t);
+		Team team5 = createTeam(5, p2, t);
+		Team team6 = createTeam(6, p2, t);
+		
+		Team team7 = createTeam(7, p3, t);
+		Team team8 = createTeam(8, p3, t);
+		Team team9 = createTeam(9, p3, t);
+		
+		Game game1 = createGame(p1, team1, team2);
+		Game game2 = createGame(p1, team1, team3);
+		Game game3 = createGame(p1, team2, team3);
+		Game game4 = createGame(p1, team2, team1);
+		Game game5 = createGame(p1, team3, team1);
+		Game game6 = createGame(p1, team3, team2);
 
-        Player player = new Player();
-        player.setName("Guy");
-        player.setTeam(team1);
-//        player.setMepaUser(mepaUser);
-        playerservice.createPlayer(player);
+        Game game7 = createGame(p2, team4, team5);
+        Game game8 = createGame(p2, team4, team6);
+        Game game9 = createGame(p2, team5, team6);
+        Game game10 = createGame(p2, team5, team4);
+        Game game11 = createGame(p2, team6, team4);
+        Game game12 = createGame(p2, team6, team5);
 
-		Team team2 = new Team();
-		team2.setName("TeamInject2");
-		team2.setPool(p1);
-		team2.setTournament(t);
-		teamservice.createTeam(team2);
-		Team team3 = new Team();
-		team3.setName("TeamInject3");
-		team3.setPool(p1);
-		team3.setTournament(t);
-		teamservice.createTeam(team3);
-		
-		Team team4 = new Team();
-		team4.setName("TeamInject4");
-		team4.setPool(p2);
-		team4.setTournament(t);
-		teamservice.createTeam(team4);
-		Team team5 = new Team();
-		team5.setName("TeamInject5");
-		team5.setPool(p2);
-		team5.setTournament(t);
-		teamservice.createTeam(team5);
-		Team team6 = new Team();
-		team6.setName("TeamInject6");
-		team6.setPool(p2);
-		team6.setTournament(t);
-		teamservice.createTeam(team6);
-		
-		Team team7 = new Team();
-		team7.setName("TeamInject7");
-		team7.setPool(p3);
-		team7.setTournament(t);
-        team7.setWinGame(1);
-        team7.setLoseGame(5);
-		teamservice.createTeam(team7);
-		Team team8 = new Team();
-		team8.setName("TeamInject8");
-		team8.setPool(p3);
-		team8.setTournament(t);
-		teamservice.createTeam(team8);
-		Team team9 = new Team();
-		team9.setName("TeamInject9");
-		team9.setPool(p3);
-		team9.setTournament(t);
-		teamservice.createTeam(team9);
-		
-		Game game1 = new Game();
-		game1.setStatus(Game.GameStatus.TODO);
-		game1.setPool(p1);
-		gameservice.createGame(game1);
-		
-		JoinedGameTeam jg1 = new JoinedGameTeam();
-		jg1.setGame(game1);
-		jg1.setTeam(team1);
-		jgservice.createJoinedGameTeam(jg1);
-		JoinedGameTeam jg2 = new JoinedGameTeam();
-		jg2.setGame(game1);
-		jg2.setTeam(team2);
-		jgservice.createJoinedGameTeam(jg2);
-		
-		Game game2 = new Game();
-		game2.setStatus(Game.GameStatus.TODO);
-		game2.setPool(p1);
-		gameservice.createGame(game2);
-		
-		JoinedGameTeam jg3 = new JoinedGameTeam();
-		jg3.setGame(game2);
-		jg3.setTeam(team1);
-		jgservice.createJoinedGameTeam(jg3);
-		JoinedGameTeam jg4 = new JoinedGameTeam();
-		jg4.setGame(game2);
-		jg4.setTeam(team3);
-		jgservice.createJoinedGameTeam(jg4);
-		
-		Game game3 = new Game();
-		game3.setStatus(Game.GameStatus.TODO);
-		game3.setPool(p1);
-		gameservice.createGame(game3);
-		
-		JoinedGameTeam jg5 = new JoinedGameTeam();
-		jg5.setGame(game3);
-		jg5.setTeam(team2);
-		jgservice.createJoinedGameTeam(jg5);
-		JoinedGameTeam jg6 = new JoinedGameTeam();
-		jg6.setGame(game3);
-		jg6.setTeam(team3);
-		jgservice.createJoinedGameTeam(jg6);
-		
-		Game game4 = new Game();
-		game4.setStatus(Game.GameStatus.TODO);
-		game4.setPool(p1);
-		gameservice.createGame(game4);
-		
-		JoinedGameTeam jg7 = new JoinedGameTeam();
-		jg7.setGame(game4);
-		jg7.setTeam(team2);
-		jgservice.createJoinedGameTeam(jg7);
-		JoinedGameTeam jg8 = new JoinedGameTeam();
-		jg8.setGame(game4);
-		jg8.setTeam(team1);
-		jgservice.createJoinedGameTeam(jg8);
-		
-		Game game5 = new Game();
-		game5.setStatus(Game.GameStatus.TODO);
-		game5.setPool(p1);
-		gameservice.createGame(game5);
-		
-		JoinedGameTeam jg9 = new JoinedGameTeam();
-		jg9.setGame(game5);
-		jg9.setTeam(team3);
-		jgservice.createJoinedGameTeam(jg9);
-		JoinedGameTeam jg10 = new JoinedGameTeam();
-		jg10.setGame(game5);
-		jg10.setTeam(team1);
-		jgservice.createJoinedGameTeam(jg10);
-		
-		Game game6 = new Game();
-		game6.setStatus(Game.GameStatus.TODO);
-		game6.setPool(p1);
-		gameservice.createGame(game6);
-		
-		JoinedGameTeam jg11 = new JoinedGameTeam();
-		jg11.setGame(game6);
-		jg11.setTeam(team2);
-		jgservice.createJoinedGameTeam(jg11);
-		JoinedGameTeam jg12 = new JoinedGameTeam();
-		jg12.setGame(game6);
-		jg12.setTeam(team3);
-		jgservice.createJoinedGameTeam(jg12);
-		
-		Game game7 = new Game();
-		game7.setStatus(Game.GameStatus.TODO);
-		game7.setPool(p2);
-		gameservice.createGame(game7);
-		
-		JoinedGameTeam jg13 = new JoinedGameTeam();
-		jg13.setGame(game7);
-		jg13.setTeam(team4);
-		jgservice.createJoinedGameTeam(jg13);
-		JoinedGameTeam jg14 = new JoinedGameTeam();
-		jg14.setGame(game7);
-		jg14.setTeam(team5);
-		jgservice.createJoinedGameTeam(jg14);
-		
-		Game game8 = new Game();
-		game8.setStatus(Game.GameStatus.TODO);
-		game8.setPool(p2);
-		gameservice.createGame(game8);
-		
-		JoinedGameTeam jg15 = new JoinedGameTeam();
-		jg15.setGame(game8);
-		jg15.setTeam(team4);
-		jgservice.createJoinedGameTeam(jg15);
-		JoinedGameTeam jg16 = new JoinedGameTeam();
-		jg16.setGame(game8);
-		jg16.setTeam(team6);
-		jgservice.createJoinedGameTeam(jg16);
-		
-		Game game9 = new Game();
-		game9.setStatus(Game.GameStatus.TODO);
-		game9.setPool(p2);
-		gameservice.createGame(game9);
-		
-		JoinedGameTeam jg17 = new JoinedGameTeam();
-		jg17.setGame(game9);
-		jg17.setTeam(team5);
-		jgservice.createJoinedGameTeam(jg17);
-		JoinedGameTeam jg18 = new JoinedGameTeam();
-		jg18.setGame(game9);
-		jg18.setTeam(team6);
-		jgservice.createJoinedGameTeam(jg18);
-		
-		Game game10 = new Game();
-		game10.setStatus(Game.GameStatus.TODO);
-		game10.setPool(p2);
-		gameservice.createGame(game10);
-		
-		JoinedGameTeam jg19 = new JoinedGameTeam();
-		jg19.setGame(game10);
-		jg19.setTeam(team5);
-		jgservice.createJoinedGameTeam(jg19);
-		JoinedGameTeam jg20 = new JoinedGameTeam();
-		jg20.setGame(game10);
-		jg20.setTeam(team4);
-		jgservice.createJoinedGameTeam(jg20);
-		
-		Game game11 = new Game();
-		game11.setStatus(Game.GameStatus.TODO);
-		game11.setPool(p2);
-		gameservice.createGame(game11);
-		
-		JoinedGameTeam jg21 = new JoinedGameTeam();
-		jg21.setGame(game11);
-		jg21.setTeam(team6);
-		jgservice.createJoinedGameTeam(jg21);
-		JoinedGameTeam jg22 = new JoinedGameTeam();
-		jg22.setGame(game11);
-		jg22.setTeam(team4);
-		jgservice.createJoinedGameTeam(jg22);
-		
-		Game game12 = new Game();
-		game12.setStatus(Game.GameStatus.TODO);
-		game12.setPool(p2);
-		gameservice.createGame(game12);
-		
-		JoinedGameTeam jg23 = new JoinedGameTeam();
-		jg23.setGame(game12);
-		jg23.setTeam(team5);
-		jgservice.createJoinedGameTeam(jg23);
-		JoinedGameTeam jg24 = new JoinedGameTeam();
-		jg24.setGame(game12);
-		jg24.setTeam(team6);
-		jgservice.createJoinedGameTeam(jg24);
-		
-		Game game13 = new Game();
-		game13.setStatus(Game.GameStatus.DONE);
-		game13.setPool(p3);
-		gameservice.createGame(game13);
-		
-		JoinedGameTeam jg25 = new JoinedGameTeam();
-		jg25.setGame(game13);
-		jg25.setTeam(team7);
-        jg25.setScore(1);
-		jgservice.createJoinedGameTeam(jg25);
-		JoinedGameTeam jg26 = new JoinedGameTeam();
-		jg26.setGame(game13);
-		jg26.setTeam(team8);
-        jg26.setScore(4);
-		jgservice.createJoinedGameTeam(jg26);
-		
-		Game game14 = new Game();
-		game14.setStatus(Game.GameStatus.TODO);
-		game14.setPool(p3);
-		gameservice.createGame(game14);
-		
-		JoinedGameTeam jg27 = new JoinedGameTeam();
-		jg27.setGame(game14);
-		jg27.setTeam(team7);
-		jgservice.createJoinedGameTeam(jg27);
-		JoinedGameTeam jg28 = new JoinedGameTeam();
-		jg28.setGame(game14);
-		jg28.setTeam(team9);
-		jgservice.createJoinedGameTeam(jg28);
-		
-		Game game15 = new Game();
-		game15.setStatus(Game.GameStatus.TODO);
-		game15.setPool(p3);
-		gameservice.createGame(game15);
-		
-		JoinedGameTeam jg29 = new JoinedGameTeam();
-		jg29.setGame(game15);
-		jg29.setTeam(team8);
-		jgservice.createJoinedGameTeam(jg29);
-		JoinedGameTeam jg30 = new JoinedGameTeam();
-		jg30.setGame(game15);
-		jg30.setTeam(team9);
-		jgservice.createJoinedGameTeam(jg30);
-		
-		Game game16 = new Game();
-		game16.setStatus(Game.GameStatus.DONE);
-		game16.setPool(p3);
-		gameservice.createGame(game16);
-		
-		JoinedGameTeam jg31 = new JoinedGameTeam();
-		jg31.setGame(game16);
-		jg31.setTeam(team8);
-        jg31.setScore(2);
-		jgservice.createJoinedGameTeam(jg31);
-		JoinedGameTeam jg32 = new JoinedGameTeam();
-		jg32.setGame(game16);
-		jg32.setTeam(team7);
-        jg32.setScore(2);
-		jgservice.createJoinedGameTeam(jg32);
-		
-		Game game17 = new Game();
-		game17.setStatus(Game.GameStatus.DONE);
-		game17.setPool(p3);
-		gameservice.createGame(game17);
-		
-		JoinedGameTeam jg33 = new JoinedGameTeam();
-		jg33.setGame(game17);
-		jg33.setTeam(team9);
-        jg33.setScore(5);
-		jgservice.createJoinedGameTeam(jg33);
-		JoinedGameTeam jg34 = new JoinedGameTeam();
-		jg34.setGame(game17);
-		jg34.setTeam(team7);
-        jg34.setScore(0);
-		jgservice.createJoinedGameTeam(jg34);
-		
-		Game game18 = new Game();
-		game18.setStatus(Game.GameStatus.DONE);
-		game18.setPool(p3);
-		gameservice.createGame(game18);
-		
-		JoinedGameTeam jg35 = new JoinedGameTeam();
-		jg35.setGame(game18);
-		jg35.setTeam(team8);
-        jg35.setScore(2);
-		jgservice.createJoinedGameTeam(jg35);
-		JoinedGameTeam jg36 = new JoinedGameTeam();
-		jg36.setGame(game18);
-		jg36.setTeam(team9);
-        jg36.setScore(3);
-		jgservice.createJoinedGameTeam(jg36);
-		
-		System.out.println(t.getId());
+        Game game13 = createGame(p3, team7, team8);
+        Game game14 = createGame(p3, team7, team9);
+        Game game15 = createGame(p3, team8, team9);
+        Game game16 = createGame(p3, team8, team7);
+        Game game17 = createGame(p3, team9, team7);
+        Game game18 = createGame(p3, team9, team8);
 	}
 	
 	private HashSet<Team> instanceHashSet(Team t1, Team t2)
