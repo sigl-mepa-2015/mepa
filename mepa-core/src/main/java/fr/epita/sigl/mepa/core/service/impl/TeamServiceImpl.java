@@ -49,6 +49,6 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<Team> getAllOrderTeamsByTournament(Long tournamentID)
     {
-    	return null;
+    	return this.teamDao.getOrderByTournamentId(tournamentID);
     }
 }

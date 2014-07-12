@@ -50,17 +50,17 @@ public class Team implements Serializable {
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
     private Set<Player> players;
 
-    @OneToMany(cascade=CascadeType.ALL, targetEntity = JoinedGameTeam.class, mappedBy = "team", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "team")
     private Set<JoinedGameTeam> joinedGameTeams;
 
     @Column(name = "winGame", nullable = true)
-    Integer winGame;
+    Integer winGame = 0;
 
     @Column(name = "drawGame", nullable = true)
-    Integer drawGame;
+    Integer drawGame = 0;
 
     @Column(name = "loseGame", nullable = true)
-    Integer loseGame;
+    Integer loseGame = 0;
 
     public Integer getWinGame() {
         return winGame;

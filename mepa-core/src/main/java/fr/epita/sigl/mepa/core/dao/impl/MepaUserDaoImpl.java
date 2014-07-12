@@ -1,7 +1,7 @@
 package fr.epita.sigl.mepa.core.dao.impl;
 
-import fr.epita.sigl.mepa.core.dao.UserDao;
-import fr.epita.sigl.mepa.core.domain.User;
+import fr.epita.sigl.mepa.core.dao.MepaUserDao;
+import fr.epita.sigl.mepa.core.domain.MepaUser;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class MepaUserDaoImpl implements MepaUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -25,33 +25,33 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public void create(User user) {
-        this.getSession().save(user);
+    @Transactional
+    public void create(MepaUser mepaUser) {
+        this.getSession().save(mepaUser);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void update(User user) {
-        this.getSession().saveOrUpdate(user);
+    public void update(MepaUser mepaUser) {
+        this.getSession().saveOrUpdate(mepaUser);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void delete(User user) {
-        this.getSession().delete(user);
+    public void delete(MepaUser mepaUser) {
+        this.getSession().delete(mepaUser);
     }
 
     @Override
-    public User getById(Long id) {
-        Query query = this.getSession().getNamedQuery("User.findById");
+    public MepaUser getById(Long id) {
+        Query query = this.getSession().getNamedQuery("MepaUser.findById");
         query.setParameter("id", id);
-        return (User) query.uniqueResult();
+        return (MepaUser) query.uniqueResult();
     }
 
     @Override
-    public List<User> getAll() {
-        Query query = this.getSession().getNamedQuery("User.findAll");
+    public List<MepaUser> getAll() {
+        Query query = this.getSession().getNamedQuery("MepaUser.findAll");
         return query.list();
     }
 

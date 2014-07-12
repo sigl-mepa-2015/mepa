@@ -27,9 +27,17 @@ public class Player implements Serializable {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "USER_ID", unique = true, nullable = false)
-    private User user;
+//    public MepaUser getMepaUser() {
+//        return mepaUser;
+//    }
+//
+//    public void setMepaUser(MepaUser mepaUser) {
+//        this.mepaUser = mepaUser;
+//    }
+
+//    @OneToOne(optional = false)
+//    @JoinColumn(name = "MEPAUSER_ID", unique = true, nullable = false)
+//    private MepaUser mepaUser;
 
     public Player() {
 
@@ -37,14 +45,6 @@ public class Player implements Serializable {
 
     public Player(String name) {
         this.name = name;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Team getTeam() {

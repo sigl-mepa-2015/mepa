@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import fr.epita.sigl.mepa.core.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
-import fr.epita.sigl.mepa.core.service.GameService;
-import fr.epita.sigl.mepa.core.service.JoinedGameTeamService;
-import fr.epita.sigl.mepa.core.service.PoolService;
-import fr.epita.sigl.mepa.core.service.TeamService;
-import fr.epita.sigl.mepa.core.service.TournamentService;
 
 @Controller
 @RequestMapping("/injectData")
@@ -35,6 +31,12 @@ public class InjectDataController {
 	
 	@Autowired
 	private GameService gameservice;
+
+    @Autowired
+    private PlayerService playerservice;
+
+    @Autowired
+    private MepaUserService mepauserservice;
 	
 	@Autowired
 	private JoinedGameTeamService jgservice;
@@ -82,6 +84,20 @@ public class InjectDataController {
 		team1.setPool(p1);
 		team1.setTournament(t);
 		teamservice.createTeam(team1);
+
+//        MepaUser mepaUser = new MepaUser();
+//        mepaUser.setName("GuyUser");
+//        mepaUser.setLogin("guyguy");
+//        mepaUser.setPwd("lolol");
+//        user.setPlayer();
+//        mepauserservice.createMepaUser(mepaUser);
+
+        Player player = new Player();
+        player.setName("Guy");
+        player.setTeam(team1);
+//        player.setMepaUser(mepaUser);
+        playerservice.createPlayer(player);
+
 		Team team2 = new Team();
 		team2.setName("TeamInject2");
 		team2.setPool(p1);
@@ -113,6 +129,8 @@ public class InjectDataController {
 		team7.setName("TeamInject7");
 		team7.setPool(p3);
 		team7.setTournament(t);
+        team7.setWinGame(1);
+        team7.setLoseGame(5);
 		teamservice.createTeam(team7);
 		Team team8 = new Team();
 		team8.setName("TeamInject8");
@@ -294,17 +312,19 @@ public class InjectDataController {
 		jgservice.createJoinedGameTeam(jg24);
 		
 		Game game13 = new Game();
-		game13.setStatus(Game.GameStatus.TODO);
+		game13.setStatus(Game.GameStatus.DONE);
 		game13.setPool(p3);
 		gameservice.createGame(game13);
 		
 		JoinedGameTeam jg25 = new JoinedGameTeam();
 		jg25.setGame(game13);
 		jg25.setTeam(team7);
+        jg25.setScore(1);
 		jgservice.createJoinedGameTeam(jg25);
 		JoinedGameTeam jg26 = new JoinedGameTeam();
 		jg26.setGame(game13);
 		jg26.setTeam(team8);
+        jg26.setScore(4);
 		jgservice.createJoinedGameTeam(jg26);
 		
 		Game game14 = new Game();
@@ -336,45 +356,51 @@ public class InjectDataController {
 		jgservice.createJoinedGameTeam(jg30);
 		
 		Game game16 = new Game();
-		game16.setStatus(Game.GameStatus.TODO);
+		game16.setStatus(Game.GameStatus.DONE);
 		game16.setPool(p3);
 		gameservice.createGame(game16);
 		
 		JoinedGameTeam jg31 = new JoinedGameTeam();
 		jg31.setGame(game16);
 		jg31.setTeam(team8);
+        jg31.setScore(2);
 		jgservice.createJoinedGameTeam(jg31);
 		JoinedGameTeam jg32 = new JoinedGameTeam();
 		jg32.setGame(game16);
 		jg32.setTeam(team7);
+        jg32.setScore(2);
 		jgservice.createJoinedGameTeam(jg32);
 		
 		Game game17 = new Game();
-		game17.setStatus(Game.GameStatus.TODO);
+		game17.setStatus(Game.GameStatus.DONE);
 		game17.setPool(p3);
 		gameservice.createGame(game17);
 		
 		JoinedGameTeam jg33 = new JoinedGameTeam();
 		jg33.setGame(game17);
 		jg33.setTeam(team9);
+        jg33.setScore(5);
 		jgservice.createJoinedGameTeam(jg33);
 		JoinedGameTeam jg34 = new JoinedGameTeam();
 		jg34.setGame(game17);
 		jg34.setTeam(team7);
+        jg34.setScore(0);
 		jgservice.createJoinedGameTeam(jg34);
 		
 		Game game18 = new Game();
-		game18.setStatus(Game.GameStatus.TODO);
+		game18.setStatus(Game.GameStatus.DONE);
 		game18.setPool(p3);
 		gameservice.createGame(game18);
 		
 		JoinedGameTeam jg35 = new JoinedGameTeam();
 		jg35.setGame(game18);
 		jg35.setTeam(team8);
+        jg35.setScore(2);
 		jgservice.createJoinedGameTeam(jg35);
 		JoinedGameTeam jg36 = new JoinedGameTeam();
 		jg36.setGame(game18);
 		jg36.setTeam(team9);
+        jg36.setScore(3);
 		jgservice.createJoinedGameTeam(jg36);
 		
 		System.out.println(t.getId());

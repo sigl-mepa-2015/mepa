@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-	<h5>Niveau de progression du tournoi : ${(endedGame * 100) / (comingGame + endedGame)} %</h5>
+	<h5>Niveau de progression du tournoi</h5>
 	<div class="progress">
   <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;">
   </div>
@@ -84,15 +84,19 @@
 	  				</tr>
 	  			</thead>
 	  			<tbody>
-	  				<tr>
-	  					<c:forEach items="${orderTeams}" var="t" varStatus="index">
+	  					<c:forEach items="${listOrderTeam}" var="t" varStatus="index">
+                        <tr>
 	  						<td>
 	  							<c:choose>
-		  							<c:when test="${index != 0 && t.winGame == orderTeams[index - 1].winGame && t.drawGame == orderTeams[index - 1].drawGame && t.loseGame == orderTeams[index - 1].loseGame}">
-		  								-
+		  							<c:when test="${index.index != 0
+		  							&& t.winGame == listOrderTeam[index.index - 1].winGame
+		  							&& t.drawGame == listOrderTeam[index.index - 1].drawGame
+		  							&& t.loseGame == listOrderTeam[index.index - 1].loseGame}">
+                                        -
 		  							</c:when>
-		  							<c:otherwise>${index + 1}</c:otherwise>
+		  							<c:otherwise>${index.index + 1}</c:otherwise>
 	  							</c:choose>
+                                <%--<c:out value="${index.index}"/>--%>
 	  						</td>
 	  						<td>${t.name}</td>
 	  						<td>${t.pool.name}</td>
@@ -100,8 +104,8 @@
 	  						<td class="success">${t.winGame}</td>
 	  						<td class="warning">${t.drawGame}</td>
 	  						<td class="danger">${t.loseGame}</td>
+                        </tr>
 	  					</c:forEach>
-	  				</tr>
 	  			</tbody>
 	  		</table>
 	  </div>

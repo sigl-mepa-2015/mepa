@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class JoinedGameTeam implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private Long id;
     private Game game;
     private Team team;
     private Integer score;
@@ -20,7 +21,13 @@ public class JoinedGameTeam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="JOINEDGAMETEAM_ID", nullable=false)
-    private Long id;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @ManyToOne
     @JoinColumn(name = "GAME_ID")

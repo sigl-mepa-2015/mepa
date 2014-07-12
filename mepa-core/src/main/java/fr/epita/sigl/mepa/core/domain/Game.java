@@ -16,13 +16,13 @@ import com.mysql.fabric.xmlrpc.base.Array;
         @NamedQuery(name = "Game.findAllComingByTournamentId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'TODO'"),
         @NamedQuery(name = "Game.findAllEndedByTournamentId", 
-        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'ENDED'")})
+        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'DONE'")})
 public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
     public enum GameStatus {
-        TODO("TODO"), PROGESS("PROGRESS"), DONE("DONE");
+        TODO("TODO"), PROGRESS("PROGRESS"), DONE("DONE");
 
         private final String val;
         GameStatus(String val) { this.val = val;}
@@ -114,7 +114,7 @@ public class Game implements Serializable{
 
     private Set<JoinedGameTeam> joinedGameTeams;
 
-    @OneToMany(cascade=CascadeType.ALL, targetEntity = JoinedGameTeam.class, mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "game", fetch = FetchType.EAGER)
     public Set<JoinedGameTeam> getJoinedGameTeams() {
         return joinedGameTeams;
     }
