@@ -74,7 +74,7 @@ public class Tournament implements Serializable{
 	public void setPools(Set<Pool> pools) {
 		this.pools = pools;
 	}
-	
+
 	@Column(name="TOURNAMENT_STARTEDDATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartedDate() {

@@ -48,7 +48,7 @@
         
     <c:if test="${message == true}">
         <div id="message_box" class="alert alert-success">
-            <spring:message code="pool.create.resultMessageSucces" arguments="${pool.name}" />
+            <a>${pool.name} a été créé</a>
         </div>
     </c:if>
     <c:if test="${message == false}">
