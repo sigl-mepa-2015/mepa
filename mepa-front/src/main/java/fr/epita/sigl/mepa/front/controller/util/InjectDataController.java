@@ -6,6 +6,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 import fr.epita.sigl.mepa.core.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -232,6 +233,39 @@ public class InjectDataController {
             }
             tournamentservice.getTournamentEndDate(t);
         }
+    }
+    
+    @RequestMapping(value="/generateTournament", method=RequestMethod.GET)
+    @ResponseBody
+    public void generateTournament(@RequestParam("poolNumber") int poolNumber, @RequestParam("teamNumber") int teamNumber)
+    {
+    	Tournament t = new Tournament();
+    	t.setName("GeneratedTournament" + poolNumber + "/" + teamNumber);
+    	tournamentservice.createTournament(t);
+    	
+    	this.lastLoadTournamentId = t.getId();
+    	
+    	for (int i = 0; i < poolNumber; ++i)
+    	{
+    		Pool p = createPool(i, t);
+    		List<Team> listTeam = new ArrayList<Team>();
+    		for (int j = 0; j < teamNumber; j++)
+    		{
+    			Team te = createTeam(j, p, t);
+    			listTeam.add(te);
+    		}
+    		for (Team t1 : listTeam)
+    		{
+    			for (Team t2 : listTeam)
+    			{
+    				if (t1 != t2)
+    				{
+    					createGame(p, t1, t2);
+    				}	
+    			}
+    		}
+    	}
+    	
     }
 
 
