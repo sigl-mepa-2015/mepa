@@ -208,6 +208,7 @@ public class InjectDataController {
                     }
                 }
             }
+            tournamentservice.getTournamentEndDate(t);
         }
     }
 

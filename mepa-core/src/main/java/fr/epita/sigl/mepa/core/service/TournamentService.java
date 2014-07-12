@@ -1,6 +1,7 @@
 package fr.epita.sigl.mepa.core.service;
 
 import java.util.List;
+import java.util.Date;
 
 import fr.epita.sigl.mepa.core.domain.Tournament;
 
@@ -18,4 +19,5 @@ public interface TournamentService {
 
     List<Tournament> getAllTournaments();
 
+    Date getTournamentEndDate (Tournament t);
 }

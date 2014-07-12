@@ -1,8 +1,10 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
 import java.util.List;
+import java.util.Date;
 
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
+import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import fr.epita.sigl.mepa.core.domain.Tournament;
 @Service
 @Transactional
 public class TournamentServiceImpl implements TournamentService {
+
+    static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
 
     @Autowired
     private TournamentDao tournamentDao;
@@ -49,4 +53,35 @@ public class TournamentServiceImpl implements TournamentService {
     public List<Tournament> getAllTournaments() {
         return this.tournamentDao.getAll();
     }
+
+    @Override
+    public Date getTournamentEndDate (Tournament t)
+    {
+        Date d = new Date();
+        System.out.println("Before : " + d.toString());
+        float min = 0;
+        long moy = 0;
+        int games_ended = 0;
+        int games_todo = 0;
+        for (Pool p : t.getPools())
+        {
+            for (Game g : p.getGames())
+            {
+                if (g.getStatus() == Game.GameStatus.DONE)
+                {
+                    min += g.getDuration();
+                    games_ended += 1;
+                }
+                else {
+                    games_todo += 1;
+                }
+            }
+        }
+        moy = (long) (min / games_ended);
+        System.out.println("Minute : " + moy + " - Todo : " + games_todo);
+        d.setTime(d.getTime() + moy * ONE_MINUTE_IN_MILLIS * games_todo);
+        System.out.println("After : " + d.toString());
+        return d;
+    }
+
 }

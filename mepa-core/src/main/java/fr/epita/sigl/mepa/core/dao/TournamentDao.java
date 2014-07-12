@@ -17,5 +17,4 @@ public interface TournamentDao {
     Tournament getByType(String type);
 
     List<Tournament> getAll();
-
 }
