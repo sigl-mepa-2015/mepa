@@ -28,6 +28,7 @@
                 <value>fr.epita.sigl.mepa.core.domain.Player</value>
                 <value>fr.epita.sigl.mepa.core.domain.Role</value>
                 <value>fr.epita.sigl.mepa.core.domain.User</value>
+                <value>fr.epita.sigl.mepa.core.domain.JoinedGameTeam</value>
             </list>
         </property>
         <property name="hibernateProperties">

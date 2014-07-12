@@ -46,6 +46,9 @@ public class Team implements Serializable {
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
     private Set<Player> players;
 
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = JoinedGameTeam.class, mappedBy = "team", fetch = FetchType.EAGER)
+    private Set<JoinedGameTeam> joinedGameTeams;
+
     @Column(name = "winGame", nullable = true)
     Integer winGame;
 
@@ -137,5 +140,13 @@ public class Team implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<JoinedGameTeam> getJoinedGameTeams() {
+        return joinedGameTeams;
+    }
+
+    public void setJoinedGameTeams(Set<JoinedGameTeam> joinedGameTeams) {
+        this.joinedGameTeams = joinedGameTeams;
     }
 }
