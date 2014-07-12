@@ -18,20 +18,19 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String authority;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="POOL_ID", nullable=false)
     private Long id;
 
-    @JoinTable(
-            name="USER_ROLE",
-            joinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")})
-    private Set<User> users;
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
 
     /**
      * @return the id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="POOL_ID", nullable=false)
+
     public Long getId() {
         return id;
     }
@@ -40,13 +39,13 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 
     public String getAuthority() {
         return authority;

@@ -30,22 +30,23 @@ public class User implements Serializable {
     @Column(name = "pwd", nullable = false)
     private String pwd;
 
-    @OneToOne (optional = true, mappedBy = "user")
-    private Player player;
+//    @OneToOne (optional = true, mappedBy = "user")
+//    private Player player;
 
-    private Set<Role> roles;
+//    @ManyToMany
+//    @JoinTable(
+//            name="USER_ROLE",
+//            joinColumns={@JoinColumn(name="USER_ID")},
+//            inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
+//    private Set<Role> roles;
 
-    @JoinTable(
-            name="USER_ROLE",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 
     public User() {
 
@@ -99,11 +100,11 @@ public class User implements Serializable {
         this.pwd = pwd;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+//    public Player getPlayer() {
+//        return player;
+//    }
+//
+//    public void setPlayer(Player player) {
+//        this.player = player;
+//    }
 }
