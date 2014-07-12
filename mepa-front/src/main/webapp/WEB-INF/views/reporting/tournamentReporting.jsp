@@ -14,7 +14,7 @@
   	</div>
   	
   	<h5>Niveau de progression des poules</h5>
-   	<div class="row">	
+   	<!-- <div class="row">	
 	  	<div class="col-md-2 text-center">
 	  		<div><h5>Poule 1</h5></div>
 	  		<canvas id="myChart" width="120" height="120" ></canvas>
@@ -23,14 +23,15 @@
 	  		<div><h5>Poule 1</h5></div>
 	  		<canvas id="myChart2" width="120" height="120"></canvas>
 	  	</div>
-  	</div>
-  <%-- 	<div class="row">
+  	</div> -->
+   	<div id="pieContainer" class="row">
   		<c:forEach items="${mapPools}" var="pool">
-  			<div class="col-md-2" style="text-align:">
-  			
+  			<div class="col-md-2 text-center">
+  				<div ><h5>${pool.key.name}</h5></div>
+  				<canvas id="pie${pool.key.id}" width="120" height="120" data-json="${fn:escapeXml(pool.value)}"></canvas>
   			</div>
   		</c:forEach>
-  	</div> --%>
+  	</div>
 </div>
 
 
@@ -169,5 +170,4 @@
 	  </div>
 	</div>
 </div>        
-
 <script src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>
