@@ -3,6 +3,9 @@
     <div class="container">
         <div class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
+                <!-- Mettre la variable dev à faslse lors du recettage avec le client car il
+                    ne souhaite pas voir "Tournoi" et "Gestion des équipes" sur le Header -->
+                <c:set var="dev" value="false"/>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" name-toggle="collapse" name-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -16,27 +19,28 @@
                     <a class="navbar-brand tip" data-original-title="Se connecter" data-toggle="modal" role="button" href="#login_modal"><i class="icon-remove3"></i>Se connecter</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span
-                                class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
-                                <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message
-                                code="home.bar.title2"/> <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="${pageContext.request.contextPath}/team/form"><spring:message
-                                        code="home.bar.title2.nav1"/></a></li>
-                                <li><a href="${pageContext.request.contextPath}/team/all"><spring:message
-                                        code="home.bar.title2.nav2"/></a></li>
-                            </ul>
-
-                        </li>
-                    </ul>
+                    <c:if test="${dev}">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown" ><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournoi <span
+                                    class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="${pageContext.request.contextPath}/tournament/form">Créer un tournoi</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/tournament/">Tous les tournois</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message
+                                    code="home.bar.title2"/> <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="${pageContext.request.contextPath}/team/form"><spring:message
+                                            code="home.bar.title2.nav1"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/team/all"><spring:message
+                                            code="home.bar.title2.nav2"/></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </c:if>
                 </div>
             </div>
         </div>
