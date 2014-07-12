@@ -114,6 +114,21 @@ public class Team implements Serializable {
         return tournament;
     }
 
+    public void addWin()
+    {
+        this.winGame += 1;
+    }
+
+    public void addDraw()
+    {
+        this.drawGame += 1;
+    }
+
+    public void addLose()
+    {
+        this.loseGame += 1;
+    }
+
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
