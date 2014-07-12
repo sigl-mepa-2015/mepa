@@ -28,45 +28,85 @@
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">
 	  	<h3>Liste des matchs termines</h3>
-		  <c:forEach items="${tournament.pools}" var="pool">
-			<h3>Poule : ${pool.name}</h3>
-			<table class="table table-bordered">
-				<tbody>
-					<c:forEach items="${pool.games}" var="game">
-						<c:choose>
-							<c:when test="${game.status == 'DONE'}">
-								<tr>
-									<c:forEach items="${game.joinedGameTeams}" var="join">
-										<td>${join.team.name}</td>
-										<td>${join.score}</td>
-									</c:forEach>
-								</tr>
-							</c:when>
-						</c:choose>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:forEach>
+	  		<c:forEach items="${tournament.pools}" var="pool">
+		  			<div class="panel-group" id="accordion">
+	 					 <div class="panel panel-default">
+	   						 <div class="panel-heading">
+	      						<h4 class="panel-title">
+       							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2${pool.id}">
+          							Poule : ${pool.name}
+       							 </a>
+	     				 	  </h4>
+	    					</div>
+	    				<div id="collapse2${pool.id}" class="panel-collapse collapse in">
+	     				 <div class="panel-body">
+	     			 		<div class="col-md-8 col-md-offset-2">
+	     			 			<table class="table table-bordered">
+									<tbody>
+						     			 <c:forEach items="${pool.games}" var="game">
+											<c:choose>
+												<c:when test="${game.status == 'DONE'}">
+													<tr>
+														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
+															<c:choose>
+																<c:when test="${i.index % 2 == 0}">
+																	<td style="text-align : center">${join.team.name}</td>
+																	<td style="text-align : center">${join.score}</td>
+																</c:when>
+																<c:otherwise>
+																	<td style="text-align : center">${join.score}</td>
+																	<td style="text-align : center">${join.team.name}</td>
+																</c:otherwise>
+															</c:choose>	
+														</c:forEach>
+													</tr>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+	        	    	</div>
+	    			</div>
+	    		</div>
+  			</div>
+  		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="coming">
 	  		<h3>Liste des matchs a venir</h3>
 	  		<c:forEach items="${tournament.pools}" var="pool">
-			<h3>Poule : ${pool.name}</h3>
-			<table class="table table-bordered">
-				<tbody>
-					<c:forEach items="${pool.games}" var="game">	
-						<c:choose>
-							<c:when test="${game.status == 'TODO'}">
-								<tr>
-									<c:forEach items="${game.joinedGameTeams}" var="join">
-										<td>${join.team.name}</td>
-									</c:forEach>
-								</tr>	
-							</c:when>	
-						</c:choose>
-					</c:forEach> 
-				</tbody>
-			</table>
+			<div class="panel-group" id="accordion">
+	 					 <div class="panel panel-default">
+	   						 <div class="panel-heading">
+	      						<h4 class="panel-title">
+       							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse${pool.id}">
+          							Poule : ${pool.name}
+       							 </a>
+	     				 	  </h4>
+	    					</div>
+	    				<div id="collapse${pool.id}" class="panel-collapse collapse in">
+	     				 <div class="panel-body">
+	     			 		<div class="col-md-8 col-md-offset-2">
+	     			 			<table class="table table-bordered">
+									<tbody>
+						     			 <c:forEach items="${pool.games}" var="game">
+											<c:choose>
+												<c:when test="${game.status == 'TODO'}">
+													<tr>
+														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
+																	<td style="text-align : center">${join.team.name}</td>
+														</c:forEach>
+													</tr>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+	        	    	</div>
+	    			</div>
+	    		</div>
+  			</div>
 		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="range">
