@@ -1,10 +1,14 @@
 package fr.epita.sigl.mepa.core.domain;
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.NotBlank;
 import java.io.Serializable;
+import java.lang.Integer;
+import java.lang.String;
 import java.util.Date;
 import java.util.Set;
-
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "TOURNAMENT")
@@ -15,12 +19,27 @@ public class Tournament implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", nullable=false)
     private Long id;
+
+    @Column(name="name", nullable=false)
+    @NotBlank
     private String name;
+
     private Set<Pool> pools;
+
     private Set<Team> teams;
+
+    @Column(name="maxTeamNumber", nullable=true)
+    @Digits(integer = 10, fraction = 0)
+    @Min(0)
     private Integer maxTeamNumber;
+
     private Date startedDate;
+
+    @Column(name="type", nullable=true)
     private String type;
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Team.class, mappedBy = "tournament", fetch = FetchType.EAGER)
