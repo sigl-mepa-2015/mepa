@@ -30,37 +30,6 @@ public class HomeController {
     @RequestMapping(value = {"/", "/home"})
     public String home()
     {
-        //CreateObject init = new CreateObject();
-        //Tournament g = init.createTournamentOnLaunch();
-
-        Tournament tournament = new Tournament();
-        tournament.setName("Tournois 1");
-
-        t.createTournament(tournament);
-
-        Pool p1 = new Pool();
-        p1.setName("Poule A");
-        p1.setTournament(tournament);
-
-        Pool p2 = new Pool();
-        p2.setName("Poule Z");
-        p2.setTournament(tournament);
-
-        p.createPool(p1);
-        p.createPool(p2);
-
-        Game g1 = new Game();
-        g1.setPool(p1);
-        g1.setStatus(Game.GameStatus.TODO);
-        gs.createGame(g1);
-
-        Game g2 = new Game();
-        g2.setPool(p2);
-        g2.setStatus(Game.GameStatus.DONE);
-        g2.setResultTeam1(2);
-        g2.setResultTeam2(3);
-        gs.createGame(g2);
-
         return "/home/home";
     }
 

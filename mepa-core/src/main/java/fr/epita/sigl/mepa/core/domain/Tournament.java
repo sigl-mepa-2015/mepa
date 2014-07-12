@@ -1,8 +1,10 @@
 package fr.epita.sigl.mepa.core.domain;
 
+import java.awt.List;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 

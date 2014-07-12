@@ -8,10 +8,9 @@
 </div>
 
 <div class="container">
-	<h5>Niveau de progression du tournoi</h5>
+	<h5>Niveau de progression du tournoi : ${(endedGame * 100) / (comingGame + endedGame)} %</h5>
 	<div class="progress">
-  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: 80%;">
-    ${(endedGame * 100) / (comingGame + endedGame)} %
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;">
   </div>
 </div>
 </div>
@@ -37,12 +36,10 @@
 						<c:choose>
 							<c:when test="${game.status == 'DONE'}">
 								<tr>
-                                    <td>TODO TEAM</td>
-									<%--<td>${game.team1.name}</td>--%>
+									<td>${game.team1.name}</td>
 									<td>${game.resultTeam1}</td>
 									<td>${game.resultTeam2}</td>
-									<%--<td>${game.team2.name}</td>--%>
-                                    <td>TODO TEAM</td>
+									<td>${game.team2.name}</td>
 								</tr>
 							</c:when>
 						</c:choose>
@@ -61,10 +58,8 @@
 						<c:choose>
 							<c:when test="${game.status == 'TODO'}">
 								<tr>
-									<td>TODO TEAM</td>
-                                    <td>TODO TEAM2</td>
-									<%--<td>${game.team1.name}</td>--%>
-									<%--<td>${game.team2.name}</td>--%>
+									<td>${game.getTeams().}</td>
+									<td>${game.getTeams()}</td>
 								</tr>	
 							</c:when>	
 						</c:choose>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.*;
 
 @Controller
@@ -34,11 +35,15 @@ public class ReportingController {
     {    	
     	ModelAndView mv = new ModelAndView("/reporting/tournamentReporting");
     	
-    	mv.addObject("tournament",tournamentService.getTournamentById(tournamentID));
+    	Tournament t = tournamentService.getTournamentById(tournamentID);
+    	System.out.println("pools :" + t.getPools().size());
+    	System.out.println("teamps : " + t.getTeams().size());
+    	
+    	mv.addObject("tournament",t);
         mv.addObject("listOrderTeam", teamService.getAllOrderTeamsByTournament(tournamentID));
     	mv.addObject("comingGame", gameService.getComingGameByTournamentId(tournamentID));
     	mv.addObject("endedGame", gameService.getEndedGameByTournamentId(tournamentID));
-            
+    	
     	return mv;
     }
   

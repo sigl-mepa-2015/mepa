@@ -1,9 +1,12 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 @Entity
 @Table(name="GAME")
@@ -49,13 +52,13 @@ public class Game implements Serializable{
 	}
 
 
-@ManyToMany
-@JoinTable(
+	@ManyToMany
+	@JoinTable(
         name="GAME_TEAM",
         joinColumns={@JoinColumn(name="GAME_ID")},
         inverseJoinColumns={@JoinColumn(name="TEAM_ID")})
-    public Set<Team> getTeams() {
-        return teams;
+    public ArrayList<Team> getTeams() {
+        return new ArrayList<Team>(teams);
     }
 
     public void setTeams(Set<Team> teams) {

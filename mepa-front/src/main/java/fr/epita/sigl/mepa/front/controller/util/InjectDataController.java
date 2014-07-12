@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
+import fr.epita.sigl.mepa.core.service.GameService;
+import fr.epita.sigl.mepa.core.service.PoolService;
+import fr.epita.sigl.mepa.core.service.TeamService;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 
 @Controller
@@ -20,6 +23,15 @@ public class InjectDataController {
 
 	@Autowired
 	private TournamentService tournamentservice;
+	
+	@Autowired
+	private PoolService poolservice;
+	
+	@Autowired
+	private TeamService teamservice;
+	
+	@Autowired
+	private GameService gameservice;
 	
 	@RequestMapping(value="/cleanDatabase", method=RequestMethod.GET)
 	@ResponseBody
@@ -37,149 +49,178 @@ public class InjectDataController {
 	{
 		Tournament t = new Tournament();
 		t.setName("TournamentInjectViaController");
+		tournamentservice.createTournament(t);
 		
 		Pool p1 = new Pool();
 		p1.setName("PoolInjectViaController1");
 		p1.setTournament(t);
+		poolservice.createPool(p1);
 		Pool p2 = new Pool();
 		p2.setName("PoolInjectViaController2");
 		p2.setTournament(t);
+		poolservice.createPool(p2);
 		Pool p3 = new Pool();
 		p3.setName("PoolInjectViaController3");
 		p3.setTournament(t);
+		poolservice.createPool(p3);
 		
 		Team team1 = new Team();
 		team1.setName("TeamInject1");
 		team1.setPool(p1);
 		team1.setTournament(t);
+		teamservice.createTeam(team1);
 		Team team2 = new Team();
 		team2.setName("TeamInject2");
 		team2.setPool(p1);
 		team2.setTournament(t);
+		teamservice.createTeam(team2);
 		Team team3 = new Team();
 		team3.setName("TeamInject3");
 		team3.setPool(p1);
 		team3.setTournament(t);
+		teamservice.createTeam(team3);
 		
 		Team team4 = new Team();
 		team4.setName("TeamInject4");
 		team4.setPool(p2);
 		team4.setTournament(t);
+		teamservice.createTeam(team4);
 		Team team5 = new Team();
 		team5.setName("TeamInject5");
 		team5.setPool(p2);
 		team5.setTournament(t);
+		teamservice.createTeam(team5);
 		Team team6 = new Team();
 		team6.setName("TeamInject6");
 		team6.setPool(p2);
 		team6.setTournament(t);
+		teamservice.createTeam(team6);
 		
 		Team team7 = new Team();
 		team7.setName("TeamInject7");
 		team7.setPool(p3);
 		team7.setTournament(t);
+		teamservice.createTeam(team7);
 		Team team8 = new Team();
 		team8.setName("TeamInject8");
 		team8.setPool(p3);
 		team8.setTournament(t);
+		teamservice.createTeam(team8);
 		Team team9 = new Team();
 		team9.setName("TeamInject9");
 		team9.setPool(p3);
 		team9.setTournament(t);
+		teamservice.createTeam(team9);
 		
 		Game game1 = new Game();
 		game1.setTeams(instanceHashSet(team1, team2));
 		game1.setStatus(Game.GameStatus.TODO);
 		game1.setPool(p1);
+		gameservice.createGame(game1);
 		
 		Game game2 = new Game();
 		game2.setTeams(instanceHashSet(team1, team3));
 		game2.setStatus(Game.GameStatus.TODO);
 		game2.setPool(p1);
+		gameservice.createGame(game2);
 		
 		Game game3 = new Game();
 		game3.setTeams(instanceHashSet(team2, team3));
 		game3.setStatus(Game.GameStatus.TODO);
 		game3.setPool(p1);
+		gameservice.createGame(game3);
 		
 		Game game4 = new Game();
 		game4.setTeams(instanceHashSet(team2, team1));
 		game4.setStatus(Game.GameStatus.TODO);
 		game4.setPool(p1);
+		gameservice.createGame(game4);
 		
 		Game game5 = new Game();
 		game5.setTeams(instanceHashSet(team3, team1));
 		game5.setStatus(Game.GameStatus.TODO);
 		game5.setPool(p1);
+		gameservice.createGame(game5);
 		
 		Game game6 = new Game();
 		game6.setTeams(instanceHashSet(team2, team3));
 		game6.setStatus(Game.GameStatus.TODO);
 		game6.setPool(p1);
+		gameservice.createGame(game6);
 		
 		
 		Game game7 = new Game();
 		game7.setTeams(instanceHashSet(team4, team5));
 		game7.setStatus(Game.GameStatus.TODO);
 		game7.setPool(p2);
+		gameservice.createGame(game7);
 		
 		Game game8 = new Game();
 		game8.setTeams(instanceHashSet(team4, team6));
 		game8.setStatus(Game.GameStatus.TODO);
 		game8.setPool(p2);
+		gameservice.createGame(game8);
 		
 		Game game9 = new Game();
 		game9.setTeams(instanceHashSet(team5, team6));
 		game9.setStatus(Game.GameStatus.TODO);
 		game9.setPool(p2);
+		gameservice.createGame(game9);
 		
 		Game game10 = new Game();
 		game10.setTeams(instanceHashSet(team5, team4));
 		game10.setStatus(Game.GameStatus.TODO);
 		game10.setPool(p2);
+		gameservice.createGame(game10);
 		
 		Game game11 = new Game();
 		game11.setTeams(instanceHashSet(team6, team4));
 		game11.setStatus(Game.GameStatus.TODO);
 		game11.setPool(p2);
+		gameservice.createGame(game11);
 		
 		Game game12 = new Game();
 		game12.setTeams(instanceHashSet(team5, team6));
 		game12.setStatus(Game.GameStatus.TODO);
 		game12.setPool(p2);
+		gameservice.createGame(game12);
 		
 		
 		Game game13 = new Game();
 		game13.setTeams(instanceHashSet(team7, team8));
 		game13.setStatus(Game.GameStatus.TODO);
 		game13.setPool(p3);
+		gameservice.createGame(game13);
 		
 		Game game14 = new Game();
 		game14.setTeams(instanceHashSet(team7, team9));
 		game14.setStatus(Game.GameStatus.TODO);
 		game14.setPool(p3);
+		gameservice.createGame(game14);
 		
 		Game game15 = new Game();
 		game15.setTeams(instanceHashSet(team8, team9));
 		game15.setStatus(Game.GameStatus.TODO);
 		game15.setPool(p3);
+		gameservice.createGame(game15);
 		
 		Game game16 = new Game();
 		game16.setTeams(instanceHashSet(team8, team7));
 		game16.setStatus(Game.GameStatus.TODO);
 		game16.setPool(p3);
+		gameservice.createGame(game16);
 		
 		Game game17 = new Game();
 		game17.setTeams(instanceHashSet(team9, team7));
 		game17.setStatus(Game.GameStatus.TODO);
 		game17.setPool(p3);
+		gameservice.createGame(game17);
 		
 		Game game18 = new Game();
 		game18.setTeams(instanceHashSet(team8, team9));
 		game18.setStatus(Game.GameStatus.TODO);
 		game18.setPool(p3);
-		
-		tournamentservice.createTournament(t);
+		gameservice.createGame(game18);
 		
 		System.out.println(t.getId());
 	}

@@ -16,8 +16,8 @@ public interface GameDao {
 
     List<Game> getAll();
 
-	int getComingGameById(Long id);
+	Long getComingGameById(Long id);
 
-	int getEndedGameById(Long id);
+	Long getEndedGameById(Long id);
 
 }

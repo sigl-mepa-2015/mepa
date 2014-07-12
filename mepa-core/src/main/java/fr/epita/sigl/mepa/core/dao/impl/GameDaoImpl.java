@@ -52,18 +52,18 @@ public class GameDaoImpl implements GameDao {
     }
     
     @Override
-    public int getComingGameById(Long id)
+    public Long getComingGameById(Long id)
     {
     	 Query query = this.getSession().getNamedQuery("Game.findAllComingByTournamentId");
-         query.setParameter("id", id);
-         return (int) query.uniqueResult();
+         query.setParameter("tournamentId", id);
+         return (Long) query.uniqueResult();
     }
     
     @Override
-    public int getEndedGameById(Long id)
+    public Long getEndedGameById(Long id)
     {
     	 Query query = this.getSession().getNamedQuery("Game.findAllEndedByTournamentId");
-         query.setParameter("id", id);
-         return (int) query.uniqueResult();
+         query.setParameter("tournamentId", id);
+         return (Long) query.uniqueResult();
     }
 }
