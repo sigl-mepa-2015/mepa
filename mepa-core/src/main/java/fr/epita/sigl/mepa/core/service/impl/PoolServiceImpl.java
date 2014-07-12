@@ -95,14 +95,14 @@ public class PoolServiceImpl implements PoolService {
     		
     		JSONObject progressObject = new JSONObject();
     		progressObject.put("value", gameDao.countProgressGameByPoolId(p.getId()));
-    		progressObject.put("color", "#46BFBD");
-    		progressObject.put("highlight", "#5AD3D1");
+    		progressObject.put("color", "#FDB45C");
+    		progressObject.put("highlight", "#FFC870");
     		progressObject.put("label", "En cours");
     		
     		JSONObject endedObject = new JSONObject();
     		endedObject.put("value", gameDao.countEndedGameByPoolId(p.getId()));
-    		endedObject.put("color", "#FDB45C");
-    		endedObject.put("highlight", "#FFC870");
+    		endedObject.put("color", "#46BFBD");
+    		endedObject.put("highlight", "#5AD3D1");
     		endedObject.put("label", "Fini");
     		
     		jArray.put(0, comingObject);
