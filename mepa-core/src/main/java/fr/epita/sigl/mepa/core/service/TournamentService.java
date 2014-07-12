@@ -19,5 +19,5 @@ public interface TournamentService {
 
     List<Tournament> getAllTournaments();
 
-    Date getTournamentEndDate (Tournament t);
+    String[] getTournamentEndDate (Tournament t);
 }

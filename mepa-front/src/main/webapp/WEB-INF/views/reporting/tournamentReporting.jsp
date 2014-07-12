@@ -8,22 +8,15 @@
 </div>
 
 <div class="container" style="margin-bottom : 30px">
-	<h5>Niveau de progression du tournoi</h5>
+    <h5><b>Estimation de l'heure de fin du tournoi :</b> ${endedDate}</h5>
+    <h5><b>Durée moyenne des matchs :</b> ${timeMoy} min</h5>
+	<h5><b>Niveau de progression du tournoi</b></h5>
 	<div class="progress">
   		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;"></div>
   	</div>
   	
-  	<h5>Niveau de progression des poules</h5>
-   	<!-- <div class="row">	
-	  	<div class="col-md-2 text-center">
-	  		<div><h5>Poule 1</h5></div>
-	  		<canvas id="myChart" width="120" height="120" ></canvas>
-	  	</div>
-	  	<div class="col-md-2 text-center">
-	  		<div><h5>Poule 1</h5></div>
-	  		<canvas id="myChart2" width="120" height="120"></canvas>
-	  	</div>
-  	</div> -->
+  	<h5><b>Niveau de progression des poules</b></h5>
+
    	<div id="pieContainer" class="row">
   		<c:forEach items="${mapPools}" var="pool">
   			<div class="col-md-2 text-center">
@@ -42,20 +35,6 @@
 		<li><a href="#range" role="tab" data-toggle="tab">Voir le classement general</a></li>
 	</ul>
 </div>
-
-<ul>
-    <c:forEach items="${tournament.teams}" var="team">
-        <li>${team.name}</li>
-        <ul>
-            <c:forEach items="${team.players}" var="player">
-                <li>${player.name}</li>
-                <li>${player.mepaUser.login}</li>
-                <li>${player.mepaUser.name}</li>
-                <li>${player.mepaUser.pwd}</li>
-            </c:forEach>
-        </ul>
-    </c:forEach>
-</ul>
 
 <div class="container">
 	<div class="tab-content">

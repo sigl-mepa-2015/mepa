@@ -1,5 +1,6 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
 
@@ -55,10 +56,10 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public Date getTournamentEndDate (Tournament t)
+    public String[] getTournamentEndDate (Tournament t)
     {
+        String[] results = new String[2];
         Date d = new Date();
-        System.out.println("Before : " + d.toString());
         float min = 0;
         long moy = 0;
         int games_ended = 0;
@@ -78,10 +79,11 @@ public class TournamentServiceImpl implements TournamentService {
             }
         }
         moy = (long) (min / games_ended);
-        System.out.println("Minute : " + moy + " - Todo : " + games_todo);
         d.setTime(d.getTime() + moy * ONE_MINUTE_IN_MILLIS * games_todo);
-        System.out.println("After : " + d.toString());
-        return d;
+        SimpleDateFormat dateformat = new SimpleDateFormat("EEEEEEEE dd MMMMMMMM YYYY, kk:mm");
+        results[0] = dateformat.format(d);
+        results[1] = "" + moy;
+        return results;
     }
 
 }
