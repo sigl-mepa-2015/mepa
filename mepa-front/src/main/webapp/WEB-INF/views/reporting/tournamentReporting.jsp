@@ -7,12 +7,31 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom : 30px">
 	<h5>Niveau de progression du tournoi</h5>
 	<div class="progress">
-  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;">
-  </div>
-</div>
+  		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;"></div>
+  	</div>
+  	
+  	<h5>Niveau de progression des poules</h5>
+   	<!-- <div class="row">	
+	  	<div class="col-md-2 text-center">
+	  		<div><h5>Poule 1</h5></div>
+	  		<canvas id="myChart" width="120" height="120" ></canvas>
+	  	</div>
+	  	<div class="col-md-2 text-center">
+	  		<div><h5>Poule 1</h5></div>
+	  		<canvas id="myChart2" width="120" height="120"></canvas>
+	  	</div>
+  	</div> -->
+   	<div id="pieContainer" class="row">
+  		<c:forEach items="${mapPools}" var="pool">
+  			<div class="col-md-2 text-center">
+  				<div ><h5>${pool.key.name}</h5></div>
+  				<canvas id="pie${pool.key.id}" width="120" height="120" data-json="${fn:escapeXml(pool.value)}"></canvas>
+  			</div>
+  		</c:forEach>
+  	</div>
 </div>
 
 
@@ -34,7 +53,7 @@
 	   						 <div class="panel-heading">
 	      						<h4 class="panel-title">
        							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2${pool.id}">
-          							Poule : ${pool.name}
+          							${pool.name}
        							 </a>
 	     				 	  </h4>
 	    					</div>
@@ -80,7 +99,7 @@
 	   						 <div class="panel-heading">
 	      						<h4 class="panel-title">
        							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse${pool.id}">
-          							Poule : ${pool.name}
+          							${pool.name}
        							 </a>
 	     				 	  </h4>
 	    					</div>
@@ -150,4 +169,5 @@
 	  		</table>
 	  </div>
 	</div>
-</div>
+</div>        
+<script src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>

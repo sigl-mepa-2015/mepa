@@ -17,6 +17,7 @@
         <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <%-- Bootstrap JavaScript --%>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
     </head>
     <body>
         <div class="wrapper">
