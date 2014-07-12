@@ -3,7 +3,6 @@ package fr.epita.sigl.mepa.front.controller.tournament;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +15,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Tournament controller
  * Created by Quentin on 08/07/2014.
  */
 @Controller
 @RequestMapping("/tournament")
 @SessionAttributes({TournamentController.TOURNAMENT_MODEL_ATTRIBUTE})
 public class TournamentController {
-    private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
-
     protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
+    private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
     @Autowired
     private TournamentService tournamentService;
 
+    /**
+     * Default action : show all tournaments
+     *
+     * @param request The request
+     * @return The View Name
+     */
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public ModelAndView showAllTournaments(HttpServletRequest request) {
         List<Tournament> allTournament = tournamentService.getAllTournaments();
@@ -48,22 +52,33 @@ public class TournamentController {
 
         if (created != null) {
             mv.addObject("created", created);
-        }
-        else if (updated != null)
-        {
+        } else if (updated != null) {
             mv.addObject("updated", updated);
-        }
-        else if (removed != null)
-        {
+        } else if (removed != null) {
             mv.addObject("removed", removed);
         }
 
         return mv;
     }
-    @RequestMapping(value = {"/form"})
-    public String showForm(HttpServletRequest request, ModelMap modelMap) {return "/tournament/create/form";}
 
-    @RequestMapping(value="/form/{id}",method=RequestMethod.GET)
+    /**
+     * Show the creation form
+     *
+     * @return The view name
+     */
+    @RequestMapping(value = {"/form"}, method = RequestMethod.GET)
+    public String showForm() {
+        return "/tournament/create/form";
+    }
+
+    /**
+     * Show the update form
+     *
+     * @param id The tournament id
+     * @return The view name
+     * @throws ServletRequestBindingException
+     */
+    @RequestMapping(value = "/form/{id}", method = RequestMethod.GET)
     public ModelAndView setupForm(@PathVariable("id") long id) throws ServletRequestBindingException {
         Tournament tournament = tournamentService.getTournamentById(id);
         if (tournament == null)
@@ -72,11 +87,13 @@ public class TournamentController {
     }
 
     /**
-     * @param request
-     * @param modelMap
-     * @param newTournament
-     * @param result
-     * @return
+     * Process the creation or update form
+     *
+     * @param request       The request
+     * @param modelMap      The variables used in the view
+     * @param newTournament The tournament made of the sent form
+     * @param result        The binding result
+     * @return The view name
      */
     @RequestMapping(value = {"/create"}, method = {RequestMethod.POST})
     public String processForm(HttpServletRequest request, ModelMap modelMap,
@@ -88,9 +105,7 @@ public class TournamentController {
         if (newTournament.getId() == null) {
             this.tournamentService.createTournament(newTournament);
             return "redirect:?created=" + newTournament.getName();
-        }
-        else
-        {
+        } else {
             this.tournamentService.updateTournament(newTournament);
             return "redirect:?updated=" + newTournament.getName();
         }
@@ -98,10 +113,13 @@ public class TournamentController {
 
 
     /**
-     * @param request The request
-     * @param modelMap The variables used in the view
+     * Remove a tournament action.
+     * It used a form to prevent double removing when user hit refresh on its web browser
+     *
+     * @param request                  The request
+     * @param modelMap                 The variables used in the view
      * @param removeTournamentFormBean The form binding object
-     * @param result The binding result
+     * @param result                   The binding result
      * @return viewName
      */
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
@@ -118,7 +136,7 @@ public class TournamentController {
     }
 
     /**
-    /**
+     * /**
      * Initialize "tournaments" model attribute
      *
      * @return an empty List of Tournaments.
