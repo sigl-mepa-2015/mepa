@@ -10,8 +10,7 @@ import java.io.Serializable;
 @Table(name = "Player")
 @NamedQueries({
         @NamedQuery(name = "Player.findById", query = "FROM Player o WHERE o.id=:id"),
-        @NamedQuery(name = "Player.findAll", query = "FROM Player o"),
-        @NamedQuery(name = "Player.findByIdTeam", query = "From Player o WHERE o.team.id=:team.id")})
+        @NamedQuery(name = "Player.findAll", query = "FROM Player o")})
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;

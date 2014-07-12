@@ -44,7 +44,7 @@ public class Team implements Serializable {
         this.games = games;
     }
 
-    @ManyToMany(targetEntity = Game.class, mappedBy = "teams")
+    @ManyToMany(mappedBy = "teams")
     private Set<Game> games;
 
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)

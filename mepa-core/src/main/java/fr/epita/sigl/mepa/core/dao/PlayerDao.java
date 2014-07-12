@@ -16,6 +16,4 @@ public interface PlayerDao{
     Player getById(Long id);
 
     List<Player> getAll();
-
-    List<Player> getAllByIdTeam(Long id);
 }

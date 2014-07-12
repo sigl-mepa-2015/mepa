@@ -18,6 +18,4 @@ public interface PlayerService {
     Player getPlayerById(Long id);
 
     List<Player> getAllPlayers();
-
-    List<Player> getAllPlayersByIdTeam(Long id);
 }

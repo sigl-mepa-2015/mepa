@@ -1,7 +1,6 @@
 package fr.epita.sigl.mepa.core.domain;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -49,7 +48,12 @@ public class Game implements Serializable{
 		this.id = id;
 	}
 
-    @ManyToMany(targetEntity = Team.class)
+
+@ManyToMany
+@JoinTable(
+        name="GAME_TEAM",
+        joinColumns={@JoinColumn(name="GAME_ID")},
+        inverseJoinColumns={@JoinColumn(name="TEAM_ID")})
     public Set<Team> getTeams() {
         return teams;
     }
