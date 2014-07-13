@@ -6,6 +6,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 import fr.epita.sigl.mepa.core.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,9 @@ public class InjectDataController {
 
     @Autowired
     private JoinedGameTeamService jgservice;
+
+    @Autowired
+    private RoleService roleservice;
 
     @RequestMapping(value="/cleanDatabase", method=RequestMethod.GET)
     @ResponseBody
@@ -104,15 +108,26 @@ public class InjectDataController {
         Player player = new Player();
         player.setName(name);
         player.setTeam(team);
-//        player.setMepaUser(user);
+        player.setMepaUser(user);
         playerservice.createPlayer(player);
         return player;
     }
 
+    private Role createRole(String authority) {
+        Role role = new Role();
+        role.setAuthority(authority);
+        roleservice.createRole(role);
+        return role;
+    }
+
+    private void linkRoleToUser(Role role, MepaUser user) {
+        user.addRole(role);
+        mepauserservice.updateMepaUser(user);
+    }
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     @ResponseBody
-    public void injectData(HttpServletRequest request)
+    public void injectData()
     {
         Tournament t = new Tournament();
         t.setName("TournamentInjectViaController" + (this.lastLoadTournamentId + 1));
@@ -156,7 +171,10 @@ public class InjectDataController {
         Game game17 = createGame(p3, team9, team7);
         Game game18 = createGame(p3, team9, team8);
 
-        //MepaUser mepaUser = createUser("alex", "aloubelou", "test");
+        Role role = createRole("ADMIN");
+        MepaUser user = createUser("taguele", "totot", "ttobgnk");
+        Player player = createPlayer("Bob", team1, user);
+        linkRoleToUser(role, user);
     }
 
     private int whowin (int score1, int score2)
@@ -182,7 +200,8 @@ public class InjectDataController {
             {
                 for (Game g : p.getGames())
                 {
-                    if (randomGenerator.nextInt(2) == 1)
+                	int rand = randomGenerator.nextInt(10);
+                    if ( rand <= 3)
                     {
                         int score1 = randomGenerator.nextInt(6);
                         int score2 = randomGenerator.nextInt(6);
@@ -226,15 +245,50 @@ public class InjectDataController {
                         }
                         g.setDuration(randomGenerator.nextInt(101) + 20);
                         g.setStatus(GameStatus.DONE);
-                        gameservice.updateGame(g);
                     }
+                    else
+                    {
+                    	if (rand <= 5)
+                    	{
+                    		g.setStatus(GameStatus.PROGRESS);
+                    	}
+                    }
+                    gameservice.updateGame(g);
                 }
             }
         }
     }
 
-
-
-
-
+    @RequestMapping(value="/generateTournament", method=RequestMethod.GET)
+    @ResponseBody
+    public void generateTournament(@RequestParam("poolNumber") int poolNumber, @RequestParam("teamNumber") int teamNumber)
+    {
+    	Tournament t = new Tournament();
+    	t.setName("GeneratedTournament" + poolNumber + "/" + teamNumber);
+    	tournamentservice.createTournament(t);
+    	
+    	this.lastLoadTournamentId = t.getId();
+    	
+    	for (int i = 0; i < poolNumber; ++i)
+    	{
+    		Pool p = createPool(i, t);
+    		List<Team> listTeam = new ArrayList<Team>();
+    		for (int j = 0; j < teamNumber; j++)
+    		{
+    			Team te = createTeam(i*10 + j, p, t);
+    			listTeam.add(te);
+    		}
+    		for (Team t1 : listTeam)
+    		{
+    			for (Team t2 : listTeam)
+    			{
+    				if (t1 != t2)
+    				{
+    					createGame(p, t1, t2);
+    				}	
+    			}
+    		}
+    	}
+    	
+    }
 }

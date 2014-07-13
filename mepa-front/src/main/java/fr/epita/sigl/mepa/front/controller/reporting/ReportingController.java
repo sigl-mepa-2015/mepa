@@ -49,6 +49,7 @@ public class ReportingController {
     	mv.addObject("tournament",t);
         mv.addObject("listOrderTeam", teamList);
     	mv.addObject("comingGame", gameService.getComingGameByTournamentId(tournamentID));
+    	mv.addObject("progressGame", gameService.getProgressGameByTournamentId(tournamentID));
     	mv.addObject("endedGame", gameService.getEndedGameByTournamentId(tournamentID));
     	mv.addObject("timeMoy", timeData[1]);
         mv.addObject("endedDate", timeData[0]);

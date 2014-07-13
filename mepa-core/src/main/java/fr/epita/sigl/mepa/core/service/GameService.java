@@ -24,4 +24,6 @@ public interface GameService {
 
 	List<Team> getTeams(Long id);
 
+	Long getProgressGameByTournamentId(Long tournamentId);
+
 }

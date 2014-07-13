@@ -12,7 +12,8 @@
     <h5><b>Durée moyenne des matchs :</b> ${timeMoy} min</h5>
 	<h5><b>Niveau de progression du tournoi</b></h5>
 	<div class="progress">
-  		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;"></div>
+  		<div class="progress-bar progress-bar-todo progress-bar-striped" stylerole="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame + progressGame)}%;"><fmt:formatNumber value="${(endedGame * 100) / (comingGame + endedGame + progressGame)}" maxFractionDigits="0"/>%</div>
+  		<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(progressGame * 100) / (comingGame + endedGame + progressGame)}%;"><fmt:formatNumber value="${(progressGame * 100) / (comingGame + endedGame + progressGame)}" maxFractionDigits="0"/>%</div>
   	</div>
   	
   	<h5><b>Niveau de progression des poules</b></h5>
