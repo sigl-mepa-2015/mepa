@@ -47,110 +47,110 @@
 </div>
 
 <div class="container">
-    <div class="tab-content">
-        <div class="tab-pane active" id="ended">
-            <h3>Liste des matchs termines</h3>
-            <c:forEach items="${tournament.pools}" var="pool">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2${pool.id}">
-                                        ${pool.name}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse2${pool.id}" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                        <c:forEach items="${pool.games}" var="game">
-                                            <c:choose>
-                                                <c:when test="${game.status == 'DONE'}">
-                                                    <tr>
-                                                        <c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
-                                                            <c:choose>
-                                                                <c:when test="${i.index % 2 == 0}">
-                                                                    <td style="text-align : center">${join.team.name}</td>
-                                                                    <td style="text-align : center">${join.score}</td>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <td style="text-align : center">${join.score}</td>
-                                                                    <td style="text-align : center">${join.team.name}</td>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                    </tr>
-                                                </c:when>
-                                            </c:choose>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-        <div class="tab-pane" id="coming">
-            <h3>Liste des matchs a venir</h3>
-            <c:forEach items="${tournament.pools}" var="pool">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse${pool.id}">
-                                        ${pool.name}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse${pool.id}" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                        <c:forEach items="${pool.games}" var="game">
-                                            <c:choose>
-                                                <c:when test="${game.status == 'TODO'}">
-                                                    <tr>
-                                                        <c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
-                                                            <td style="text-align : center">${join.team.name}</td>
-                                                        </c:forEach>
-                                                    </tr>
-                                                </c:when>
-                                            </c:choose>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-        <div class="tab-pane" id="range">
-            <h3>Classement general pour le tournoi</h3>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Classement</th>
-                    <th>Equipe</th>
-                    <th>Poule</th>
-                    <th>J</th>
-                    <th>V</th>
-                    <th>N</th>
-                    <th>D</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${listOrderTeam}" var="t" varStatus="index">
-                    <tr>
-                        <td>
-                            <c:choose>
-                                <c:when test="${index.index != 0
+	<div class="tab-content">
+	  <div class="tab-pane active" id="ended">
+	  	<h3>Liste des matchs termines</h3>
+	  		<c:forEach items="${tournament.pools}" var="pool">
+		  			<div class="panel-group" id="accordion">
+	 					 <div class="panel panel-default">
+	   						 <div class="panel-heading">
+       							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2${pool.id}">
+                                     <h4 class="panel-title">
+          							    ${pool.name}
+                                     </h4>
+       							 </a>
+	    					</div>
+	    				<div id="collapse2${pool.id}" class="panel-collapse collapse">
+	     				 <div class="panel-body">
+	     			 		<div class="col-md-8 col-md-offset-2">
+	     			 			<table class="table table-bordered">
+									<tbody>
+						     			 <c:forEach items="${pool.games}" var="game">
+											<c:choose>
+												<c:when test="${game.status == 'DONE'}">
+													<tr class="scoreRow">
+														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
+															<c:choose>
+																<c:when test="${i.index % 2 == 0}">
+																	<td class="text-center">${join.team.name}</td>
+																	<td class="text-center score1">${join.score}</td>
+																</c:when>
+																<c:otherwise>
+																	<td class="text-center score2">${join.score}</td>
+																	<td class="text-center">${join.team.name}</td>
+																</c:otherwise>
+															</c:choose>	
+														</c:forEach>
+													</tr>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+	        	    	</div>
+	    			</div>
+	    		</div>
+  			</div>
+  		</c:forEach>
+	  </div>
+	  <div class="tab-pane" id="coming">
+	  		<h3>Liste des matchs a venir</h3>
+	  		<c:forEach items="${tournament.pools}" var="pool">
+			<div class="panel-group" id="accordion">
+	 					 <div class="panel panel-default">
+	   						 <div class="panel-heading">
+       							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse${pool.id}">
+                                     <h4 class="panel-title">
+                                         ${pool.name}
+                                     </h4>
+       							 </a>
+	    					</div>
+	    				<div id="collapse${pool.id}" class="panel-collapse collapse">
+	     				 <div class="panel-body">
+	     			 		<div class="col-md-8 col-md-offset-2">
+	     			 			<table class="table table-bordered">
+									<tbody>
+						     			 <c:forEach items="${pool.games}" var="game">
+											<c:choose>
+												<c:when test="${game.status == 'TODO'}">
+													<tr>
+														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
+																	<td style="text-align : center">${join.team.name}</td>
+														</c:forEach>
+													</tr>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+	        	    	</div>
+	    			</div>
+	    		</div>
+  			</div>
+		</c:forEach>
+	  </div>
+	  <div class="tab-pane" id="range">
+	  		<h3>Classement general pour le tournoi</h3>
+	  		<table class="table table-bordered">
+	  			<thead>
+	  				<tr>
+	  					<th>Classement</th>
+	  					<th>Equipe</th>
+	  					<th>Poule</th>
+	  					<th>J</th>
+	  					<th>V</th>
+	  					<th>N</th>
+	  					<th>D</th>
+	  				</tr>
+	  			</thead>
+	  			<tbody>
+	  					<c:forEach items="${listOrderTeam}" var="t" varStatus="index">
+                        <tr>
+	  						<td>
+	  							<c:choose>
+		  							<c:when test="${index.index != 0
 		  							&& t.winGame == listOrderTeam[index.index - 1].winGame
 		  							&& t.drawGame == listOrderTeam[index.index - 1].drawGame
 		  							&& t.loseGame == listOrderTeam[index.index - 1].loseGame}">
