@@ -62,21 +62,19 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><spring:message code="tournament.form.loginLabel" /></label>
                             <div class="col-sm-8">
-                                <spring:message code='tournament.form.loginPlaceholder' var="loginPlaceholder"/>
-                                <input class="form-control" name="j_username" id="inputId" placeholder="${loginPlaceholder}">
+                                <input class="form-control" name="j_username" id="inputId" placeholder="<spring:message code='tournament.form.loginLabel' />">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="col-sm-3 control-label"><spring:message code="tournament.form.passwordLabel" /></label>
                             <div class="col-sm-8">
-                                <spring:message code='tournament.form.passwordPlaceholder' var="passwordPlaceholder"/>
-                                <input type="password" class="form-control" name="j_password" id="inputPassword" placeholder="${passwordPlaceholder}">
+                                <input type="password" class="form-control" name="j_password" id="inputPassword" placeholder="<spring:message code='tournament.form.passwordLabel' />" />
                             </div>
                         </div>
                     </div>
                 <div class="modal-footer">
-                            <button type="submit" class="btn btn-default">Se connecter</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Se connecter</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                         </div>
                 </form>
             </div>

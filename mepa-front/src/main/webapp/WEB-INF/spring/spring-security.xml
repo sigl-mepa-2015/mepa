@@ -26,7 +26,6 @@
                 login-page="/tournament"
                 default-target-url="/tournament"
                 always-use-default-target="true"/>
-        <security:access-denied-handler error-page="/denied.jsp"/>
     </security:http>
 
     <security:authentication-manager >
