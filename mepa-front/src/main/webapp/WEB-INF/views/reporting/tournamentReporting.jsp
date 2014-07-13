@@ -124,7 +124,7 @@
 	  </div>
 	  <div class="tab-pane" id="range">
 	  		<h3>Classement general pour le tournoi</h3>
-	  		<table class="table table-bordered">
+	  		<table class="table table-striped table-bordered" id="rangeTable">
 	  			<thead>
 	  				<tr>
 	  					<th>Classement</th>
