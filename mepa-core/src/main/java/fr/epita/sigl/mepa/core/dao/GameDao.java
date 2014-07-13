@@ -28,4 +28,6 @@ public interface GameDao {
 
 	Long countEndedGameByPoolId(Long id);
 
+	Long getProgressGameById(Long id);
+
 }

@@ -25,3 +25,8 @@ footer {
 	width : 100%;
 	background-color : rgb(230,230,230);
 }
+
+.progress-bar-todo
+{
+	background-image: linear-gradient(to bottom,#4FD0CE 0,#46BFBD 100%);
+}

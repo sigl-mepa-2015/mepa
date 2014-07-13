@@ -61,6 +61,12 @@ public class GameServiceImpl implements GameService {
     }
     
     @Override
+    public Long getProgressGameByTournamentId(Long tournamentId)
+    {
+    	return this.gameDao.getProgressGameById(tournamentId);
+    }
+    
+    @Override
     public Long getEndedGameByTournamentId(Long tournamentId)
     {
     	return this.gameDao.getEndedGameById(tournamentId);
