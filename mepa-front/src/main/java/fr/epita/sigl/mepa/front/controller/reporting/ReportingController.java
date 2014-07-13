@@ -65,5 +65,16 @@ public class ReportingController {
     	
     	return mv;
     }
+    
+    @RequestMapping(value="/team", method=RequestMethod.GET)
+    public ModelAndView teamReporting(@RequestParam("teamID") Long teamID)
+    {
+    	ModelAndView mv = new ModelAndView("/reporting/teamReporting");
+    	
+    	Team t = teamService.getTeamById(teamID);
+    	mv.addObject("team", t);
+    	
+    	return mv;
+    }
   
 }
