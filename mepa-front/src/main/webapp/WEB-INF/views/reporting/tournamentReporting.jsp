@@ -206,4 +206,4 @@
     </div>
 </div>
 </div>
-<script src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>
+<script type="application/javascript" src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>

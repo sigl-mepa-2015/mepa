@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -73,7 +74,17 @@ public class ReportingController {
     	
     	Team t = teamService.getTeamById(teamID);
     	mv.addObject("team", t);
-    	
+    	HashMap<String, Long> rangeLongMap = teamService.getRangeByTounrnamentId(t.getTournament().getId(), t);
+    	mv.addObject("rangeGlobal", rangeLongMap.get("global"));
+    	mv.addObject("rangePool", rangeLongMap.get("pool"));
+    	if (rangeLongMap.get("globalPrev") != null)
+    		mv.addObject("globalPrev", teamService.getTeamById((long) rangeLongMap.get("globalPrev")));
+    	if (rangeLongMap.get("globalNext") != null)
+    		mv.addObject("globalNext", teamService.getTeamById((long) rangeLongMap.get("globalNext")));
+    	if (rangeLongMap.get("poolPrev") != null)
+    		mv.addObject("poolPrev", teamService.getTeamById((long) rangeLongMap.get("poolPrev")));
+    	if (rangeLongMap.get("poolNext") != null)
+    		mv.addObject("poolNext", teamService.getTeamById((long) rangeLongMap.get("poolNext")));
     	return mv;
     }
   

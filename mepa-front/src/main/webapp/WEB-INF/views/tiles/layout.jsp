@@ -25,8 +25,8 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
         
-        <script src="${pageContext.request.contextPath}/js/DataTables-1.10.0/media/js/jquery.dataTables.js"></script>
-        <script src="${pageContext.request.contextPath}/js/dataTables.bootstrap.js"></script>
+        <script type="application/javascript" src="${pageContext.request.contextPath}/js/DataTables-1.10.0/media/js/jquery.dataTables.js"></script>
+        <script type="application/javascript" src="${pageContext.request.contextPath}/js/dataTables.bootstrap.js"></script>
         
         
     </head>

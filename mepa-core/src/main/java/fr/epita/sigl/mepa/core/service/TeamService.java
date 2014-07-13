@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.service;
 
 import fr.epita.sigl.mepa.core.domain.Team;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,4 +22,7 @@ public interface TeamService {
     List<Team> getAllTeams();
 
 	List<Team> getAllOrderTeamsByTournament(Long tournamentID);
+
+	HashMap<String, Long> getRangeByTounrnamentId(Long tournamentID,
+			Team team);
 }
