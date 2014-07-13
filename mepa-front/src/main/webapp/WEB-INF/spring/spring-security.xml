@@ -14,25 +14,28 @@
 
 <!--access="permitAll" -->
 
-        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/mepa-front/" access="permitAll"/>
         <security:intercept-url pattern="/tournament" access="permitAll"/>
+        <security:intercept-url pattern="/injectData/**" access="permitAll"/>
+        <security:intercept-url pattern="/reporting/**" access="permitAll"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
         <security:anonymous username="/*"
                             granted-authority="ROLE_ANONYME"/>
         <!-- Override default login and logout pages -->
         <security:form-login
                 login-page="/tournament"
-                default-target-url="/"
+                default-target-url="/tournament"
                 always-use-default-target="true"/>
+        <security:access-denied-handler error-page="/denied.jsp"/>
     </security:http>
 
     <security:authentication-manager >
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="admin" password="admin"
-                               authorities="ROLE_ADMIN,ROLE_USER" />
                 <security:user name="guest" password="guest"
                                authorities="ROLE_USER" />
+                <security:user name="admin" password="admin"
+                               authorities="ROLE_ADMIN,ROLE_USER" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
