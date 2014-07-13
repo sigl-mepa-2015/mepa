@@ -47,4 +47,12 @@ public class RoleDaoImpl implements RoleDao {
         Query query = this.getSession().getNamedQuery("Role.findAll");
         return query.list();
     }
+
+    @Override
+    public Role getByAuthority(String authority)
+    {
+        Query query = this.getSession().getNamedQuery("Role.findByAuthority");
+        query.setParameter("authority", authority);
+        return (Role) query.uniqueResult();
+    }
 }

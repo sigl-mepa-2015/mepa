@@ -17,7 +17,8 @@ import java.util.Set;
 @Table(name = "Role")
 @NamedQueries({
         @NamedQuery(name = "Role.findById", query = "FROM Role o WHERE o.id=:id"),
-        @NamedQuery(name = "Role.findAll", query = "FROM Role o")})
+        @NamedQuery(name = "Role.findAll", query = "FROM Role o"),
+        @NamedQuery(name = "Role.findByAuthority", query = "FROM Role o WHERE o.authority=:authority")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;

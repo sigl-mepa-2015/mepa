@@ -73,6 +73,11 @@ public class InjectDataController {
         team.setPool(p);
         team.setTournament(t);
         teamservice.createTeam(team);
+
+        for (int i = 0; i < 12; i++)
+        {
+            addGamer("Player-" + nb + "" + i, "Login-" + t.getId(), "test", team);
+        }
         return team;
     }
 
@@ -177,6 +182,14 @@ public class InjectDataController {
         linkRoleToUser(role, user);
     }
 
+    private void addGamer(String name, String login, String password, Team t)
+    {
+        Role role = roleservice.getRoleByAuthority("PLAYER");
+        MepaUser user = createUser(name, login, password);
+        Player player = createPlayer(name, t, user);
+        linkRoleToUser(role, user);
+    }
+
     private int whowin (int score1, int score2)
     {
         if (score1 == score2)
@@ -186,6 +199,23 @@ public class InjectDataController {
         if (score2 > score1)
             return 2;
         return 0;
+    }
+
+    private void addPoint (Team t, int nbpoint)
+    {
+        Random randomGenerator = new Random();
+        ArrayList<Player> players = new ArrayList<>(t.getPlayers());
+
+        for (int i = 0; i < nbpoint; i++)
+        {
+            int rand = randomGenerator.nextInt(players.size());
+            Player p = players.get(rand);
+            if (p.getNbPoint() != null)
+                p.setNbPoint(p.getNbPoint() + 1);
+            else
+                p.setNbPoint(1);
+            System.out.println("Player " + p.getName() + " give 1 point to Team " + t.getName());
+        }
     }
 
     @RequestMapping(value="/playGame", method=RequestMethod.GET)
@@ -222,6 +252,7 @@ public class InjectDataController {
                                         jgt.getTeam().addLose();
                                         break;
                                 }
+                                addPoint(jgt.getTeam(), score1);
                             }
                             else
                             {
@@ -238,6 +269,7 @@ public class InjectDataController {
                                         jgt.getTeam().addWin();
                                         break;
                                 }
+                                addPoint(jgt.getTeam(), score2);
                             }
                             i += 1;
                             teamservice.updateTeam(jgt.getTeam());
@@ -275,7 +307,9 @@ public class InjectDataController {
     		List<Team> listTeam = new ArrayList<Team>();
     		for (int j = 0; j < teamNumber; j++)
     		{
-    			Team te = createTeam(i*10 + j, p, t);
+                String nbTeam = "" + i;
+                nbTeam += j;
+    			Team te = createTeam(new Integer(nbTeam), p, t);
     			listTeam.add(te);
     		}
     		for (Team t1 : listTeam)

@@ -23,6 +23,9 @@ public class Player implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "nbPoint", nullable = true)
+    private Integer nbPoint;
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
@@ -41,6 +44,14 @@ public class Player implements Serializable {
 
     public Player() {
 
+    }
+
+    public Integer getNbPoint() {
+        return nbPoint;
+    }
+
+    public void setNbPoint(Integer nbPoint) {
+        this.nbPoint = nbPoint;
     }
 
     public Player(String name) {

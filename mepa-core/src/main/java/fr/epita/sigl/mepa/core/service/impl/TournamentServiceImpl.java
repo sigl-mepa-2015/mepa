@@ -80,7 +80,7 @@ public class TournamentServiceImpl implements TournamentService {
         }
         moy = (long) (min / games_ended);
         d.setTime(d.getTime() + moy * ONE_MINUTE_IN_MILLIS * games_todo);
-        SimpleDateFormat dateformat = new SimpleDateFormat("EEEEEEEE dd MMMMMMMM YYYY, kk:mm");
+        SimpleDateFormat dateformat = new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM YYYY, kk:mm");
         results[0] = dateformat.format(d);
         results[1] = "" + moy;
         return results;

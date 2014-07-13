@@ -40,4 +40,19 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> getAllRoles() {
         return this.roleDao.getAll();
     }
+
+    @Override
+    public Role getRoleByAuthority(String authority)
+    {
+        Role r = this.roleDao.getByAuthority(authority);
+
+        if (r == null)
+        {
+            r = new Role();
+            r.setAuthority(authority);
+            this.roleDao.create(r);
+        }
+
+        return r;
+    }
 }
