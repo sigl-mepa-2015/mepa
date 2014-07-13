@@ -5,7 +5,7 @@ version="3.0" id="mepa-front">
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:front-common-context.xml</param-value>
+        <param-value>/WEB-INF/spring/spring-security.xml, classpath:front-common-context.xml</param-value>
     </context-param>
 
     <!-- i18n configuration -->
@@ -19,7 +19,16 @@ version="3.0" id="mepa-front">
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <!-- Reads request input using UTF-8 encoding -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -48,11 +57,11 @@ version="3.0" id="mepa-front">
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
     <jsp-config>
+        <taglib>
+            <taglib-uri>/security</taglib-uri>
+            <taglib-location>/WEB-INF/lib/springsecurity.tld</taglib-location>
+        </taglib>
         <jsp-property-group>
             <url-pattern>*.html</url-pattern>
             <page-encoding>UTF-8</page-encoding>
@@ -62,6 +71,10 @@ version="3.0" id="mepa-front">
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
