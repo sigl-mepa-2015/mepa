@@ -42,7 +42,6 @@ public class TeamController {
     public ModelAndView editTeam(@RequestParam("teamID") Long teamID){
 
         Team team = teamService.getTeamById(teamID);
-        System.out.println(teamID);
         ModelAndView mv = new ModelAndView("/team/edit/form");
         mv.addObject("team", team);
         return mv;
