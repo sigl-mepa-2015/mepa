@@ -15,6 +15,8 @@ import com.mysql.fabric.xmlrpc.base.Array;
         @NamedQuery(name = "Game.findAll", query = "FROM Game o"),
         @NamedQuery(name = "Game.findAllComingByTournamentId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'TODO'"),
+        @NamedQuery(name = "Game.findAllProgressByTournamentId", 
+        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'PROGRESS'"),
         @NamedQuery(name = "Game.findAllEndedByTournamentId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'DONE'"),
         @NamedQuery(name = "Game.CountTodoGameByPoolId", 

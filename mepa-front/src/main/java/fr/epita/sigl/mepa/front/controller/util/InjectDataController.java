@@ -200,7 +200,8 @@ public class InjectDataController {
             {
                 for (Game g : p.getGames())
                 {
-                    if (randomGenerator.nextInt(2) == 1)
+                	int rand = randomGenerator.nextInt(10);
+                    if ( rand <= 3)
                     {
                         int score1 = randomGenerator.nextInt(6);
                         int score2 = randomGenerator.nextInt(6);
@@ -244,8 +245,15 @@ public class InjectDataController {
                         }
                         g.setDuration(randomGenerator.nextInt(101) + 20);
                         g.setStatus(GameStatus.DONE);
-                        gameservice.updateGame(g);
                     }
+                    else
+                    {
+                    	if (rand <= 5)
+                    	{
+                    		g.setStatus(GameStatus.PROGRESS);
+                    	}
+                    }
+                    gameservice.updateGame(g);
                 }
             }
             tournamentservice.getTournamentEndDate(t);
@@ -268,7 +276,7 @@ public class InjectDataController {
     		List<Team> listTeam = new ArrayList<Team>();
     		for (int j = 0; j < teamNumber; j++)
     		{
-    			Team te = createTeam(j, p, t);
+    			Team te = createTeam(i*10 + j, p, t);
     			listTeam.add(te);
     		}
     		for (Team t1 : listTeam)

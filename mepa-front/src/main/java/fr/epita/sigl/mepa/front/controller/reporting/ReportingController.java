@@ -45,10 +45,10 @@ public class ReportingController {
     	Tournament t = tournamentService.getTournamentById(tournamentID);
         String[] timeData = tournamentService.getTournamentEndDate(t);
         List<Team> teamList = teamService.getAllOrderTeamsByTournament(tournamentID);
-        System.out.print(teamList.size());
     	mv.addObject("tournament",t);
         mv.addObject("listOrderTeam", teamList);
     	mv.addObject("comingGame", gameService.getComingGameByTournamentId(tournamentID));
+    	mv.addObject("progressGame", gameService.getProgressGameByTournamentId(tournamentID));
     	mv.addObject("endedGame", gameService.getEndedGameByTournamentId(tournamentID));
     	mv.addObject("timeMoy", timeData[1]);
         mv.addObject("endedDate", timeData[0]);

@@ -12,7 +12,8 @@
     <h5><b>Durée moyenne des matchs :</b> ${timeMoy} min</h5>
 	<h5><b>Niveau de progression du tournoi</b></h5>
 	<div class="progress">
-  		<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame)}%;"></div>
+  		<div class="progress-bar progress-bar-todo progress-bar-striped" stylerole="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(endedGame * 100) / (comingGame + endedGame + progressGame)}%;"><fmt:formatNumber value="${(endedGame * 100) / (comingGame + endedGame + progressGame)}" maxFractionDigits="0"/>%</div>
+  		<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="${endedGame + comingGame}" style="width: ${(progressGame * 100) / (comingGame + endedGame + progressGame)}%;"><fmt:formatNumber value="${(progressGame * 100) / (comingGame + endedGame + progressGame)}" maxFractionDigits="0"/>%</div>
   	</div>
   	
   	<h5><b>Niveau de progression des poules</b></h5>
@@ -44,13 +45,13 @@
 		  			<div class="panel-group" id="accordion">
 	 					 <div class="panel panel-default">
 	   						 <div class="panel-heading">
-	      						<h4 class="panel-title">
        							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2${pool.id}">
-          							${pool.name}
+                                     <h4 class="panel-title">
+          							    ${pool.name}
+                                     </h4>
        							 </a>
-	     				 	  </h4>
 	    					</div>
-	    				<div id="collapse2${pool.id}" class="panel-collapse collapse in">
+	    				<div id="collapse2${pool.id}" class="panel-collapse collapse">
 	     				 <div class="panel-body">
 	     			 		<div class="col-md-8 col-md-offset-2">
 	     			 			<table class="table table-bordered">
@@ -58,16 +59,16 @@
 						     			 <c:forEach items="${pool.games}" var="game">
 											<c:choose>
 												<c:when test="${game.status == 'DONE'}">
-													<tr>
+													<tr class="scoreRow">
 														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
 															<c:choose>
 																<c:when test="${i.index % 2 == 0}">
-																	<td style="text-align : center">${join.team.name}</td>
-																	<td style="text-align : center">${join.score}</td>
+																	<td class="text-center">${join.team.name}</td>
+																	<td class="text-center score1">${join.score}</td>
 																</c:when>
 																<c:otherwise>
-																	<td style="text-align : center">${join.score}</td>
-																	<td style="text-align : center">${join.team.name}</td>
+																	<td class="text-center score2">${join.score}</td>
+																	<td class="text-center">${join.team.name}</td>
 																</c:otherwise>
 															</c:choose>	
 														</c:forEach>
@@ -90,13 +91,13 @@
 			<div class="panel-group" id="accordion">
 	 					 <div class="panel panel-default">
 	   						 <div class="panel-heading">
-	      						<h4 class="panel-title">
        							 <a data-toggle="collapse" data-parent="#accordion" href="#collapse${pool.id}">
-          							${pool.name}
+                                     <h4 class="panel-title">
+                                         ${pool.name}
+                                     </h4>
        							 </a>
-	     				 	  </h4>
 	    					</div>
-	    				<div id="collapse${pool.id}" class="panel-collapse collapse in">
+	    				<div id="collapse${pool.id}" class="panel-collapse collapse">
 	     				 <div class="panel-body">
 	     			 		<div class="col-md-8 col-md-offset-2">
 	     			 			<table class="table table-bordered">
