@@ -174,7 +174,7 @@
         </div>
         <div class="tab-pane" id="rangePlayer">
             <h3>Classement général des joueurs pour le tournoi</h3>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped" id="playerRange">
                 <thead>
                 <tr>
                     <th>Classement</th>
@@ -206,4 +206,4 @@
     </div>
 </div>
 </div>
-<script type="application/javascript" src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>
