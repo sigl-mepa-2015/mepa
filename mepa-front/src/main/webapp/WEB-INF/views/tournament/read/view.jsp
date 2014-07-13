@@ -13,4 +13,8 @@
     Maximum d'équipes allouables : ${tournamentView.maxTeamNumber}<br/>
     Liste des équipes : ...<br/>
     Liste des pules : ...<br/>
+<c:forEach items="${tournamentView.pools}" var="p">
+    <td>${p.name}</td>
+    <br/>
+    </c:forEach>
 </div>
