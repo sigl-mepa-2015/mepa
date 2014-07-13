@@ -35,4 +35,10 @@ public class PlayerServiceImp implements PlayerService {
     @Override
     public List<Player> getAllPlayers(){return this.playerDao.getAll();};
 
+    @Override
+    public List<Player> getAllOrderPlayerByTournament(long tournamentid)
+    {
+        return this.playerDao.getAllOrderPlayerByTournament(tournamentid);
+    }
+
 }

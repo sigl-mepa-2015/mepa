@@ -16,4 +16,6 @@ public interface PlayerDao{
     Player getById(Long id);
 
     List<Player> getAll();
+
+    List<Player> getAllOrderPlayerByTournament(long tournamentid);
 }

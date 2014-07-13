@@ -10,7 +10,10 @@ import java.io.Serializable;
 @Table(name = "Player")
 @NamedQueries({
         @NamedQuery(name = "Player.findById", query = "FROM Player o WHERE o.id=:id"),
-        @NamedQuery(name = "Player.findAll", query = "FROM Player o")})
+        @NamedQuery(name = "Player.findAll", query = "FROM Player o"),
+        @NamedQuery(name = "Player.findAllOrderByTournamentId",
+                query = "FROM Player p where p.team.tournament.id = :tournamentId "
+                        + "ORDER BY p.nbPoint DESC")})
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +26,7 @@ public class Player implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nbPoint", nullable = true)
+    @Column(name = "nbPoint", nullable = false)
     private Integer nbPoint;
 
     @ManyToOne

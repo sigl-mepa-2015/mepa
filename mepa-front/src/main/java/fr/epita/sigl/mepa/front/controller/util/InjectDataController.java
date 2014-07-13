@@ -114,6 +114,7 @@ public class InjectDataController {
         player.setName(name);
         player.setTeam(team);
         player.setMepaUser(user);
+        player.setNbPoint(0);
         playerservice.createPlayer(player);
         return player;
     }
@@ -210,10 +211,7 @@ public class InjectDataController {
         {
             int rand = randomGenerator.nextInt(players.size());
             Player p = players.get(rand);
-            if (p.getNbPoint() != null)
-                p.setNbPoint(p.getNbPoint() + 1);
-            else
-                p.setNbPoint(1);
+            p.setNbPoint(p.getNbPoint() + 1);
             System.out.println("Player " + p.getName() + " give 1 point to Team " + t.getName());
         }
     }

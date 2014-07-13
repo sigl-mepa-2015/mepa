@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.core.dao.impl;
 
 import fr.epita.sigl.mepa.core.dao.PlayerDao;
 import fr.epita.sigl.mepa.core.domain.Player;
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -50,6 +51,14 @@ public class PlayerDaoImpl implements PlayerDao {
     @Override
     public List<Player> getAll() {
         Query query = this.getSession().getNamedQuery("Player.findAll");
+        return query.list();
+    }
+
+    @Override
+    public List<Player> getAllOrderPlayerByTournament(long tournamentid)
+    {
+        Query query = this.getSession().getNamedQuery("Player.findAllOrderByTournamentId");
+        query.setParameter("tournamentId", tournamentid);
         return query.list();
     }
 
