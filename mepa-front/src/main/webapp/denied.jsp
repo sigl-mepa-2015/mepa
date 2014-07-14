@@ -14,6 +14,6 @@
 <h1>Accès Refusé</h1>
 Vous n'avez pas les droits pour accéder à cette page.
 En cas de soucis veuillez contacter un administrateur.<br/>
-<a type="button" class="btn btn-primary btn-large" href="/mepa-front/tournament">Rediriger vers la page d'accueil</a>
+<a type="button" class="btn btn-primary btn-large" href="${pageContext.request.contextPath}/tournament">Rediriger vers la page d'accueil</a>
 </body>
 </html>
