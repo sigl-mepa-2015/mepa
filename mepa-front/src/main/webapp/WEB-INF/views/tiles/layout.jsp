@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
         <%-- Application CSS --%>
-        <c:url var="defaultCssUrl" value="${pageContext.request.contextPath}/css/default.css" />
+        <c:url var="defaultCssUrl" value="/css/default.css" />
         <link rel="stylesheet" href="${defaultCssUrl}" type="text/css" />
        	
        	<link rel="stylesheet" href="${pageContext.request.contextPath}/js/DataTables-1.10.0/media/css/jquery.dataTables.css" type="text/css" />
