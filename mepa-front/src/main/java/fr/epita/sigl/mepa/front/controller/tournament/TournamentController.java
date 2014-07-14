@@ -49,7 +49,7 @@ public class TournamentController {
         String removed = request.getParameter("removed");
         String updated = request.getParameter("updated");
         String created = request.getParameter("created");
-
+        String unknown = request.getParameter("unknown");
 
         if (created != null) {
             mv.addObject("created", created);
@@ -57,6 +57,8 @@ public class TournamentController {
             mv.addObject("updated", updated);
         } else if (removed != null) {
             mv.addObject("removed", removed);
+        } else if (unknown != null) {
+            mv.addObject("unknown", unknown);
         }
 
         return mv;
@@ -70,16 +72,6 @@ public class TournamentController {
     @RequestMapping(value = {"/form"}, method = RequestMethod.GET)
     public String showForm() {
         return "/tournament/create/form";
-    }
-
-    /**
-     * Show the view of a tournament
-     *
-     * @return The view name
-     */
-    @RequestMapping(value = {"/view"}, method = RequestMethod.GET)
-    public String showView() {
-        return "/tournament/read/view";
     }
 
     /**
@@ -97,11 +89,16 @@ public class TournamentController {
         return new ModelAndView("/tournament/create/form", ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
     }
 
+    /**
+     * Show the view of a tournament
+     *
+     * @return The view name
+     */
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public ModelAndView setupView(@PathVariable("id") long id) throws ServletRequestBindingException {
         Tournament tournament = tournamentService.getTournamentById(id);
         if (tournament == null)
-            tournament = new Tournament();
+            return new ModelAndView("redirect:/?unknown="+id);
         return new ModelAndView("/tournament/read/view", VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
     }
 
