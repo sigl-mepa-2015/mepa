@@ -30,36 +30,4 @@
         </form:form>
 </div>
 
-<div class="container">
-
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>
-            Nom
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        
-    <c:if test="${message == true}">
-        <div id="message_box" class="alert alert-success">
-            <spring:message code="pool.create.resultMessageSucces" arguments="${pool.name}" />
-        </div>
-    </c:if>
-    <c:if test="${message == false}">
-        <div id="message_box" class="alert alert-fail">
-            <spring:message code="pool.create.resultMessageFail" arguments="${pool.name}" />
-        </div>
-    </c:if>
-
-    <c:forEach items="${pools}" var="p" varStatus="loop">
-        <tr>        <td>${p.name}</td><tr>
-
-    </c:forEach>
-    </tbody>
-</table>
-</div>
-
 

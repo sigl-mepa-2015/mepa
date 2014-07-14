@@ -92,8 +92,6 @@ public class PoolController {
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);
 
-
-
         modelMap.addAttribute("message", true);
         return "/creerPoule";
     }
