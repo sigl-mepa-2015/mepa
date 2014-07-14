@@ -89,6 +89,14 @@ public class PoolController {
         this.s.createPool(newPool);
         modelMap.addAttribute("pool", newPool);
 
+
+        Set<Team> teamsSet = new HashSet<Team>();
+        for(int i = 0; i < createPoolFormBean.getTeams().size(); ++i){
+            teamsSet.add(ts.getTeamById(Long.getLong(createPoolFormBean.getTeams().get(i))));
+        }
+
+        newPool.setTeams(teamsSet);
+
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);
 
