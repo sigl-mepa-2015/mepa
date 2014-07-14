@@ -18,15 +18,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>Equipe 1</td>
-                   <td><input type="checkbox" name="teams" value="Equipe 1"/></td>
+                     <c:forEach items="${teams}" var="t" varStatus="loop">
+                            <tr>
+                                <td>${t.name}</td>
+                                 <td><input type="checkbox" name="teams" value="${t.id}""/></td>
+                            <tr>
 
-                    </tr>
-                    <tr>
-                       <td>Equipe 2</td>
-                       <td><input type="checkbox" name="teams" value="Equipe 2"/></td>
-                    </tr>
+                     </c:forEach>
                 </tbody>
             </table><button type="submit"  class="btn btn-primary">Créer</button>
         </form:form>
