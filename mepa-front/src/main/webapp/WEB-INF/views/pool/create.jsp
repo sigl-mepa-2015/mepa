@@ -9,7 +9,7 @@
 <div class="container">
         <form:form role="form"  modelAttribute="createPoolFormBean" method="post">
             <label class="col-lg-6">Nom de la poule</label>
-            <input type="text" class="col-lg-6" name="name">
+            <input type="text" class="col-lg-6" name="name"><br/>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -26,7 +26,6 @@
                     <tr>
                        <td>Equipe 2</td>
                        <td><input type="checkbox" name="teams" value="Equipe 2"/></td>
-
                     </tr>
                 </tbody>
             </table><button type="submit"  class="btn btn-primary">Créer</button>

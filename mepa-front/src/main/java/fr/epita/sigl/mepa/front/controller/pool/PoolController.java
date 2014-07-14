@@ -4,6 +4,7 @@ import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.PoolService;
+import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.pool.CreatePoolFormBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -32,8 +30,11 @@ public class PoolController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PoolController.class);
 
-     @Autowired
+    @Autowired
     private PoolService s;
+
+    @Autowired
+    private TournamentService t;
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -59,9 +60,8 @@ public class PoolController {
     }
 
     @RequestMapping(value="/creerPoule", method = RequestMethod.POST)
-    public String creer(HttpServletRequest request, ModelMap modelMap,
+    public String creer(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
                          CreatePoolFormBean createPoolFormBean, BindingResult result) {
-
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
@@ -70,6 +70,8 @@ public class PoolController {
 
         Pool newPool = new Pool();
         newPool.setName(createPoolFormBean.getName());
+
+        newPool.setTournament(t.getTournamentById(tournamentID));
 
         this.s.createPool(newPool);
         modelMap.addAttribute("pool", newPool);
