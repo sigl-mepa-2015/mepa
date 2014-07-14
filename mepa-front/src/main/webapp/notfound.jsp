@@ -15,6 +15,6 @@
 <div class="text-center">
 <img class="text-center" src="${pageContext.request.contextPath}/img/notfound.png"/>
 </div>
-<a type="button" class="btn btn-primary btn-large" href="/mepa-front/tournament">Rediriger vers la page d'accueil</a>
+<a type="button" class="btn btn-primary btn-large" href="${pageContext.request.contextPath}/tournament">Rediriger vers la page d'accueil</a>
 </body>
 </html>
