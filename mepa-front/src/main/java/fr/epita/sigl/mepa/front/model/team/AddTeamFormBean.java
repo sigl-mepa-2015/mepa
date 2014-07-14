@@ -17,6 +17,7 @@ public class AddTeamFormBean {
 	@NotBlank  
     private String name;
     private long id;
+    private long tournamentID;
 
     public long getId() {
         return id;
@@ -32,5 +33,13 @@ public class AddTeamFormBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getTournamentID() {
+        return tournamentID;
+    }
+
+    public void setTournamentID(long tournamentID) {
+        this.tournamentID = tournamentID;
     }
 }

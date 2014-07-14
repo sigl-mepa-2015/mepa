@@ -23,6 +23,7 @@
 		<thead>
 			<tr>
 				<th>Nom de l'équipe</th>
+                <th>Tournoi</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -30,6 +31,7 @@
 			<c:forEach items="${teams}" var="t">
 				<tr>
 					<td width="70%">${t.name}</td>
+                    <td width="70%">${t.tournament.name}</td>
 					<td width="30%">
 						<button type="button" class="btn btn-info" onClick="location.href='${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
 							<span class="glyphicon glyphicon-cog"></span>
