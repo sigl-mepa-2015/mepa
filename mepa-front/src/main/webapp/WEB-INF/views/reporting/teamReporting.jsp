@@ -10,6 +10,7 @@
 </div>
 
 <div class="container">
+	<h4>Statistiques classements</h4>
 	<div class="col-md-6">
 		<h5>Classement global</h5>
 		<table class="table table-bordered">
@@ -36,6 +37,8 @@
 				</c:choose>
 			</tbody>
 		</table>
+		</div>
+		<div class="col-md-6">
 		<h5>Classement poule</h5>
 		<table class="table table-bordered">
 			<tbody>
@@ -61,10 +64,52 @@
 				</c:choose>
 			</tbody>
 		</table>
-		<br>
-		<h5>Nombre de matchs joues</h5>
-	</div>
-	<div class="col-md-6">
-		shdjksfhj
 	</div>
 </div>
+<div class="container">
+	<h4>Statistiques matchs</h4>
+	<div class="col-md-4">
+		<h5>Nombre de match joues : 2</h5>
+		<h5>Nombre de match restants : 4</h5>
+		<h5>Duree moyenne match : 20</h5>
+		<h5>Temps de jeu total : 56</h5>
+		<h5>Niveau de progression dans le tournoi</h5>
+	    <div class="progress">
+	        <div class="progress-bar progress-bar-todo progress-bar-striped" stylerole="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><fmt:formatNumber value="50" maxFractionDigits="0"/>%</div>
+    	</div>
+	</div>
+	<div class="col-md-4 text-center">
+		<div><h5>Graphique 1</h5></div>
+		<canvas id="pieGame" width="180" height="180" data-json=""></canvas>
+	</div>
+	<div class="col-md-4 text-center">
+		<div><h5>Graphique 3</h5></div>
+		<canvas id="pieGame2" width="180" height="180" data-json=""></canvas>
+	</div>
+</div>
+</br>
+
+<div class="container">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs termines</a></li>
+        <li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs a venir</a></li>
+        <li><a href="#player" role="tab" data-toggle="tab">Voir les joueurs</a></li>
+    </ul>
+</div>
+
+<div class="container">
+	<div class="tab-content">
+		<div class="tab-pane" id="ended">
+			ended
+		</div>
+		<div class="tab-pane" id="coming">
+			coming
+		</div>
+		<div class="tab-pane" id="player">
+			player
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>
+
