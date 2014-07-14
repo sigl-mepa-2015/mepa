@@ -37,14 +37,6 @@
     <definition name="/tournament/read/view" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/tournament/read/view.jsp" />
     </definition>
-    <definition name="/tournament/create/result" extends="base.definition">
-        <put-attribute name="title" value="tournament.createTitle" />
-        <put-attribute name="body" value="/WEB-INF/views/tournament/create/result.jsp" />
-    </definition>
-    <definition name="/tournament/remove/result" extends="base.definition">
-        <put-attribute name="title" value="tournament.removeTitle" />
-        <put-attribute name="body" value="/WEB-INF/views/tournament/remove/result.jsp" />
-    </definition>
 
     <!-- Team -->
     <definition name="/team/read/list" extends="base.definition">
