@@ -145,10 +145,15 @@ public class TournamentController {
             // Error(s) in form bean validation
             return "/tournament/read/list";
         }
+
         Tournament removedTournament = this.tournamentService.getTournamentById(removeTournamentFormBean.getId());
-        this.tournamentService.deleteTournament(removedTournament);
-        modelMap.addAttribute("tournament", removedTournament);
-        return "redirect:?removed=" + removedTournament.getName();
+
+        if (removedTournament.getPools().size() == 0 && removedTournament.getTeams().size() == 0) {
+            this.tournamentService.deleteTournament(removedTournament);
+            modelMap.addAttribute("tournament", removedTournament);
+            return "redirect:?removed=" + removedTournament.getName();
+        }
+        return "/tournament/read/list";
     }
 
     /**
