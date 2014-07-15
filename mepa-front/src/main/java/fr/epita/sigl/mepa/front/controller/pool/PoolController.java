@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by maite on 10/07/14.
@@ -38,10 +35,12 @@ public class PoolController {
     private TeamService ts;
 
     @Autowired
-    private JoinedGameTeamService joinedGameService;
+
+    private GameService gs;
 
     @Autowired
-    private GameService gameService;
+    private JoinedGameTeamService jgs;
+
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -72,13 +71,8 @@ public class PoolController {
         pModel.addAttribute("tournamentID", tournamentID);
         List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
         pModel.addAttribute("teams", teams);
-        return "/creerPoule";
+        return "/poolManager";
     }
-
-
-
-
-
 
     @RequestMapping(value = {"/creerPoule"}, method = RequestMethod.GET)
     public String afficher(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
@@ -110,16 +104,54 @@ public class PoolController {
         Set<Team> listteams = new HashSet<Team>();
 
         for (String id_teams: teams) {
-            Team tms = ts.getTeamById(Long.parseLong(id_teams));
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
         }
         newPool.setTeams(listteams);
+
         this.s.createPool(newPool);
+        this.s.getPoolById(newPool.getId()).setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
+        newPool.setGames(this.s.getPoolById(newPool.getId()).getGames());
         modelMap.addAttribute("pool", newPool);
+
+
 
         modelMap.addAttribute("message", true);
 
         return "/poolManager";
+    }
+    public Set<Game> generateGames(Long id_team, Long id_pool) {
+        List<Game> listGames = new ArrayList<Game>();
+        for(int i = 0; i < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++i) {
+            for(int j = i + 1; j < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++j) {
+                Game g = new Game();
+                JoinedGameTeam jg1 = new JoinedGameTeam();
+                jg1.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(i));
+                JoinedGameTeam jg2 = new JoinedGameTeam();
+                jg2.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(j));
+
+                jg1.setGame(g);
+                jg2.setGame(g);
+
+                Set<JoinedGameTeam> st = new HashSet<JoinedGameTeam>();
+                st.add(jg1);
+                st.add(jg2);
+                g.setJoinedGameTeams(st);
+                g.setPool(this.s.getPoolById(id_pool));
+                g.setStatus(Game.GameStatus.TODO);
+
+                this.gs.createGame(g);
+                this.jgs.createJoinedGameTeam(jg1);
+                this.jgs.createJoinedGameTeam(jg2);
+            }
+        }
+        System.out.println(this.gs.getAllGames().size());
+        listGames = this.gs.getAllGames();
+
+        for(int i = 0; i < listGames.size(); ++i) {
+            System.out.println(listGames.get(i).getJoinedGameTeams());
+        }
+        return new HashSet<Game>(listGames);
+
     }
 
     @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
@@ -131,7 +163,6 @@ public class PoolController {
             pModel.addAttribute("gameList", gameList);
         }
 
-
         pModel.addAttribute("pools", poolID);
 
         return "/afficherGame";
@@ -141,21 +172,21 @@ public class PoolController {
     public String updateGame(HttpServletRequest request, ModelMap modelMap) {
 
         Long gameID = Long.parseLong(request.getParameter("gameID"));
-        Game g = this.gameService.getGameById(gameID);
+        Game g = this.gs.getGameById(gameID);
         g.setDuration(Integer.parseInt(request.getParameter("duration")));
-        this.gameService.updateGame(g);
+        this.gs.updateGame(g);
 
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
             Long joinedGameTeam1 = Long.parseLong(request.getParameter("joinedID1"));
-            JoinedGameTeam j1 = this.joinedGameService.getJoinedGameById(joinedGameTeam1);
+            JoinedGameTeam j1 = this.jgs.getJoinedGameById(joinedGameTeam1);
             j1.setScore(Integer.parseInt(request.getParameter("resultEquipe1")));
-            this.joinedGameService.updateJoinedGameTeam(j1);
+            this.jgs.updateJoinedGameTeam(j1);
         }
         if (request.getParameter("resultEquipe2").compareTo("") != 0) {
             Long joinedGameTeam2 = Long.parseLong(request.getParameter("joinedID2"));
-            JoinedGameTeam j2 = this.joinedGameService.getJoinedGameById(joinedGameTeam2);
+            JoinedGameTeam j2 = this.jgs.getJoinedGameById(joinedGameTeam2);
             j2.setScore(Integer.parseInt(request.getParameter("resultEquipe2")));
-            this.joinedGameService.updateJoinedGameTeam(j2);
+            this.jgs.updateJoinedGameTeam(j2);
         }
 
         return "redirect:afficherGame?poolID="+g.getPool().getId();

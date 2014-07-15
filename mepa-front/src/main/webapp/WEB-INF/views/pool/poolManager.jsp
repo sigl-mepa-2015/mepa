@@ -2,33 +2,41 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Créer une poule</h1>
+		<h1>Poule ${pool.name}</h1>
 	</div>
 </div>
 
 <div class="container">
-        <form:form role="form"  modelAttribute="createPoolFormBean" method="POST">
-            <label class="col-lg-6">Nom de la poule</label>
-            <input type="text" name="tournamentID" value="${tournamentID}">
-            <input type="text" class="col-lg-6" name="name"><br/>
-            <table class="table table-bordered">
-                <thead>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="20%">Classement</th>
+                    <th >Equipe</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:set var="i" value="1"/>
+                <c:forEach items="${pool.teams}" var="t"  varStatus="loop">
                     <tr>
-                        <th>Equipe</th>
-                        <th>Selection</th>
+                        <td width="20%">${i}</td>
+                        <td >${t.name}</td>
                     </tr>
-                </thead>
-                <tbody>
-                     <c:forEach items="${teams}" var="t" varStatus="loop">
-                            <tr>
-                                <td>${t.name}</td>
-                                 <td><input type="checkbox" name='teams' value="${t.id}"/></td>
-                            <tr>
-
-                     </c:forEach>
-                </tbody>
-            </table><button type="submit"  class="btn btn-primary">Créer</button>
-        </form:form>
+                <c:set var="i" value="${i+1}"/>
+               </c:forEach>
+            </tbody>
+        </table>
+    <br/>
+   Liste des matchs :
+   <ul>
+    <c:forEach items="${pool.games}" var="g" varStatus="loop">
+       <li>
+           Identifiant du match : ${g.id}<br/>
+           <c:forEach items="${g.joinedGameTeams}" var="jt" varStatus="loop">
+                   ${jt.team.name}
+            </c:forEach>
+        </li>
+    </c:forEach>
+   </ul>
 </div>
 
 

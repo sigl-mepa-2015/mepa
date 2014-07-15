@@ -30,4 +30,6 @@ public interface GameDao {
 
 	Long getProgressGameById(Long id);
 
+	List<Game> getGameByTeamId(Long id);
+
 }
