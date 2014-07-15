@@ -28,4 +28,12 @@ public interface GameService {
 
 	List<Game> getGameByTeam(Long teamId);
 
+	Long countEndedGameByTeamId(Long teamId);
+
+	Long countProgressGameByTeamId(Long teamId);
+
+	Long countComingGameByTeamId(Long teamId);
+
+	int getAverragePlayingTimeByTeam(Long teamId);
+
 }

@@ -93,7 +93,10 @@ public class ReportingController {
     		System.out.println(g.getStatus());
     	
     	mv.addObject("teamGame", listGame);
-    	mv.addObject("players", t.getPlayers());    	
+    	mv.addObject("players", t.getPlayers());
+    	mv.addObject("todoGame", gameService.countComingGameByTeamId(teamID));
+    	mv.addObject("endedGame", gameService.countEndedGameByTeamId(teamID));
+    	mv.addObject("averrageTime", gameService.getAverragePlayingTimeByTeam(teamID));
     	
     	return mv;
     }
