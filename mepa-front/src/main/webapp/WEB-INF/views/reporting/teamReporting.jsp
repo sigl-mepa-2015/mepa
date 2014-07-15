@@ -18,19 +18,19 @@
 				<c:choose>
 					<c:when test="${globalPrev != null}">
 					<tr>
-						<td>${rangeGlobal - 1}</td>
+						<td>${globalPrevRange}</td>
 						<td>${globalPrev.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>
 				<tr>
-					<td>${rangeGlobal}</td>
-					<td>${team.name}</td>
+					<td class="success">${rangeGlobal}</td>
+					<td class="success">${team.name}</td>
 				</tr>
 				<c:choose>
 					<c:when test="${globalNext != null}">
 					<tr>
-						<td>${rangeNext + 1}</td>
+						<td>${globalNextRange}</td>
 						<td>${globalNext.name}</td>
 					</tr>
 					</c:when>
@@ -45,20 +45,20 @@
 				<c:choose>
 					<c:when test="${poolPrev != null}">
 					<tr>
-						<td>${rangePool - 1}</td>
+						<td>${poolPrevRange}</td>
 						<td>${poolPrev.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>
 				<tr>
-					<td>${rangePool}</td>
-					<td>${team.name}</td>
+					<td class="success">${rangePool}</td>
+					<td class="success">${team.name}</td>
 				</tr>
 				<c:choose>
-					<c:when test="${poolPrev != null}">
+					<c:when test="${poolNext != null}">
 					<tr>
-						<td>${rangePool + 1}</td>
-						<td>${poolPrev.name}</td>
+						<td>${poolNextRange}</td>
+						<td>${poolNext.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>

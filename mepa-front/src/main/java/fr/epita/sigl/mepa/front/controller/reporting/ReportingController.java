@@ -78,14 +78,22 @@ public class ReportingController {
     	HashMap<String, Long> rangeLongMap = teamService.getRangeByTounrnamentId(t.getTournament().getId(), t);
     	mv.addObject("rangeGlobal", rangeLongMap.get("global"));
     	mv.addObject("rangePool", rangeLongMap.get("pool"));
-    	if (rangeLongMap.get("globalPrev") != null)
-    		mv.addObject("globalPrev", teamService.getTeamById((long) rangeLongMap.get("globalPrev")));
-    	if (rangeLongMap.get("globalNext") != null)
-    		mv.addObject("globalNext", teamService.getTeamById((long) rangeLongMap.get("globalNext")));
-    	if (rangeLongMap.get("poolPrev") != null)
-    		mv.addObject("poolPrev", teamService.getTeamById((long) rangeLongMap.get("poolPrev")));
-    	if (rangeLongMap.get("poolNext") != null)
-    		mv.addObject("poolNext", teamService.getTeamById((long) rangeLongMap.get("poolNext")));
+    	if (rangeLongMap.get("globalPrev") != null) {
+            mv.addObject("globalPrev", teamService.getTeamById(rangeLongMap.get("globalPrev")));
+            mv.addObject("globalPrevRange", rangeLongMap.get("globalPrevRange"));
+        }
+    	if (rangeLongMap.get("globalNext") != null) {
+            mv.addObject("globalNext", teamService.getTeamById(rangeLongMap.get("globalNext")));
+            mv.addObject("globalNextRange", rangeLongMap.get("globalNextRange"));
+        }
+        if (rangeLongMap.get("poolPrev") != null) {
+            mv.addObject("poolPrev", teamService.getTeamById(rangeLongMap.get("poolPrev")));
+            mv.addObject("poolPrevRange", rangeLongMap.get("poolPrevRange"));
+        }
+        if (rangeLongMap.get("poolNext") != null) {
+            mv.addObject("poolNext", teamService.getTeamById(rangeLongMap.get("poolNext")));
+            mv.addObject("poolNextRange", rangeLongMap.get("poolNextRange"));
+        }
     	
     	List<Game> listGame = gameService.getGameByTeam(teamID);
     	
