@@ -25,15 +25,15 @@
                              <form:form role="form" action="${pageContext.request.contextPath}/updateGame" method="post">
                                  <input type="HIDDEN" name="gameID" value="${g.id}">
                                  <c:set var="i" value="1"/>
-                                 <c:forEach items="${g.getJoinedGameTeams()}" var="joined" varStatus="loop">
-                                     <td>${(joined.getTeam().getName())}</td>
-                                     <td><input type="text" name="resultEquipe${i}" size="2" value="${joined.getScore()}"/></td>
+                                 <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
+                                     <td>${joined.team.name}</td>
+                                     <td><input type="text" name="resultEquipe${i}" size="2" value="${joined.score}"/></td>
                                      <input type="HIDDEN" name="joinedID${i}" value="${joined.id}" />
                                      <c:set var="i" value="${i + 1}"/>
                                  </c:forEach>
 
 
-                                 <td><input type="text" id="duration" name="duration" value="${g.getDuration()}"/></td>
+                                 <td><input type="text" id="duration" name="duration" value="${g.duration}"/></td>
                                  <td><input type="submit" id="valider"/></td>
 
                              </form:form>
