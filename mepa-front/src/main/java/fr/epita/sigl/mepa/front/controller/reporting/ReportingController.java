@@ -99,6 +99,7 @@ public class ReportingController {
     	mv.addObject("averrageTime", gameService.getAverragePlayingTimeByTeam(teamID));
     	try {
 			mv.addObject("jsonResult", teamService.constructJSONforResultChart(t));
+			mv.addObject("jsonResultScore", teamService.constructJSONForScoreChart(teamID));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

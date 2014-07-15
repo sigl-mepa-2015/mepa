@@ -30,4 +30,6 @@ public interface TeamService {
 			Team team);
 
 	JSONArray constructJSONforResultChart(Team t) throws JSONException;
+
+	JSONArray constructJSONForScoreChart(Long teamId) throws JSONException;
 }

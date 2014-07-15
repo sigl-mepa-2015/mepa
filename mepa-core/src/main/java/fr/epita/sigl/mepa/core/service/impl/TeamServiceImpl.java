@@ -1,6 +1,9 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
+import fr.epita.sigl.mepa.core.dao.GameDao;
 import fr.epita.sigl.mepa.core.dao.TeamDao;
+import fr.epita.sigl.mepa.core.domain.Game;
+import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
 import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.service.TeamService;
 
@@ -25,6 +28,8 @@ public class TeamServiceImpl implements TeamService {
 
    @Autowired
     private TeamDao teamDao;
+   @Autowired
+   private GameDao gameDao;
 
     @Override
     public void createTeam(Team team) {
@@ -130,7 +135,69 @@ public class TeamServiceImpl implements TeamService {
 		jArray.put(1, looseGameObject);
 		jArray.put(2, drawGameObject);
 		
-		return jArray;
+		return jArray;	
+    }
+    
+    @Override
+    public JSONArray constructJSONForScoreChart(Long teamId) throws JSONException
+    {
+    	JSONArray jArray = new JSONArray();
+    	
+    	JSONObject winGameObject = new JSONObject();
+    	winGameObject.put("value", getScoreGoalByTeamId(teamId));
+		winGameObject.put("color", "#46BFBD");
+		winGameObject.put("highlight", "#5AD3D1");
+		winGameObject.put("label", "Marques");
 		
+		JSONObject looseGameObject = new JSONObject();
+		looseGameObject.put("value", getConcededGoalByTeamId(teamId));
+		looseGameObject.put("color", "#F7464A");
+		looseGameObject.put("highlight", "#FF5A5E");
+		looseGameObject.put("label", "Encaisses");
+		
+		jArray.put(0, winGameObject);
+		jArray.put(1, looseGameObject);
+		
+		return jArray;	
+    }
+    
+    public int getConcededGoalByTeamId(Long teamId)
+    {
+    	List<Game> list = gameDao.getGameByTeamId(teamId);
+    	
+    	int sum = 0;
+    	
+    	for (Game g : list)
+    	{
+    		for (JoinedGameTeam j : g.getJoinedGameTeams())
+    		{
+    			if (j.getTeam().getId() != teamId)
+    			{
+    				sum += j.getScore();
+    			}		
+    		}
+    	}
+    	
+    	return sum;
+    }
+    
+    public int getScoreGoalByTeamId(Long teamId)
+    {
+    	List<Game> list = gameDao.getGameByTeamId(teamId);
+    	
+    	int sum = 0;
+    	
+    	for (Game g : list)
+    	{
+    		for (JoinedGameTeam j : g.getJoinedGameTeams())
+    		{
+    			if (j.getTeam().getId() == teamId)
+    			{
+    				sum += j.getScore();
+    			}		
+    		}
+    	}
+    	
+    	return sum;
     }
 }
