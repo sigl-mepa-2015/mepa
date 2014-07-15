@@ -16,8 +16,16 @@
     Maximum d'équipes allouables : ${tournamentView.maxTeamNumber}<br/>
     Liste des équipes : ...<br/>
     Liste des pules : ...<br/>
-    <c:forEach items="${tournamentView.pools}" var="p">
-        <td>${p.name}</td>
-        <br/>
-</c:forEach>
+    <table class="table table-striped table-bordered" id="rangeTable">
+        <thead>
+        <tr>
+            <th>Nom de la Poule</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${tournamentView.pools}" var="p">
+            <td>${p.name}</td>
+        </c:forEach>
+        </tbody>
+        </table>
 </div>
