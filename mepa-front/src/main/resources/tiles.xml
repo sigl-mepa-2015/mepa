@@ -62,4 +62,7 @@
     <definition name="/creerPoule" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
     </definition>
+    <definition name="/poolManager" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
+    </definition>
 </tiles-definitions>

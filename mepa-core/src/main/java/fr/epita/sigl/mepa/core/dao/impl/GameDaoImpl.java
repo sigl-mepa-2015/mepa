@@ -101,4 +101,12 @@ public class GameDaoImpl implements GameDao {
     	query.setParameter("poolId", id);
     	return (Long) query.uniqueResult();
     }
+    
+    @Override
+    public List<Game> getGameByTeamId(Long id)
+    {
+    	Query query = this.getSession().getNamedQuery("Game.findAllByTeamId");
+    	query.setParameter("teamId", id);
+    	return (List<Game>) query.list();
+    }
 }

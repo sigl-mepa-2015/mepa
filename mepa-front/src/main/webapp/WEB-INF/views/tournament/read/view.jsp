@@ -13,8 +13,8 @@
     </div>
 </div>
 <div class="container">
-    Maximum d'équipes allouables : ${tournamentView.maxTeamNumber}<br/>
-    <h3>Liste des équipes :</h3> <br/>
+    <h2>Maximum d'équipes allouables : <c:if test="${tournamentView.maxTeamNumber <0}">-</c:if>${tournamentView.maxTeamNumber}</h2><br/>
+    <h2>Liste des équipes :</h2> <br/>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -38,11 +38,20 @@
             </c:forEach>
         </tbody>
     </table><br/>
-    <h3>Liste des poules :</h3> ...<br/>
-</div>
+    <h2>Liste des poules : </h2><br/>
+    <table class="table table-striped table-bordered" id="rangeTable">
+        <thead>
+        <tr>
+            <th>Nom de la Poule</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${tournamentView.pools}" var="p">
+            <tr>
+                <td>${p.name}</td>
+                </tr>
 
-<c:forEach items="${tournamentView.pools}" var="p">
-    <td>${p.name}</td>
-    <br/>
-</c:forEach>
+        </c:forEach>
+        </tbody>
+        </table>
 </div>

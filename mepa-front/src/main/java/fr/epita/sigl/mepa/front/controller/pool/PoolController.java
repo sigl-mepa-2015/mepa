@@ -47,6 +47,7 @@ public class PoolController {
 
     @ModelAttribute(CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE)
     public CreatePoolFormBean initAddPoolFormBean() {
+        System.out.println("Je suis dans initAddPoolFormBean");
 
         return new CreatePoolFormBean();
     }
@@ -61,39 +62,59 @@ public class PoolController {
         return new ArrayList<Team>();
     }
 
+    @RequestMapping(value = {"/poolManager"}, method = RequestMethod.GET)
+    public String afficherManager(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
+        List<Pool> l = this.s.getAllPools();
+        pModel.addAttribute("pools", l);
+        pModel.addAttribute("tournamentID", tournamentID);
+        List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
+        pModel.addAttribute("teams", teams);
+        return "/poolManager";
+    }
+
     @RequestMapping(value = {"/creerPoule"}, method = RequestMethod.GET)
     public String afficher(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
         List<Pool> l = this.s.getAllPools();
         pModel.addAttribute("pools", l);
-
+        pModel.addAttribute("tournamentID", tournamentID);
         List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
         pModel.addAttribute("teams", teams);
-
         return "/creerPoule";
     }
 
     @RequestMapping(value="/creerPoule", method = RequestMethod.POST)
     public String creer(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
-                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
+                         @RequestParam("teams") String[] teams, CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/creerPoule";
         }
 
+        List<Pool> l = this.s.getAllPools();
+        modelMap.addAttribute("pools", l);
+        modelMap.addAttribute("tournamentID", tournamentID);
+
         Pool newPool = new Pool();
         newPool.setName(createPoolFormBean.getName());
-
         newPool.setTournament(t.getTournamentById(tournamentID));
 
+        Set<Team> listteams = new HashSet<Team>();
+
+        for (String id_teams: teams) {
+            listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
+        }
+        newPool.setTeams(listteams);
         this.s.createPool(newPool);
         modelMap.addAttribute("pool", newPool);
 
-        List<Pool> l = this.s.getAllPools();
-        modelMap.addAttribute("pools", l);
-
         modelMap.addAttribute("message", true);
-        return "/creerPoule";
+
+        return "/poolManager";
     }
+
+
+
+
 
 }

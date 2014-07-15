@@ -22,14 +22,14 @@ public class CreatePoolFormBean {
         this.name = name;
     }
 
-    public ArrayList<String> getTeams() {
+    public String[] getTeams() {
         return teams;
     }
 
-    public void setTeams(ArrayList<String> teams) {
+    public void setTeams(String[] teams) {
         this.teams = teams;
     }
 
-    private ArrayList<String> teams;
+    private String[] teams;
 
 }
