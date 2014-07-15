@@ -173,7 +173,7 @@
             </table>
         </div>
         <div class="tab-pane" id="rangePlayer">
-            <h3>Classement général des joueurs pour le tournoi</h3>
+            <h3>Classement general des joueurs pour le tournoi</h3>
             <table class="table table-bordered table-striped" id="playerRange">
                 <thead>
                 <tr>
