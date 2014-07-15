@@ -7,6 +7,7 @@
 </div>
 
 <div class="container">
+   <h3> Classement des équipes : </h3><br/>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,7 +27,7 @@
             </tbody>
         </table>
     <br/>
-   Liste des matchs :
+   <h3>Liste des matchs :</h3>
    <ul>
     <c:forEach items="${pool.games}" var="g" varStatus="loop">
        <li>
@@ -38,5 +39,3 @@
     </c:forEach>
    </ul>
 </div>
-
-
