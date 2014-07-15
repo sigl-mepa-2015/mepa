@@ -339,7 +339,8 @@ public class InjectDataController {
     public void createTournament(@RequestParam("tournamentName") String tournamentName,
     		@RequestParam("poolNumber") int poolNumber,
     		@RequestParam("teamNumber") int teamNumber,
-    		@RequestParam("return") Boolean returnGame)
+    		@RequestParam("return") Boolean returnGame,
+    		@RequestParam("playerNumber") int playerNumber)
     {
     	System.out.println(tournamentName);
     	System.out.println(poolNumber);
@@ -349,7 +350,12 @@ public class InjectDataController {
     
     @RequestMapping(value="/playGame", method=RequestMethod.POST)
     @ResponseBody
-    public void playTournament(@RequestParam("tournamentId") int tournamentId)
+    public void playTournament(@RequestParam("tournamentId") int tournamentId,
+    		@RequestParam("pourPlaying") int pourPlaying,
+    		@RequestParam("currentPlaying") int currentPlaying,
+    		@RequestParam("minGame") int minGame,
+    		@RequestParam("maxGame") int maxGame,
+    		@RequestParam("scoreMax") int scoreMax)
     {
     	
     }

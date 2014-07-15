@@ -15,7 +15,7 @@
 
 <div class="container">
 	<div class="tab-content">
-		<div class="tab-pane" id="generate">
+		<div class="tab-pane active" id="generate">
 			<div class="col-md-4">
 				<form action="${pageContext.request.contextPath}/injectData/createTournament" method="POST">
 					<div class="form-group">
@@ -27,8 +27,12 @@
 						<input name="poolNumber" class="form-control" type="number" min="1"></input>
 					</div>
 					<div class="form-group">
-						<label for="teamNumber">Nombre d'equipes</label>
+						<label for="teamNumber">Nombre d'equipes par poule</label>
 						<input name="teamNumber" class="form-control" type="number" min="1"></input>
+					</div>
+					<div class="form-group">
+						<label for="playerNumber">Nombre de joueurs par equipe</label>
+						<input name="playerNumber" class="form-control" type="number" min="1"></input>
 					</div>
 					<div class="checkbox">
 					    <label>
@@ -42,13 +46,13 @@
 			</div>
 		</div>
 		<div class="tab-pane" id="play">
-			<form action="${pageContext.request.contextPath}/injectData/playTournament" method="POST">
+			<form action="${pageContext.request.contextPath}/injectData/playGame" method="POST">
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for="tournamentId">Selectionner un tournoi</label>
 						<select name="tournamentId" class="form-control">
 							<c:forEach items="${allTournament}" var="t">
-								<option value=${t.id}">${t.name}</option>
+								<option value="${t.id}">${t.name}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -57,8 +61,12 @@
 						<input name="pourPlaying" class="form-control" type="number" min="0" max="100"></input>
 					</div>
 					<div class="form-group">
+						<label for="currentPlaying">% max de match en cours</label>
+						<input name="currentPlaying" class="form-control" type="number" min="0" max="100"></input>
+					</div>
+					<div class="form-group">
 						<label for="minGame">duree min match</label>
-						<input name="mineGame" class="form-control" type="number" min="0"></input>
+						<input name="minGame" class="form-control" type="number" min="0"></input>
 					</div>
 					<div class="form-group">
 						<label for="maxGame">duree max match</label>
