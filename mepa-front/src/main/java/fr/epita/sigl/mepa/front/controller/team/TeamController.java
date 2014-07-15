@@ -95,7 +95,7 @@ public class TeamController {
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
 
-        return "/team/read/list";
+        return "redirect:/tournament/view/"+ newTeam.getTournament().getId();
     }
 
     @RequestMapping(value="/all", method=RequestMethod.GET)
