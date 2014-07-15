@@ -13,6 +13,8 @@ public interface JoinedGameTeamService {
 
     void deleteJoinedGameTeam(JoinedGameTeam joinedGameTeamService);
 
+    JoinedGameTeam getJoinedGameById(Long id);
+
 //    JoinedGameTeam getJoinedGameTeamServiceById(Long id);
 //
 //    List<JoinedGameTeam> getAllJoinedGameTeamServices();

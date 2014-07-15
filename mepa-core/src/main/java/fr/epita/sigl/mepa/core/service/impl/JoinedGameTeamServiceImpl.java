@@ -29,6 +29,10 @@ public class JoinedGameTeamServiceImpl implements JoinedGameTeamService {
         this.joinedGameTeamDao.delete(game);
     }
 
+    @Override
+    public JoinedGameTeam getJoinedGameById(Long id) {
+       return this.joinedGameTeamDao.getJoinedGameById(id);
+    }
 //    @Override
 //    @Transactional(readOnly = true)
 //    public JoinedGameTeam getGameById(Long id) {

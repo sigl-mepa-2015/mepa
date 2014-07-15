@@ -11,8 +11,8 @@ import java.io.Serializable;
 @Table(name = "JoinedGameTeam")
 @NamedQueries({@NamedQuery(name = "JoinedGameTeam.findAllByGameId", query = "FROM JoinedGameTeam j WHERE j.game.id=:gameId"),
 	@NamedQuery(name = "JoinedGameTeam.getScoreGoalByTeamId", 
-		query = "SELECT sum(j.score) FROM JoinedGameTeam j WHERE j.team.id=:teamId")})
-
+		query = "SELECT sum(j.score) FROM JoinedGameTeam j WHERE j.team.id=:teamId"),
+    @NamedQuery(name = "JoinedGameTeam.findById", query = "FROM JoinedGameTeam o WHERE o.id=:id")})
 public class JoinedGameTeam implements Serializable {
 
     private static final long serialVersionUID = 1L;
