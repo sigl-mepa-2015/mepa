@@ -7,7 +7,6 @@
 </div>
 
 <div class="container">
-<div class="col-md-9 col-md-offset-1">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,7 +25,7 @@
                </c:forEach>
             </tbody>
         </table>
-    </div>
+    <br/>
    Liste des matchs :
    <ul>
     <c:forEach items="${pool.games}" var="g" varStatus="loop">
