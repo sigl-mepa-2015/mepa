@@ -173,7 +173,8 @@ public class TeamServiceImpl implements TeamService {
     		{
     			if (j.getTeam().getId() != teamId)
     			{
-    				sum += j.getScore();
+    				if (j.getScore() != null)
+    					sum += j.getScore();
     			}		
     		}
     	}
@@ -184,6 +185,7 @@ public class TeamServiceImpl implements TeamService {
     public int getScoreGoalByTeamId(Long teamId)
     {
     	List<Game> list = gameDao.getGameByTeamId(teamId);
+    	System.out.println(list);
     	
     	int sum = 0;
     	
@@ -193,7 +195,8 @@ public class TeamServiceImpl implements TeamService {
     		{
     			if (j.getTeam().getId() == teamId)
     			{
-    				sum += j.getScore();
+    				if (j.getScore() != null)
+    					sum += j.getScore();
     			}		
     		}
     	}
