@@ -69,13 +69,8 @@ public class PoolController {
         pModel.addAttribute("tournamentID", tournamentID);
         List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
         pModel.addAttribute("teams", teams);
-        return "/creerPoule";
+        return "/poolManager";
     }
-
-
-
-
-
 
     @RequestMapping(value = {"/creerPoule"}, method = RequestMethod.GET)
     public String afficher(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
@@ -107,7 +102,6 @@ public class PoolController {
         Set<Team> listteams = new HashSet<Team>();
 
         for (String id_teams: teams) {
-            Team tms = ts.getTeamById(Long.parseLong(id_teams));
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
         }
         newPool.setTeams(listteams);
@@ -118,6 +112,8 @@ public class PoolController {
 
         return "/poolManager";
     }
+
+
 
 
 

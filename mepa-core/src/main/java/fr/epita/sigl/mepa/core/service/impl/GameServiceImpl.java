@@ -81,4 +81,10 @@ public class GameServiceImpl implements GameService {
         }
         return teams;
     }
+    
+    @Override
+    public List<Game> getGameByTeam(Long teamId)
+    {
+    	return this.gameDao.getGameByTeamId(teamId);
+    }
 }
