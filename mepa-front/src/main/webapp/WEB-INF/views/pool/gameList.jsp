@@ -2,35 +2,47 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Créer une poule</h1>
+		<h1>Liste des match</h1>
 	</div>
 </div>
 
 <div class="container">
-        <form:form role="form"  modelAttribute="createPoolFormBean" method="POST">
-            <label class="col-lg-3">Nom de la poule</label>
-            <input type="HIDDEN" name="tournamentID" value="${tournamentID}">
-            <input type="text" class="col-lg-3" name="name" required="required"><br/>
             </br>
             <table class="table table-striped table-bordered" id="rangeTable">
                 <thead>
                     <tr>
-                        <th>Equipe</th>
-                        <th>Selection</th>
+                        <th>Equipe 1</th>
+                        <th>Score eq 1</th>
+                        <th>Equipe 2</th>
+                        <th>Score eq 2</th>
+                        <th>Durée</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                     <c:forEach items="${teams}" var="t" varStatus="loop">
-                            <tr>
-                                <td>${t.name}</td>
-                                 <td><input type="checkbox" name='teams' value="${t.id}"/></td>
-                            <tr>
+                     <c:forEach items="${gameList}" var="g" varStatus="loop">
+                         <tr>
+                             <form:form role="form" action="${pageContext.request.contextPath}/updateGame" method="post">
+                                 <input type="HIDDEN" name="gameID" value="${g.id}">
+                                 <c:set var="i" value="1"/>
+                                 <c:forEach items="${g.getJoinedGameTeams()}" var="joined" varStatus="loop">
+                                     <td>${(joined.getTeam().getName())}</td>
+                                     <td><input type="text" name="resultEquipe${i}" size="2" value="${joined.getScore()}"/></td>
+                                     <input type="HIDDEN" name="joinedID${i}" value="${joined.id}" />
+                                     <c:set var="i" value="${i + 1}"/>
+                                 </c:forEach>
+
+
+                                 <td><input type="text" id="duration" name="duration" value="${g.getDuration()}"/></td>
+                                 <td><input type="submit" id="valider"/></td>
+
+                             </form:form>
+                         </tr>
                      </c:forEach>
+
                 </tbody>
             </table>
-            <button type="submit"  class="btn btn-primary pull-right">Créer</button>
-        </form:form>
-    <a class="pull-left btn btn-default" href="/mepa-front/tournament/view/${tournamentID}" title="Annuler">
+    <a class="pull-left btn btn-default" href="/mepa-front/tournament/view/${poolID}" title="Annuler">
         <i class="glyphicon glyphicon-arrow-left"></i>
         Annuler
     </a>
