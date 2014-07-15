@@ -69,13 +69,8 @@ public class PoolController {
         pModel.addAttribute("tournamentID", tournamentID);
         List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
         pModel.addAttribute("teams", teams);
-        return "/creerPoule";
+        return "/poolManager";
     }
-
-
-
-
-
 
     @RequestMapping(value = {"/creerPoule"}, method = RequestMethod.GET)
     public String afficher(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
@@ -117,6 +112,8 @@ public class PoolController {
 
         return "/poolManager";
     }
+
+
 
 
 

@@ -44,7 +44,7 @@
            if ($('input[type="checkbox"]:checked', $(this)).size() >= 2)
              return true;
            else
-             alert("cochez au moins deux équipes");
+             alert("Cochez au moins deux équipes");
              return false;
        });
     });
