@@ -99,14 +99,73 @@
 
 <div class="container">
 	<div class="tab-content">
-		<div class="tab-pane" id="ended">
-			ended
+		<div class="tab-pane active" id="ended">
+			<h3>Liste des matchs termines</h3>
+			<div class="col-md-8 col-md-offset-2">
+				<table class="table table-bordered">
+					<tbody>
+		     			  <c:forEach items="${teamGame}" var="g">
+							 <c:choose>
+								<c:when test="${g.status == 'DONE'}">
+									<tr class="scoreRow">
+										<c:forEach items="${g.joinedGameTeams}" var="join" varStatus="i">
+											<c:choose>
+												<c:when test="${i.index % 2 == 0}">
+													<td class="text-center">${join.team.name}</td>
+													<td class="text-center score1">${join.score}</td>
+												</c:when>
+												<c:otherwise>
+													<td class="text-center score2">${join.score}</td>
+													<td class="text-center">${join.team.name}</td>
+												</c:otherwise>
+											</c:choose>	
+										</c:forEach>
+									</tr>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="tab-pane" id="coming">
-			coming
+			<h3>Liste des matchs a venir</h3>
+			<div class="col-md-8 col-md-offset-2">
+				<table class="table table-bordered">
+					<tbody>
+						<c:forEach items="${teamGame}" var="g">
+							 <c:choose>
+								<c:when test="${g.status == 'TODO'}">
+									<tr class="scoreRow">
+										<c:forEach items="${g.joinedGameTeams}" var="join" varStatus="i">
+											<td class="text-center">${join.team.name}</td>
+										</c:forEach>
+									</tr>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="tab-pane" id="player">
-			player
+             <h3>Liste des joueurs de l'equipe</h3>
+            <table class="table table-bordered table-striped" id="playersTable">
+                <thead>
+	                <tr>
+	                    <th>Joueur</th>
+	                    <th>Points</th>
+	                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${players}" var="p">
+                    <tr>
+                        <td>${p.name}</td>
+                        <td class="info">${p.nbPoint}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
 		</div>
 	</div>
 </div>

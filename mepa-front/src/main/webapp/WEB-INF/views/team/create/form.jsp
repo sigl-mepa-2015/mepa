@@ -14,7 +14,8 @@
             <spring:message code='team.form.namePlaceholder' var="namePlaceholder"/>
             <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}"/>
             <br/>
-            <button type="submit" class="btn btn-primary"><spring:message code="add" /></button>
+            <button type="submit" class="btn btn-primary">
+                <spring:message code="add" /></button>
         </div>
     </form:form>
 </div>

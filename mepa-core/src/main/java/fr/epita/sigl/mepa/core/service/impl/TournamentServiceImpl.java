@@ -3,6 +3,7 @@ package fr.epita.sigl.mepa.core.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
 import fr.epita.sigl.mepa.core.domain.*;
@@ -80,7 +81,7 @@ public class TournamentServiceImpl implements TournamentService {
         }
         moy = (long) (min / games_ended);
         d.setTime(d.getTime() + moy * ONE_MINUTE_IN_MILLIS * games_todo);
-        SimpleDateFormat dateformat = new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM YYYY, kk:mm");
+        SimpleDateFormat dateformat = new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM YYYY, kk:mm", Locale.FRANCE);
         results[0] = dateformat.format(d);
         results[1] = "" + moy;
         return results;

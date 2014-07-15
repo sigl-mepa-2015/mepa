@@ -86,6 +86,15 @@ public class ReportingController {
     		mv.addObject("poolPrev", teamService.getTeamById((long) rangeLongMap.get("poolPrev")));
     	if (rangeLongMap.get("poolNext") != null)
     		mv.addObject("poolNext", teamService.getTeamById((long) rangeLongMap.get("poolNext")));
+    	
+    	List<Game> listGame = gameService.getGameByTeam(teamID);
+    	
+    	for(Game g : listGame)
+    		System.out.println(g.getStatus());
+    	
+    	mv.addObject("teamGame", listGame);
+    	mv.addObject("players", t.getPlayers());    	
+    	
     	return mv;
     }
   
