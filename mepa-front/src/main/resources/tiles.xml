@@ -26,6 +26,9 @@
      <definition name="/reporting/teamReporting" extends="base.definition">
     	<put-attribute name="body" value="/WEB-INF/views/reporting/teamReporting.jsp"/>
     </definition>
+     <definition name="/injectData/tournamentGenerator" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentGenerator.jsp"/>
+    </definition>
      
     <!-- Tournament -->
     <definition name="/tournament/read/list" extends="base.definition">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
@@ -323,4 +324,34 @@ public class InjectDataController {
     	}
     	
     }
+    
+    @RequestMapping(value="/tournamentGenerator", method=RequestMethod.GET)
+    public ModelAndView generateTournament()
+    {
+    	ModelAndView mv = new ModelAndView("/injectData/tournamentGenerator");
+    	mv.addObject("allTournament", tournamentservice.getAllTournaments());
+		
+    	return mv;
+    }
+    
+    @RequestMapping(value="/createTournament", method=RequestMethod.POST)
+    @ResponseBody
+    public void createTournament(@RequestParam("tournamentName") String tournamentName,
+    		@RequestParam("poolNumber") int poolNumber,
+    		@RequestParam("teamNumber") int teamNumber,
+    		@RequestParam("return") Boolean returnGame)
+    {
+    	System.out.println(tournamentName);
+    	System.out.println(poolNumber);
+    	System.out.println(teamNumber);
+    	System.out.println(returnGame);
+    }
+    
+    @RequestMapping(value="/playGame", method=RequestMethod.POST)
+    @ResponseBody
+    public void playTournament(@RequestParam("tournamentId") int tournamentId)
+    {
+    	
+    }
+    
 }
