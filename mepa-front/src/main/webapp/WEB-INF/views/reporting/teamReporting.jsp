@@ -80,7 +80,7 @@
 	</div>
 	<div class="col-md-4 text-center">
 		<div><h5>Repartition resultat</h5></div>
-		<canvas id="pieGame" width="180" height="180" data-json=""></canvas>
+		<canvas id="pieGame" width="180" height="180" data-json="${fn:escapeXml(jsonResult)}"></canvas>
 	</div>
 	<div class="col-md-4 text-center">
 		<div><h5>Repartition score</h5></div>

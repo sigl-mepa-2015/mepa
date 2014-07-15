@@ -4,6 +4,9 @@ import fr.epita.sigl.mepa.core.dao.TeamDao;
 import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.service.TeamService;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,5 +101,36 @@ public class TeamServiceImpl implements TeamService {
     	}
     	
     	return result;
+    }
+    
+    @Override
+    public JSONArray constructJSONforResultChart(Team t) throws JSONException
+    {
+    	JSONArray jArray = new JSONArray();
+    	
+    	JSONObject winGameObject = new JSONObject();
+    	winGameObject.put("value", t.getWinGame());
+		winGameObject.put("color", "#46BFBD");
+		winGameObject.put("highlight", "#5AD3D1");
+		winGameObject.put("label", "Victoires");
+		
+		JSONObject looseGameObject = new JSONObject();
+		looseGameObject.put("value", t.getLoseGame());
+		looseGameObject.put("color", "#F7464A");
+		looseGameObject.put("highlight", "#FF5A5E");
+		looseGameObject.put("label", "Defaites");
+		
+		JSONObject drawGameObject = new JSONObject();
+		drawGameObject.put("value", t.getDrawGame());
+		drawGameObject.put("color", "#FDB45C");
+		drawGameObject.put("highlight", "#FFC870");
+		drawGameObject.put("label", "Nuls");
+		
+		jArray.put(0, winGameObject);
+		jArray.put(1, looseGameObject);
+		jArray.put(2, drawGameObject);
+		
+		return jArray;
+		
     }
 }
