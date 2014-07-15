@@ -107,7 +107,6 @@ public class PoolController {
         Set<Team> listteams = new HashSet<Team>();
 
         for (String id_teams: teams) {
-            Team tms = ts.getTeamById(Long.parseLong(id_teams));
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
         }
         newPool.setTeams(listteams);

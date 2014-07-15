@@ -24,7 +24,7 @@
                             <tr>
                                 <td>${t.name}</td>
                                  <td><input type="checkbox" name='teams' value="${t.id}"/></td>
-                            </tr>
+                            <tr>
                      </c:forEach>
                 </tbody>
             </table>
