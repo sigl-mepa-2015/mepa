@@ -7,6 +7,7 @@
 </div>
 
 <div class="container">
+   <h3> Classement des équipes : </h3><br/>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,17 +27,5 @@
             </tbody>
         </table>
     <br/>
-   Liste des matchs :
-   <ul>
-    <c:forEach items="${pool.games}" var="g" varStatus="loop">
-       <li>
-           Identifiant du match : ${g.id}<br/>
-           <c:forEach items="${g.joinedGameTeams}" var="jt" varStatus="loop">
-                   ${jt.team.name}
-            </c:forEach>
-        </li>
-    </c:forEach>
-   </ul>
+    <%@ include file="/WEB-INF/views/pool/gameList.jsp"%>
 </div>
-
-
