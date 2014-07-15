@@ -39,7 +39,7 @@
         </tbody>
     </table><br/>
     <h2>Liste des poules : </h2><br/>
-    <table class="table table-striped table-bordered" id="rangeTable">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Nom de la Poule</th>
