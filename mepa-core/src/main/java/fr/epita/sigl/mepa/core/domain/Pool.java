@@ -99,6 +99,4 @@ public class Pool implements Serializable{
 		this.teams = teams;
 	}
 
-
-
 }
