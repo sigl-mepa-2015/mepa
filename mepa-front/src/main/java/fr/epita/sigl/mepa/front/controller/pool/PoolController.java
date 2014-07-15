@@ -3,6 +3,7 @@ package fr.epita.sigl.mepa.front.controller.pool;
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.*;
 import fr.epita.sigl.mepa.front.model.pool.CreatePoolFormBean;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,12 @@ public class PoolController {
     private TeamService ts;
 
     @Autowired
+
     private GameService gs;
 
     @Autowired
     private JoinedGameTeamService jgs;
+
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -116,7 +119,6 @@ public class PoolController {
 
         return "/poolManager";
     }
-
     public Set<Game> generateGames(Long id_team, Long id_pool) {
         List<Game> listGames = new ArrayList<Game>();
         for(int i = 0; i < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++i) {
@@ -146,14 +148,47 @@ public class PoolController {
         listGames = this.gs.getAllGames();
 
         for(int i = 0; i < listGames.size(); ++i) {
-                System.out.println(listGames.get(i).getJoinedGameTeams());
+            System.out.println(listGames.get(i).getJoinedGameTeams());
         }
         return new HashSet<Game>(listGames);
 
     }
 
+    @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
+    public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel) {
+        Pool pool = this.s.getPoolById(poolID);
+        if (pool != null) {
+            Set<Game> gameList = pool.getGames();
 
+            pModel.addAttribute("gameList", gameList);
+        }
 
+        pModel.addAttribute("pools", poolID);
 
+        return "/afficherGame";
+    }
 
+    @RequestMapping(value = {"/updateGame"}, method = RequestMethod.POST)
+    public String updateGame(HttpServletRequest request, ModelMap modelMap) {
+
+        Long gameID = Long.parseLong(request.getParameter("gameID"));
+        Game g = this.gs.getGameById(gameID);
+        g.setDuration(Integer.parseInt(request.getParameter("duration")));
+        this.gs.updateGame(g);
+
+        if (request.getParameter("resultEquipe1").compareTo("") != 0) {
+            Long joinedGameTeam1 = Long.parseLong(request.getParameter("joinedID1"));
+            JoinedGameTeam j1 = this.jgs.getJoinedGameById(joinedGameTeam1);
+            j1.setScore(Integer.parseInt(request.getParameter("resultEquipe1")));
+            this.jgs.updateJoinedGameTeam(j1);
+        }
+        if (request.getParameter("resultEquipe2").compareTo("") != 0) {
+            Long joinedGameTeam2 = Long.parseLong(request.getParameter("joinedID2"));
+            JoinedGameTeam j2 = this.jgs.getJoinedGameById(joinedGameTeam2);
+            j2.setScore(Integer.parseInt(request.getParameter("resultEquipe2")));
+            this.jgs.updateJoinedGameTeam(j2);
+        }
+
+        return "redirect:afficherGame?poolID="+g.getPool().getId();
+    }
 }
