@@ -5,6 +5,9 @@ import fr.epita.sigl.mepa.core.domain.Team;
 import java.util.HashMap;
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+
 /**
  * Created by david on 10/07/14.
  */
@@ -25,4 +28,8 @@ public interface TeamService {
 
 	HashMap<String, Long> getRangeByTounrnamentId(Long tournamentID,
 			Team team);
+
+	JSONArray constructJSONforResultChart(Team t) throws JSONException;
+
+	JSONArray constructJSONForScoreChart(Long teamId) throws JSONException;
 }

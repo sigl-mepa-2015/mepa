@@ -7,24 +7,25 @@
 </div>
 
 <div class="container">
-    Liste des équipes :
-    <ul>
-     <c:forEach items="${pool.teams}" var="t" varStatus="loop">
-
-                                    <li>${t.name}</li>
-
-                         </c:forEach>
-</ul>
-    <c:choose>
-                <c:when test="${not empty pool.games}">
-                    Liste des matchs : ...
-                </c:when>
-                <c:otherwise>
-                     <button class="btn btn-default">Générer les matchs</button>
-
-                </c:otherwise>
-            </c:choose>
-
+   <h3> Classement des équipes : </h3><br/>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="20%">Classement</th>
+                    <th >Equipe</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:set var="i" value="1"/>
+                <c:forEach items="${pool.teams}" var="t"  varStatus="loop">
+                    <tr>
+                        <td width="20%">${i}</td>
+                        <td >${t.name}</td>
+                    </tr>
+                <c:set var="i" value="${i+1}"/>
+               </c:forEach>
+            </tbody>
+        </table>
+    <br/>
+    <%@ include file="/WEB-INF/views/pool/gameList.jsp"%>
 </div>
-
-

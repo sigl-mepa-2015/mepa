@@ -32,4 +32,10 @@ public interface GameDao {
 
 	List<Game> getGameByTeamId(Long id);
 
+	Long countEndedGameByTeamId(Long id);
+
+	Long countTodoGameByTeamId(Long id);
+
+	Long countProgressGameByTeamId(Long id);
+
 }

@@ -26,7 +26,13 @@ import com.mysql.fabric.xmlrpc.base.Array;
         @NamedQuery(name = "Game.CountEndedGameByPoolId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.id = :poolId AND g.status = 'DONE'"),
         @NamedQuery(name = "Game.findAllByTeamId", 
-        query = "SELECT g FROM Game g INNER JOIN g.joinedGameTeams j ON j.team.id = :teamId WHERE g.id = j.game.id")
+        query = "SELECT g FROM Game g INNER JOIN g.joinedGameTeams j ON j.team.id = :teamId WHERE g.id = j.game.id"),
+        @NamedQuery(name = "Game.CountEndedGameByTeamId", 
+        query = "SELECT Count(g) FROM Game g INNER JOIN g.joinedGameTeams j ON j.team.id = :teamId WHERE g.id = j.game.id AND g.status = 'DONE'"),
+        @NamedQuery(name = "Game.CountProgressGameByTeamId", 
+        query = "SELECT Count(g) FROM Game g INNER JOIN g.joinedGameTeams j ON j.team.id = :teamId WHERE g.id = j.game.id AND g.status = 'PROGRESS'"),
+        @NamedQuery(name = "Game.CountTodoGameByTeamId", 
+        query = "SELECT Count(g) FROM Game g INNER JOIN g.joinedGameTeams j ON j.team.id = :teamId WHERE g.id = j.game.id AND g.status = 'TODO'")
 })
 public class Game implements Serializable{
 

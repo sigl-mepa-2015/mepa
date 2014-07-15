@@ -4,6 +4,7 @@ import fr.epita.sigl.mepa.core.dao.GameDao;
 import fr.epita.sigl.mepa.core.dao.JoinedGameTeamDao;
 import fr.epita.sigl.mepa.core.dao.PoolDao;
 import fr.epita.sigl.mepa.core.domain.Game;
+import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
 import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
 import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Team;
@@ -86,5 +87,43 @@ public class GameServiceImpl implements GameService {
     public List<Game> getGameByTeam(Long teamId)
     {
     	return this.gameDao.getGameByTeamId(teamId);
+    }
+    
+    @Override
+    public Long countComingGameByTeamId(Long teamId)
+    {
+    	return this.gameDao.countTodoGameByTeamId(teamId);
+    }
+    
+    @Override
+    public Long countProgressGameByTeamId(Long teamId)
+    {
+    	return this.gameDao.countProgressGameByTeamId(teamId);
+    }
+    
+    @Override
+    public Long countEndedGameByTeamId(Long teamId)
+    {
+    	return this.gameDao.countEndedGameByTeamId(teamId);
+    }
+    
+    @Override
+    public int getAverragePlayingTimeByTeam(Long teamId)
+    {
+    	List<Game> list = gameDao.getGameByTeamId(teamId);
+    	
+    	int sum = 0;
+    	int i = 0;
+    	
+    	for (Game g : list)
+    	{
+    		if (g.getStatus() == GameStatus.DONE)
+    		{
+    			sum += g.getDuration();
+    			i++;
+    		}
+    	}
+    	
+    	return sum/i;
     }
 }

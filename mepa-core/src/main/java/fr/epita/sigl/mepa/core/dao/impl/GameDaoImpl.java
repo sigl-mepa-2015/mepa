@@ -107,6 +107,31 @@ public class GameDaoImpl implements GameDao {
     {
     	Query query = this.getSession().getNamedQuery("Game.findAllByTeamId");
     	query.setParameter("teamId", id);
-    	return (List<Game>) query.list();
+    	return query.list();
     }
+    
+    @Override
+    public Long countEndedGameByTeamId(Long id)
+    {
+    	 Query query = this.getSession().getNamedQuery("Game.CountEndedGameByTeamId");
+         query.setParameter("teamId", id);
+         return (Long) query.uniqueResult();
+    }
+    
+    @Override
+    public Long countTodoGameByTeamId(Long id)
+    {
+    	Query query = this.getSession().getNamedQuery("Game.CountTodoGameByTeamId");
+    	query.setParameter("teamId", id);
+    	return (Long) query.uniqueResult();
+    }
+    
+    @Override
+    public Long countProgressGameByTeamId(Long id)
+    {
+    	Query query = this.getSession().getNamedQuery("Game.CountProgressGameByTeamId");
+    	query.setParameter("teamId", id);
+    	return (Long) query.uniqueResult();
+    }
+    
 }

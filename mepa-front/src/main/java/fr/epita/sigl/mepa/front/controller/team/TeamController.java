@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 /**
  * Created by david on 10/07/14.
@@ -69,13 +70,14 @@ public class TeamController {
         Tournament tournament = tournamentService.getTournamentById(tournamentID);
 
         newTeam.setTournament(tournament);
+        tournamentService.updateTournament(tournament);
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
 
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
 
-        return "/team/read/list";
+        return "redirect:/tournament/view/"+tournament.getId();
     }
 
     @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
@@ -93,7 +95,7 @@ public class TeamController {
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
 
-        return "/team/read/list";
+        return "redirect:/tournament/view/"+ newTeam.getTournament().getId();
     }
 
     @RequestMapping(value="/all", method=RequestMethod.GET)
