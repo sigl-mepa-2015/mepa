@@ -18,19 +18,19 @@
 				<c:choose>
 					<c:when test="${globalPrev != null}">
 					<tr>
-						<td>${rangeGlobal - 1}</td>
+						<td>${globalPrevRange}</td>
 						<td>${globalPrev.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>
 				<tr>
-					<td>${rangeGlobal}</td>
-					<td>${team.name}</td>
+					<td class="success">${rangeGlobal}</td>
+					<td class="success">${team.name}</td>
 				</tr>
 				<c:choose>
 					<c:when test="${globalNext != null}">
 					<tr>
-						<td>${rangeNext + 1}</td>
+						<td>${globalNextRange}</td>
 						<td>${globalNext.name}</td>
 					</tr>
 					</c:when>
@@ -45,20 +45,20 @@
 				<c:choose>
 					<c:when test="${poolPrev != null}">
 					<tr>
-						<td>${rangePool - 1}</td>
+						<td>${poolPrevRange}</td>
 						<td>${poolPrev.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>
 				<tr>
-					<td>${rangePool}</td>
-					<td>${team.name}</td>
+					<td class="success">${rangePool}</td>
+					<td class="success">${team.name}</td>
 				</tr>
 				<c:choose>
-					<c:when test="${poolPrev != null}">
+					<c:when test="${poolNext != null}">
 					<tr>
-						<td>${rangePool + 1}</td>
-						<td>${poolPrev.name}</td>
+						<td>${poolNextRange}</td>
+						<td>${poolNext.name}</td>
 					</tr>
 					</c:when>
 				</c:choose>
@@ -69,22 +69,22 @@
 <div class="container">
 	<h4>Statistiques matchs</h4>
 	<div class="col-md-4">
-		<h5>Nombre de match joues : 2</h5>
-		<h5>Nombre de match restants : 4</h5>
-		<h5>Duree moyenne match : 20</h5>
-		<h5>Temps de jeu total : 56</h5>
+		<h5>Nombre de match joues : ${endedGame}</h5>
+		<h5>Nombre de match restants : ${todoGame}</h5>
+		<h5>Duree moyenne match : ${averrageTime}</h5>
+		<h5>Temps de jeu total : ${averrageTime * endedGame}</h5>
 		<h5>Niveau de progression dans le tournoi</h5>
 	    <div class="progress">
-	        <div class="progress-bar progress-bar-todo progress-bar-striped" stylerole="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><fmt:formatNumber value="50" maxFractionDigits="0"/>%</div>
+	        <div class="progress-bar progress-bar-todo progress-bar-striped" stylerole="progressbar" aria-valuenow="${endedGame}" aria-valuemin="0" aria-valuemax="100" style="width: ${(endedGame * 100) / (endedGame +todoGame)}%;"><fmt:formatNumber value="${(endedGame * 100) / (endedGame +todoGame)}" maxFractionDigits="0"/>%</div>
     	</div>
 	</div>
 	<div class="col-md-4 text-center">
-		<div><h5>Graphique 1</h5></div>
-		<canvas id="pieGame" width="180" height="180" data-json=""></canvas>
+		<div><h5>Repartition resultat</h5></div>
+		<canvas id="pieGame" width="180" height="180" data-json="${fn:escapeXml(jsonResult)}"></canvas>
 	</div>
 	<div class="col-md-4 text-center">
-		<div><h5>Graphique 3</h5></div>
-		<canvas id="pieGame2" width="180" height="180" data-json=""></canvas>
+		<div><h5>Repartition score</h5></div>
+		<canvas id="pieGame2" width="180" height="180" data-json="${fn:escapeXml(jsonResultScore)}"></canvas>
 	</div>
 </div>
 </br>

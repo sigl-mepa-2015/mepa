@@ -78,14 +78,22 @@ public class ReportingController {
     	HashMap<String, Long> rangeLongMap = teamService.getRangeByTounrnamentId(t.getTournament().getId(), t);
     	mv.addObject("rangeGlobal", rangeLongMap.get("global"));
     	mv.addObject("rangePool", rangeLongMap.get("pool"));
-    	if (rangeLongMap.get("globalPrev") != null)
-    		mv.addObject("globalPrev", teamService.getTeamById((long) rangeLongMap.get("globalPrev")));
-    	if (rangeLongMap.get("globalNext") != null)
-    		mv.addObject("globalNext", teamService.getTeamById((long) rangeLongMap.get("globalNext")));
-    	if (rangeLongMap.get("poolPrev") != null)
-    		mv.addObject("poolPrev", teamService.getTeamById((long) rangeLongMap.get("poolPrev")));
-    	if (rangeLongMap.get("poolNext") != null)
-    		mv.addObject("poolNext", teamService.getTeamById((long) rangeLongMap.get("poolNext")));
+    	if (rangeLongMap.get("globalPrev") != null) {
+            mv.addObject("globalPrev", teamService.getTeamById(rangeLongMap.get("globalPrev")));
+            mv.addObject("globalPrevRange", rangeLongMap.get("globalPrevRange"));
+        }
+    	if (rangeLongMap.get("globalNext") != null) {
+            mv.addObject("globalNext", teamService.getTeamById(rangeLongMap.get("globalNext")));
+            mv.addObject("globalNextRange", rangeLongMap.get("globalNextRange"));
+        }
+        if (rangeLongMap.get("poolPrev") != null) {
+            mv.addObject("poolPrev", teamService.getTeamById(rangeLongMap.get("poolPrev")));
+            mv.addObject("poolPrevRange", rangeLongMap.get("poolPrevRange"));
+        }
+        if (rangeLongMap.get("poolNext") != null) {
+            mv.addObject("poolNext", teamService.getTeamById(rangeLongMap.get("poolNext")));
+            mv.addObject("poolNextRange", rangeLongMap.get("poolNextRange"));
+        }
     	
     	List<Game> listGame = gameService.getGameByTeam(teamID);
     	
@@ -93,7 +101,17 @@ public class ReportingController {
     		System.out.println(g.getStatus());
     	
     	mv.addObject("teamGame", listGame);
-    	mv.addObject("players", t.getPlayers());    	
+    	mv.addObject("players", t.getPlayers());
+    	mv.addObject("todoGame", gameService.countComingGameByTeamId(teamID));
+    	mv.addObject("endedGame", gameService.countEndedGameByTeamId(teamID));
+    	mv.addObject("averrageTime", gameService.getAverragePlayingTimeByTeam(teamID));
+    	try {
+			mv.addObject("jsonResult", teamService.constructJSONforResultChart(t));
+			mv.addObject("jsonResultScore", teamService.constructJSONForScoreChart(teamID));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+    	
     	
     	return mv;
     }

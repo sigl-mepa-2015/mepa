@@ -19,7 +19,6 @@
         <security:intercept-url pattern="/mepa-front/" access="permitAll"/>
         <security:intercept-url pattern="/tournament" access="permitAll"/>
         <security:intercept-url pattern="/injectData/**" access="permitAll"/>
-        <security:intercept-url pattern="/reporting/**" access="permitAll"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
         <security:anonymous username="/*"
                             granted-authority="ROLE_ANONYME"/>

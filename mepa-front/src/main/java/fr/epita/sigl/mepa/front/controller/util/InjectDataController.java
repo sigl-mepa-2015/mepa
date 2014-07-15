@@ -9,6 +9,7 @@ import fr.epita.sigl.mepa.core.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
+import fr.epita.sigl.mepa.front.controller.tournament.TournamentController;
 
 @Controller
 @RequestMapping("/injectData")
@@ -270,7 +272,7 @@ public class InjectDataController {
     }
     
     @RequestMapping(value="/createTournament", method=RequestMethod.POST)
-    public String createTournament(@RequestParam("tournamentName") String tournamentName,
+    public  String createTournament(@RequestParam("tournamentName") String tournamentName,
     		@RequestParam("poolNumber") int poolNumber,
     		@RequestParam("teamNumber") int teamNumber,
     		@RequestParam(value = "return", required = false) Boolean returnGame,
@@ -280,7 +282,7 @@ public class InjectDataController {
     	    this.generateTournament(tournamentName, poolNumber, teamNumber, playerNumber, false);
         else
             this.generateTournament(tournamentName, poolNumber, teamNumber, playerNumber, returnGame);
-        return "/tournament/read/list";
+        return "redirect:/tournament";
     }
     
     @RequestMapping(value="/playGame", method=RequestMethod.POST)
@@ -292,7 +294,7 @@ public class InjectDataController {
     		@RequestParam("scoreMax") int scoreMax)
     {
     	this.playGame(tournamentId, pourPlaying, currentPlaying, scoreMax, minGame, maxGame);
-        return "/tournament/read/list";
+        return "redirect:/tournament";
     }
     
 }
