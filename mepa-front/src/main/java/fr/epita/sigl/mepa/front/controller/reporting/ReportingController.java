@@ -36,6 +36,7 @@ public class ReportingController {
 	
     private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
+    
     /**
      * 
      * @return ModelAndView

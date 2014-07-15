@@ -26,6 +26,9 @@
      <definition name="/reporting/teamReporting" extends="base.definition">
     	<put-attribute name="body" value="/WEB-INF/views/reporting/teamReporting.jsp"/>
     </definition>
+     <definition name="/injectData/tournamentGenerator" extends="base.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentGenerator.jsp"/>
+    </definition>
      
     <!-- Tournament -->
     <definition name="/tournament/read/list" extends="base.definition">
@@ -58,5 +61,8 @@
     <!-- Pool -->
     <definition name="/creerPoule" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
+    </definition>
+    <definition name="/poolManager" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
 </tiles-definitions>
