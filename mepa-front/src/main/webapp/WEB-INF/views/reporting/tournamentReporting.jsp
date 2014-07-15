@@ -73,12 +73,12 @@
 														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
 															<c:choose>
 																<c:when test="${i.index % 2 == 0}">
-																	<td class="text-center">${join.team.name}</td>
+																	<td class="text-center"><a href="${pageContext.request.contextPath}/reporting/team?teamID=${join.team.id}">${join.team.name}<a></td>
 																	<td class="text-center score1">${join.score}</td>
 																</c:when>
 																<c:otherwise>
 																	<td class="text-center score2">${join.score}</td>
-																	<td class="text-center">${join.team.name}</td>
+																	<td class="text-center"><a href="${pageContext.request.contextPath}/reporting/team?teamID=${join.team.id}">${join.team.name}<a></td>
 																</c:otherwise>
 															</c:choose>	
 														</c:forEach>
@@ -117,7 +117,7 @@
 												<c:when test="${game.status == 'TODO'}">
 													<tr>
 														<c:forEach items="${game.joinedGameTeams}" var="join" varStatus="i">
-																	<td style="text-align : center">${join.team.name}</td>
+																	<td style="text-align : center"><a href="${pageContext.request.contextPath}/reporting/team?teamID=${join.team.id}">${join.team.name}<a></td>
 														</c:forEach>
 													</tr>
 												</c:when>
@@ -161,7 +161,7 @@
                             </c:choose>
                                 <%--<c:out value="${index.index}"/>--%>
                         </td>
-                        <td>${t.name}</td>
+                        <td><a href="${pageContext.request.contextPath}/reporting/team?teamID=${t.id}">${t.name}<a></td>
                         <td>${t.pool.name}</td>
                         <td class="info">${t.winGame + t.drawGame + t.loseGame}</td>
                         <td class="success">${t.winGame}</td>
