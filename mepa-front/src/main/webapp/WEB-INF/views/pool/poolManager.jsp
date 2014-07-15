@@ -27,15 +27,5 @@
             </tbody>
         </table>
     <br/>
-   <h3>Liste des matchs :</h3>
-   <ul>
-    <c:forEach items="${pool.games}" var="g" varStatus="loop">
-       <li>
-           Identifiant du match : ${g.id}<br/>
-           <c:forEach items="${g.joinedGameTeams}" var="jt" varStatus="loop">
-                   ${jt.team.name}
-            </c:forEach>
-        </li>
-    </c:forEach>
-   </ul>
+    <%@ include file="/WEB-INF/views/pool/gameList.jsp"%>
 </div>
