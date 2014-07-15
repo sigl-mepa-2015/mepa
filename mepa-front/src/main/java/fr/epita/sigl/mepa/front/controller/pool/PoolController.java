@@ -1,11 +1,7 @@
 package fr.epita.sigl.mepa.front.controller.pool;
 
-import fr.epita.sigl.mepa.core.domain.Pool;
-import fr.epita.sigl.mepa.core.domain.Team;
-import fr.epita.sigl.mepa.core.domain.Tournament;
-import fr.epita.sigl.mepa.core.service.PoolService;
-import fr.epita.sigl.mepa.core.service.TeamService;
-import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.core.domain.*;
+import fr.epita.sigl.mepa.core.service.*;
 import fr.epita.sigl.mepa.front.model.pool.CreatePoolFormBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by maite on 10/07/14.
@@ -39,6 +32,12 @@ public class PoolController {
 
     @Autowired
     private TeamService ts;
+
+    @Autowired
+    private GameService gs;
+
+    @Autowired
+    private JoinedGameTeamService jgs;
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -105,12 +104,52 @@ public class PoolController {
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
         }
         newPool.setTeams(listteams);
+
         this.s.createPool(newPool);
+        this.s.getPoolById(newPool.getId()).setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
+        newPool.setGames(this.s.getPoolById(newPool.getId()).getGames());
         modelMap.addAttribute("pool", newPool);
+
+
 
         modelMap.addAttribute("message", true);
 
         return "/poolManager";
+    }
+
+    public Set<Game> generateGames(Long id_team, Long id_pool) {
+        List<Game> listGames = new ArrayList<Game>();
+        for(int i = 0; i < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++i) {
+            for(int j = i + 1; j < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++j) {
+                Game g = new Game();
+                JoinedGameTeam jg1 = new JoinedGameTeam();
+                jg1.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(i));
+                JoinedGameTeam jg2 = new JoinedGameTeam();
+                jg2.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(j));
+
+                jg1.setGame(g);
+                jg2.setGame(g);
+
+                Set<JoinedGameTeam> st = new HashSet<JoinedGameTeam>();
+                st.add(jg1);
+                st.add(jg2);
+                g.setJoinedGameTeams(st);
+                g.setPool(this.s.getPoolById(id_pool));
+                g.setStatus(Game.GameStatus.TODO);
+
+                this.gs.createGame(g);
+                this.jgs.createJoinedGameTeam(jg1);
+                this.jgs.createJoinedGameTeam(jg2);
+            }
+        }
+        System.out.println(this.gs.getAllGames().size());
+        listGames = this.gs.getAllGames();
+
+        for(int i = 0; i < listGames.size(); ++i) {
+                System.out.println(listGames.get(i).getJoinedGameTeams());
+        }
+        return new HashSet<Game>(listGames);
+
     }
 
 

@@ -15,16 +15,17 @@
 
                          </c:forEach>
 </ul>
-    <c:choose>
-                <c:when test="${not empty pool.games}">
-                    Liste des matchs : ...
-                </c:when>
-                <c:otherwise>
-                     <button class="btn btn-default">Générer les matchs</button>
-
-                </c:otherwise>
-            </c:choose>
-
+Liste des matchs :
+<ul>
+ <c:forEach items="${pool.games}" var="g" varStatus="loop">
+    <li>
+        Identifiant du match : ${g.id}<br/>
+        <c:forEach items="${g.joinedGameTeams}" var="jt" varStatus="loop">
+                ${jt.team.name}
+         </c:forEach>
+     </li>
+ </c:forEach>
+</ul>
 </div>
 
 
