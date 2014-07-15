@@ -30,7 +30,7 @@
             </table>
             <button type="submit" class="btn btn-primary pull-right btn-success">Créer</button>
         </form:form>
-    <a class="pull-left btn btn-default" href="/mepa-front/tournament/view/${tournamentID}" title="Annuler">
+    <a class="pull-left btn btn-default" href="${pageContext.request.contextPath}/tournament/view/${tournamentID}" title="Annuler">
         Annuler
     </a>
 
