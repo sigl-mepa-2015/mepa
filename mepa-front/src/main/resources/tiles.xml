@@ -66,6 +66,6 @@
         <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
     <definition name="/afficherGame" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/pool/gameList.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
 </tiles-definitions>
