@@ -35,5 +35,13 @@ public class ResultController {
    
         return new ModelAndView("result/view");
     }
-    
+
+    /**
+     * Default action : show a team
+     */
+    @RequestMapping(value = {"/teamScore"}, method = RequestMethod.GET)
+    public String teamScore(@RequestParam("teamID") Long teamID) {
+        System.out.println("Ma froute sur ta tete id:"+ teamID);
+        return "/result/teamScore";
+    }
 }

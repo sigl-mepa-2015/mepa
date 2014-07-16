@@ -8,8 +8,8 @@
                     <c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
                     <a class="navbar-brand" href="${baseURL}">MEPA</a>
                 </div>
-                <sec:authorize access="isAnonymous()">
 
+                <sec:authorize access="isAnonymous()">
                     <button type="button" class="btn btn-primary navbar-btn navbar-right tip" data-toggle="modal" role="button" href="#login_modal"> <span class="hidden-xs"><spring:message code="login" /></span>&nbsp;<i class="glyphicon glyphicon-log-in"></i></button>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">

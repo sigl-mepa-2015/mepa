@@ -68,4 +68,10 @@
     <definition name="/afficherGame" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
+
+    <!-- Result -->
+    <definition name="/result/teamScore" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/result/teamScore.jsp" />
+    </definition>
+
 </tiles-definitions>
