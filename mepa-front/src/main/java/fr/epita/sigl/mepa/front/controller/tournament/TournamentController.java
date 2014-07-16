@@ -42,7 +42,7 @@ public class TournamentController {
      */
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public ModelAndView showAllTournaments(HttpServletRequest request) {
-        List<Tournament> allTournament = tournamentService.getAllTournaments();
+        List<Tournament>  allTournament = tournamentService.getAllTournaments();
         ModelAndView mv = new ModelAndView("/tournament/read/list");
         mv.addObject("tournaments", allTournament);
 
