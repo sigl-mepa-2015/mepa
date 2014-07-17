@@ -57,6 +57,9 @@
     <definition name="/team/edit/form" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/team/edit/form.jsp" />
     </definition>
+    <definition name="/team/detail" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/team/read/detail.jsp" />
+    </definition>
 
     <!-- Pool -->
     <definition name="/creerPoule" extends="base.definition">

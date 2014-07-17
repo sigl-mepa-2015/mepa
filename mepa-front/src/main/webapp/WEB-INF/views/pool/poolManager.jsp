@@ -1,12 +1,12 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
-<div class="container">
+<div>
 	<div class="page-header">
 		<h1>Poule ${pool.name}</h1>
 	</div>
 </div>
 
-<div class="container">
+<div>
    <h3> Classement des équipes : </h3><br/>
         <table class="table table-striped">
             <thead>

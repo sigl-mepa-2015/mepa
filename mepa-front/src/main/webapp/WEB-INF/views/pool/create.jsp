@@ -1,12 +1,12 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
-<div class="container">
+<div>
 	<div class="page-header">
 		<h1>Créer une poule</h1>
 	</div>
 </div>
 
-<div class="container">
+<div>
         <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" method="POST">
             <label class="col-lg-3">Nom de la poule</label>
             <input type="HIDDEN" name="tournamentID" value="${tournamentID}">
@@ -34,7 +34,6 @@
         Annuler
     </a>
 
-</div>
 </div>
 
 <script type="text/javascript">

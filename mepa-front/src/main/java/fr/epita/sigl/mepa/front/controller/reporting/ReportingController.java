@@ -7,6 +7,8 @@ import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.social.FacebookAutoConfiguration;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +35,7 @@ public class ReportingController {
 	private PoolService poolService;
     @Autowired
     private PlayerService playerService;
-	
+	    
     private static final Logger LOG = LoggerFactory.getLogger(ReportingController.class);
     
     

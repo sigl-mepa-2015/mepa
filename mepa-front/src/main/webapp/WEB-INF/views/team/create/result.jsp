@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 <%@ include file="/WEB-INF/views/team/namespace.jsp"%>
-<div class="container">
+<div>
     <div class="alert alert-success">
         <spring:message code="team.create.resultMessage" arguments="${team.name}" />
     </div>
