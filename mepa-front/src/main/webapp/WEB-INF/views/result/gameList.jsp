@@ -15,7 +15,8 @@
             //document.getElementById("score1").value="0";
               $(".score1",$(this).parent().parent()).attr("disabled", false);
               $("#duration",$(this).parent().parent()).attr("disabled", false);
-              $("#status",$(this).parent().parent()).val('En cours');
+              $(".status",$(this).parent().parent()).val('En cours');
+               $("#submit",$(this).parent()).attr("disabled", true);
             //document.getElementById("score1").disabled=false;        
         });
          $('.end').click(
@@ -24,15 +25,14 @@
             $(".Start",$(this).parent().parent()).attr("disabled", true);
             $(".score1",$(this).parent().parent()).attr("disabled", false);
             $("#duration",$(this).parent().parent()).attr("disabled", false);
-            $("#status",$(this).parent().parent()).val('à valider');
+            $(".status",$(this).parent().parent()).val('à valider');
                   });
-   
-    });
+             });
 </script>
 
 <div>
 	<div class="page-header">
-		<h1>Liste des match</h1>
+		<h1>Liste des matchs</h1>
 	</div>
 </div>
 
@@ -67,31 +67,32 @@
                                  </c:forEach>
                                      
                                      <c:if test="${g.status == 'DONE'}">
-                                 <td><button type="button" disabled="true"  class="btn btn-default btn-lg Start"> SL </button></td>   
-                                <td><button  type="button" disabled="true"  class="btn btn-default btn-lg end"> SF </button></td>
-                                 <td><input type="text" id="status" disabled="true" name="status" size="6"   value="${g.status}"/></td>
+                                 <td><button type="button" disabled="true"  class="btn btn-default btn-lg Start"> Direct </button></td>   
+                                <td><button  type="button" disabled="true"  class="btn btn-default btn-lg end"> Fin </button></td>
+                                 <td><input type="text" class="status" disabled="true" name="status" size="6"   value="${g.status}"/></td>
                                  <td><input type="text" id="duration" size="2" disabled="true" name="duration" value="${g.duration}"></td> 
-                                 <td><input disabled="true" type="submit" id="valider"/></td>
+                                 <td><button disabled="true" type="submit" id="valider"/> Valider </button></td>
                                      </c:if>
                                 
                                  <c:if test="${(g.status == 'TODO')}">
-                                       <td><button type="button"  class="btn btn-default btn-lg Start"> SL </button></td>   
-                                <td><button  type="button"   class="btn btn-default btn-lg end"> SF </button></td>
-                                 <td><input type="text" id="status" name="status" size="6"   value="${g.status}"/></td>
+                                       <td><button type="button"  class="btn btn-default btn-lg Start"> Direct </button></td>   
+                                <td><button  type="button"   class="btn btn-default btn-lg end"> Fin </button></td>
+                                 <td><input type="text" class="status" name="status" disabled="true" size="6"   value="${g.status}"/></td>
                                  <td><input type="text" id="duration" size="2" disabled="true" name="duration" value="${g.duration}"/>
-                                     <td><input type="submit" id="valider"/></td>
+                                 <input type="HIDDEN" class="status" name="Status" value="${g.status}">
+                                 <td><button type="submit" id="valider"/> Valider </button></td>
                                  </c:if>
                                 
                                    <c:if test="${(g.status == 'PROGRESS')}">
-                                         <td><button type="button" disabled="true" class="btn btn-default btn-lg Start"> SL </button></td>   
-                                         <td><button  type="button"   class="btn btn-default btn-lg end"> SF </button></td>
-                                         <td><input type="text" id="status" name="status" size="6"   value="${g.status}"/></td>
+                                         <td><button type="button" disabled="true" class="btn btn-default btn-lg Start"> Direct </button></td>   
+                                         <td><button  type="button"   class="btn btn-default btn-lg end"> Fin </button></td>
+                                         <td><input type="text" class="status" name="status" disabled="true" size="6"   value="${g.status}"/></td>
                                          <td><input type="text" id="duration" size="2"  name="duration" value="${g.duration}"/></td>
-                                         <td><input type="submit" id="valider"/></td>
+                                      <input type="HIDDEN" class="status" name="Status" value="${g.status}">
+                                         <td><button type="submit" id="valider"/> Valider </button></td>
                                  </c:if>
                                 
-                               
-                                 
+                                       
 
                              </form:form>
                          </tr>
@@ -99,7 +100,7 @@
 
                 </tbody>
             </table>
-    <a class="pull-left btn btn-default" href="/mepa-front/tournament/view/${poolID}" title="Annuler">
+    <a class="pull-left btn btn-default" href="/mepa-front/" title="Annuler">
         <i class="glyphicon glyphicon-arrow-left"></i>
         Annuler
     </a>

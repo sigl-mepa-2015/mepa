@@ -101,9 +101,9 @@ public class ResultController {
         g.setDuration(Integer.parseInt(request.getParameter("duration")));
         
 
-        if (request.getParameter("status").compareTo("TODO") == 0)
+        if (request.getParameter("Status").compareTo("TODO") == 0)
             return ("result/erreur");
-        if (request.getParameter("status").compareTo("En cours") == 0)
+        if (request.getParameter("Status").compareTo("En cours") == 0)
             g.setStatus(Game.GameStatus.PROGRESS);
         else
             g.setStatus(Game.GameStatus.DONE);
