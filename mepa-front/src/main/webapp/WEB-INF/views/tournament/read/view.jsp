@@ -51,8 +51,7 @@
         </thead>
         <tbody>
         <c:forEach items="${tournamentView.pools}" var="p">
-            <tr>
-                <td>${p.name} </td>
+            <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
                 <td><button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/afficherGame?poolID=${p.id}'">
                     <span class="glyphicon glyphicon-arrow-right"></span>
                 </button></td>
