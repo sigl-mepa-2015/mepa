@@ -48,6 +48,7 @@ public class Team implements Serializable {
     private Set<Game> games;*/
 
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
+    @OrderBy("name")
     private Set<Player> players;
 
     @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "team")
