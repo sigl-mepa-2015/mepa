@@ -41,8 +41,6 @@ public class PoolController {
     @Autowired
     private JoinedGameTeamService jgs;
 
-    private boolean match = false;
-
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -102,11 +100,14 @@ public class PoolController {
         for (String id_teams: createPoolFormBean.getTeams()) {
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
             newTeam = this.ts.getTeamById(Long.parseLong(id_teams));
+            System.out.println("Team = " + newTeam.getId());
             newTeam.setPool(newPool);
             this.ts.updateTeam(newTeam);
         }
 
         newPool.setTeams(listteams);
+        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
+
 
         modelMap.addAttribute("pool", newPool);
 
