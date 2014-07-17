@@ -64,22 +64,35 @@
         </script>
     <br/>
     <h2>Liste des poules : </h2><br/>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nom de la Poule</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${tournamentView.pools}" var="p">
-            <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
-                <td><button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/afficherGame?poolID=${p.id}'">
-                    <span class="glyphicon glyphicon-arrow-right"></span>
-                </button></td>
-            </tr>
-
-        </c:forEach>
-        </tbody>
-        </table>
+    <c:choose>
+        <c:when test="${empty tournamentView.pools}">
+            <div class="jumbotron">
+                    <div class="container">
+                        <h2>Aucune poule crée</h2>
+                    </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom de la Poule</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${tournamentView.pools}" var="p">
+                    <tr>
+                        <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/poolManager?poolID=${p.id}'">
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
 </div>

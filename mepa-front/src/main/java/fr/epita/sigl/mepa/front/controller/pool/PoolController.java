@@ -76,13 +76,20 @@ public class PoolController {
     }
 
     @RequestMapping(value="/poolManager", method = RequestMethod.POST)
-    public String creer2(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
-                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    public String createPool(@RequestParam(value = "tournamentID", required = true) Long tournamentID,
+                             @RequestParam(value = "created", required = false) Long poolID,
+                             ModelMap modelMap,
+                             CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/poolManager";
         }
+        // My code
+        if (poolID != null){
+            modelMap.addAttribute("created", 1);//this.s.getPoolById(poolID));
+        }
+        // End MyCode
 
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);
@@ -100,14 +107,11 @@ public class PoolController {
         for (String id_teams: createPoolFormBean.getTeams()) {
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
             newTeam = this.ts.getTeamById(Long.parseLong(id_teams));
-            System.out.println("Team = " + newTeam.getId());
             newTeam.setPool(newPool);
             this.ts.updateTeam(newTeam);
-        }   
+        }
 
         newPool.setTeams(listteams);
-        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
-
 
         modelMap.addAttribute("pool", newPool);
 
@@ -127,14 +131,38 @@ public class PoolController {
 
         Pool p = new Pool();
         p=this.s.getPoolById(poolID);
+
+
         modelMap.addAttribute("pool", p);
 
         return "/poolManager";
     }
 
+/*
+    @RequestMapping(value="/matchGame", method = RequestMethod.GET)
+    public String creerMatch(@RequestParam("poolID") Long poolID,
+                             ModelMap modelMap,CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
-    public Set<Game> generateGames(Long id_team, Long id_pool) {
-        List<Game> listGames = new ArrayList<Game>();
+        if (result.hasErrors()) {
+            // Error(s) in form bean validation
+            return "/poolManager";
+        }
+
+        Pool p = new Pool();
+        p=this.s.getPoolById(poolID);
+        modelMap.addAttribute("pool", p);
+
+        if (match == true) {
+            generateGames(p.getTournament().getId(), p.getId());
+            this.match = false;
+        }
+        return "/matchGame";
+    }
+
+*/
+
+
+    public void generateGames(Long id_team, Long id_pool) {
         for(int i = 0; i < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++i) {
             for(int j = i + 1; j < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++j) {
                 Game g = new Game();
@@ -158,19 +186,18 @@ public class PoolController {
                 this.jgs.createJoinedGameTeam(jg2);
             }
         }
-        listGames = this.gs.getAllGames();
-
-
-        return new HashSet<Game>(listGames);
-
     }
 
     @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
     public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel) {
         Pool pool = this.s.getPoolById(poolID);
         if (pool != null) {
+            if(pool.getGames().isEmpty())
+            {
+                generateGames(pool.getTournament().getId(), pool.getId());
+                pool=this.s.getPoolById(poolID);
+            }
             Set<Game> gameList = pool.getGames();
-
             pModel.addAttribute("gameList", gameList);
         }
 
@@ -178,6 +205,9 @@ public class PoolController {
 
         return "/afficherGame";
     }
+
+
+
 
     @RequestMapping(value = {"/updateGame"}, method = RequestMethod.POST)
     public String updateGame(HttpServletRequest request, ModelMap modelMap) {
