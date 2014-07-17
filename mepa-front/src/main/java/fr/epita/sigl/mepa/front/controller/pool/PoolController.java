@@ -76,7 +76,7 @@ public class PoolController {
     }
 
     @RequestMapping(value="/poolManager", method = RequestMethod.POST)
-    public String createPool(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
+    public String creer2(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
                          CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
@@ -113,7 +113,7 @@ public class PoolController {
 
     @RequestMapping(value="/poolManager", method = RequestMethod.GET)
     public String creer(@RequestParam("poolID") Long poolID, ModelMap modelMap,
-                         BindingResult result) {
+                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
@@ -122,7 +122,6 @@ public class PoolController {
 
         Pool p = new Pool();
         p=this.s.getPoolById(poolID);
-        System.out.println(p.getTeams());
         modelMap.addAttribute("pool", p);
 
         return "/poolManager";
