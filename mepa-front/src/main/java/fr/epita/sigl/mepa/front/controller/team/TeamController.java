@@ -5,6 +5,7 @@ import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TeamService;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.team.AddTeamFormBean;
+import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 /**
  * Created by david on 10/07/14.
@@ -31,8 +31,7 @@ public class TeamController {
 
     protected static final String TEAM_MODEL_ATTRIBUTE = "tournaments";
     private static final String ADD_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "addTeamFormBean";
-    private static final String EDIT_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "editTeamFormBean";
-
+    private static final String REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "removeTeamFormBean";
 
     @Autowired
     private TeamService teamService;
@@ -118,6 +117,27 @@ public class TeamController {
 
         return mv;
     }
+    
+    @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
+    public String removeTeam(HttpServletRequest request, ModelMap modelMap,
+                                   @Valid RemoveTeamFormBean removeTeamFormBean, BindingResult result) {
+        
+        if (result.hasErrors()) {
+            // Error(s) in form bean validation
+            return "/tournament/read/list";
+        }
+
+        Team deleteTeam = this.teamService.getTeamById(removeTeamFormBean.getId());
+        long idtournament = deleteTeam.getTournament().getId();
+        
+        if(deleteTeam.getPool() == null) {
+            this.teamService.deleteTeam(deleteTeam);
+            List<Team> allTeam = teamService.getAllTeams();
+            modelMap.addAttribute("teams", allTeam);
+        }
+
+          return "redirect:/tournament/view/"+ idtournament;
+    }
 
     @ModelAttribute(TEAM_MODEL_ATTRIBUTE)
     public List<Team> initTeams() {
@@ -128,5 +148,9 @@ public class TeamController {
     public AddTeamFormBean initAddTeamFormBean() {
         return new AddTeamFormBean();
     }
-
+    
+    @ModelAttribute(REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE)
+    public RemoveTeamFormBean initRemoveTeamFormBean() {
+        return new RemoveTeamFormBean();
+    }
 }

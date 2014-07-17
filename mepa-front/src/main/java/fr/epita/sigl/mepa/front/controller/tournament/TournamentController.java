@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.front.controller.tournament;
 
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ public class TournamentController {
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
     private static final String VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournamentView";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
+    private static final String REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "removeTeamFormBean";
+
     @Autowired
     private TournamentService tournamentService;
 
@@ -196,5 +199,10 @@ public class TournamentController {
     @ModelAttribute(REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
     public RemoveTournamentFormBean initRemoveTournamentFormBean() {
         return new RemoveTournamentFormBean();
+    }
+    
+    @ModelAttribute(REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE)
+    public RemoveTeamFormBean initRemoveTeamFormBean() {
+        return new RemoveTeamFormBean();
     }
 }
