@@ -1,13 +1,13 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
 
-<div class="container">
+<div>
 	<div class="page-header">
 		<h1>Toutes les équipes</h1>
 	</div>
 </div>
 
-<div class="container">
+<div>
 
 	<c:choose>
 		<c:when test="${team != null}">

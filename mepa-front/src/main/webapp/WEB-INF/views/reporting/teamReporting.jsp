@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
-<div class="container">
+<div>
 	<div class="page-header">
 		<h1>Statistique d'equipe</h1>
 		<h4>Equipe : ${team.name}</h4>
@@ -9,7 +9,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div>
 	<h4>Statistiques classements</h4>
 	<div class="col-md-6">
 		<h5>Classement global</h5>
@@ -66,7 +66,7 @@
 		</table>
 	</div>
 </div>
-<div class="container">
+<div>
 	<h4>Statistiques matchs</h4>
 	<div class="col-md-4">
 		<h5>Nombre de match joues : ${endedGame}</h5>
@@ -89,7 +89,7 @@
 </div>
 </br>
 
-<div class="container">
+<div>
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs termines</a></li>
         <li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs a venir</a></li>
@@ -97,7 +97,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div>
 	<div class="tab-content">
 		<div class="tab-pane active" id="ended">
 			<h3>Liste des matchs termines</h3>

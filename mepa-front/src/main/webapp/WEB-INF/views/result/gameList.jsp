@@ -10,13 +10,13 @@ function myFunction()
 }
 </script>
 
-<div class="container">
+<div>
 	<div class="page-header">
 		<h1>Liste des match</h1>
 	</div>
 </div>
 
-<div class="container">
+<div>
      <input type="HIDDEN" name="poolID" value="${poolID}">
             </br>
             <table class="table table-striped table-bordered" id="rangeTable">

@@ -1,19 +1,19 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
-<div class="container">
+<div>
     <div class="page-header">
         <h1>Generateur de tournoi</h1>
     </div>
 </div>
 
-<div class="container">
+<div>
 	 <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#generate" role="tab" data-toggle="tab">Generer un tournoi</a></li>
         <li><a href="#play" role="tab" data-toggle="tab">Jouer un tournoi</a></li>
     </ul>
 </div>
 
-<div class="container">
+<div>
 	<div class="tab-content">
 		<div class="tab-pane active" id="generate">
 			<div class="col-md-4">

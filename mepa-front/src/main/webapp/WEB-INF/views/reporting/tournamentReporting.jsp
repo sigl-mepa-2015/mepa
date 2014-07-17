@@ -1,13 +1,13 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
-<div class="container">
+<div>
     <div class="page-header">
         <h1>Statistiques sur le tournoi</h1>
         <h4><spring:message code="tournament"/> : ${tournament.name}</h4>
     </div>
 </div>
 
-<div class="container" style="margin-bottom : 30px">
+<div style="margin-bottom : 30px">
     <c:choose>
         <c:when test="${timeMoy != 0}">
             <h5><b>Estimation de l'heure de fin du tournoi :</b> ${endedDate}</h5>
@@ -38,7 +38,7 @@
 </div>
 
 
-<div class="container">
+<div>
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs terminés</a></li>
         <li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs a venir</a></li>
@@ -47,7 +47,7 @@
     </ul>
 </div>
 
-<div class="container">
+<div>
 	<div class="tab-content">
 	  <div class="tab-pane active" id="ended">
 	  	<h3>Liste des matchs termines</h3>
@@ -204,6 +204,5 @@
             </table>
         </div>
     </div>
-</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/mepa_chart.js"></script>

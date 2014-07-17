@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
 
-<div class="container">
+<div>
     <div class="page-header">
         <a class="pull-right btn btn-success" title="Créer une poule" href="${pageContext.request.contextPath}/creerPoule?tournamentID=${tournamentView.id}">
             <i class="glyphicon glyphicon-plus"></i> Créer une poule
@@ -15,7 +15,7 @@
         <h1>Tournoi ${tournamentView.name} </h1>
     </div>
 </div>
-<div class="container">
+<div>
     <h2>Maximum d'équipes allouables : <c:if test="${tournamentView.maxTeamNumber <0}">-</c:if>${tournamentView.maxTeamNumber}</h2><br/>
     <h2>Liste des équipes :</h2> <br/>
     <table class="table table-striped">
