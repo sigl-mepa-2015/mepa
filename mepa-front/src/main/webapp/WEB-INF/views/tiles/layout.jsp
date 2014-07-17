@@ -33,27 +33,56 @@
         
     </head>
     <body>
+    
+    	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=678922165534982&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+    
         <div class="wrapper">
             <%-- Header --%>
             <tiles:insertAttribute name="header" />
             <%-- Body content --%>
             <div class="container">
 	           <div class="row">
-		           	<div class="col-md-10">
+		           	<div class="col-md-9">
 		            	<tiles:insertAttribute name="body" />
 		            </div>
-		            <div class="col-md-2">
+		            <div class="col-md-3">
+		            	<div>
+						    <ul class="nav nav-tabs nav-justified" role="tablist">
+						        <li class="active"><a href="#facebook" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/img/facebook.png"/>&nbsp; Facebook</a></li>
+						        <li><a href="#twitter" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/img/twitter.png"/>&nbsp;Twitter</a></li>
+						    </ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane active" id="facebook">
+								<div class="fb-like-box" data-href="https://www.facebook.com/643322352412195" data-width="100%" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true"></div>		            	
+							</div>
+							<div class="tab-pane" id="twitter">
+								<a class="twitter-timeline" href="https://twitter.com/MepaSigl" data-widget-id="489393956145225728">Tweets de @MepaSigl</a>
+								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		            		</div>
+						</div>
+					</div>
+		        </div>
+		         <!--    <div class="col-md-1">
+						<div class="fb-like-box" data-href="https://www.facebook.com/643322352412195" data-width="180" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true"></div>		            	
+		            </div>
+		            <div class="col-md-1">
 		            	<a class="twitter-timeline" href="https://twitter.com/MepaSigl" data-widget-id="489393956145225728">Tweets de @MepaSigl</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-		            </div>
-	            </div>
-            </div/>
+		            	
+		            </div> -->
 	            
 	        <div class="push"></div>
             
         </div>
         <%-- Footer --%>
         <tiles:insertAttribute name="footer" />
-    </body>
+    </body>   
 </html>

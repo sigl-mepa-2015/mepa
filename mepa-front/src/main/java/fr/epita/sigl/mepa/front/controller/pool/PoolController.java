@@ -75,13 +75,13 @@ public class PoolController {
         return "/creerPoule";
     }
 
-    @RequestMapping(value="/creerPoule", method = RequestMethod.POST)
-    public String creer(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
-                         @RequestParam("teams") String[] teams, CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    @RequestMapping(value="/poolManager", method = RequestMethod.POST)
+    public String creer2(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
+                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/creerPoule";
+            return "/poolManager";
         }
 
         List<Pool> l = this.s.getAllPools();
@@ -94,15 +94,20 @@ public class PoolController {
 
         Set<Team> listteams = new HashSet<Team>();
 
-        for (String id_teams: teams) {
-            listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
-        }
-        newPool.setTeams(listteams);
-        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
         this.s.createPool(newPool);
 
-        this.s.getPoolById(newPool.getId()).setGames(newPool.getGames());
-        this.s.getPoolById(newPool.getId()).setTeams(newPool.getTeams());
+        Team newTeam = new Team();
+        for (String id_teams: createPoolFormBean.getTeams()) {
+            listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
+            newTeam = this.ts.getTeamById(Long.parseLong(id_teams));
+            System.out.println("Team = " + newTeam.getId());
+            newTeam.setPool(newPool);
+            this.ts.updateTeam(newTeam);
+        }   
+
+        newPool.setTeams(listteams);
+        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
+
 
         modelMap.addAttribute("pool", newPool);
 
@@ -111,14 +116,15 @@ public class PoolController {
     }
 
 
-    @RequestMapping(value="/poolManager/{id}", method = RequestMethod.GET)
-    public String creer(@PathVariable("id") Long poolID, ModelMap modelMap,
+    @RequestMapping(value="/poolManager", method = RequestMethod.GET)
+    public String creer(@RequestParam("poolID") Long poolID, ModelMap modelMap,
                          CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/poolManager";
         }
+
         Pool p = new Pool();
         p=this.s.getPoolById(poolID);
         modelMap.addAttribute("pool", p);

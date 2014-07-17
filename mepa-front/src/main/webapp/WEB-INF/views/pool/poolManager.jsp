@@ -27,5 +27,5 @@
             </tbody>
         </table>
     <br/>
-    <%@ include file="/WEB-INF/views/pool/gameList.jsp"%>
+    <!--%@ include file="/WEB-INF/views/pool/gameList.jsp"%-->
 </div>
