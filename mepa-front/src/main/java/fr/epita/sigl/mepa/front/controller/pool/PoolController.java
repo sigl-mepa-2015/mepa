@@ -106,8 +106,6 @@ public class PoolController {
         }
 
         newPool.setTeams(listteams);
-        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
-
 
         modelMap.addAttribute("pool", newPool);
 
