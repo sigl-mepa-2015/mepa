@@ -94,15 +94,20 @@ public class PoolController {
 
         Set<Team> listteams = new HashSet<Team>();
 
-        for (String id_teams: createPoolFormBean.getTeams()) {
-            listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
-        }
-        newPool.setTeams(listteams);
-        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
         this.s.createPool(newPool);
 
-        this.s.getPoolById(newPool.getId()).setGames(newPool.getGames());
-        this.s.getPoolById(newPool.getId()).setTeams(newPool.getTeams());
+        Team newTeam = new Team();
+        for (String id_teams: createPoolFormBean.getTeams()) {
+            listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
+            newTeam = this.ts.getTeamById(Long.parseLong(id_teams));
+            System.out.println("Team = " + newTeam.getId());
+            newTeam.setPool(newPool);
+            this.ts.updateTeam(newTeam);
+        }   
+
+        newPool.setTeams(listteams);
+        newPool.setGames(generateGames(newPool.getTournament().getId(), newPool.getId()));
+
 
         modelMap.addAttribute("pool", newPool);
 
