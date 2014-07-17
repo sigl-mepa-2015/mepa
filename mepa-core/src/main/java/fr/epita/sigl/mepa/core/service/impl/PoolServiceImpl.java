@@ -42,10 +42,6 @@ public class PoolServiceImpl implements PoolService {
         return poolDao;
     }
 
-    public void setPoolDao(PoolDao poolDao) {
-        this.poolDao = poolDao;
-    }
-
     @Override
     @Transactional(readOnly = true)
     public Pool getPoolById(Long id) {

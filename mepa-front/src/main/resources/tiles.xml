@@ -83,4 +83,9 @@
         <put-attribute name="body" value="/WEB-INF/views/result/gameList.jsp" />
     </definition>
 
+    <!-- Player -->
+    <definition name="/player/create/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/player/create/form.jsp" />
+    </definition>
+
 </tiles-definitions>

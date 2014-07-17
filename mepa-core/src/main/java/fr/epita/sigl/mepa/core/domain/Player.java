@@ -26,7 +26,10 @@ public class Player implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nbPoint", nullable = false)
+    @Column(name = "firstname", nullable = true)
+    private String firstname;
+
+    @Column(name = "nbPoint", nullable = true)
     private Integer nbPoint;
 
     @ManyToOne
@@ -60,6 +63,18 @@ public class Player implements Serializable {
     public Player(String name) {
         this.name = name;
     }
+
+    public Player(String name, String firstname) {
+        this.name = name;
+        this.firstname = firstname;
+    }
+
+    public Player(String name, String firstname, Team team) {
+        this.name = name;
+        this.firstname = firstname;
+        this.team = team;
+    }
+
 
     public Team getTeam() {
         return team;
@@ -101,4 +116,13 @@ public class Player implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
 }

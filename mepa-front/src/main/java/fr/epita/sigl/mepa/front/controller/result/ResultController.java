@@ -1,16 +1,12 @@
 package fr.epita.sigl.mepa.front.controller.result;
 
 
-import fr.epita.sigl.mepa.core.domain.Game;
-import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
-import fr.epita.sigl.mepa.core.domain.Pool;
-import fr.epita.sigl.mepa.core.domain.Tournament;
-import fr.epita.sigl.mepa.core.service.GameService;
-import fr.epita.sigl.mepa.core.service.JoinedGameTeamService;
-import fr.epita.sigl.mepa.core.service.PoolService;
-import java.util.List;
+import fr.epita.sigl.mepa.core.domain.*;
+import fr.epita.sigl.mepa.core.service.*;
+
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,7 +32,12 @@ public class ResultController {
      
     @Autowired
     private JoinedGameTeamService jgs;
-    
+
+    @Autowired
+    private TeamService ts;
+
+    @Autowired
+    private PlayerService ps;
 
     /**
      * Default action : show all tournaments
@@ -55,12 +56,30 @@ public class ResultController {
      * Default action : show a team
      */
     @RequestMapping(value = {"/teamScore"}, method = RequestMethod.GET)
-    public String teamScore(@RequestParam("teamID") Long teamID) {
-        System.out.println("Ma froute sur ta tete id:"+ teamID);
+    public String teamScore(@RequestParam("teamID") Long teamID, ModelMap pModel) {
+        Team team = this.ts.getTeamById(teamID);
+        if (team != null) {
+            Set<Player> playerList = team.getPlayers();
+
+            pModel.addAttribute("playerList", playerList);
+        }
+
+        pModel.addAttribute("team", team);
         return "/result/teamScore";
     }
-    
-      @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/modifyPlayerScore"}, method = RequestMethod.POST)
+    public String modifyPlayerScore(HttpServletRequest request, ModelMap pModel) {
+
+        Long gameID = Long.parseLong(request.getParameter("playerID"));
+        Player p = this.ps.getPlayerById(gameID);
+        p.setNbPoint(Integer.parseInt(request.getParameter("playerScore")));
+        ps.updatePlayer(p);
+
+        return "redirect:/result/teamScore?teamID="+p.getTeam().getId();
+    }
+
+    @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
     public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel) {
         Pool pool = this.s.getPoolById(poolID);
         if (pool != null) {
