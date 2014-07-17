@@ -37,8 +37,21 @@
             <%-- Header --%>
             <tiles:insertAttribute name="header" />
             <%-- Body content --%>
-            <tiles:insertAttribute name="body" />
-            <div class="push"></div>
+            <div class="container">
+	           <div class="row">
+		           	<div class="col-md-10">
+		            	<tiles:insertAttribute name="body" />
+		            </div>
+		            <div class="col-md-2">
+		            	<a class="twitter-timeline" href="https://twitter.com/MepaSigl" data-widget-id="489393956145225728">Tweets de @MepaSigl</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+		            </div>
+	            </div>
+            </div/>
+	            
+	        <div class="push"></div>
+            
         </div>
         <%-- Footer --%>
         <tiles:insertAttribute name="footer" />
