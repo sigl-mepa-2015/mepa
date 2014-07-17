@@ -9,6 +9,9 @@
         <button type="button" class="pull-right btn btn-success" onClick="location.href = '${pageContext.request.contextPath}/team/form?tournamentID=${tournamentView.id}'">
             <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
         </button>
+        <button type="button" class="pull-right btn btn-success" onClick="location.href = '${pageContext.request.contextPath}/result/view?tournamentID=${tournamentView.id}'">
+            <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
+        </button>
         <h1>Tournoi ${tournamentView.name} </h1>
     </div>
 </div>

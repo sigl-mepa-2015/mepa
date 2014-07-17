@@ -65,13 +65,19 @@
     <definition name="/poolManager" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
-    <definition name="/afficherGame" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
-    </definition>
+   
 
     <!-- Result -->
     <definition name="/result/teamScore" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/result/teamScore.jsp" />
+    </definition>
+    
+    <definition name="/result/view" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/result/view.jsp" />
+    </definition>
+    
+     <definition name="/afficherGame" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/result/gameList.jsp" />
     </definition>
 
 </tiles-definitions>

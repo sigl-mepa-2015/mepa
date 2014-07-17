@@ -7,6 +7,7 @@
 </div>
 
 <div class="container">
+     <input type="HIDDEN" name="poolID" value="${poolID}">
             </br>
             <table class="table table-striped table-bordered" id="rangeTable">
                 <thead>
@@ -15,6 +16,9 @@
                         <th>Score eq 1</th>
                         <th>Equipe 2</th>
                         <th>Score eq 2</th>
+                        <th>Lancer match</th>
+                        <th>Terminé match</th>
+                        <th>Etat</th>
                         <th>Durée</th>
                         <th></th>
                     </tr>
@@ -32,8 +36,11 @@
                                      <c:set var="i" value="${i + 1}"/>
                                  </c:forEach>
 
-
-                                 <td><input type="text" id="duration" name="duration" value="${g.duration}"/></td>
+                                 <td><button type="button"  enabled="true" id="Start" class="btn btn-default btn-lg"> LM <Button/>
+                                </td>
+                                 <td><button type="button" disabled="true" id="end" class="btn btn-default btn-lg"> TM <Button/></td>
+                                 <td><input type="text" name="status" size="4" value="${g.status}"/></td>
+                                 <td><input type="text" id="duration" size="2" name="duration" value="${g.duration}"/></td>
                                  <td><input type="submit" id="valider"/></td>
 
                              </form:form>
