@@ -5,5 +5,5 @@
         <h1>TEAM SCORE</h1>
     </div>
 </div>
-<div class="container">
+<div>
 </div>

@@ -1,5 +1,10 @@
 /* /!\ always use the dash-spaced pattern (my-class and not myClass) for id and class names /!\ */
 
+
+.container {
+	width: 95%;
+}
+
 /* Example below to delete */
 .well-done img {
     border-radius: 10px;
