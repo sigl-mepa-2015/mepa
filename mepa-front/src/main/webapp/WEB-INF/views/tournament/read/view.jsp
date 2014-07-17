@@ -52,7 +52,7 @@
         <tbody>
         <c:forEach items="${tournamentView.pools}" var="p">
             <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
-                <td><button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/afficherGame?poolID=${p.id}'">
+                <td><button type="button" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath}/poolManager?poolID=${p.id}'">
                     <span class="glyphicon glyphicon-arrow-right"></span>
                 </button></td>
             </tr>
