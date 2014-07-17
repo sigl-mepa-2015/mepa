@@ -100,7 +100,6 @@ public class PoolController {
         for (String id_teams: createPoolFormBean.getTeams()) {
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
             newTeam = this.ts.getTeamById(Long.parseLong(id_teams));
-            System.out.println("Team = " + newTeam.getId());
             newTeam.setPool(newPool);
             this.ts.updateTeam(newTeam);
         }
