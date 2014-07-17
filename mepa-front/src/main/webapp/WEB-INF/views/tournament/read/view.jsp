@@ -29,7 +29,7 @@
         <tbody>
             <c:forEach items="${tournamentView.teams}" var="t">
                 <tr>
-                    <td width="70%">${t.name}</td>
+                    <td width="70%"><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
                     <td width="70%">${t.tournament.name}</td>
                     <td width="30%">
                         <button type="button" class="btn btn-info" onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">

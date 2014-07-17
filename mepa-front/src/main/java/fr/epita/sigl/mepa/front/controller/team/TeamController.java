@@ -57,6 +57,17 @@ public class TeamController {
 
     }
 
+    @RequestMapping(value="/detail/{id}", method=RequestMethod.GET)
+    public ModelAndView detailTeam(@PathVariable("id") Long teamID){
+
+        System.out.print("*****\n*****\n*****\nYOU ARE HERE MOTHER FUCKER\n\n\n**********");
+        Team team = teamService.getTeamById(teamID);
+        ModelAndView mv = new ModelAndView("/team/detail");
+        mv.addObject("team", team);
+        return mv;
+
+    }
+
 
     @RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
     public String processForm(HttpServletRequest request, ModelMap modelMap,
