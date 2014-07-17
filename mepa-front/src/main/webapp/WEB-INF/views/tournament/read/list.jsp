@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div>
     <div class="page-header">
         <spring:message code="create" var="addLabel"/>
         <sec:authorize access="isAuthenticated()">
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="container">
+<div>
     <c:if test="${not empty removed}">
         <div id="message_box" class="alert alert-success">
             <spring:message code="tournament.remove.resultMessage" arguments="${removed}"/>
