@@ -9,12 +9,13 @@
 
     <c:if test="${not empty created}">
         <div id="message_box" class="alert alert-success">
-            <spring:message code="pool.create.resultMessage" arguments="${created}"/>
+            Poule bien crée.
+            <!--spring:message code="pool.create.resultMessage" arguments="${created}"/-->
         </div>
     </c:if>
 
     <script>
-        $("#message_box").delay(1500).slideUp();
+        $("#message_box").delay(3000).slideUp();
     </script>
 </div>
 <div>

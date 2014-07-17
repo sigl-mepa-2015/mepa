@@ -16,6 +16,7 @@
     <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" action="${pageContext.request.contextPath}/poolManager?tournamentID=${tournamentID}" method="POST">
         <label class="col-lg-3">Nom de la poule</label>
         <input type="HIDDEN" name="tournamentID" value="${tournamentID}">
+        <input type="HIDDEN" name="created" value="1">
         <input type="text" class="col-lg-3" name="name" required="required"><br/>
         </br>
         <table class="table table-striped table-bordered" id="rangeTable">
