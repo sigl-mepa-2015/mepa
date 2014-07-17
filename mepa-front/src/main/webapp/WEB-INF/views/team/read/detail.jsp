@@ -16,6 +16,7 @@
         <tr>
             <th>Nom du joueur</th>
             <th>Prénom du joueur</th>
+            <th>Editer</th>
         </tr>
         </thead>
         <tbody>
@@ -26,9 +27,11 @@
 
                 <td width="70%">${player.firstname}</td>
 
-
-                        <td width="70%"></td>
-
+<td>
+                <button type="button" class="btn btn-info" onClick="location.href = '${pageContext.request.contextPath}/player/edit?playerID=${player.id}'">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+</td>
 
             </tr>
         </c:forEach>
