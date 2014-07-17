@@ -16,7 +16,7 @@
             <form:input id="id" path="id" class="form-control" maxlength="20" value="${player.id}" type="hidden" placeholder="${namePlaceholder}"/>
             <br/>
             <button type="submit" class="btn btn-primary">
-                <spring:message code="add" /></button>
+                <spring:message code="update" /></button>
         </div>
     </form:form>
 </div>

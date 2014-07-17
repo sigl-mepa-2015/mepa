@@ -61,6 +61,16 @@ public class PlayerController {
 
     }
 
+    @RequestMapping(value="/delete", method=RequestMethod.GET)
+    public String deletePlayer(@RequestParam("playerID") Long playerID,
+                                     @RequestParam("teamID") Long teamID){
+
+        Player player = playerService.getPlayerById(playerID);
+        Team team = teamService.getTeamById(teamID);
+        playerService.deletePlayer(player);
+        return "redirect:/team/detail/"+team.getId();
+    }
+
 
     @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
     public String processEditForm(HttpServletRequest request, ModelMap modelMap,

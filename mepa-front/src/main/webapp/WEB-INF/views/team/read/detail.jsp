@@ -17,6 +17,7 @@
             <th>Nom du joueur</th>
             <th>Prénom du joueur</th>
             <th>Editer</th>
+            <th>Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,11 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </button>
 </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onClick="location.href = '${pageContext.request.contextPath}/player/delete?playerID=${player.id}&teamID=${team.id}'">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </td>
 
             </tr>
         </c:forEach>
