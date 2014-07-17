@@ -99,14 +99,23 @@ public class ResultController {
         Long gameID = Long.parseLong(request.getParameter("gameID"));
         Game g = this.gs.getGameById(gameID);
         g.setDuration(Integer.parseInt(request.getParameter("duration")));
-        this.gs.updateGame(g);
+        
 
+        if (request.getParameter("status").compareTo("TODO") == 0)
+            return ("result/erreur");
+        if (request.getParameter("status").compareTo("En cours") == 0)
+            g.setStatus(Game.GameStatus.PROGRESS);
+        else
+            g.setStatus(Game.GameStatus.DONE);
+        this.gs.updateGame(g);
+        
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
             Long joinedGameTeam1 = Long.parseLong(request.getParameter("joinedID1"));
             JoinedGameTeam j1 = this.jgs.getJoinedGameById(joinedGameTeam1);
             j1.setScore(Integer.parseInt(request.getParameter("resultEquipe1")));
             this.jgs.updateJoinedGameTeam(j1);
         }
+      
         if (request.getParameter("resultEquipe2").compareTo("") != 0) {
             Long joinedGameTeam2 = Long.parseLong(request.getParameter("joinedID2"));
             JoinedGameTeam j2 = this.jgs.getJoinedGameById(joinedGameTeam2);
