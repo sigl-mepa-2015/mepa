@@ -63,9 +63,11 @@
 
     <!-- Pool -->
     <definition name="/creerPoule" extends="base.definition">
+        <put-attribute name="title" value="creerPoule.Title" />
         <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
     </definition>
     <definition name="/poolManager" extends="base.definition">
+        <put-attribute name="title" value="poolManager.title" />
         <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
    
@@ -87,5 +89,9 @@
     <definition name="/player/create/form" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/player/create/form.jsp" />
     </definition>
+    <definition name="/player/edit/form" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/player/edit/form.jsp" />
+    </definition>
+
 
 </tiles-definitions>

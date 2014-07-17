@@ -5,7 +5,19 @@
 		<h1>Poule ${pool.name}</h1>
 	</div>
 </div>
+<div>
 
+    <c:if test="${not empty created}">
+        <div id="message_box" class="alert alert-success">
+            Poule bien crée.
+            <!--spring:message code="pool.create.resultMessage" arguments="${created}"/-->
+        </div>
+    </c:if>
+
+    <script>
+        $("#message_box").delay(3000).slideUp();
+    </script>
+</div>
 <div>
    <h3> Classement des équipes : </h3><br/>
         <table class="table table-striped">

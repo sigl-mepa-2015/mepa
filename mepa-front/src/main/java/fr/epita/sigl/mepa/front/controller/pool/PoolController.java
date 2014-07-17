@@ -41,8 +41,6 @@ public class PoolController {
     @Autowired
     private JoinedGameTeamService jgs;
 
-    private boolean match = false;
-
 
     private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     protected static final String POOL_MODEL_ATTRIBUTE = "pools";
@@ -78,13 +76,20 @@ public class PoolController {
     }
 
     @RequestMapping(value="/poolManager", method = RequestMethod.POST)
-    public String createPool(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
-                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    public String createPool(@RequestParam(value = "tournamentID", required = true) Long tournamentID,
+                             @RequestParam(value = "created", required = false) Long poolID,
+                             ModelMap modelMap,
+                             CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/poolManager";
         }
+        // My code
+        if (poolID != null){
+            modelMap.addAttribute("created", 1);//this.s.getPoolById(poolID));
+        }
+        // End MyCode
 
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);

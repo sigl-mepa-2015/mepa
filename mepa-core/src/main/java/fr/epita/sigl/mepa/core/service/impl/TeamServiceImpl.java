@@ -43,7 +43,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void deleteTeam(Team team) {
-        this.deleteTeam(team);
+        this.teamDao.delete(team);
     }
 
     @Override

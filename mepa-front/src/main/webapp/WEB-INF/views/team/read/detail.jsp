@@ -16,6 +16,8 @@
         <tr>
             <th>Nom du joueur</th>
             <th>Prénom du joueur</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -26,9 +28,16 @@
 
                 <td width="70%">${player.firstname}</td>
 
-
-                        <td width="70%"></td>
-
+<td>
+                <button type="button" class="btn btn-info" onClick="location.href = '${pageContext.request.contextPath}/player/edit?playerID=${player.id}'">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </button>
+</td>
+                <td>
+                    <button type="button" class="btn btn-danger" onClick="location.href = '${pageContext.request.contextPath}/player/delete?playerID=${player.id}&teamID=${team.id}'">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </td>
 
             </tr>
         </c:forEach>

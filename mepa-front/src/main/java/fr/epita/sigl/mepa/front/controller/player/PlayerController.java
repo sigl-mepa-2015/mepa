@@ -55,10 +55,37 @@ public class PlayerController {
     public ModelAndView editPlayer(@RequestParam("playerID") Long playerID){
 
         Player player = playerService.getPlayerById(playerID);
-        ModelAndView mv = new ModelAndView("player/edit/form");
+        ModelAndView mv = new ModelAndView("/player/edit/form");
         mv.addObject("player", player);
         return mv;
 
+    }
+
+    @RequestMapping(value="/delete", method=RequestMethod.GET)
+    public String deletePlayer(@RequestParam("playerID") Long playerID,
+                                     @RequestParam("teamID") Long teamID){
+
+        Player player = playerService.getPlayerById(playerID);
+        Team team = teamService.getTeamById(teamID);
+        playerService.deletePlayer(player);
+        return "redirect:/team/detail/"+team.getId();
+    }
+
+
+    @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
+    public String processEditForm(HttpServletRequest request, ModelMap modelMap,
+                              @Valid PlayerFormBean playerFormBean, BindingResult result,
+                              @RequestParam("teamID") Long teamID) {
+        if (result.hasErrors()) {
+            // Error(s) in form bean validation
+            return "/team/read/list";
+        }
+        Team team = teamService.getTeamById(teamID);
+        Player editPlayer = playerService.getPlayerById(playerFormBean.getId());
+        editPlayer.setName(playerFormBean.getName());
+        editPlayer.setFirstname(playerFormBean.getFirstname());
+        playerService.updatePlayer(editPlayer);
+        return "redirect:/team/detail/"+team.getId();
     }
 
 
