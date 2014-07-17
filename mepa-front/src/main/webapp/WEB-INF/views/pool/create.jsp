@@ -7,7 +7,7 @@
 </div>
 
 <div>
-        <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" method="POST">
+        <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" action="${pageContext.request.contextPath}/poolManager?tournamentID=${tournamentID}" method="POST">
             <label class="col-lg-3">Nom de la poule</label>
             <input type="HIDDEN" name="tournamentID" value="${tournamentID}">
             <input type="text" class="col-lg-3" name="name" required="required"><br/>

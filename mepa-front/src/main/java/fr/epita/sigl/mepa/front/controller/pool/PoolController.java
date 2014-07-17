@@ -75,13 +75,13 @@ public class PoolController {
         return "/creerPoule";
     }
 
-    @RequestMapping(value="/creerPoule", method = RequestMethod.POST)
-    public String creer(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
-                         @RequestParam("teams") String[] teams, CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    @RequestMapping(value="/poolManager", method = RequestMethod.POST)
+    public String createPool(@RequestParam("tournamentID") Long tournamentID, ModelMap modelMap,
+                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/creerPoule";
+            return "/poolManager";
         }
 
         List<Pool> l = this.s.getAllPools();
@@ -94,7 +94,7 @@ public class PoolController {
 
         Set<Team> listteams = new HashSet<Team>();
 
-        for (String id_teams: teams) {
+        for (String id_teams: createPoolFormBean.getTeams()) {
             listteams.add(ts.getTeamById(Long.parseLong(id_teams)));
         }
         newPool.setTeams(listteams);
@@ -111,16 +111,18 @@ public class PoolController {
     }
 
 
-    @RequestMapping(value="/poolManager/{id}", method = RequestMethod.GET)
-    public String creer(@PathVariable("id") Long poolID, ModelMap modelMap,
-                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    @RequestMapping(value="/poolManager", method = RequestMethod.GET)
+    public String creer(@RequestParam("poolID") Long poolID, ModelMap modelMap,
+                         BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/poolManager";
         }
+
         Pool p = new Pool();
         p=this.s.getPoolById(poolID);
+        System.out.println(p.getTeams());
         modelMap.addAttribute("pool", p);
 
         return "/poolManager";
