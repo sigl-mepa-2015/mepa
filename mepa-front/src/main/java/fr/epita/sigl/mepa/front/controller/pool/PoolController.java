@@ -164,25 +164,30 @@ public class PoolController {
     public void generateGames(Long id_team, Long id_pool) {
         for(int i = 0; i < this.ts.getAllOrderTeamsByPhase(id_team).size(); ++i) {
             for(int j = i + 1; j < this.ts.getAllOrderTeamsByPhase(id_team).size(); ++j) {
-                Game g = new Game();
-                JoinedGameTeam jg1 = new JoinedGameTeam();
-                jg1.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(i));
-                JoinedGameTeam jg2 = new JoinedGameTeam();
-                jg2.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(j));
+                if(this.ts.getAllOrderTeamsByPhase(id_team).get(i).getPool() != null
+                        && this.ts.getAllOrderTeamsByPhase(id_team).get(i).getPool().getId().longValue() == id_pool
+                        && this.ts.getAllOrderTeamsByPhase(id_team).get(j).getPool() != null
+                        && this.ts.getAllOrderTeamsByPhase(id_team).get(j).getPool().getId().longValue() == id_pool) {
+                    Game g = new Game();
+                    JoinedGameTeam jg1 = new JoinedGameTeam();
+                    jg1.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(i));
+                    JoinedGameTeam jg2 = new JoinedGameTeam();
+                    jg2.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(j));
 
-                jg1.setGame(g);
-                jg2.setGame(g);
+                    jg1.setGame(g);
+                    jg2.setGame(g);
 
-                Set<JoinedGameTeam> st = new HashSet<JoinedGameTeam>();
-                st.add(jg1);
-                st.add(jg2);
-                g.setJoinedGameTeams(st);
-                g.setPool(this.s.getPoolById(id_pool));
-                g.setStatus(Game.GameStatus.TODO);
+                    Set<JoinedGameTeam> st = new HashSet<JoinedGameTeam>();
+                    st.add(jg1);
+                    st.add(jg2);
+                    g.setJoinedGameTeams(st);
+                    g.setPool(this.s.getPoolById(id_pool));
+                    g.setStatus(Game.GameStatus.TODO);
 
-                this.gs.createGame(g);
-                this.jgs.createJoinedGameTeam(jg1);
-                this.jgs.createJoinedGameTeam(jg2);
+                    this.gs.createGame(g);
+                    this.jgs.createJoinedGameTeam(jg1);
+                    this.jgs.createJoinedGameTeam(jg2);
+                }
             }
         }
     }
