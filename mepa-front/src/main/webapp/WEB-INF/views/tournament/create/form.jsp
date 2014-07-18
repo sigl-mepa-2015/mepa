@@ -37,6 +37,13 @@
                                 placeholder="${maxTeamNumberPlaceholder}"/>
                 </div>
                 <div class="input-group col-md-4">
+                    <form:errors path="maxPlayerNumber" cssStyle="color: #FF0000;" htmlEscape="false"/>
+                    <label for="maxPlayerNumber"><spring:message code="tournament.form.maxPlayerNumberLabel"/></label>
+                    <spring:message code='tournament.form.maxPlayerNumberPlaceholder' var="maxPlayerNumberPlaceholder"/>
+                    <form:input id="maxPlayerNumber" path="maxPlayerNumber" class="form-control" min="0" type="number"
+                                placeholder="${maxPlayerNumberPlaceholder}"/>
+                </div>
+                <div class="input-group col-md-4">
                     <form:errors path="type" cssStyle="color: #FF0000;" htmlEscape="false"/>
                     <label for="type"><spring:message code="tournament.form.typeLabel"/></label>
                     <spring:message code='tournament.form.typePlaceholder' var="typePlaceholder"/>

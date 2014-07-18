@@ -136,6 +136,7 @@
                         <th><spring:message code="name"/></th>
                         <th><spring:message code="type"/></th>
                         <th><spring:message code="maxTeamNumber"/></th>
+                        <th><spring:message code="maxPlayerNumber"/></th>
                         <th><spring:message code="actions"/></th>
                     </tr>
                     </thead>
@@ -145,6 +146,7 @@
                             <td>${t.name}</td>
                             <td>${t.type}</td>
                             <td>${t.maxTeamNumber}</td>
+                            <td>${t.maxPlayerNumber}</td>
                             <td class="col-md-4">
                                 <sec:authorize access="isAuthenticated()">
                                     <spring:message code="update" var="updateLabel"/>

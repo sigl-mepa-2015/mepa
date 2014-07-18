@@ -26,8 +26,10 @@ public class Tournament implements Serializable {
     private Integer maxTeamNumber;
     @NotBlank
     private String name;
-
     private Set<Phase> phases;
+    @Digits(integer = 10, fraction = 0)
+    @Min(0)
+    private Integer maxPlayerNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,5 +77,14 @@ public class Tournament implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "maxPlayerNumber", nullable = true)
+    public Integer getMaxPlayerNumber() {
+        return maxPlayerNumber;
+    }
+
+    public void setMaxPlayerNumber(Integer maxPlayerNumber) {
+        this.maxPlayerNumber = maxPlayerNumber;
     }
 }
