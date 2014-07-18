@@ -4,7 +4,7 @@
 	<div class="page-header">
 		<h1>Statistique d'equipe</h1>
 		<h4>Equipe : ${team.name}</h4>
-		<h5><spring:message code="tournament"/> : ${team.tournament.name}</h5>
+		<h5><spring:message code="tournament"/> : ${team.phase.name}</h5>
 		<h5>Poule : ${team.pool.name}</h5>
 	</div>
 </div>
