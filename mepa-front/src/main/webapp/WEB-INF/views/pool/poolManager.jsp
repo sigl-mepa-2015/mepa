@@ -65,7 +65,7 @@
                 <c:forEach items="${pool.games}" var="g" varStatus="loop">
                     <tr>
                         <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
-                        <td>${joined.team.name}</td>
+                            <td>${joined.team.name}</td>
                         </c:forEach>
                         <td>${g.status}</td>
                     </tr>
