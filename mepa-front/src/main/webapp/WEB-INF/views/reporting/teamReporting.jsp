@@ -6,7 +6,10 @@
 		<h4>Equipe : ${team.name}</h4>
 		<h5><spring:message code="tournament"/> : ${team.phase.name}</h5>
 		<h5>Poule : ${team.pool.name}</h5>
-	</div>
+        <a href="https://twitter.com/intent/tweet" data-text="#${team.name} Suivez les résultats de votre équipe ${team.name} : " class="twitter-mention-button" data-lang="fr">Tweeter les résultats</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
 </div>
 
 <div>
