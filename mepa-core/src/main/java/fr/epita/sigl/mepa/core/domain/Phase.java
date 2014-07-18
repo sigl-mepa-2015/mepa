@@ -158,9 +158,8 @@ public class Phase implements Serializable {
         return average;
     }
 
-    @Column(name = "maxPlayerNumber", nullable = true)
     public Integer getMaxPlayerNumber() {
-        return maxPlayerNumber;
+        return tournament.getMaxPlayerNumber();
     }
 
     public void setMaxPlayerNumber(Integer maxPlayerNumber) {
