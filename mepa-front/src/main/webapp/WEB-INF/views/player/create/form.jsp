@@ -12,9 +12,9 @@
             <label for="name"><spring:message code="player.form.nameLabel" /></label>
             <br/>
             <spring:message code='player.form.namePlaceholder' var="namePlaceholder"/>
-            <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}"/>
+            <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}" required="required"/>
             <spring:message code='player.form.firstnamePlaceholder' var="firstnamePlaceholder"/>
-            <form:input id="firstname" path="firstname" class="form-control" type="text" maxlength="20" placeholder="${firstnamePlaceholder}"/>
+            <form:input id="firstname" path="firstname" class="form-control" type="text" maxlength="20" placeholder="${firstnamePlaceholder}" required="required"/>
             <br/>
             <button type="submit" class="btn btn-primary">
                 <spring:message code="add" /></button>
