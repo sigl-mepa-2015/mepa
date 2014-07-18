@@ -167,7 +167,7 @@
                         </tr>
                         <c:forEach items="${t.phases}" var="p">
                             <tr class="phase info">
-                                <td>${p.name}</td>
+                                <td><i class="glyphicon glyphicon-chevron-right"></i>&nbsp;${p.name}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
