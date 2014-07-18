@@ -39,6 +39,7 @@
             <tr>
                 <th>Nom de l'équipe</th>
                 <th>Tournoi</th>
+                <th>Poule</th>
                 <th></th>
             </tr>
         </thead>
@@ -47,7 +48,9 @@
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
                     <td>${t.tournament.name}</td>
+                    <td><c:if test="${not empty t.pool}"><span class="glyphicon glyphicon-ok"></span></c:if></td>
                     <td  class="col-md-2">
+
                         <button type="button" class="btn btn-info" onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
                             <span class="glyphicon glyphicon-cog"></span>
                         </button>
