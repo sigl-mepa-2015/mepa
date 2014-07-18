@@ -2,6 +2,6 @@
 
 <div>
     <div class="alert alert-success">
-        <spring:message code="update.game.resultMessage" arguments="${g.name}" />
+        <spring:message code="update.game.resultMessage"/>
     </div>
 </div>

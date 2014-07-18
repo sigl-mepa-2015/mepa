@@ -5,15 +5,15 @@
     <div class="page-header">
         <a class="pull-right btn btn-success" title="Créer une poule"
            href="${pageContext.request.contextPath}/creerPoule?phaseID=${phaseView.id}">
-        <i class="glyphicon glyphicon-plus"></i> Créer une poule
+            <i class="glyphicon glyphicon-plus"></i> Créer une poule
         </a>
         <button type="button" class="pull-right btn btn-success"
                 onClick="location.href = '${pageContext.request.contextPath}/team/form?phaseID=${phaseView.id}'">
-        <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
+            <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
         </button>
         <button type="button" class="pull-right btn btn-success"
                 onClick="location.href = '${pageContext.request.contextPath}/result/view?phaseID=${phaseView.id}'">
-        <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
+            <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
         </button>
         <h1>Phase ${phaseView.name} </h1>
     </div>
@@ -36,7 +36,27 @@
     </div>
 </div>
 <div>
-    <h2>Maximum d'équipes allouables : <c:if test="${phaseView.maxTeamNumber <0}">-</c:if>
+    <c:if test="${not empty created}">
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <spring:message code="team.create.resultMessage" arguments="${created}"/>
+        </div>
+    </c:if>
+    <c:if test="${not empty delete}">
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <spring:message code="team.remove.resultMessage" arguments="${delete}"/>
+        </div>
+    </c:if>
+    <c:if test="${not empty update}">
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <spring:message code="team.update.resultMessage" arguments="${update}"/>
+        </div>
+    </c:if>
+</div>
+<div>
+    <h2>Nombre maximum d'équipes : <c:if test="${phaseView.maxTeamNumber <0}">-</c:if>
         ${phaseView.maxTeamNumber}</h2><br/>
 
     <h2>Liste des équipes :</h2> <br/>
@@ -59,7 +79,7 @@
 
                     <button type="button" class="btn btn-info"
                             onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
-                    <span class="glyphicon glyphicon-cog"></span>
+                        <span class="glyphicon glyphicon-cog"></span>
                     </button>
                     <%@ include file="/WEB-INF/views/team/remove/form.jsp" %>
                 </td>
@@ -107,3 +127,11 @@
         </c:otherwise>
     </c:choose>
 </div>
+</div>
+<script>
+    $(function() {
+        setTimeout(function() {
+            $('.alert').hide();
+        }, 3000);
+    });
+</script>

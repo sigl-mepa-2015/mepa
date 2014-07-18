@@ -98,8 +98,11 @@ public class ResultController {
     }
 
     @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
-    public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel) {
+    public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel, HttpServletRequest request) {
         Pool pool = this.s.getPoolById(poolID);
+        String message = request.getParameter("message");
+        pModel.addAttribute("message", message);
+        
         if (pool != null) {
             Set<Game> gameList = pool.getGames();
 
@@ -116,15 +119,23 @@ public class ResultController {
 
         Long gameID = Long.parseLong(request.getParameter("gameID"));
         Game g = this.gs.getGameById(gameID);
-        g.setDuration(Integer.parseInt(request.getParameter("duration")));
         
+        String message = null;
 
-        if (request.getParameter("Status").compareTo("TODO") == 0)
-            return ("result/erreur");
-        if (request.getParameter("Status").compareTo("En cours") == 0)
+        if ((request.getParameter("duration").compareTo("") != 0) || (request.getParameter("duration").compareTo("0") != 0))
+           g.setDuration(Integer.parseInt(request.getParameter("duration")));
+        else
+        {
+            message = "durée";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
+        }
+        
+         if (request.getParameter("Status").compareTo("En cours") == 0)
             g.setStatus(Game.GameStatus.PROGRESS);
         else
             g.setStatus(Game.GameStatus.DONE);
+         
         this.gs.updateGame(g);
         
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
@@ -133,6 +144,12 @@ public class ResultController {
             j1.setScore(Integer.parseInt(request.getParameter("resultEquipe1")));
             this.jgs.updateJoinedGameTeam(j1);
         }
+         else
+        {
+            message = "score";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
+        }
       
         if (request.getParameter("resultEquipe2").compareTo("") != 0) {
             Long joinedGameTeam2 = Long.parseLong(request.getParameter("joinedID2"));
@@ -140,8 +157,22 @@ public class ResultController {
             j2.setScore(Integer.parseInt(request.getParameter("resultEquipe2")));
             this.jgs.updateJoinedGameTeam(j2);
         }
-
+         else
+        {
+            message = "score";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
+        }
+        
+       
+        
+         if (request.getParameter("Status").compareTo("En cours") == 0)
+        message = "validerLive";
+         else
+             message = "ValiderFin";
+         modelMap.addAttribute("message", message);
         return "redirect:afficherGame?poolID="+g.getPool().getId();
+        
     }
 
     /**

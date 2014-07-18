@@ -67,22 +67,9 @@
                         <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
                             <td>${joined.team.name}</td>
                         </c:forEach>
-                        <td>
-                        <c:choose>
-                            <c:when test="${ g.status == 'TODO'}">
-                                Pas commencé
-                            </c:when>
-                            <c:when test="${ g.status == 'PROGRESS'}">
-                                En cours
-                            </c:when>
-                             <c:when test="${ g.status == 'DONE'}">
-                                Terminé
-                            </c:when>
-                            <c:otherwise>
-                                Indéterminé
-                            </c:otherwise>
-                        </c:choose>
-                        </td>
+
+                        <td><spring:message code="${g.status}" /></td>
+
                     </tr>
                 </c:forEach>
         </tbody>
