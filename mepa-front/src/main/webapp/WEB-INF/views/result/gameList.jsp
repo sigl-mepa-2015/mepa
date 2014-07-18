@@ -46,8 +46,8 @@
                         <th>Score eq 1</th>
                         <th>Equipe 2</th>
                         <th>Score eq 2</th>
-                        <th>Saisie des scores en live</th>
-                        <th>Saisie des scores finaux</th>
+                        <th>Scores en live</th>
+                        <th>Scores finaux</th>
                         <th>Etat</th>
                         <th>DurÃ©e</th>
                         <th></th>
@@ -76,9 +76,9 @@
                                 
                                  <c:if test="${(g.status == 'TODO')}">
                                        <td><button type="button"  class="btn btn-default btn-lg Start"> Direct </button></td>   
-                                <td><button  type="button"   class="btn btn-default btn-lg end"> Fin </button></td>
+                                 <td><button  type="button"   class="btn btn-default btn-lg end"> Fin </button></td>
                                  <td><input type="text" class="status" name="status" disabled="true" size="6"   value="${g.status}"/></td>
-                                 <td><input type="text" id="duration" size="2" disabled="true" name="duration" value="${g.duration}"/>
+                                 <td><input type="text" id="duration" size="2" disabled="true" name="duration" value="${g.duration}"/></td>
                                  <input type="HIDDEN" class="status" name="Status" value="${g.status}">
                                  <td><button type="submit" id="valider"/> Valider </button></td>
                                  </c:if>
@@ -88,13 +88,10 @@
                                          <td><button  type="button"   class="btn btn-default btn-lg end"> Fin </button></td>
                                          <td><input type="text" class="status" name="status" disabled="true" size="6"   value="${g.status}"/></td>
                                          <td><input type="text" id="duration" size="2"  name="duration" value="${g.duration}"/></td>
-                                      <input type="HIDDEN" class="status" name="Status" value="${g.status}">
+                                            <input type="HIDDEN" class="status" name="Status" value="${g.status}">
                                          <td><button type="submit" id="valider"/> Valider </button></td>
                                  </c:if>
-                                
-                                       
-
-                             </form:form>
+                           </form:form>
                          </tr>
                      </c:forEach>
 
