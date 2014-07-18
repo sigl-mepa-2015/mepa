@@ -27,22 +27,18 @@
     </script>
 </div>
 <div>
-   <h3> Classement des équipes : </h3><br/>
+   <h3> Liste des équipes : </h3><br/>
         <table class="table table-striped">
     <thead>
     <tr>
-        <th width="20%">Classement</th>
-        <th >Equipe</th>
+        <th >Equipes</th>
     </tr>
     </thead>
             <tbody>
-            <c:set var="i" value="1"/>
                 <c:forEach items="${pool.teams}" var="t"  varStatus="loop">
                     <tr>
-                        <td width="20%">${i}</td>
                         <td >${t.name}</td>
                     </tr>
-                <c:set var="i" value="${i+1}"/>
                </c:forEach>
             </tbody>
         </table>
