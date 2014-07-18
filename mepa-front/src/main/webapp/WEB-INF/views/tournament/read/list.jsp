@@ -127,7 +127,7 @@
         $("#message_box").delay(1500).slideUp();
     </script>
 
-    <div class="col-md-9 col-md-offset-1">
+    <div class="col-md-11 col-md-offset-1" style="text-align: center">
         <c:choose>
             <c:when test="${not empty tournaments}">
                 <table class="table table-striped" style="text-align: center">
@@ -147,7 +147,7 @@
                             <td>${t.type}</td>
                             <td>${t.maxTeamNumber}</td>
                             <td>${t.maxPlayerNumber}</td>
-                            <td class="col-md-4">
+                            <td class="col-md-2">
                                 <sec:authorize access="isAuthenticated()">
                                     <spring:message code="update" var="updateLabel"/>
                                     <a data-toggle="modal" data-target="#updateTournamentForm"
