@@ -11,7 +11,7 @@
             <label for="name"><spring:message code="team.form.nameLabel" /></label>
             <br/>
             <spring:message code='team.form.namePlaceholder' var="namePlaceholder"/>
-            <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}"/>
+            <form:input id="name" path="name" class="form-control" type="text" maxlength="20" placeholder="${namePlaceholder}" required="required"/>
             <form:input id="id" path="id" class="form-control" maxlength="20" value="${team.id}" type="hidden" placeholder="${namePlaceholder}"/>
             <br/>
             <button type="submit" class="btn btn-primary"><spring:message code="update" /></button>

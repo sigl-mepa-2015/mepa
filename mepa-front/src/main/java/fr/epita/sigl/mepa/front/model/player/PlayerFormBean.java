@@ -8,14 +8,18 @@ package fr.epita.sigl.mepa.front.model.player;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author david
  */
 public class PlayerFormBean {
     
-	@NotBlank  
+	@NotBlank
+    @NotNull
     private String name;
+    @NotNull
     private String firstname;
     private long id;
     private long teamID;

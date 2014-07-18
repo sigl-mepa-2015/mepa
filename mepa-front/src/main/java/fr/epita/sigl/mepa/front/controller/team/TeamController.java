@@ -135,7 +135,7 @@ public class TeamController {
             modelMap.addAttribute("teams", allTeam);
         }
 
-        return "redirect:/tournament/view/" + idtournament;
+        return "redirect:/phase/view/" + idtournament;
     }
 
     @ModelAttribute(TEAM_MODEL_ATTRIBUTE)
