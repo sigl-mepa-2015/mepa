@@ -28,10 +28,12 @@
             </thead>
             <tbody>
             <c:forEach items="${teams}" var="t" varStatus="loop">
-            <tr>
-                <td>${t.name}</td>
-                <td><input type="checkbox" name='teams' value="${t.id}"/></td>
-            <tr>
+            <c:if test="${t.pool == null}">
+                <tr>
+                    <td>${t.name}</td>
+                    <td><input type="checkbox" name='teams' value="${t.id}"/></td>
+                <tr>
+            </c:if>
                 </c:forEach>
             </tbody>
         </table>
