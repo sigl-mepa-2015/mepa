@@ -4,6 +4,8 @@
     <div class="page-header">
         <h1>Statistiques sur le tournoi</h1>
         <h4><spring:message code="tournament"/> : ${tournament.name}</h4>
+            <a href="https://twitter.com/intent/tweet" data-text="#${tournament.name} Suivez les résultats du tournoi ${tournament.name} : " class="twitter-mention-button" data-lang="fr">Tweeter les résultats</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </div>
 </div>
 
@@ -96,7 +98,7 @@
   		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="coming">
-	  		<h3>Liste des matchs a venir</h3>
+	  		<h3>Liste des matchs à venir</h3>
 	  		<c:forEach items="${tournament.pools}" var="pool">
 			<div class="panel-group" id="accordion">
 	 					 <div class="panel panel-default">
@@ -133,13 +135,13 @@
 		</c:forEach>
 	  </div>
 	  <div class="tab-pane" id="range">
-	  		<h3>Classement general pour le tournoi</h3>
+	  		<h3>Classement général pour le tournoi</h3>
 	  		<table class="table table-striped table-bordered" id="rangeTable">
 	  			<thead>
 	  				<tr>
 	  					<th>Classement</th>
-	  					<th>Equipe</th>
-	  					<th>Poule</th>
+	  					<th>Equipes</th>
+	  					<th>Poules</th>
 	  					<th>J</th>
 	  					<th>V</th>
 	  					<th>N</th>
@@ -173,14 +175,14 @@
             </table>
         </div>
         <div class="tab-pane" id="rangePlayer">
-            <h3>Classement general des joueurs pour le tournoi</h3>
+            <h3>Classement général des joueurs pour le tournoi</h3>
             <table class="table table-bordered table-striped" id="playerRange">
                 <thead>
                 <tr>
                     <th>Classement</th>
-                    <th>Joueur</th>
-                    <th>Equipe</th>
-                    <th>Point</th>
+                    <th>Joueurs</th>
+                    <th>Equipes</th>
+                    <th>Points</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -24,10 +24,13 @@ public class Tournament implements Serializable {
     @Digits(integer = 10, fraction = 0)
     @Min(0)
     private Integer maxTeamNumber;
+    private String hashTag;
     @NotBlank
     private String name;
-
     private Set<Phase> phases;
+    @Digits(integer = 10, fraction = 0)
+    @Min(0)
+    private Integer maxPlayerNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,6 +47,13 @@ public class Tournament implements Serializable {
     public Integer getMaxTeamNumber() {
         return maxTeamNumber;
     }
+
+    @Column(name = "hashTag", nullable = true)
+    public String getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(String hashTag) { this.hashTag = hashTag; }
 
     public void setMaxTeamNumber(Integer maxTeamNumber) {
         this.maxTeamNumber = maxTeamNumber;
@@ -75,5 +85,14 @@ public class Tournament implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "maxPlayerNumber", nullable = true)
+    public Integer getMaxPlayerNumber() {
+        return maxPlayerNumber;
+    }
+
+    public void setMaxPlayerNumber(Integer maxPlayerNumber) {
+        this.maxPlayerNumber = maxPlayerNumber;
     }
 }

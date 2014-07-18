@@ -127,16 +127,17 @@
         $("#message_box").delay(1500).slideUp();
     </script>
 
-    <div class="col-md-9 col-md-offset-1">
+    <div class="col-md-11 col-md-offset-1" style="text-align: center">
         <c:choose>
             <c:when test="${not empty tournaments}">
                 <table class="table table-striped" style="text-align: center">
                     <thead style="text-align: center">
                     <tr>
-                        <th><spring:message code="name"/></th>
-                        <th><spring:message code="type"/></th>
-                        <th><spring:message code="maxTeamNumber"/></th>
-                        <th><spring:message code="actions"/></th>
+                        <th style="text-align: center"><spring:message code="name"/></th>
+                        <th style="text-align: center"><spring:message code="type"/></th>
+                        <th style="text-align: center"><spring:message code="maxTeamNumber"/></th>
+                        <th style="text-align: center"><spring:message code="maxPlayerNumber"/></th>
+                        <th style="text-align: center"><spring:message code="actions"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -145,7 +146,8 @@
                             <td>${t.name}</td>
                             <td>${t.type}</td>
                             <td>${t.maxTeamNumber}</td>
-                            <td class="col-md-4">
+                            <td>${t.maxPlayerNumber}</td>
+                            <td class="col-md-2">
                                 <sec:authorize access="isAuthenticated()">
                                     <spring:message code="update" var="updateLabel"/>
                                     <a data-toggle="modal" data-target="#updateTournamentForm"
@@ -168,7 +170,7 @@
                                 <td>${p.name}</td>
                                 <td></td>
                                 <td></td>
-                                <td class="col-md-4">
+                                <td class="col-md-3">
                                     <sec:authorize access="isAuthenticated()">
                                         <button type="button" class="btn btn-primary"
                                                 onClick="location.href='${pageContext.request.contextPath}/phase/view/${p.id}'">

@@ -63,7 +63,7 @@
 
     <!-- Pool -->
     <definition name="/creerPoule" extends="base.definition">
-        <put-attribute name="title" value="creerPoule.Title" />
+        <put-attribute name="title" value="creerPoule.title" />
         <put-attribute name="body" value="/WEB-INF/views/pool/create.jsp" />
     </definition>
     <definition name="/poolManager" extends="base.definition">

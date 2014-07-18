@@ -2,6 +2,9 @@
 
 <div>
     <div class="page-header">
+        <button type="button" class="pull-right btn btn-success" onClick="location.href = '${pageContext.request.contextPath}/result/teamScore?teamID=${team.id}'">
+            <span class="glyphicon glyphicon-plus"></span> <spring:message code="result.bar.title.nav2"/>
+        </button>
         <button type="button" class="pull-right btn btn-success" onClick="location.href = '${pageContext.request.contextPath}/player/form?teamID=${team.id}'">
             <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav3"/>
         </button>
