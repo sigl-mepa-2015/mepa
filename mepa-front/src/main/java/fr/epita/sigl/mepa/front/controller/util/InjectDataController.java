@@ -1,24 +1,19 @@
 package fr.epita.sigl.mepa.front.controller.util;
 
-import java.io.Console;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-
+import fr.epita.sigl.mepa.core.domain.*;
+import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
 import fr.epita.sigl.mepa.core.service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.epita.sigl.mepa.core.domain.*;
-import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
-import fr.epita.sigl.mepa.front.controller.tournament.TournamentController;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/injectData")
@@ -28,6 +23,9 @@ public class InjectDataController {
 
     @Autowired
     private TournamentService tournamentservice;
+
+    @Autowired
+    private PhaseService phaseservice;
 
     @Autowired
     private PoolService poolservice;
@@ -50,42 +48,36 @@ public class InjectDataController {
     @Autowired
     private RoleService roleservice;
 
-    @RequestMapping(value="/cleanDatabase", method=RequestMethod.GET)
+    @RequestMapping(value = "/cleanDatabase", method = RequestMethod.GET)
     @ResponseBody
-    public void cleanData()
-    {
-        for(Tournament t : tournamentservice.getAllTournaments())
-        {
+    public void cleanData() {
+        for (Tournament t : tournamentservice.getAllTournaments()) {
             tournamentservice.deleteTournament(t);
         }
     }
 
-    private Pool createPool(int nb, Tournament t)
-    {
+    private Pool createPool(int nb, Phase t) {
         Pool p = new Pool();
         p.setName("PoolInjectViaController" + nb);
-        p.setTournament(t);
+        p.setPhase(t);
         poolservice.createPool(p);
         return p;
     }
 
-    private Team createTeam(int nb, Pool p, Tournament t, int nbPlayer)
-    {
+    private Team createTeam(int nb, Pool p, Phase t, int nbPlayer) {
         Team team = new Team();
         team.setName("TeamInject" + nb);
         team.setPool(p);
-        team.setTournament(t);
+        team.setPhase(t);
         teamservice.createTeam(team);
 
-        for (int i = 0; i < nbPlayer; i++)
-        {
+        for (int i = 0; i < nbPlayer; i++) {
             addGamer("Player-" + nb + "" + i, "Login-" + t.getId(), "test", team);
         }
         return team;
     }
 
-    private Game createGame(Pool p, Team t1, Team t2)
-    {
+    private Game createGame(Pool p, Team t1, Team t2) {
         Game game = new Game();
         game.setStatus(Game.GameStatus.TODO);
         game.setPool(p);
@@ -127,16 +119,14 @@ public class InjectDataController {
         mepauserservice.updateMepaUser(user);
     }
 
-    private void addGamer(String name, String login, String password, Team t)
-    {
+    private void addGamer(String name, String login, String password, Team t) {
         Role role = roleservice.getRoleByAuthority("PLAYER");
         MepaUser user = createUser(name, login, password);
         Player player = createPlayer(name, t, user);
         linkRoleToUser(role, user);
     }
 
-    private int whowin (int score1, int score2)
-    {
+    private int whowin(int score1, int score2) {
         if (score1 == score2)
             return 0;
         if (score1 > score2)
@@ -146,13 +136,11 @@ public class InjectDataController {
         return 0;
     }
 
-    private void addPoint (Team t, int nbpoint)
-    {
+    private void addPoint(Team t, int nbpoint) {
         Random randomGenerator = new Random();
         ArrayList<Player> players = new ArrayList<>(t.getPlayers());
 
-        for (int i = 0; i < nbpoint; i++)
-        {
+        for (int i = 0; i < nbpoint; i++) {
             int rand = randomGenerator.nextInt(players.size());
             Player p = players.get(rand);
             p.setNbPoint(p.getNbPoint() + 1);
@@ -160,12 +148,11 @@ public class InjectDataController {
         }
     }
 
-    @RequestMapping(value="/playGame", method=RequestMethod.GET)
+    @RequestMapping(value = "/playGame", method = RequestMethod.GET)
     @ResponseBody
-    public void playGame(long tournamentID, int pourcPlayed, int pourcPlaying, int maxPoint, int dmin, int dmax)
-    {
+    public void playGame(long tournamentID, int pourcPlayed, int pourcPlaying, int maxPoint, int dmin, int dmax) {
         Random randomGenerator = new Random();
-        Tournament t = tournamentservice.getTournamentById(tournamentID);
+        Phase t = phaseservice.getPhaseById(tournamentID);
         if (t != null) {
             for (Pool p : t.getPools()) {
                 for (Game g : p.getGames()) {
@@ -221,23 +208,25 @@ public class InjectDataController {
         }
     }
 
-    private void generateTournament(String tournamentName, int poolNumber, int teamNumber, int playerNumber, boolean return_game)
-    {
-    	Tournament t = new Tournament();
-    	t.setName(tournamentName);
-    	tournamentservice.createTournament(t);
-    	
-    	for (int i = 0; i < poolNumber; ++i)
-    	{
-    		Pool p = createPool(i, t);
-    		List<Team> listTeam = new ArrayList<Team>();
-    		for (int j = 0; j < teamNumber; j++)
-    		{
+    private void generateTournament(String tournamentName, int poolNumber, int teamNumber, int playerNumber, boolean return_game) {
+
+        Tournament t = new Tournament();
+        Phase p0 = new Phase(t);
+
+        t.setName(tournamentName);
+        p0.setName(tournamentName + " phase 1");
+        tournamentservice.createTournament(t);
+        phaseservice.createPhase(p0);
+
+        for (int i = 0; i < poolNumber; ++i) {
+            Pool p = createPool(i, p0);
+            List<Team> listTeam = new ArrayList<Team>();
+            for (int j = 0; j < teamNumber; j++) {
                 String nbTeam = "" + i;
                 nbTeam += j;
-    			Team te = createTeam(new Integer(nbTeam), p, t, playerNumber);
-    			listTeam.add(te);
-    		}
+                Team te = createTeam(new Integer(nbTeam), p, p0, playerNumber);
+                listTeam.add(te);
+            }
             if (return_game == true) {
                 for (Team t1 : listTeam) {
                     for (Team t2 : listTeam) {
@@ -246,55 +235,48 @@ public class InjectDataController {
                         }
                     }
                 }
-            }
-            else
-            {
-                for (int index = 0; index < listTeam.size(); index++)
-                {
+            } else {
+                for (int index = 0; index < listTeam.size(); index++) {
                     Team t1 = listTeam.get(index);
-                    for (int j = index + 1; j < listTeam.size(); j++)
-                    {
+                    for (int j = index + 1; j < listTeam.size(); j++) {
                         Team t2 = listTeam.get(j);
                         createGame(p, t1, t2);
                     }
                 }
             }
-    	}
+        }
     }
-    
-    @RequestMapping(value="/tournamentGenerator", method=RequestMethod.GET)
-    public ModelAndView generateTournament()
-    {
-    	ModelAndView mv = new ModelAndView("/injectData/tournamentGenerator");
-    	mv.addObject("allTournament", tournamentservice.getAllTournaments());
-		
-    	return mv;
+
+    @RequestMapping(value = "/tournamentGenerator", method = RequestMethod.GET)
+    public ModelAndView generateTournament() {
+        ModelAndView mv = new ModelAndView("/injectData/tournamentGenerator");
+        mv.addObject("allTournament", phaseservice.getAllPhases());
+
+        return mv;
     }
-    
-    @RequestMapping(value="/createTournament", method=RequestMethod.POST)
-    public  String createTournament(@RequestParam("tournamentName") String tournamentName,
-    		@RequestParam("poolNumber") int poolNumber,
-    		@RequestParam("teamNumber") int teamNumber,
-    		@RequestParam(value = "return", required = false) Boolean returnGame,
-    		@RequestParam("playerNumber") int playerNumber)
-    {
+
+    @RequestMapping(value = "/createPhase", method = RequestMethod.POST)
+    public String createTournament(@RequestParam("tournamentName") String tournamentName,
+                                   @RequestParam("poolNumber") int poolNumber,
+                                   @RequestParam("teamNumber") int teamNumber,
+                                   @RequestParam(value = "return", required = false) Boolean returnGame,
+                                   @RequestParam("playerNumber") int playerNumber) {
         if (returnGame == null)
-    	    this.generateTournament(tournamentName, poolNumber, teamNumber, playerNumber, false);
+            this.generateTournament(tournamentName, poolNumber, teamNumber, playerNumber, false);
         else
             this.generateTournament(tournamentName, poolNumber, teamNumber, playerNumber, returnGame);
         return "redirect:/tournament";
     }
-    
-    @RequestMapping(value="/playGame", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/playGame", method = RequestMethod.POST)
     public String playTournament(@RequestParam("tournamentId") int tournamentId,
-    		@RequestParam("pourPlaying") int pourPlaying,
-    		@RequestParam("currentPlaying") int currentPlaying,
-    		@RequestParam("minGame") int minGame,
-    		@RequestParam("maxGame") int maxGame,
-    		@RequestParam("scoreMax") int scoreMax)
-    {
-    	this.playGame(tournamentId, pourPlaying, currentPlaying, scoreMax, minGame, maxGame);
+                                 @RequestParam("pourPlaying") int pourPlaying,
+                                 @RequestParam("currentPlaying") int currentPlaying,
+                                 @RequestParam("minGame") int minGame,
+                                 @RequestParam("maxGame") int maxGame,
+                                 @RequestParam("scoreMax") int scoreMax) {
+        this.playGame(tournamentId, pourPlaying, currentPlaying, scoreMax, minGame, maxGame);
         return "redirect:/tournament";
     }
-    
+
 }

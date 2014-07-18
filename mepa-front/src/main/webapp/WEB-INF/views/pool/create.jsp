@@ -13,9 +13,9 @@
 </div>
 
 <div>
-    <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" action="${pageContext.request.contextPath}/poolManager?tournamentID=${tournamentID}" method="POST">
+    <form:form role="form"  id="formulaire1" modelAttribute="createPoolFormBean" action="${pageContext.request.contextPath}/poolManager?phaseID=${phaseID}" method="POST">
         <label class="col-lg-3">Nom de la poule</label>
-        <input type="HIDDEN" name="tournamentID" value="${tournamentID}">
+        <input type="HIDDEN" name="phaseID" value="${phaseID}">
         <input type="HIDDEN" name="created" value="1">
         <input type="text" class="col-lg-3" name="name" required="required"><br/>
         </br>
@@ -37,7 +37,7 @@
         </table>
         <button type="submit" class="btn btn-primary pull-right btn-success">Créer</button>
     </form:form>
-    <a class="pull-left btn btn-default" href="${pageContext.request.contextPath}/tournament/view/${tournamentID}" title="Annuler">
+    <a class="pull-left btn btn-default" href="${pageContext.request.contextPath}/phase/view/${phaseID}" title="Annuler">
         Annuler
     </a>
 

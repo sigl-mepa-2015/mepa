@@ -1,7 +1,5 @@
 package fr.epita.sigl.mepa.core.dao.impl;
 
-import java.util.List;
-
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import org.hibernate.Query;
@@ -10,6 +8,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+/**
+ * Created by Quentin on 17/07/2014.
+ */
 @Repository
 public class TournamentDaoImpl implements TournamentDao {
 
@@ -43,15 +46,9 @@ public class TournamentDaoImpl implements TournamentDao {
     }
 
     @Override
-    public Tournament getByType(String type) {
-        Query query = this.getSession().getNamedQuery("Tournament.findByType");
-        query.setParameter("type", type);
-        return (Tournament) query.uniqueResult();
-    }
-
-    @Override
     public List<Tournament> getAll() {
         Query query = this.getSession().getNamedQuery("Tournament.findAll");
         return query.list();
     }
 }
+

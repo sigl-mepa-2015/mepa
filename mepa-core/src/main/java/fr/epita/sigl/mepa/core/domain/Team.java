@@ -1,40 +1,25 @@
 package fr.epita.sigl.mepa.core.domain;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
-
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "Team")
 @NamedQueries({
     @NamedQuery(name = "Team.findById", query = "FROM Team o WHERE o.id=:id"),
     @NamedQuery(name = "Team.findAll", query = "FROM Team o"),
-    @NamedQuery(name = "Team.findAllOrderByTournamentId", 
-    query = "FROM Team t where t.tournament.id = :tournamentId "
-    		+ "ORDER BY t.winGame DESC, t.drawGame DESC, t.loseGame ASC")})
+        @NamedQuery(name = "Team.findAllOrderByPhaseId",
+                query = "FROM Team t where t.phase.id = :phaseId "
+                        + "ORDER BY t.winGame DESC, t.drawGame DESC, t.loseGame ASC")})
 
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    Integer winGame = 0;
+    Integer drawGame = 0;
+    Integer loseGame = 0;
     private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name="TOURNAMENT_ID")
-    private Tournament tournament;
-
-    @ManyToOne
-    @JoinColumn(name="POOL_ID")
-    private Pool pool;
 
     /*  public Set<Game> getGames() {
         return games;
@@ -46,23 +31,21 @@ public class Team implements Serializable {
 
     @ManyToMany(mappedBy = "teams")
     private Set<Game> games;*/
-
-    @OneToMany(cascade=CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
-    @OrderBy("name")
+    private String name;
+    private Phase phase;
+    private Pool pool;
     private Set<Player> players;
-
-    @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "team")
     private Set<JoinedGameTeam> joinedGameTeams;
 
+    public Team() {
+
+    }
+
+    public Team(String name) {
+        this.name = name;
+    }
+
     @Column(name = "winGame", nullable = true)
-    Integer winGame = 0;
-
-    @Column(name = "drawGame", nullable = true)
-    Integer drawGame = 0;
-
-    @Column(name = "loseGame", nullable = true)
-    Integer loseGame = 0;
-
     public Integer getWinGame() {
         return winGame;
     }
@@ -71,10 +54,12 @@ public class Team implements Serializable {
         this.winGame = winGame;
     }
 
+    @Column(name = "drawGame", nullable = true)
     public Integer getDrawGame() {
         return drawGame;
     }
 
+    @Column(name = "loseGame", nullable = true)
     public void setDrawGame(Integer drawGame) {
         this.drawGame = drawGame;
     }
@@ -87,6 +72,8 @@ public class Team implements Serializable {
         this.loseGame = loseGame;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Player.class, mappedBy = "team", fetch = FetchType.EAGER)
+    @OrderBy("name")
     public Set<Player> getPlayers() {
         return players;
     }
@@ -95,6 +82,8 @@ public class Team implements Serializable {
         this.players = players;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "POOL_ID")
     public Pool getPool() {
         return pool;
     }
@@ -103,16 +92,14 @@ public class Team implements Serializable {
         this.pool = pool;
     }
 
-    public Team() {
-        
-    }
-    
-    public Team(String name) {
-        this.name = name;
+    @ManyToOne
+    @JoinColumn(name = "PHASE_ID")
+    public Phase getPhase() {
+        return phase;
     }
 
-    public Tournament getTournament() {
-        return tournament;
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 
     public void addWin()
@@ -125,18 +112,16 @@ public class Team implements Serializable {
         this.drawGame += 1;
     }
 
-    public void addLose()
-    {
+    public void addLose() {
         this.loseGame += 1;
-    }
-
-    public void setTournament(Tournament tournament) {
-        this.tournament = tournament;
     }
 
     /**
      * @return the id
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
     }
@@ -151,6 +136,7 @@ public class Team implements Serializable {
     /**
      * @return the name
      */
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -162,6 +148,7 @@ public class Team implements Serializable {
         this.name = name;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = JoinedGameTeam.class, mappedBy = "team")
     public Set<JoinedGameTeam> getJoinedGameTeams() {
         return joinedGameTeams;
     }

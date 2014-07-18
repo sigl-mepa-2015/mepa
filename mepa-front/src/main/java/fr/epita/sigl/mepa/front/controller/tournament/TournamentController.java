@@ -2,6 +2,7 @@ package fr.epita.sigl.mepa.front.controller.tournament;
 
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.front.model.phase.RemovePhaseFormBean;
 import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
 import org.slf4j.Logger;
@@ -30,9 +31,10 @@ public class TournamentController {
     protected static final String TOURNAMENT_MODEL_ATTRIBUTE = "tournaments";
     private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
-    private static final String VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournamentView";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
     private static final String REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "removeTeamFormBean";
+
+    private static final String REMOVE_PHASE_FORM_BEAN_MODEL_ATTRIBUTE = "removePhaseFormBean";
 
     @Autowired
     private TournamentService tournamentService;
@@ -45,7 +47,7 @@ public class TournamentController {
      */
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public ModelAndView showAllTournaments(HttpServletRequest request) {
-        List<Tournament>  allTournament = tournamentService.getAllTournaments();
+        List<Tournament> allTournament = tournamentService.getAllTournaments();
         ModelAndView mv = new ModelAndView("/tournament/read/list");
         mv.addObject("tournaments", allTournament);
 
@@ -53,6 +55,10 @@ public class TournamentController {
         String updated = request.getParameter("updated");
         String created = request.getParameter("created");
         String unknown = request.getParameter("unknown");
+        String removedPhase = request.getParameter("removedPhase");
+        String updatedPhase = request.getParameter("updatedPhase");
+        String createdPhase = request.getParameter("createdPhase");
+        String unknownPhase = request.getParameter("unknownPhase");
 
         if (created != null) {
             mv.addObject("created", created);
@@ -62,6 +68,14 @@ public class TournamentController {
             mv.addObject("removed", removed);
         } else if (unknown != null) {
             mv.addObject("unknown", unknown);
+        } else if (createdPhase != null) {
+            mv.addObject("createdPhase", createdPhase);
+        } else if (updatedPhase != null) {
+            mv.addObject("updatedPhase", updatedPhase);
+        } else if (removedPhase != null) {
+            mv.addObject("removedPhase", removedPhase);
+        } else if (unknownPhase != null) {
+            mv.addObject("unknownPhase", unknownPhase);
         }
 
         return mv;
@@ -90,19 +104,6 @@ public class TournamentController {
         if (tournament == null)
             tournament = new Tournament();
         return new ModelAndView("/tournament/create/form", ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
-    }
-
-    /**
-     * Show the view of a tournament
-     *
-     * @return The view name
-     */
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView setupView(@PathVariable("id") long id) throws ServletRequestBindingException {
-        Tournament tournament = tournamentService.getTournamentById(id);
-        if (tournament == null)
-            return new ModelAndView("redirect:/?unknown="+id);
-        return new ModelAndView("/tournament/read/view", VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE, tournament);
     }
 
     /**
@@ -148,15 +149,10 @@ public class TournamentController {
             // Error(s) in form bean validation
             return "/tournament/read/list";
         }
-
         Tournament removedTournament = this.tournamentService.getTournamentById(removeTournamentFormBean.getId());
 
-        if (removedTournament.getPools().size() == 0 && removedTournament.getTeams().size() == 0) {
-            this.tournamentService.deleteTournament(removedTournament);
-            modelMap.addAttribute("tournament", removedTournament);
-            return "redirect:?removed=" + removedTournament.getName();
-        }
-        return "/tournament/read/list";
+        this.tournamentService.deleteTournament(removedTournament);
+        return "redirect:?removed=" + removedTournament.getName();
     }
 
     /**
@@ -182,16 +178,6 @@ public class TournamentController {
 
 
     /**
-     * Initialize "TournamentView" model attribute
-     *
-     * @return a new TournamentView.
-     */
-    @ModelAttribute(VIEW_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE)
-    public Tournament initTournamentView() {
-        return new Tournament();
-    }
-
-    /**
      * Initialize "RemoveTournamentFormBean" model attribute
      *
      * @return a new RemoveTournamentFormBean.
@@ -204,5 +190,10 @@ public class TournamentController {
     @ModelAttribute(REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE)
     public RemoveTeamFormBean initRemoveTeamFormBean() {
         return new RemoveTeamFormBean();
+    }
+    
+    @ModelAttribute(REMOVE_PHASE_FORM_BEAN_MODEL_ATTRIBUTE)
+    public RemovePhaseFormBean initRemovePhaseFormBean() {
+        return new RemovePhaseFormBean();
     }
 }

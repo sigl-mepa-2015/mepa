@@ -1,9 +1,12 @@
 package fr.epita.sigl.mepa.core.dao;
 
-import java.util.List;
-
 import fr.epita.sigl.mepa.core.domain.Tournament;
 
+import java.util.List;
+
+/**
+ * Created by Quentin on 17/07/2014.
+ */
 public interface TournamentDao {
 
     void create(Tournament tournament);
@@ -13,8 +16,6 @@ public interface TournamentDao {
     void delete(Tournament tournament);
 
     Tournament getById(Long id);
-
-    Tournament getByType(String type);
 
     List<Tournament> getAll();
 }

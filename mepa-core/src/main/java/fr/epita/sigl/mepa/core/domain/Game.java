@@ -1,24 +1,20 @@
 package fr.epita.sigl.mepa.core.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Set;
-
 import javax.persistence.*;
-
-import com.mysql.fabric.xmlrpc.base.Array;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="GAME")
 @NamedQueries({
         @NamedQuery(name = "Game.findById", query = "FROM Game o WHERE o.id=:id"),
         @NamedQuery(name = "Game.findAll", query = "FROM Game o"),
-        @NamedQuery(name = "Game.findAllComingByTournamentId", 
-        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'TODO'"),
-        @NamedQuery(name = "Game.findAllProgressByTournamentId", 
-        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'PROGRESS'"),
-        @NamedQuery(name = "Game.findAllEndedByTournamentId", 
-        query = "SELECT Count(g) FROM Game g WHERE g.pool.tournament.id = :tournamentId AND g.status = 'DONE'"),
+        @NamedQuery(name = "Game.findAllComingByPhaseId",
+                query = "SELECT Count(g) FROM Game g WHERE g.pool.phase.id = :phaseId AND g.status = 'TODO'"),
+        @NamedQuery(name = "Game.findAllProgressByPhaseId",
+                query = "SELECT Count(g) FROM Game g WHERE g.pool.phase.id = :phaseId AND g.status = 'PROGRESS'"),
+        @NamedQuery(name = "Game.findAllEndedByPhaseId",
+                query = "SELECT Count(g) FROM Game g WHERE g.pool.phase.id = :phaseId AND g.status = 'DONE'"),
         @NamedQuery(name = "Game.CountTodoGameByPoolId", 
         query = "SELECT Count(g) FROM Game g WHERE g.pool.id = :poolId AND g.status = 'TODO'"),
         @NamedQuery(name = "Game.CountProgressGameByPoolId", 
@@ -37,22 +33,11 @@ import com.mysql.fabric.xmlrpc.base.Array;
 public class Game implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
-    public enum GameStatus {
-        TODO("TODO"), PROGRESS("PROGRESS"), DONE("DONE");
-
-        private final String val;
-        GameStatus(String val) { this.val = val;}
-
-        public String getGameStatus() {
-            return val;
-        }
-    }
-	
 	private Long id;
 	private int duration;
 	private GameStatus status;
     private Pool pool;
+    private Set<JoinedGameTeam> joinedGameTeams;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -94,14 +79,26 @@ public class Game implements Serializable{
         this.pool = pool;
     }
 
-    private Set<JoinedGameTeam> joinedGameTeams;
-
-    @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = JoinedGameTeam.class, mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<JoinedGameTeam> getJoinedGameTeams() {
         return joinedGameTeams;
     }
 
     public void setJoinedGameTeams(Set<JoinedGameTeam> joinedGameTeams) {
         this.joinedGameTeams = joinedGameTeams;
+    }
+
+    public enum GameStatus {
+        TODO("TODO"), PROGRESS("PROGRESS"), DONE("DONE");
+
+        private final String val;
+
+        GameStatus(String val) {
+            this.val = val;
+        }
+
+        public String getGameStatus() {
+            return val;
+        }
     }
 }

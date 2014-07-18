@@ -1,7 +1,6 @@
 package fr.epita.sigl.mepa.core.service;
 
 import fr.epita.sigl.mepa.core.domain.Player;
-import fr.epita.sigl.mepa.core.domain.Tournament;
 
 import java.util.List;
 
@@ -20,5 +19,5 @@ public interface PlayerService {
 
     List<Player> getAllPlayers();
 
-    List<Player> getAllOrderPlayerByTournament(long tournamentid);
+    List<Player> getAllOrderPlayerByPhase(long tournamentid);
 }

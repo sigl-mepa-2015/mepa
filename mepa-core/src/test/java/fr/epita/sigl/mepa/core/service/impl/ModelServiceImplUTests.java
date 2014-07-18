@@ -1,20 +1,22 @@
 package fr.epita.sigl.mepa.core.service.impl;
 
+import fr.epita.sigl.mepa.core.dao.PhaseDao;
 import fr.epita.sigl.mepa.core.dao.TournamentDao;
+import fr.epita.sigl.mepa.core.domain.Phase;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.validation.ValidationUtils;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Date;
 import java.util.Set;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
@@ -22,70 +24,89 @@ import static org.mockito.Mockito.verify;
 public class ModelServiceImplUTests {
 
     @Mock
+    PhaseDao mockedPhaseDao;
+
+    @Mock
     TournamentDao mockedTournamentDao;
 
     @InjectMocks
-    TournamentServiceImpl modelService;
+    PhaseServiceImpl phaseService;
+
+    @InjectMocks
+    TournamentServiceImpl tournamentService;
 
     @Test
     public void createModel_ShouldCreateANewModel_WithDateVeryCloseToNow() {
         // Given
         Tournament tournamentToCreate = new Tournament();
+        Phase phaseToCreate = new Phase(tournamentToCreate);
         Date now = new Date();
         long deltaInMilliseconds = 500;
 
         // When
-        modelService.createTournament(tournamentToCreate);
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
 
         // Then
-        //assertThat(tournamentToCreate.getCreated()).isCloseTo(now, deltaInMilliseconds);
+        //assertThat(phaseToCreate.getCreated()).isCloseTo(now, deltaInMilliseconds);
     }
 
     @Test
     public void createModel_ShouldCreateANewModel_UsingModelDao() {
         // Given
         Tournament tournamentToCreate = new Tournament();
+        Phase phaseToCreate = new Phase(tournamentToCreate);
 
         // When
-        modelService.createTournament(tournamentToCreate);
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
 
         // Then
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
-    @Test
-    public void createTournamentWithOnlyName_ShouldCreateTournament_UsingTournamentDao()
-    {
-        Tournament tournamentToCreate = new Tournament();
 
-        tournamentToCreate.setName("Tournoi Test");
+    @Test
+    public void createPhaseWithOnlyName_ShouldCreatePhase_UsingPhaseDao() {
+        // Given
+        Tournament tournamentToCreate = new Tournament();
+        Phase phaseToCreate = new Phase(tournamentToCreate);
+
+        phaseToCreate.setName("Tournoi Test");
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "name");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "name");
         assertEquals(0, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 
     @Test
-    public void createTournamentWithoutName_ShouldNotCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithoutName_ShouldNotCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
+        Phase phaseToCreate = new Phase(tournamentToCreate);
 
-        tournamentToCreate.setName("");
+        phaseToCreate.setName("");
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "name");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "name");
         assertEquals(1, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 
     @Test
-    public void createTournamentWithNegativeMaxTeamNumber_ShouldNotCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithNegativeMaxTeamNumber_ShouldNotCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
+
         tournamentToCreate.setName("Tournoi Test");
 
         tournamentToCreate.setMaxTeamNumber(-6);
@@ -94,70 +115,92 @@ public class ModelServiceImplUTests {
         Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "maxTeamNumber");
         assertEquals(1, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+
         verify(mockedTournamentDao).create(tournamentToCreate);
     }
 
     @Test
-    public void createTournamentWithPositiveMaxTeamNumber_ShouldCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithPositiveMaxTeamNumber_ShouldCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
-        tournamentToCreate.setName("Tournoi Test");
+        Phase phaseToCreate = new Phase(tournamentToCreate);
 
-        tournamentToCreate.setMaxTeamNumber(12);
+        phaseToCreate.setName("Tournoi Test");
+
+        phaseToCreate.setMaxTeamNumber(12);
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "maxTeamNumber");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "maxTeamNumber");
         assertEquals(0, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 
     @Test
-    public void createTournamentWithType_ShouldCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithType_ShouldCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
-        tournamentToCreate.setName("Tournoi Test");
+        Phase phaseToCreate = new Phase(tournamentToCreate);
 
-        tournamentToCreate.setType("Football");
+        phaseToCreate.setName("Tournoi Test");
+
+        phaseToCreate.setType("Football");
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "type");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "type");
         assertEquals(0, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 
     @Test
-    public void createTournamentWithoutType_ShouldCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithoutType_ShouldCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
-        tournamentToCreate.setName("Tournoi Test");
+        Phase phaseToCreate = new Phase(tournamentToCreate);
+
+        phaseToCreate.setName("Tournoi Test");
 
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "type");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "type");
         assertEquals(0, constraintViolations.size());
 
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 
     @Test
-    public void createTournamentWithTypeAndSpecialCaracters_ShouldCreateTournament_UsingTournamentDao()
-    {
+    public void createPhaseWithTypeAndSpecialCaracters_ShouldCreatePhase_UsingPhaseDao() {
+        // Given
         Tournament tournamentToCreate = new Tournament();
-        tournamentToCreate.setName("Tournoi Test");
+        Phase phaseToCreate = new Phase(tournamentToCreate);
 
-        tournamentToCreate.setType(",;:!?./§&é'(è_çà=$*^ù'");
+        phaseToCreate.setName("Tournoi Test");
+
+        phaseToCreate.setType(",;:!?./§&é'(è_çà=$*^ù'");
         ValidatorFactory fact = Validation.buildDefaultValidatorFactory();
         Validator v = fact.getValidator();
-        Set<ConstraintViolation<Tournament>> constraintViolations = v.validateProperty(tournamentToCreate, "type");
+        Set<ConstraintViolation<Phase>> constraintViolations = v.validateProperty(phaseToCreate, "type");
         assertEquals(0, constraintViolations.size());
-        modelService.createTournament(tournamentToCreate);
-        verify(mockedTournamentDao).create(tournamentToCreate);
+        // When
+        tournamentService.createTournament(tournamentToCreate);
+        phaseService.createPhase(phaseToCreate);
+
+        verify(mockedPhaseDao).create(phaseToCreate);
     }
 }
 

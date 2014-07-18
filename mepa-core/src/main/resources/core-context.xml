@@ -1,27 +1,29 @@
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
                         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 ">
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
-    <context:component-scan base-package="fr.epita.sigl.mepa.core" />
+    <context:component-scan base-package="fr.epita.sigl.mepa.core"/>
 
     <!-- Remove this name source below when you will use a JNDI name source -->
     <bean id="coreDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${dataSource.driverClassName}" />
-        <property name="url" value="${dataSource.url}" />
-        <property name="username" value="${dataSource.username}" />
-        <property name="password" value="${dataSource.password}" />
+        <property name="driverClassName" value="${dataSource.driverClassName}"/>
+        <property name="url" value="${dataSource.url}"/>
+        <property name="username" value="${dataSource.username}"/>
+        <property name="password" value="${dataSource.password}"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="coreDataSource" />
+        <property name="dataSource" ref="coreDataSource"/>
         <property name="annotatedClasses">
             <list>
                 <value>fr.epita.sigl.mepa.core.domain.Tournament</value>
+                <value>fr.epita.sigl.mepa.core.domain.Phase</value>
                 <value>fr.epita.sigl.mepa.core.domain.Team</value>
                 <value>fr.epita.sigl.mepa.core.domain.Game</value>
                 <value>fr.epita.sigl.mepa.core.domain.Pool</value>
@@ -41,9 +43,9 @@
 
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <!-- Declare a transaction manager -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-        p:sessionFactory-ref="sessionFactory" />
+          p:sessionFactory-ref="sessionFactory"/>
 
 </beans>

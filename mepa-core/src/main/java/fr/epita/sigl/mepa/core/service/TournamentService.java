@@ -1,10 +1,12 @@
 package fr.epita.sigl.mepa.core.service;
 
-import java.util.List;
-import java.util.Date;
-
 import fr.epita.sigl.mepa.core.domain.Tournament;
 
+import java.util.List;
+
+/**
+ * Created by Quentin on 17/07/2014.
+ */
 public interface TournamentService {
 
     void createTournament(Tournament tournament);
@@ -15,9 +17,7 @@ public interface TournamentService {
 
     Tournament getTournamentById(Long id);
 
-    Tournament getTournamentByType(String type);
-
     List<Tournament> getAllTournaments();
 
-    String[] getTournamentEndDate (Tournament t);
+    String[] getTournamentEndDate(Tournament tournament);
 }

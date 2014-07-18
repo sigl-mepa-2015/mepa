@@ -1,7 +1,6 @@
 package fr.epita.sigl.mepa.core.service;
 
 import fr.epita.sigl.mepa.core.domain.Game;
-import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Team;
 
 import java.util.List;
@@ -18,22 +17,22 @@ public interface GameService {
 
     List<Game> getAllGames();
 
-	Long getComingGameByTournamentId(Long tournamentId);
+    Long getComingGameByPhaseId(Long tournamentId);
 
-	Long getEndedGameByTournamentId(Long tournamentId);
+    Long getEndedGameByPhaseId(Long tournamentId);
 
-	List<Team> getTeams(Long id);
+    List<Team> getTeams(Long id);
 
-	Long getProgressGameByTournamentId(Long tournamentId);
+    Long getProgressGameByPhaseId(Long tournamentId);
 
-	List<Game> getGameByTeam(Long teamId);
+    List<Game> getGameByTeam(Long teamId);
 
-	Long countEndedGameByTeamId(Long teamId);
+    Long countEndedGameByTeamId(Long teamId);
 
-	Long countProgressGameByTeamId(Long teamId);
+    Long countProgressGameByTeamId(Long teamId);
 
-	Long countComingGameByTeamId(Long teamId);
+    Long countComingGameByTeamId(Long teamId);
 
-	int getAverragePlayingTimeByTeam(Long teamId);
+    int getAverragePlayingTimeByTeam(Long teamId);
 
 }

@@ -1,19 +1,13 @@
 package fr.epita.sigl.mepa.core.dao.impl;
 
 import fr.epita.sigl.mepa.core.dao.GameDao;
-import fr.epita.sigl.mepa.core.dao.PoolDao;
 import fr.epita.sigl.mepa.core.domain.Game;
-import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
-import fr.epita.sigl.mepa.core.domain.Pool;
-import fr.epita.sigl.mepa.core.domain.Team;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -53,85 +47,75 @@ public class GameDaoImpl implements GameDao {
         Query query = this.getSession().getNamedQuery("Game.findAll");
         return query.list();
     }
-    
+
     @Override
-    public Long getComingGameById(Long id)
-    {
-    	 Query query = this.getSession().getNamedQuery("Game.findAllComingByTournamentId");
-         query.setParameter("tournamentId", id);
-         return (Long) query.uniqueResult();
+    public Long getComingGameById(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.findAllComingByPhaseId");
+        query.setParameter("phaseId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long getProgressGameById(Long id)
-    {
-    	 Query query = this.getSession().getNamedQuery("Game.findAllProgressByTournamentId");
-         query.setParameter("tournamentId", id);
-         return (Long) query.uniqueResult();
+    public Long getProgressGameById(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.findAllProgressByPhaseId");
+        query.setParameter("phaseId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long getEndedGameById(Long id)
-    {
-    	 Query query = this.getSession().getNamedQuery("Game.findAllEndedByTournamentId");
-         query.setParameter("tournamentId", id);
-         return (Long) query.uniqueResult();
+    public Long getEndedGameById(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.findAllEndedByPhaseId");
+        query.setParameter("phaseId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long countTodoGameByPoolId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.CountTodoGameByPoolId");
-    	query.setParameter("poolId", id);
-    	return (Long) query.uniqueResult();
+    public Long countTodoGameByPoolId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountTodoGameByPoolId");
+        query.setParameter("poolId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long countProgressGameByPoolId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.CountProgressGameByPoolId");
-    	query.setParameter("poolId", id);
-    	return (Long) query.uniqueResult();
+    public Long countProgressGameByPoolId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountProgressGameByPoolId");
+        query.setParameter("poolId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long countEndedGameByPoolId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.CountEndedGameByPoolId");
-    	query.setParameter("poolId", id);
-    	return (Long) query.uniqueResult();
+    public Long countEndedGameByPoolId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountEndedGameByPoolId");
+        query.setParameter("poolId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public List<Game> getGameByTeamId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.findAllByTeamId");
-    	query.setParameter("teamId", id);
-    	return query.list();
+    public List<Game> getGameByTeamId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.findAllByTeamId");
+        query.setParameter("teamId", id);
+        return query.list();
     }
-    
+
     @Override
-    public Long countEndedGameByTeamId(Long id)
-    {
-    	 Query query = this.getSession().getNamedQuery("Game.CountEndedGameByTeamId");
-         query.setParameter("teamId", id);
-         return (Long) query.uniqueResult();
+    public Long countEndedGameByTeamId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountEndedGameByTeamId");
+        query.setParameter("teamId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long countTodoGameByTeamId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.CountTodoGameByTeamId");
-    	query.setParameter("teamId", id);
-    	return (Long) query.uniqueResult();
+    public Long countTodoGameByTeamId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountTodoGameByTeamId");
+        query.setParameter("teamId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
     @Override
-    public Long countProgressGameByTeamId(Long id)
-    {
-    	Query query = this.getSession().getNamedQuery("Game.CountProgressGameByTeamId");
-    	query.setParameter("teamId", id);
-    	return (Long) query.uniqueResult();
+    public Long countProgressGameByTeamId(Long id) {
+        Query query = this.getSession().getNamedQuery("Game.CountProgressGameByTeamId");
+        query.setParameter("teamId", id);
+        return (Long) query.uniqueResult();
     }
-    
+
 }

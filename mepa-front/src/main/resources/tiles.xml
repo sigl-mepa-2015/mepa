@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC 
-"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
-"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
     <definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
-        <put-attribute name="title" value="default.title" />
-        <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-        <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+        <put-attribute name="title" value="default.title"/>
+        <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp"/>
     </definition>
 
     <!-- Home -->
     <definition name="home.definition" extends="base.definition">
-        <put-attribute name="title" value="home.title" />
+        <put-attribute name="title" value="home.title"/>
     </definition>
     <definition name="/home/home" extends="home.definition">
-        <put-attribute name="body" value="/WEB-INF/views/home/home.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/home/home.jsp"/>
     </definition>
-    
+
     <!-- Reporting -->
     <definition name="/reporting/tournamentReporting" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentReporting.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/reporting/tournamentReporting.jsp"/>
     </definition>
-     <definition name="/reporting/teamReporting" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/teamReporting.jsp"/>
+    <definition name="/reporting/teamReporting" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/reporting/teamReporting.jsp"/>
     </definition>
-     <definition name="/injectData/tournamentGenerator" extends="base.definition">
-    	<put-attribute name="body" value="/WEB-INF/views/reporting/tournamentGenerator.jsp"/>
+    <definition name="/injectData/tournamentGenerator" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/reporting/tournamentGenerator.jsp"/>
     </definition>
-     
+
     <!-- Tournament -->
     <definition name="/tournament/read/list" extends="base.definition">
-        <put-attribute name="title" value="tournament.listTitle" />
-        <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp" />
+        <put-attribute name="title" value="tournament.listTitle"/>
+        <put-attribute name="body" value="/WEB-INF/views/tournament/read/list.jsp"/>
     </definition>
     <definition name="/tournament/create/form" template="/WEB-INF/views/tournament/create/form.jsp">
     </definition>
     <definition name="/tournament/read/view" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/tournament/read/view.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/tournament/read/view.jsp"/>
     </definition>
 
     <!-- Team -->
     <definition name="/team/read/list" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/read/list.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/read/list.jsp"/>
     </definition>
     <definition name="/team/create/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/create/form.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/create/form.jsp"/>
     </definition>
     <definition name="/team/create/result" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/create/result.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/create/result.jsp"/>
     </definition>
     <definition name="/team/remove/result" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/remove/result.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/remove/result.jsp"/>
     </definition>
     <definition name="/team/edit/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/edit/form.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/edit/form.jsp"/>
     </definition>
     <definition name="/team/detail" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/team/read/detail.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/team/read/detail.jsp"/>
     </definition>
 
     <!-- Pool -->
@@ -70,24 +70,32 @@
         <put-attribute name="title" value="poolManager.title" />
         <put-attribute name="body" value="/WEB-INF/views/pool/poolManager.jsp" />
     </definition>
-   
+
 
     <!-- Result -->
     <definition name="/result/teamScore" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/result/teamScore.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/result/teamScore.jsp"/>
     </definition>
-    
+
     <definition name="/result/view" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/result/view.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/result/view.jsp"/>
     </definition>
-    
-     <definition name="/afficherGame" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/result/gameList.jsp" />
+
+    <definition name="/afficherGame" extends="base.definition">
+        <put-attribute name="body" value="/WEB-INF/views/result/gameList.jsp"/>
     </definition>
 
     <!-- Player -->
     <definition name="/player/create/form" extends="base.definition">
-        <put-attribute name="body" value="/WEB-INF/views/player/create/form.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/player/create/form.jsp"/>
+    </definition>
+
+    <!-- Phase -->
+    <definition name="/phase/create/form" template="/WEB-INF/views/phase/create/form.jsp">
+    </definition>
+    <definition name="/phase/read/view" extends="base.definition">
+        <put-attribute name="title" value="phase"/>
+        <put-attribute name="body" value="/WEB-INF/views/phase/read/view.jsp"/>
     </definition>
     <definition name="/player/edit/form" extends="base.definition">
         <put-attribute name="body" value="/WEB-INF/views/player/edit/form.jsp" />

@@ -1,9 +1,9 @@
 package fr.epita.sigl.mepa.front.controller.team;
 
+import fr.epita.sigl.mepa.core.domain.Phase;
 import fr.epita.sigl.mepa.core.domain.Team;
-import fr.epita.sigl.mepa.core.domain.Tournament;
+import fr.epita.sigl.mepa.core.service.PhaseService;
 import fr.epita.sigl.mepa.core.service.TeamService;
-import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.team.AddTeamFormBean;
 import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import java.util.ArrayList;
@@ -19,6 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by david on 10/07/14.
  */
@@ -27,22 +32,21 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes({ TeamController.TEAM_MODEL_ATTRIBUTE})
 public class TeamController {
 
+    protected static final String TEAM_MODEL_ATTRIBUTE = "phases";
     private static final Logger LOG = LoggerFactory.getLogger(TeamController.class);
-
-    protected static final String TEAM_MODEL_ATTRIBUTE = "tournaments";
     private static final String ADD_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "addTeamFormBean";
     private static final String REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "removeTeamFormBean";
 
     @Autowired
     private TeamService teamService;
     @Autowired
-    private TournamentService tournamentService;
+    private PhaseService phaseService;
 
     @RequestMapping(value = {"/form" })
-    public ModelAndView showCreationForm(@RequestParam("tournamentID") Long tournamentID){
-        Tournament tournament = tournamentService.getTournamentById(tournamentID);
+    public ModelAndView showCreationForm(@RequestParam("phaseID") Long phaseID) {
+        Phase phase = phaseService.getPhaseById(phaseID);
         ModelAndView mv = new ModelAndView("/team/create/form");
-        mv.addObject("tournament", tournament);
+        mv.addObject("phase", phase);
         return mv;
     }
 
@@ -70,23 +74,23 @@ public class TeamController {
     @RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
     public String processForm(HttpServletRequest request, ModelMap modelMap,
                               @Valid AddTeamFormBean addTeamFormBean, BindingResult result,
-                              @RequestParam("tournamentID") Long tournamentID) {
+                              @RequestParam("phaseID") Long phaseID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/team/read/list";
         }
         Team newTeam = new Team(addTeamFormBean.getName());
-        Tournament tournament = tournamentService.getTournamentById(tournamentID);
+        Phase phase = phaseService.getPhaseById(phaseID);
 
-        newTeam.setTournament(tournament);
-        tournamentService.updateTournament(tournament);
+        newTeam.setPhase(phase);
+        phaseService.updatePhase(phase);
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
 
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
 
-        return "redirect:/tournament/view/"+tournament.getId();
+        return "redirect:/phase/view/" + phase.getId();
     }
 
     @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
@@ -104,7 +108,7 @@ public class TeamController {
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
 
-        return "redirect:/tournament/view/"+ newTeam.getTournament().getId();
+        return "redirect:/phase/view/" + newTeam.getPhase().getId();
     }
 
     @RequestMapping(value="/all", method=RequestMethod.GET)

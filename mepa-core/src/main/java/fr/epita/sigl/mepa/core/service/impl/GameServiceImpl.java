@@ -2,15 +2,11 @@ package fr.epita.sigl.mepa.core.service.impl;
 
 import fr.epita.sigl.mepa.core.dao.GameDao;
 import fr.epita.sigl.mepa.core.dao.JoinedGameTeamDao;
-import fr.epita.sigl.mepa.core.dao.PoolDao;
 import fr.epita.sigl.mepa.core.domain.Game;
 import fr.epita.sigl.mepa.core.domain.Game.GameStatus;
 import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
-import fr.epita.sigl.mepa.core.domain.Pool;
 import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.service.GameService;
-import fr.epita.sigl.mepa.core.service.PoolService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,23 +50,20 @@ public class GameServiceImpl implements GameService {
     public List<Game> getAllGames() {
         return this.gameDao.getAll();
     }
-    
+
     @Override
-    public Long getComingGameByTournamentId(Long tournamentId)
-    {
-    	return this.gameDao.getComingGameById(tournamentId);
+    public Long getComingGameByPhaseId(Long phaseId) {
+        return this.gameDao.getComingGameById(phaseId);
     }
-    
+
     @Override
-    public Long getProgressGameByTournamentId(Long tournamentId)
-    {
-    	return this.gameDao.getProgressGameById(tournamentId);
+    public Long getProgressGameByPhaseId(Long phaseId) {
+        return this.gameDao.getProgressGameById(phaseId);
     }
-    
+
     @Override
-    public Long getEndedGameByTournamentId(Long tournamentId)
-    {
-    	return this.gameDao.getEndedGameById(tournamentId);
+    public Long getEndedGameByPhaseId(Long phaseId) {
+        return this.gameDao.getEndedGameById(phaseId);
     }
 
     @Override
@@ -82,48 +75,41 @@ public class GameServiceImpl implements GameService {
         }
         return teams;
     }
-    
+
     @Override
-    public List<Game> getGameByTeam(Long teamId)
-    {
-    	return this.gameDao.getGameByTeamId(teamId);
+    public List<Game> getGameByTeam(Long teamId) {
+        return this.gameDao.getGameByTeamId(teamId);
     }
-    
+
     @Override
-    public Long countComingGameByTeamId(Long teamId)
-    {
-    	return this.gameDao.countTodoGameByTeamId(teamId);
+    public Long countComingGameByTeamId(Long teamId) {
+        return this.gameDao.countTodoGameByTeamId(teamId);
     }
-    
+
     @Override
-    public Long countProgressGameByTeamId(Long teamId)
-    {
-    	return this.gameDao.countProgressGameByTeamId(teamId);
+    public Long countProgressGameByTeamId(Long teamId) {
+        return this.gameDao.countProgressGameByTeamId(teamId);
     }
-    
+
     @Override
-    public Long countEndedGameByTeamId(Long teamId)
-    {
-    	return this.gameDao.countEndedGameByTeamId(teamId);
+    public Long countEndedGameByTeamId(Long teamId) {
+        return this.gameDao.countEndedGameByTeamId(teamId);
     }
-    
+
     @Override
-    public int getAverragePlayingTimeByTeam(Long teamId)
-    {
-    	List<Game> list = gameDao.getGameByTeamId(teamId);
-    	
-    	int sum = 0;
-    	int i = 0;
-    	
-    	for (Game g : list)
-    	{
-    		if (g.getStatus() == GameStatus.DONE)
-    		{
-    			sum += g.getDuration();
-    			i++;
-    		}
-    	}
-    	
-    	return sum/i;
+    public int getAverragePlayingTimeByTeam(Long teamId) {
+        List<Game> list = gameDao.getGameByTeamId(teamId);
+
+        int sum = 0;
+        int i = 0;
+
+        for (Game g : list) {
+            if (g.getStatus() == GameStatus.DONE) {
+                sum += g.getDuration();
+                i++;
+            }
+        }
+
+        return sum / i;
     }
 }

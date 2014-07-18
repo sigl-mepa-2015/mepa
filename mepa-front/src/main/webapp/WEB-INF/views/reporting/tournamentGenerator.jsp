@@ -49,11 +49,11 @@
 			<form action="${pageContext.request.contextPath}/injectData/playGame" method="POST">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label for="tournamentId">Selectionner un tournoi</label>
-						<select name="tournamentId" class="form-control">
-							<c:forEach items="${allTournament}" var="t">
-								<option value="${t.id}">${t.name}</option>
-							</c:forEach>
+                        <label for="phaseId">Selectionner une phase</label>
+                        <select name="phaseId" class="form-control">
+                            <c:forEach items="${allPhase}" var="p">
+                                <option value="${p.id}">${p.name}</option>
+                            </c:forEach>
 						</select>
 					</div>
 					<div class="form-group">

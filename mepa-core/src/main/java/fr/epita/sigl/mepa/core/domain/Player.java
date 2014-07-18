@@ -11,8 +11,8 @@ import java.io.Serializable;
 @NamedQueries({
         @NamedQuery(name = "Player.findById", query = "FROM Player o WHERE o.id=:id"),
         @NamedQuery(name = "Player.findAll", query = "FROM Player o"),
-        @NamedQuery(name = "Player.findAllOrderByTournamentId",
-                query = "FROM Player p where p.team.tournament.id = :tournamentId "
+        @NamedQuery(name = "Player.findAllOrderByPhaseId",
+                query = "FROM Player p where p.team.phase.id = :phaseId "
                         + "ORDER BY p.nbPoint DESC")})
 public class Player implements Serializable {
 
@@ -35,29 +35,12 @@ public class Player implements Serializable {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
-
-    public MepaUser getMepaUser() {
-        return mepaUser;
-    }
-
-    public void setMepaUser(MepaUser mepaUser) {
-        this.mepaUser = mepaUser;
-    }
-
     @OneToOne(optional = false)
     @JoinColumn(name = "MEPAUSER_ID", unique = true, nullable = false)
     private MepaUser mepaUser;
 
     public Player() {
 
-    }
-
-    public Integer getNbPoint() {
-        return nbPoint;
-    }
-
-    public void setNbPoint(Integer nbPoint) {
-        this.nbPoint = nbPoint;
     }
 
     public Player(String name) {
@@ -75,17 +58,32 @@ public class Player implements Serializable {
         this.team = team;
     }
 
+    public Player(String name, Team team) {
+        this.name = name;
+        this.team = team;
+    }
+
+    public MepaUser getMepaUser() {
+        return mepaUser;
+    }
+
+    public void setMepaUser(MepaUser mepaUser) {
+        this.mepaUser = mepaUser;
+    }
+
+    public Integer getNbPoint() {
+        return nbPoint;
+    }
+
+    public void setNbPoint(Integer nbPoint) {
+        this.nbPoint = nbPoint;
+    }
 
     public Team getTeam() {
         return team;
     }
 
     public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Player(String name, Team team) {
-        this.name = name;
         this.team = team;
     }
 

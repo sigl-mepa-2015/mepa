@@ -18,5 +18,5 @@ public interface TeamDao {
 
     List<Team> getAll();
 
-	List<Team> getOrderByTournamentId(Long id);
+    List<Team> getOrderByPhaseId(Long id);
 }

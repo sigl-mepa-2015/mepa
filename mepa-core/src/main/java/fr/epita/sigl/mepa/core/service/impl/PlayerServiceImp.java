@@ -21,24 +21,43 @@ public class PlayerServiceImp implements PlayerService {
     private PlayerDao playerDao;
 
     @Override
-    public void createPlayer(Player player){this.playerDao.create(player);};
+    public void createPlayer(Player player) {
+        this.playerDao.create(player);
+    }
+
+    ;
 
     @Override
-    public void updatePlayer(Player player){this.playerDao.update(player);};
+    public void updatePlayer(Player player) {
+        this.playerDao.update(player);
+    }
+
+    ;
 
     @Override
-    public void deletePlayer(Player player){this.playerDao.delete(player);};
+    public void deletePlayer(Player player) {
+        this.playerDao.delete(player);
+    }
+
+    ;
 
     @Override
-    public Player getPlayerById(Long id){return this.playerDao.getById(id);};
+    public Player getPlayerById(Long id) {
+        return this.playerDao.getById(id);
+    }
+
+    ;
 
     @Override
-    public List<Player> getAllPlayers(){return this.playerDao.getAll();};
+    public List<Player> getAllPlayers() {
+        return this.playerDao.getAll();
+    }
+
+    ;
 
     @Override
-    public List<Player> getAllOrderPlayerByTournament(long tournamentid)
-    {
-        return this.playerDao.getAllOrderPlayerByTournament(tournamentid);
+    public List<Player> getAllOrderPlayerByPhase(long phaseId) {
+        return this.playerDao.getAllOrderPlayerByPhase(phaseId);
     }
 
 }

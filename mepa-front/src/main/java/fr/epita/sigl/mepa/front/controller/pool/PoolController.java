@@ -1,21 +1,27 @@
 package fr.epita.sigl.mepa.front.controller.pool;
 
-import fr.epita.sigl.mepa.core.domain.*;
+import fr.epita.sigl.mepa.core.domain.Game;
+import fr.epita.sigl.mepa.core.domain.JoinedGameTeam;
+import fr.epita.sigl.mepa.core.domain.Pool;
+import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.service.*;
 import fr.epita.sigl.mepa.front.model.pool.CreatePoolFormBean;
-import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maite on 10/07/14.
@@ -23,29 +29,21 @@ import java.util.*;
 @Controller
 public class PoolController {
 
+    protected static final String POOL_MODEL_ATTRIBUTE = "pools";
+    protected static final String TEAM_MODEL_ATTRIBUTE = "teams";
     private static final Logger LOG = LoggerFactory.getLogger(PoolController.class);
-
+    private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
     @Autowired
     private PoolService s;
-
     @Autowired
-    private TournamentService t;
-
+    private PhaseService t;
     @Autowired
     private TeamService ts;
-
     @Autowired
 
     private GameService gs;
-
     @Autowired
     private JoinedGameTeamService jgs;
-
-
-    private static final String CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE = "createPoolFormBean";
-    protected static final String POOL_MODEL_ATTRIBUTE = "pools";
-    protected static final String TEAM_MODEL_ATTRIBUTE = "teams";
-
 
     @ModelAttribute(CREATE_POOL_FORM_BEAN_MODEL_ATTRIBUTE)
     public CreatePoolFormBean initAddPoolFormBean() {
@@ -66,20 +64,20 @@ public class PoolController {
 
 
     @RequestMapping(value = {"/creerPoule"}, method = RequestMethod.GET)
-    public String afficher(@RequestParam("tournamentID") Long tournamentID, ModelMap pModel) {
+    public String afficher(@RequestParam("phaseID") Long phaseID, ModelMap pModel) {
         List<Pool> l = this.s.getAllPools();
         pModel.addAttribute("pools", l);
-        pModel.addAttribute("tournamentID", tournamentID);
-        List<Team> teams = this.ts.getAllOrderTeamsByTournament(tournamentID);
+        pModel.addAttribute("phaseID", phaseID);
+        List<Team> teams = this.ts.getAllOrderTeamsByPhase(phaseID);
         pModel.addAttribute("teams", teams);
         return "/creerPoule";
     }
 
     @RequestMapping(value="/poolManager", method = RequestMethod.POST)
-    public String createPool(@RequestParam(value = "tournamentID", required = true) Long tournamentID,
-                             @RequestParam(value = "created", required = false) Long poolID,
-                             ModelMap modelMap,
-                             CreatePoolFormBean createPoolFormBean, BindingResult result) {
+    public String creer2(@RequestParam("phaseID") Long phaseID,
+                         @RequestParam(value = "created", required = false) Long poolID,
+                         ModelMap modelMap,
+                         CreatePoolFormBean createPoolFormBean, BindingResult result) {
 
         if (result.hasErrors()) {
             // Error(s) in form bean validation
@@ -93,11 +91,11 @@ public class PoolController {
 
         List<Pool> l = this.s.getAllPools();
         modelMap.addAttribute("pools", l);
-        modelMap.addAttribute("tournamentID", tournamentID);
+        modelMap.addAttribute("phaseID", phaseID);
 
         Pool newPool = new Pool();
         newPool.setName(createPoolFormBean.getName());
-        newPool.setTournament(t.getTournamentById(tournamentID));
+        newPool.setPhase(t.getPhaseById(phaseID));
 
         Set<Team> listteams = new HashSet<Team>();
 
@@ -112,6 +110,7 @@ public class PoolController {
         }
 
         newPool.setTeams(listteams);
+        
 
         modelMap.addAttribute("pool", newPool);
 
@@ -163,13 +162,13 @@ public class PoolController {
 
 
     public void generateGames(Long id_team, Long id_pool) {
-        for(int i = 0; i < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++i) {
-            for(int j = i + 1; j < this.ts.getAllOrderTeamsByTournament(id_team).size(); ++j) {
+        for(int i = 0; i < this.ts.getAllOrderTeamsByPhase(id_team).size(); ++i) {
+            for(int j = i + 1; j < this.ts.getAllOrderTeamsByPhase(id_team).size(); ++j) {
                 Game g = new Game();
                 JoinedGameTeam jg1 = new JoinedGameTeam();
-                jg1.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(i));
+                jg1.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(i));
                 JoinedGameTeam jg2 = new JoinedGameTeam();
-                jg2.setTeam(this.ts.getAllOrderTeamsByTournament(id_team).get(j));
+                jg2.setTeam(this.ts.getAllOrderTeamsByPhase(id_team).get(j));
 
                 jg1.setGame(g);
                 jg2.setGame(g);
@@ -194,7 +193,7 @@ public class PoolController {
         if (pool != null) {
             if(pool.getGames().isEmpty())
             {
-                generateGames(pool.getTournament().getId(), pool.getId());
+                generateGames(pool.getPhase().getId(), pool.getId());
                 pool=this.s.getPoolById(poolID);
             }
             Set<Game> gameList = pool.getGames();
