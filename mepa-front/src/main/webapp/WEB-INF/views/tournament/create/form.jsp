@@ -50,6 +50,13 @@
                     <form:input id="type" path="type" class="form-control" type="text"
                                 placeholder="${typePlaceholder}"/>
                 </div>
+                <div class="input-group col-md-4">
+                    <form:errors path="hashTag" cssStyle="color: #FF0000;" htmlEscape="false"/>
+                    <label for="hashTag"><spring:message code="tournament.form.hashTagLabel"/></label>
+                    <spring:message code='tournament.form.hashTagPlaceholder' var="hashTagPlaceholder"/>
+                    <form:input id="hashTag" path="hashTag" class="form-control" type="text"
+                                placeholder="${hashTagPlaceholder}"/>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
