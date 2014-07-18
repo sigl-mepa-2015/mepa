@@ -133,11 +133,11 @@
                 <table class="table table-striped" style="text-align: center">
                     <thead style="text-align: center">
                     <tr>
-                        <th><spring:message code="name"/></th>
-                        <th><spring:message code="type"/></th>
-                        <th><spring:message code="maxTeamNumber"/></th>
-                        <th><spring:message code="maxPlayerNumber"/></th>
-                        <th><spring:message code="actions"/></th>
+                        <th style="text-align: center"><spring:message code="name"/></th>
+                        <th style="text-align: center"><spring:message code="type"/></th>
+                        <th style="text-align: center"><spring:message code="maxTeamNumber"/></th>
+                        <th style="text-align: center"><spring:message code="maxPlayerNumber"/></th>
+                        <th style="text-align: center"><spring:message code="actions"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -170,7 +170,7 @@
                                 <td>${p.name}</td>
                                 <td></td>
                                 <td></td>
-                                <td class="col-md-4">
+                                <td class="col-md-3">
                                     <sec:authorize access="isAuthenticated()">
                                         <button type="button" class="btn btn-primary"
                                                 onClick="location.href='${pageContext.request.contextPath}/phase/view/${p.id}'">
