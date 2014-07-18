@@ -88,14 +88,15 @@ public class TeamController {
         phaseService.updatePhase(phase);
 
         List<Team> allTeam = teamService.getAllTeams();
-        if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber())
-        {
-            // Error(s) in form bean validation
-            return "redirect:/phase/view/" + phase.getId();
+        if (allTeam != null && newTeam.getPhase().getMaxPlayerNumber() != null) {
+            if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber()) {
+                // Error(s) in form bean validation
+                return "redirect:/phase/view/" + phase.getId();
+            }
         }
-
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
+        modelMap.addAttribute("created", newTeam.getName());
 
         modelMap.addAttribute("teams", allTeam);
 
