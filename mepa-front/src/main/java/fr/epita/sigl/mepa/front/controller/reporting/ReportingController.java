@@ -10,6 +10,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.social.FacebookAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,14 +93,16 @@ public class ReportingController {
 
         List<Game> listGame = gameService.getGameByTeam(teamID);
 
-        for (Game g : listGame)
-            System.out.println(g.getStatus());
+//        for (Game g : listGame)
+//            System.out.println(g.getStatus());
 
         mv.addObject("teamGame", listGame);
         mv.addObject("players", t.getPlayers());
         mv.addObject("todoGame", gameService.countComingGameByTeamId(teamID));
         mv.addObject("endedGame", gameService.countEndedGameByTeamId(teamID));
-        mv.addObject("averrageTime", gameService.getAverragePlayingTimeByTeam(teamID));
+        if (t.getDrawGame() + t.getLoseGame() + t.getWinGame() != 0) {
+            mv.addObject("averrageTime", gameService.getAverragePlayingTimeByTeam(teamID));
+        }
         try {
             mv.addObject("jsonResult", teamService.constructJSONforResultChart(t));
             mv.addObject("jsonResultScore", teamService.constructJSONForScoreChart(teamID));

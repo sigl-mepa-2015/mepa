@@ -36,7 +36,7 @@
     </div>
 </div>
 <div>
-    <h2>Maximum d'équipes allouables : <c:if test="${phaseView.maxTeamNumber <0}">-</c:if>
+    <h2>Nombre maximum d'équipes : <c:if test="${phaseView.maxTeamNumber <0}">-</c:if>
         ${phaseView.maxTeamNumber}</h2><br/>
 
     <h2>Liste des équipes :</h2> <br/>
