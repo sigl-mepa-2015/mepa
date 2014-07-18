@@ -136,7 +136,7 @@ public class ResultController {
         else
             g.setStatus(Game.GameStatus.DONE);
          
-        this.gs.updateGame(g);
+     
         
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
             Long joinedGameTeam1 = Long.parseLong(request.getParameter("joinedID1"));
@@ -164,7 +164,7 @@ public class ResultController {
             return "redirect:afficherGame?poolID="+g.getPool().getId();
         }
         
-       
+          this.gs.updateGame(g);
         
          if (request.getParameter("Status").compareTo("En cours") == 0)
         message = "validerLive";
