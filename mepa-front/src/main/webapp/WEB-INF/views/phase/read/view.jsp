@@ -5,17 +5,34 @@
     <div class="page-header">
         <a class="pull-right btn btn-success" title="Créer une poule"
            href="${pageContext.request.contextPath}/creerPoule?phaseID=${phaseView.id}">
-            <i class="glyphicon glyphicon-plus"></i> Créer une poule
+        <i class="glyphicon glyphicon-plus"></i> Créer une poule
         </a>
         <button type="button" class="pull-right btn btn-success"
                 onClick="location.href = '${pageContext.request.contextPath}/team/form?phaseID=${phaseView.id}'">
-            <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
+        <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
         </button>
         <button type="button" class="pull-right btn btn-success"
                 onClick="location.href = '${pageContext.request.contextPath}/result/view?phaseID=${phaseView.id}'">
-            <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
+        <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
         </button>
         <h1>Phase ${phaseView.name} </h1>
+    </div>
+</div>
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <spring:message code="team.removeTitle"/>
+            </div>
+            <div class="modal-body">
+                <spring:message code="team.removeConfirmation"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message
+                        code="cancel"/></button>
+                <a href="#" class="btn btn-danger danger"><spring:message code="delete"/></a>
+            </div>
+        </div>
     </div>
 </div>
 <div>
@@ -27,48 +44,66 @@
         <thead>
         <tr>
             <th>Nom de l'équipe</th>
-            <th>Tournoi</th>
+            <th>Phase</th>
+            <th>Poule</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${phaseView.teams}" var="t">
             <tr>
-                <td width="70%"><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
-                <td width="70%">${t.phase.name}</td>
-                <td width="30%">
+                <td><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
+                <td>${t.phase.name}</td>
+                <td><c:if test="${not empty t.pool}"><span class="glyphicon glyphicon-ok"></span></c:if></td>
+                <td class="col-md-2">
+
                     <button type="button" class="btn btn-info"
                             onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
-                        <span class="glyphicon glyphicon-cog"></span>
+                    <span class="glyphicon glyphicon-cog"></span>
                     </button>
-
+                    <%@ include file="/WEB-INF/views/team/remove/form.jsp" %>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
     <br/>
-
     <h2>Liste des poules : </h2><br/>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nom de la Poule</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${phaseView.pools}" var="p">
-            <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
-            <td>
-                <button type="button" class="btn btn-primary"
-                        onClick="location.href='${pageContext.request.contextPath}/afficherGame?poolID=${p.id}'">
-                    <span class="glyphicon glyphicon-arrow-right"></span>
-                </button>
-            </td>
-            </tr>
-
-        </c:forEach>
-        </tbody>
-    </table>
+    <c:choose>
+        <c:when test="${empty phaseView.pools}">
+            <div class="jumbotron">
+                <div class="container">
+                    <h2>Aucune poule crée</h2>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nom de la Poule</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${phaseView.pools}" var="p">
+                    <tr>
+                        <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
+                        <td>
+                            <button type="button" class="btn btn-primary"
+                                    onClick="location.href='${pageContext.request.contextPath}/poolManager?poolID=${p.id}'">
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
 </div>

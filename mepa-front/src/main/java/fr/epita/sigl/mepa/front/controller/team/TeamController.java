@@ -6,10 +6,6 @@ import fr.epita.sigl.mepa.core.service.PhaseService;
 import fr.epita.sigl.mepa.core.service.TeamService;
 import fr.epita.sigl.mepa.front.model.team.AddTeamFormBean;
 import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/team")
-@SessionAttributes({ TeamController.TEAM_MODEL_ATTRIBUTE})
+@SessionAttributes({TeamController.TEAM_MODEL_ATTRIBUTE})
 public class TeamController {
 
     protected static final String TEAM_MODEL_ATTRIBUTE = "phases";
@@ -42,7 +38,7 @@ public class TeamController {
     @Autowired
     private PhaseService phaseService;
 
-    @RequestMapping(value = {"/form" })
+    @RequestMapping(value = {"/form"})
     public ModelAndView showCreationForm(@RequestParam("phaseID") Long phaseID) {
         Phase phase = phaseService.getPhaseById(phaseID);
         ModelAndView mv = new ModelAndView("/team/create/form");
@@ -50,8 +46,8 @@ public class TeamController {
         return mv;
     }
 
-    @RequestMapping(value="/edit", method=RequestMethod.GET)
-    public ModelAndView editTeam(@RequestParam("teamID") Long teamID){
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView editTeam(@RequestParam("teamID") Long teamID) {
 
         Team team = teamService.getTeamById(teamID);
         ModelAndView mv = new ModelAndView("/team/edit/form");
@@ -60,8 +56,8 @@ public class TeamController {
 
     }
 
-    @RequestMapping(value="/detail/{id}", method=RequestMethod.GET)
-    public ModelAndView detailTeam(@PathVariable("id") Long teamID){
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public ModelAndView detailTeam(@PathVariable("id") Long teamID) {
 
         Team team = teamService.getTeamById(teamID);
         ModelAndView mv = new ModelAndView("/team/detail");
@@ -71,7 +67,7 @@ public class TeamController {
     }
 
 
-    @RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
+    @RequestMapping(value = {"/create"}, method = {RequestMethod.POST})
     public String processForm(HttpServletRequest request, ModelMap modelMap,
                               @Valid AddTeamFormBean addTeamFormBean, BindingResult result,
                               @RequestParam("phaseID") Long phaseID) {
@@ -93,7 +89,7 @@ public class TeamController {
         return "redirect:/phase/view/" + phase.getId();
     }
 
-    @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
+    @RequestMapping(value = {"/edit"}, method = {RequestMethod.POST})
     public String processEditForm(HttpServletRequest request, ModelMap modelMap,
                                   @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
         if (result.hasErrors()) {
@@ -111,9 +107,8 @@ public class TeamController {
         return "redirect:/phase/view/" + newTeam.getPhase().getId();
     }
 
-    @RequestMapping(value="/all", method=RequestMethod.GET)
-    public ModelAndView getAllTeam()
-    {
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ModelAndView getAllTeam() {
         List<Team> allTeam = teamService.getAllTeams();
         ModelAndView mv = new ModelAndView("/team/read/list");
         mv.addObject("teams", allTeam);
@@ -121,26 +116,26 @@ public class TeamController {
 
         return mv;
     }
-    
+
     @RequestMapping(value = {"/remove"}, method = {RequestMethod.POST})
     public String removeTeam(HttpServletRequest request, ModelMap modelMap,
-                                   @Valid RemoveTeamFormBean removeTeamFormBean, BindingResult result) {
-        
+                             @Valid RemoveTeamFormBean removeTeamFormBean, BindingResult result) {
+
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             return "/tournament/read/list";
         }
 
         Team deleteTeam = this.teamService.getTeamById(removeTeamFormBean.getId());
-        long idtournament = deleteTeam.getTournament().getId();
-        
-        if(deleteTeam.getPool() == null) {
+        long idtournament = deleteTeam.getPhase().getId();
+
+        if (deleteTeam.getPool() == null) {
             this.teamService.deleteTeam(deleteTeam);
             List<Team> allTeam = teamService.getAllTeams();
             modelMap.addAttribute("teams", allTeam);
         }
 
-          return "redirect:/tournament/view/"+ idtournament;
+        return "redirect:/tournament/view/" + idtournament;
     }
 
     @ModelAttribute(TEAM_MODEL_ATTRIBUTE)
@@ -152,7 +147,7 @@ public class TeamController {
     public AddTeamFormBean initAddTeamFormBean() {
         return new AddTeamFormBean();
     }
-    
+
     @ModelAttribute(REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE)
     public RemoveTeamFormBean initRemoveTeamFormBean() {
         return new RemoveTeamFormBean();

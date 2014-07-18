@@ -3,7 +3,6 @@ package fr.epita.sigl.mepa.front.controller.tournament;
 import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.phase.RemovePhaseFormBean;
-import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import fr.epita.sigl.mepa.front.model.tournament.RemoveTournamentFormBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,6 @@ public class TournamentController {
     private static final Logger LOG = LoggerFactory.getLogger(TournamentController.class);
     private static final String ADD_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "tournament";
     private static final String REMOVE_TOURNAMENT_FORM_BEAN_MODEL_ATTRIBUTE = "removeTournamentFormBean";
-    private static final String REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE = "removeTeamFormBean";
 
     private static final String REMOVE_PHASE_FORM_BEAN_MODEL_ATTRIBUTE = "removePhaseFormBean";
 
@@ -186,12 +184,7 @@ public class TournamentController {
     public RemoveTournamentFormBean initRemoveTournamentFormBean() {
         return new RemoveTournamentFormBean();
     }
-    
-    @ModelAttribute(REMOVE_TEAM_FORM_BEAN_MODEL_ATTRIBUTE)
-    public RemoveTeamFormBean initRemoveTeamFormBean() {
-        return new RemoveTeamFormBean();
-    }
-    
+
     @ModelAttribute(REMOVE_PHASE_FORM_BEAN_MODEL_ATTRIBUTE)
     public RemovePhaseFormBean initRemovePhaseFormBean() {
         return new RemovePhaseFormBean();
