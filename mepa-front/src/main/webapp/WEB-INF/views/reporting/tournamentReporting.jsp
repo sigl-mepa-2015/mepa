@@ -4,6 +4,8 @@
     <div class="page-header">
         <h1>Statistiques sur le tournoi</h1>
         <h4><spring:message code="tournament"/> : ${tournament.name}</h4>
+            <a href="https://twitter.com/intent/tweet" data-text="#${tournament.name} Suivez les résultats du tournoi ${tournament.name} : " class="twitter-mention-button" data-lang="fr">Tweeter les résultats</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </div>
 </div>
 
