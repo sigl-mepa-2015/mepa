@@ -116,7 +116,7 @@ public class ResultController {
         
         String message = null;
 
-        if (request.getParameter("duration").compareTo("0") != 0)
+        if ((request.getParameter("duration").compareTo("") != 0) || (request.getParameter("duration").compareTo("0") != 0))
            g.setDuration(Integer.parseInt(request.getParameter("duration")));
         else
         {
@@ -125,11 +125,11 @@ public class ResultController {
             return "redirect:afficherGame?poolID="+g.getPool().getId();
         }
         
- 
-        if (request.getParameter("Status").compareTo("En cours") == 0)
+         if (request.getParameter("Status").compareTo("En cours") == 0)
             g.setStatus(Game.GameStatus.PROGRESS);
         else
             g.setStatus(Game.GameStatus.DONE);
+         
         this.gs.updateGame(g);
         
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
@@ -157,12 +157,16 @@ public class ResultController {
             modelMap.addAttribute("message", message);
             return "redirect:afficherGame?poolID="+g.getPool().getId();
         }
+        
+       
+        
          if (request.getParameter("Status").compareTo("En cours") == 0)
         message = "validerLive";
          else
              message = "ValiderFin";
          modelMap.addAttribute("message", message);
         return "redirect:afficherGame?poolID="+g.getPool().getId();
+        
     }
 
     /**

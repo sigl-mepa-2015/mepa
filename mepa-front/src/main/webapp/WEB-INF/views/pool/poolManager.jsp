@@ -67,7 +67,7 @@
                         <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
                             <td>${joined.team.name}</td>
                         </c:forEach>
-                        <td>${g.status}</td>
+                        <td><spring:message code="${g.status}" /></td>
                     </tr>
                 </c:forEach>
         </tbody>
