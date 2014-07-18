@@ -39,6 +39,18 @@
 <div>
      <input type="HIDDEN" name="poolID" value="${poolID}">
             </br>
+            <c:if test="${message == 'validerFIN'}">
+      
+            </c:if>
+            <c:if test="${message == 'validerLive'}">
+      
+            </c:if>
+            <c:if test="${message == 'durée'}">
+      
+            </c:if>
+            <c:if test="${message == 'score'}">
+      
+            </c:if>
             <table class="table table-striped table-bordered" id="rangeTable">
                 <thead>
                     <tr>
