@@ -4,6 +4,7 @@ package fr.epita.sigl.mepa.front.controller.result;
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.*;
 
+import java.util.Random;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,6 +41,12 @@ public class ResultController {
     @Autowired
     private PlayerService ps;
 
+    @Autowired
+    private MepaUserService mus;
+
+    @Autowired
+    private PhaseService phs;
+
     /**
      * Default action : show all tournaments
      *
@@ -60,7 +67,6 @@ public class ResultController {
     public String teamScore(@RequestParam("teamID") Long teamID, ModelMap pModel, HttpServletRequest request) {
 
         if (request.getParameter("valid") != null) {
-            System.out.println("ICI CEST VALID");
             pModel.addAttribute("valid", request.getParameter("valid"));
         }
         Team team = this.ts.getTeamById(teamID);
@@ -142,10 +148,28 @@ public class ResultController {
      * Default action : show all tournaments
      */
     @RequestMapping(value = {"/addRandomTeam"}, method = RequestMethod.GET)
-    public ModelAndView addRandomTeam(HttpServletRequest request) {
+    public String addRandomTeam(HttpServletRequest request) {
 
-        ModelAndView mv = new ModelAndView("/result/view");
-        mv.addObject("poolID", "1");
-        return mv;
+        Phase ph = phs.getPhaseById((long) 1);
+        Team t = new Team();
+        t.setName(new Random().nextInt() + "");
+        t.setPhase(ph);
+        ts.createTeam(t);
+
+
+        MepaUser user = new MepaUser();
+        user.setName(new Random().nextInt() + "");
+        user.setLogin(new Random().nextInt() + "");
+        user.setPwd(new Random().nextInt() + "");
+        mus.createMepaUser(user);
+
+        Player p = new Player();
+        p.setTeam(t);
+        p.setMepaUser(user);
+        p.setName(new Random().nextInt() + "");
+        ps.createPlayer(p);
+
+
+        return "redirect:/tournament";
     }
 }
