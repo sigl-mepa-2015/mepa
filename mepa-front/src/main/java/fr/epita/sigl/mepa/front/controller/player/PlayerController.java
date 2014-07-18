@@ -78,7 +78,8 @@ public class PlayerController {
                               @RequestParam("teamID") Long teamID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Team team = teamService.getTeamById(teamID);
+            return "redirect:/team/detail/"+team.getId();
         }
         Team team = teamService.getTeamById(teamID);
         Player editPlayer = playerService.getPlayerById(playerFormBean.getId());
@@ -95,7 +96,8 @@ public class PlayerController {
                               @RequestParam("teamID") Long teamID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Team team = teamService.getTeamById(teamID);
+            return "redirect:/team/detail/"+team.getId();
         }
         
         Team team = teamService.getTeamById(teamID);
