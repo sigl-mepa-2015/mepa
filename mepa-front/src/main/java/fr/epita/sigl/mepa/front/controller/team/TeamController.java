@@ -91,7 +91,7 @@ public class TeamController {
         if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber())
         {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            return "redirect:/phase/view/" + phase.getId();
         }
 
         this.teamService.createTeam(newTeam);
