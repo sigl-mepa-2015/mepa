@@ -2,6 +2,10 @@
 
 <div>
 	<div class="page-header">
+	<a class="pull-right btn btn-default" href="${pageContext.request.contextPath}/phase/view/${pool.phase.id}" title="Retour">
+            <i class="glyphicon glyphicon-arrow-left"></i>
+           Retour
+        </a>
 		<h1>Poule ${pool.name}</h1>
         <c:if test="${not empty pool.games}">
             <a href="https://twitter.com/intent/tweet" data-text="Poule ${pool.name} du tournoi ${pool.phase.tournament.name} phase ${pool.phase.name}" class="twitter-mention-button" data-lang="en">Tweeter les matchs</a>
@@ -58,16 +62,14 @@
             </thead>
             <tbody>
 
-        <c:forEach items="${pool.games}" var="g" varStatus="loop">
-            <tr>
-                <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
-                <td>${joined.team.name}</td>
+                <c:forEach items="${pool.games}" var="g" varStatus="loop">
+                    <tr>
+                        <c:forEach items="${g.joinedGameTeams}" var="joined" varStatus="loop">
+                        <td>${joined.team.name}</td>
+                        </c:forEach>
+                        <td>${g.status}</td>
+                    </tr>
                 </c:forEach>
-                <td>${g.status}</td>
-        </tr>
-
-        </c:forEach>
-
         </tbody>
         </table>
         <a class="pull-left btn btn-default" href="${pageContext.request.contextPath}/afficherGame?poolID=${pool.id}" title="Saisie des matchs">
@@ -80,4 +82,5 @@
             </a>
         </c:otherwise>
     </c:choose>
+
 </div>
