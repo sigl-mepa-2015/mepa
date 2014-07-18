@@ -8,13 +8,16 @@ package fr.epita.sigl.mepa.front.model.team;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author david
  */
 public class AddTeamFormBean {
     
-	@NotBlank  
+	@NotBlank
+    @NotNull
     private String name;
     private long id;
     private long tournamentID;
