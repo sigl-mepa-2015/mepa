@@ -3,9 +3,11 @@ package fr.epita.sigl.mepa.front.controller.player;
 import fr.epita.sigl.mepa.core.domain.MepaUser;
 import fr.epita.sigl.mepa.core.domain.Team;
 import fr.epita.sigl.mepa.core.domain.Player;
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.MepaUserService;
 import fr.epita.sigl.mepa.core.service.TeamService;
 import fr.epita.sigl.mepa.core.service.PlayerService;
+import fr.epita.sigl.mepa.core.service.TournamentService;
 import fr.epita.sigl.mepa.front.model.player.PlayerFormBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by david on 10/07/14.
@@ -42,6 +45,8 @@ public class PlayerController {
     private PlayerService playerService;
     @Autowired
     private MepaUserService userService;
+    @Autowired
+    private TournamentService tournamentService;
 
     @RequestMapping(value = {"/form" })
     public ModelAndView showCreationForm(@RequestParam("teamID") Long teamID){
@@ -106,6 +111,13 @@ public class PlayerController {
         user.setLogin(playerFormBean.getName());
         user.setPwd("pwd");
         userService.createMepaUser(user);
+        Set<Player> players = team.getPlayers();
+
+        if (players != null && team.getPhase().getMaxPlayerNumber() != null) {
+            if (players.size() >= team.getPhase().getMaxPlayerNumber())
+                return "redirect:/team/detail/" + team.getId();
+        }
+
         Player newPlayer = new Player(playerFormBean.getName(), playerFormBean.getFirstname(), team);
         newPlayer.setMepaUser(user);
         newPlayer.setTeam(team);
