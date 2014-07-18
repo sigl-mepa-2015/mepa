@@ -97,9 +97,9 @@
 
                 </tbody>
             </table>
-    <a class="pull-left btn btn-default" href="/mepa-front/" title="Annuler">
+    <a class="pull-left btn btn-default" href="${pageContext.request.contextPath}/poolManager?poolID=${pools}" title="Retour">
         <i class="glyphicon glyphicon-arrow-left"></i>
-        Annuler
+       Retour
     </a>
 
 </div>

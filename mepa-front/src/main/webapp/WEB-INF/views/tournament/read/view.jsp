@@ -16,7 +16,6 @@
     </div>
 </div>
 <div>
-    <h2>Maximum d'équipes allouables : <c:if test="${tournamentView.maxTeamNumber <0}">-</c:if>${tournamentView.maxTeamNumber}</h2><br/>
     <h2>Liste des équipes :</h2> <br/>
     <table class="table table-striped">
         <thead>
