@@ -1,9 +1,14 @@
 package fr.epita.sigl.mepa.front.controller.team;
 
+import fr.epita.sigl.mepa.core.dao.TournamentDao;
+import fr.epita.sigl.mepa.core.dao.impl.TournamentDaoImpl;
 import fr.epita.sigl.mepa.core.domain.Phase;
 import fr.epita.sigl.mepa.core.domain.Team;
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.PhaseService;
 import fr.epita.sigl.mepa.core.service.TeamService;
+import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
 import fr.epita.sigl.mepa.front.model.team.AddTeamFormBean;
 import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import org.slf4j.Logger;
@@ -80,11 +85,19 @@ public class TeamController {
 
         newTeam.setPhase(phase);
         phaseService.updatePhase(phase);
+
+        List<Team> allTeam = teamService.getAllTeams();
+        if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber())
+        {
+            // Error(s) in form bean validation
+            return "/team/read/list";
+        }
+
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
 
-        List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
+
 
         return "redirect:/phase/view/" + phase.getId();
     }
