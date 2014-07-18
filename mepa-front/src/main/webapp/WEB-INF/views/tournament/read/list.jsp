@@ -170,6 +170,7 @@
                                 <td>${p.name}</td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td class="col-md-3">
                                     <sec:authorize access="isAuthenticated()">
                                         <button type="button" class="btn btn-primary"
