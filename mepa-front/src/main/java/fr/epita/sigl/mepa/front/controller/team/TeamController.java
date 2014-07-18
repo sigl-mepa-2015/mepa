@@ -88,7 +88,7 @@ public class TeamController {
         phaseService.updatePhase(phase);
 
         List<Team> allTeam = teamService.getAllTeams();
-        if (allTeam != null && newTeam.getPhase().getMaxPlayerNumber() != null) {
+        if (allTeam != null && newTeam.getPhase().getMaxTeamNumber() != null) {
             if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber()) {
                 // Error(s) in form bean validation
                 return "redirect:/phase/view/" + phase.getId();

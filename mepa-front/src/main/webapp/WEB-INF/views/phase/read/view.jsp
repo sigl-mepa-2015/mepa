@@ -3,10 +3,12 @@
 
 <div>
     <div class="page-header">
-        <a class="pull-right btn btn-success" title="Créer une poule"
+        <c:if test="${fn:length(phaseView.teams) gt 1}">
+            <a class="pull-right btn btn-success" title="Créer une poule"
            href="${pageContext.request.contextPath}/creerPoule?phaseID=${phaseView.id}">
             <i class="glyphicon glyphicon-plus"></i> Créer une poule
         </a>
+            </c:if>
         <button type="button" class="pull-right btn btn-success"
                 onClick="location.href = '${pageContext.request.contextPath}/team/form?phaseID=${phaseView.id}'">
             <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title2.nav1"/>
