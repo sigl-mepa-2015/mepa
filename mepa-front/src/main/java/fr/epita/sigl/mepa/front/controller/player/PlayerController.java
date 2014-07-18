@@ -62,11 +62,13 @@ public class PlayerController {
     }
 
     @RequestMapping(value="/delete", method=RequestMethod.GET)
-    public String deletePlayer(@RequestParam("playerID") Long playerID,
-                                     @RequestParam("teamID") Long teamID){
+    public String deletePlayer(HttpServletRequest request, ModelMap modelMap,
+                               @RequestParam("playerID") Long playerID,
+                               @RequestParam("teamID") Long teamID){
 
         Player player = playerService.getPlayerById(playerID);
         Team team = teamService.getTeamById(teamID);
+        modelMap.addAttribute("delete", player.getName());
         playerService.deletePlayer(player);
         return "redirect:/team/detail/"+team.getId();
     }
@@ -74,8 +76,8 @@ public class PlayerController {
 
     @RequestMapping(value = { "/edit" }, method = { RequestMethod.POST })
     public String processEditForm(HttpServletRequest request, ModelMap modelMap,
-                              @Valid PlayerFormBean playerFormBean, BindingResult result,
-                              @RequestParam("teamID") Long teamID) {
+                                  @Valid PlayerFormBean playerFormBean, BindingResult result,
+                                  @RequestParam("teamID") Long teamID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
             Team team = teamService.getTeamById(teamID);
@@ -85,6 +87,7 @@ public class PlayerController {
         Player editPlayer = playerService.getPlayerById(playerFormBean.getId());
         editPlayer.setName(playerFormBean.getName());
         editPlayer.setFirstname(playerFormBean.getFirstname());
+        modelMap.addAttribute("update", editPlayer.getName());
         playerService.updatePlayer(editPlayer);
         return "redirect:/team/detail/"+team.getId();
     }
@@ -99,7 +102,7 @@ public class PlayerController {
             Team team = teamService.getTeamById(teamID);
             return "redirect:/team/detail/"+team.getId();
         }
-        
+
         Team team = teamService.getTeamById(teamID);
         MepaUser user = new MepaUser();
         user.setName(playerFormBean.getName());
@@ -111,6 +114,7 @@ public class PlayerController {
         newPlayer.setTeam(team);
         playerService.createPlayer(newPlayer);
         modelMap.addAttribute("player", newPlayer);
+        modelMap.addAttribute("created", newPlayer.getName());
 
         List<Player> allPlayer = playerService.getAllPlayers();
         modelMap.addAttribute("players", allPlayer);

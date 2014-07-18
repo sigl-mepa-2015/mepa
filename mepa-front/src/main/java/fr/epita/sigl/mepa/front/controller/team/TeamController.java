@@ -62,11 +62,26 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public ModelAndView detailTeam(@PathVariable("id") Long teamID) {
+    public ModelAndView detailTeam(HttpServletRequest request,
+                                   @PathVariable("id") Long teamID) {
 
         Team team = teamService.getTeamById(teamID);
         ModelAndView mv = new ModelAndView("/team/detail");
         mv.addObject("team", team);
+
+        String created = request.getParameter("created");
+        String remove = request.getParameter("remove");
+        String update = request.getParameter("update");
+        if (created != null) {
+            mv.addObject("created", created);
+        }
+        else if (remove != null) {
+            mv.addObject("remove", remove);
+        }
+        else if (update != null) {
+            mv.addObject("update", update);
+        }
+
         return mv;
 
     }
@@ -96,6 +111,7 @@ public class TeamController {
 
         this.teamService.createTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
+        modelMap.addAttribute("created", newTeam.getName());
 
         modelMap.addAttribute("teams", allTeam);
 
@@ -115,6 +131,7 @@ public class TeamController {
         newTeam.setName(addTeamFormBean.getName());
         this.teamService.updateTeam(newTeam);
         modelMap.addAttribute("team", newTeam);
+        modelMap.addAttribute("update", newTeam.getName());
 
         List<Team> allTeam = teamService.getAllTeams();
         modelMap.addAttribute("teams", allTeam);
@@ -148,6 +165,7 @@ public class TeamController {
             this.teamService.deleteTeam(deleteTeam);
             List<Team> allTeam = teamService.getAllTeams();
             modelMap.addAttribute("teams", allTeam);
+            modelMap.addAttribute("delete", deleteTeam.getName());
         }
 
         return "redirect:/phase/view/" + idtournament;
