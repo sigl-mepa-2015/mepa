@@ -1,9 +1,14 @@
 package fr.epita.sigl.mepa.front.controller.team;
 
+import fr.epita.sigl.mepa.core.dao.TournamentDao;
+import fr.epita.sigl.mepa.core.dao.impl.TournamentDaoImpl;
 import fr.epita.sigl.mepa.core.domain.Phase;
 import fr.epita.sigl.mepa.core.domain.Team;
+import fr.epita.sigl.mepa.core.domain.Tournament;
 import fr.epita.sigl.mepa.core.service.PhaseService;
 import fr.epita.sigl.mepa.core.service.TeamService;
+import fr.epita.sigl.mepa.core.service.TournamentService;
+import fr.epita.sigl.mepa.core.service.impl.TournamentServiceImpl;
 import fr.epita.sigl.mepa.front.model.team.AddTeamFormBean;
 import fr.epita.sigl.mepa.front.model.team.RemoveTeamFormBean;
 import org.slf4j.Logger;
@@ -73,18 +78,28 @@ public class TeamController {
                               @RequestParam("phaseID") Long phaseID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Phase phase = phaseService.getPhaseById(phaseID);
+            return "redirect:/phase/view/" + phase.getId();
         }
         Team newTeam = new Team(addTeamFormBean.getName());
         Phase phase = phaseService.getPhaseById(phaseID);
 
         newTeam.setPhase(phase);
         phaseService.updatePhase(phase);
-        this.teamService.createTeam(newTeam);
-        modelMap.addAttribute("team", newTeam);
 
         List<Team> allTeam = teamService.getAllTeams();
+        if (allTeam != null && newTeam.getPhase().getMaxPlayerNumber() != null) {
+            if (allTeam.size() >= newTeam.getPhase().getMaxTeamNumber()) {
+                // Error(s) in form bean validation
+                return "redirect:/phase/view/" + phase.getId();
+            }
+        }
+        this.teamService.createTeam(newTeam);
+        modelMap.addAttribute("team", newTeam);
+        modelMap.addAttribute("created", newTeam.getName());
+
         modelMap.addAttribute("teams", allTeam);
+
 
         return "redirect:/phase/view/" + phase.getId();
     }
@@ -94,7 +109,8 @@ public class TeamController {
                                   @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
+            return "redirect:/phase/view/" + newTeam.getPhase().getId();
         }
         Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
         newTeam.setName(addTeamFormBean.getName());

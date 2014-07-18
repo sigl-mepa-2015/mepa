@@ -4,9 +4,11 @@ package fr.epita.sigl.mepa.front.controller.result;
 import fr.epita.sigl.mepa.core.domain.*;
 import fr.epita.sigl.mepa.core.service.*;
 
+import java.util.Random;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,6 +41,12 @@ public class ResultController {
     @Autowired
     private PlayerService ps;
 
+    @Autowired
+    private MepaUserService mus;
+
+    @Autowired
+    private PhaseService phs;
+
     /**
      * Default action : show all tournaments
      *
@@ -56,7 +64,11 @@ public class ResultController {
      * Default action : show a team
      */
     @RequestMapping(value = {"/teamScore"}, method = RequestMethod.GET)
-    public String teamScore(@RequestParam("teamID") Long teamID, ModelMap pModel) {
+    public String teamScore(@RequestParam("teamID") Long teamID, ModelMap pModel, HttpServletRequest request) {
+
+        if (request.getParameter("valid") != null) {
+            pModel.addAttribute("valid", request.getParameter("valid"));
+        }
         Team team = this.ts.getTeamById(teamID);
         if (team != null) {
             Set<Player> playerList = team.getPlayers();
@@ -73,15 +85,24 @@ public class ResultController {
 
         Long gameID = Long.parseLong(request.getParameter("playerID"));
         Player p = this.ps.getPlayerById(gameID);
-        p.setNbPoint(Integer.parseInt(request.getParameter("playerScore")));
-        ps.updatePlayer(p);
+        try {
+            p.setNbPoint(Integer.parseInt(request.getParameter("playerScore")));
+            ps.updatePlayer(p);
+            pModel.addAttribute("valid", 1);
+            return "redirect:/result/teamScore?teamID="+p.getTeam().getId();
+        } catch (Exception e) {
+            pModel.addAttribute("valid", 0);
+            return "redirect:/result/teamScore?teamID="+p.getTeam().getId();
+        }
 
-        return "redirect:/result/teamScore?teamID="+p.getTeam().getId();
     }
 
     @RequestMapping(value = {"/afficherGame"}, method = RequestMethod.GET)
-    public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel) {
+    public String afficherGame(@RequestParam("poolID") Long poolID, ModelMap pModel, HttpServletRequest request) {
         Pool pool = this.s.getPoolById(poolID);
+        String message = request.getParameter("message");
+        pModel.addAttribute("message", message);
+        
         if (pool != null) {
             Set<Game> gameList = pool.getGames();
 
@@ -98,22 +119,36 @@ public class ResultController {
 
         Long gameID = Long.parseLong(request.getParameter("gameID"));
         Game g = this.gs.getGameById(gameID);
-        g.setDuration(Integer.parseInt(request.getParameter("duration")));
         
+        String message = null;
 
-        if (request.getParameter("Status").compareTo("TODO") == 0)
-            return ("result/erreur");
-        if (request.getParameter("Status").compareTo("En cours") == 0)
+        if ((request.getParameter("duration").compareTo("") != 0) || (request.getParameter("duration").compareTo("0") != 0))
+           g.setDuration(Integer.parseInt(request.getParameter("duration")));
+        else
+        {
+            message = "durée";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
+        }
+        
+         if (request.getParameter("Status").compareTo("En cours") == 0)
             g.setStatus(Game.GameStatus.PROGRESS);
         else
             g.setStatus(Game.GameStatus.DONE);
-        this.gs.updateGame(g);
+         
+     
         
         if (request.getParameter("resultEquipe1").compareTo("") != 0) {
             Long joinedGameTeam1 = Long.parseLong(request.getParameter("joinedID1"));
             JoinedGameTeam j1 = this.jgs.getJoinedGameById(joinedGameTeam1);
             j1.setScore(Integer.parseInt(request.getParameter("resultEquipe1")));
             this.jgs.updateJoinedGameTeam(j1);
+        }
+         else
+        {
+            message = "score";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
         }
       
         if (request.getParameter("resultEquipe2").compareTo("") != 0) {
@@ -122,7 +157,50 @@ public class ResultController {
             j2.setScore(Integer.parseInt(request.getParameter("resultEquipe2")));
             this.jgs.updateJoinedGameTeam(j2);
         }
-
+         else
+        {
+            message = "score";
+            modelMap.addAttribute("message", message);
+            return "redirect:afficherGame?poolID="+g.getPool().getId();
+        }
+        
+          this.gs.updateGame(g);
+        
+         if (request.getParameter("Status").compareTo("En cours") == 0)
+        message = "validerLive";
+         else
+             message = "ValiderFin";
+         modelMap.addAttribute("message", message);
         return "redirect:afficherGame?poolID="+g.getPool().getId();
+        
+    }
+
+    /**
+     * Default action : show all tournaments
+     */
+    @RequestMapping(value = {"/addRandomTeam"}, method = RequestMethod.GET)
+    public String addRandomTeam(HttpServletRequest request) {
+
+        Phase ph = phs.getPhaseById((long) 1);
+        Team t = new Team();
+        t.setName(new Random().nextInt() + "");
+        t.setPhase(ph);
+        ts.createTeam(t);
+
+
+        MepaUser user = new MepaUser();
+        user.setName(new Random().nextInt() + "");
+        user.setLogin(new Random().nextInt() + "");
+        user.setPwd(new Random().nextInt() + "");
+        mus.createMepaUser(user);
+
+        Player p = new Player();
+        p.setTeam(t);
+        p.setMepaUser(user);
+        p.setName(new Random().nextInt() + "");
+        ps.createPlayer(p);
+
+
+        return "redirect:/tournament";
     }
 }

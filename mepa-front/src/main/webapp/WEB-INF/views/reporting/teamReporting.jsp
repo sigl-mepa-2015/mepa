@@ -2,11 +2,14 @@
 
 <div>
 	<div class="page-header">
-		<h1>Statistique d'equipe</h1>
+		<h1>Statistique d'équipe</h1>
 		<h4>Equipe : ${team.name}</h4>
-		<h5><spring:message code="tournament"/> : ${team.tournament.name}</h5>
+		<h5><spring:message code="tournament"/> : ${team.phase.name}</h5>
 		<h5>Poule : ${team.pool.name}</h5>
-	</div>
+        <a href="https://twitter.com/intent/tweet" data-text="#${team.name} Suivez les résultats de votre équipe ${team.name} : " class="twitter-mention-button" data-lang="fr">Tweeter les résultats</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
 </div>
 
 <div>
@@ -69,9 +72,9 @@
 <div>
 	<h4>Statistiques matchs</h4>
 	<div class="col-md-4">
-		<h5>Nombre de match joues : ${endedGame}</h5>
-		<h5>Nombre de match restants : ${todoGame}</h5>
-		<h5>Duree moyenne match : ${averrageTime}</h5>
+		<h5>Nombre de matchs joués : ${endedGame}</h5>
+		<h5>Nombre de matchs restants : ${todoGame}</h5>
+		<h5>Durée moyenne des matchs : ${averrageTime}</h5>
 		<h5>Temps de jeu total : ${averrageTime * endedGame}</h5>
 		<h5>Niveau de progression dans le tournoi</h5>
 	    <div class="progress">
@@ -79,11 +82,11 @@
     	</div>
 	</div>
 	<div class="col-md-4 text-center">
-		<div><h5>Repartition resultat</h5></div>
+		<div><h5>Répartition résultats</h5></div>
 		<canvas id="pieGame" width="180" height="180" data-json="${fn:escapeXml(jsonResult)}"></canvas>
 	</div>
 	<div class="col-md-4 text-center">
-		<div><h5>Repartition score</h5></div>
+		<div><h5>Répartition des scores</h5></div>
 		<canvas id="pieGame2" width="180" height="180" data-json="${fn:escapeXml(jsonResultScore)}"></canvas>
 	</div>
 </div>
@@ -91,8 +94,8 @@
 
 <div>
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs termines</a></li>
-        <li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs a venir</a></li>
+        <li class="active"><a href="#ended" role="tab" data-toggle="tab">Voir les matchs terminés</a></li>
+        <li><a href="#coming" role="tab" data-toggle="tab">Voir les matchs à venir</a></li>
         <li><a href="#player" role="tab" data-toggle="tab">Voir les joueurs</a></li>
     </ul>
 </div>
@@ -100,7 +103,7 @@
 <div>
 	<div class="tab-content">
 		<div class="tab-pane active" id="ended">
-			<h3>Liste des matchs termines</h3>
+			<h3>Liste des matchs terminés</h3>
 			<div class="col-md-8 col-md-offset-2">
 				<table class="table table-bordered">
 					<tbody>
@@ -129,7 +132,7 @@
 			</div>
 		</div>
 		<div class="tab-pane" id="coming">
-			<h3>Liste des matchs a venir</h3>
+			<h3>Liste des matchs à venir</h3>
 			<div class="col-md-8 col-md-offset-2">
 				<table class="table table-bordered">
 					<tbody>
@@ -149,11 +152,11 @@
 			</div>
 		</div>
 		<div class="tab-pane" id="player">
-             <h3>Liste des joueurs de l'equipe</h3>
+             <h3>Liste des joueurs de l'équipe</h3>
             <table class="table table-bordered table-striped" id="playersTable">
                 <thead>
 	                <tr>
-	                    <th>Joueur</th>
+	                    <th>Joueurs</th>
 	                    <th>Points</th>
 	                </tr>
                 </thead>

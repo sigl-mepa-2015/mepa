@@ -5,7 +5,21 @@
         <h1>Equipe : ${team.name}</h1>
     </div>
 </div>
+    <c:if test="${valid == 1}" >
+        <div id="message_box" class="alert alert-success">
+            <spring:message code="phase.teamScore.updateScoreSuccess" />
+        </div>
+    </c:if>
+    <c:if test="${valid == 0}" >
+        <div id="message_box" class="alert alert-warning">
+            <spring:message code="phase.teamScore.updateScoreError" />
+        </div>
+    </c:if>
+    <script>
+        $("#message_box").delay(3000).slideUp();
+    </script>
 <div>
+
    </br>
     <table class="table table-striped table-bordered" id="rangeTable">
         <thead>

@@ -107,11 +107,27 @@ public class PhaseController {
      * @return The view name
      */
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView setupView(@PathVariable("id") long id) throws ServletRequestBindingException {
+    public ModelAndView setupView(HttpServletRequest request,
+                                  @PathVariable("id") long id){
         Phase phase = phaseService.getPhaseById(id);
+        ModelAndView mv = new ModelAndView("/phase/read/view", VIEW_PHASE_FORM_BEAN_MODEL_ATTRIBUTE, phase);
+
+        String created = request.getParameter("created");
+        String remove = request.getParameter("remove");
+        String update = request.getParameter("update");
+        if (created != null) {
+            mv.addObject("created", created);
+        }
+        else if (remove != null) {
+            mv.addObject("remove", remove);
+        }
+        else if (update != null) {
+            mv.addObject("update", update);
+        }
+
         if (phase == null)
             return new ModelAndView("redirect:/?unknownPhase=" + id);
-        return new ModelAndView("/phase/read/view", VIEW_PHASE_FORM_BEAN_MODEL_ATTRIBUTE, phase);
+        return mv;
     }
 
     /**

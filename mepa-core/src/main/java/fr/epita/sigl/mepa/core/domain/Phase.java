@@ -3,6 +3,8 @@ package fr.epita.sigl.mepa.core.domain;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -29,6 +31,10 @@ public class Phase implements Serializable {
     private Date startedDate;
     private Date endDate = null;
     private long average = -1;
+
+    @Digits(integer = 10, fraction = 0)
+    @Min(0)
+    private Integer maxPlayerNumber;
 
     protected Phase() {
         this.tournament = null;
@@ -150,6 +156,15 @@ public class Phase implements Serializable {
         if (average == -1)
             this.getEndDate();
         return average;
+    }
+
+    @Column(name = "maxPlayerNumber", nullable = true)
+    public Integer getMaxPlayerNumber() {
+        return maxPlayerNumber;
+    }
+
+    public void setMaxPlayerNumber(Integer maxPlayerNumber) {
+        this.maxPlayerNumber = maxPlayerNumber;
     }
 
     public void setAverage(long moy) {

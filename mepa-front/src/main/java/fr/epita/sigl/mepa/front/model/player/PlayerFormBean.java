@@ -19,6 +19,7 @@ public class PlayerFormBean {
 	@NotBlank
     @NotNull
     private String name;
+    @NotBlank
     @NotNull
     private String firstname;
     private long id;
