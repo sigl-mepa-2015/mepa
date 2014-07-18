@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/common.jsp"%>
 
 
+
 <div>
 	<div class="page-header">
 		<h1>Toutes les équipes</h1>
