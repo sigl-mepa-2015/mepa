@@ -73,7 +73,8 @@ public class TeamController {
                               @RequestParam("phaseID") Long phaseID) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Phase phase = phaseService.getPhaseById(phaseID);
+            return "redirect:/phase/view/" + phase.getId();
         }
         Team newTeam = new Team(addTeamFormBean.getName());
         Phase phase = phaseService.getPhaseById(phaseID);
@@ -94,7 +95,8 @@ public class TeamController {
                                   @Valid AddTeamFormBean addTeamFormBean, BindingResult result) {
         if (result.hasErrors()) {
             // Error(s) in form bean validation
-            return "/team/read/list";
+            Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
+            return "redirect:/phase/view/" + newTeam.getPhase().getId();
         }
         Team newTeam = this.teamService.getTeamById(addTeamFormBean.getId());
         newTeam.setName(addTeamFormBean.getName());
