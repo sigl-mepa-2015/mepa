@@ -17,6 +17,10 @@
                 onClick="location.href = '${pageContext.request.contextPath}/result/view?phaseID=${phaseView.id}'">
             <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.bar.title3.nav1"/>
         </button>
+        <button type="button" class="pull-right btn btn-success"
+                onClick="location.href = '${pageContext.request.contextPath}/tournament'">
+            <span class="glyphicon glyphicon-chevron-left"></span> <spring:message code="back"/>
+        </button>
         <h1>Phase ${phaseView.name} </h1>
     </div>
 </div>
@@ -64,33 +68,33 @@
     <h2>Liste des équipes :</h2> <br/>
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Nom de l'équipe</th>
-            <th>Phase</th>
-            <th>Poule</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>Nom de l'équipe</th>
+                <th>Phase</th>
+                <th>Poule</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-        <c:forEach items="${phaseView.teams}" var="t">
-            <tr>
-                <td><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
-                <td>${t.phase.name}</td>
-                <td><c:if test="${not empty t.pool}"><span class="glyphicon glyphicon-ok"></span></c:if></td>
-                <td class="col-md-2">
+            <c:forEach items="${phaseView.teams}" var="t">
+                <tr>
+                    <td><a href="${pageContext.request.contextPath}/team/detail/${t.id}">${t.name}</a></td>
+                    <td>${t.phase.name}</td>
+                    <td><c:if test="${not empty t.pool}"><span class="glyphicon glyphicon-ok"></span></c:if></td>
+                        <td class="col-md-2">
 
-                    <button type="button" class="btn btn-info"
-                            onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </button>
-                    <%@ include file="/WEB-INF/views/team/remove/form.jsp" %>
-                </td>
-            </tr>
-        </c:forEach>
+                            <button type="button" class="btn btn-info"
+                                    onClick="location.href = '${pageContext.request.contextPath}/team/edit?teamID=${t.id}'">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </button>
+                        <%@ include file="/WEB-INF/views/team/remove/form.jsp" %>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
     <script>
-        $('#confirm-delete').on('show.bs.modal', function (e) {
+        $('#confirm-delete').on('show.bs.modal', function(e) {
             $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
         });
     </script>
@@ -107,28 +111,27 @@
         <c:otherwise>
             <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th>Nom de la Poule</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Nom de la Poule</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${phaseView.pools}" var="p">
-                    <tr>
-                        <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
-                        <td>
-                            <button type="button" class="btn btn-primary"
-                                    onClick="location.href='${pageContext.request.contextPath}/poolManager?poolID=${p.id}'">
-                                <span class="glyphicon glyphicon-arrow-right"></span>
-                            </button>
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach items="${phaseView.pools}" var="p">
+                        <tr>
+                            <td><a href="${pageContext.request.contextPath}/poolManager?poolID=${p.id}">${p.name}</a></td>
+                            <td>
+                                <button type="button" class="btn btn-primary"
+                                        onClick="location.href = '${pageContext.request.contextPath}/poolManager?poolID=${p.id}'">
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </c:otherwise>
     </c:choose>
-</div>
 </div>
 <script>
     $(function() {
